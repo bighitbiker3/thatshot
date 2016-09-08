@@ -7,9 +7,9 @@ module.exports = db;
 var User = require('./models/user')
 var Song = require('./models/song')
 var UpVotes = require('./models/upvotes')
-var UserSongs = db.define('userSongs', {
-  isSavant: Sequelize.BOOLEAN
-});
+
 
 User.hasOne(Song, {foreignKey: 'postingUserId'})
-User.belongsToMany(Song, {through: UserSongs})
+User.hasMany(Song)
+
+Song.belongsTo(User, {foreignKey: 'userId'})

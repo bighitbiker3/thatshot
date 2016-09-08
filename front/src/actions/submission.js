@@ -24,7 +24,7 @@ function sendSubmissionSubmitAction(song){
 
 export function submissionSubmit(link, user){
   return function (dispatch){
-    fetch(`https://api.soundcloud.com/resolve?url=${link}&client_id=${auth.CLIENT_ID}`)
+    return fetch(`https://api.soundcloud.com/resolve?url=${link}&client_id=${auth.CLIENT_ID}`)
     .then(song => {
       return song.json()
     })
@@ -37,21 +37,17 @@ export function submissionSubmit(link, user){
 }
 
 function analyzeSong(song, postedUser, dispatch){
-  console.log('in analyze song');
-  fetch(`https://api.soundcloud.com/users/${song.user.id}?client_id=${auth.CLIENT_ID}`)
+  return fetch(`https://api.soundcloud.com/users/${song.user.id}?client_id=${auth.CLIENT_ID}`)
   .then(user =>  user.json())
   .then(user => user.followers_count < 12000 ? checkForSongInDb(song, postedUser, dispatch) : tooManyFollowers())
   .catch(err => console.log(err))
 }
 
 function checkForSongInDb(song, user, dispatch){
-  console.log('checking for song in db');
-  console.log(user);
   const songToAdd = {artwork_url: song.artwork_url, duration: song.duration, genre: song.genre, trackId: song.id, permalink_url: song.permalink_url, reposts_count: song.reposts_count, title: song.title, artist: song.user.username, artist_uri: song.user.uri, playback_count: song.playback_count, artist_permalink: song.user.permalink_url, stream_url: song.stream_url, artist_id: song.user.id, waveform_url: song.waveform_url}
-  console.log('bout tos end ajasx');
-  $.ajax(server.API_LOCATION + `/songs/${user.id}/${song.id}`, {
+  return fetch(server.API_LOCATION + `/songs/${user.id}/${song.id}`, {
     method: 'POST',
-    data: songToAdd
+    body: songToAdd
   })
   .then(song => {
     if(song) {

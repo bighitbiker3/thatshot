@@ -3,17 +3,24 @@ var router = express.Router();
 var db = require('../db');
 var User = db.model('user')
 var Song = db.model('song');
-var UserSongs = db.model('userSongs')
 var UpVotes = db.model('upvotes')
 var Promise = require('bluebird');
 
 
 router.get('/songs', function (req, res, next) {
-  UserSongs.findAll({
-    where: req.query
+  Song.findAll({
+    include: [User]
   })
-  .then(data => Promise.all(data.map(userSong => Song.findById(userSong.songId))))
-  .then(songs => res.json(songs))
+  .then(songs => {
+    let key = Object.keys(req.query)
+    let filteredSongs = songs.filter(obj => {
+      console.log(obj.user[key], req.query[key]);
+      console.log(obj.user[key] == Boolean(req.query[key]));
+      obj.user[key]
+
+    })
+    res.json(filteredSongs)
+  })
   .catch(next)
 });
 
@@ -59,8 +66,14 @@ router.post('/users', function(req, res, next){
       email: req.body.email
     }
   })
-  .then(user => user ? console.log('user already in there') : User.create(req.body))
-  .then(newUser => res.send(newUser))
+  .then(user => {
+    console.log('THIS IS USER ON SERVER ', user);
+    return user ? console.log('user already in there') : User.create(req.body)
+  })
+  .then(newUser => {
+     console.log('THIS IS NEW USER ON SERVER', newUser);
+     res.send(newUser)
+  })
   .catch(next)
 });
 

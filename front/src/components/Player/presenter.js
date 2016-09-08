@@ -17,12 +17,12 @@ class Player extends React.Component {
   render(){
     const { nowPlaying, activeTrack } = this.props.player;
     return (
-      <div className="player">
-        <div className="play-pause-button">
-          {nowPlaying ? <FontAwesome onClick={() => this.props.toggleTrack()} name='pause-circle-o' size='2x'/> : <FontAwesome onClick={() => this.props.toggleTrack()} name='play-circle-o' size='2x'/>}
+      <player className="player">
+        <div onClick={() => this.props.toggleTrack()} className="play-pause-button">
+          {nowPlaying ? <FontAwesome name='pause-circle-o' size='2x'/> : <FontAwesome name='play-circle-o' size='2x'/>}
         </div>
         {activeTrack ? <audio id="audio" ref="player" src={`${activeTrack.stream_url}?client_id=${CLIENT_ID}`}></audio> : null}
-      </div>
+      </player>
     )
   }
 }

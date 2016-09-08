@@ -10,11 +10,11 @@ class Header extends React.Component {
 
   render(){
     return (
-      <div className="header">
+      <header className="header">
       <h1>That's Hot</h1>
       <Submission />
         {this.props.auth.user ? <p>Hello {this.props.auth.user.firstName} </p> : <div> <SignUp /> <Login /> </div> }
-      </div>
+      </header>
     )
   }
 }

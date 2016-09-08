@@ -1,9 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
 import jsdom from 'jsdom';
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
-
 
 const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
 const win = doc.defaultView;
@@ -17,3 +14,4 @@ Object.keys(window).forEach((key) => {
 
 global.React = React;
 global.expect = expect;
+global.$ = require('jquery')

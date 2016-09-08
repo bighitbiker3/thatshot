@@ -31632,6 +31632,7 @@
 	}
 	
 	function signUpPasswordFormChange(e) {
+	  console.log(e);
 	  var password = e.target.value;
 	  return {
 	    type: actionTypes.SIGNUP_PASSWORD_CHANGE,
@@ -31640,6 +31641,7 @@
 	}
 	
 	function sendUserAuthAction(user) {
+	  console.log(user, 'THIS IS USERRRRR');
 	  return {
 	    type: actionTypes.ME_SET,
 	    user: user
@@ -31647,14 +31649,19 @@
 	}
 	
 	function signUpSubmit(email, password) {
+	  console.log(email, password, 'EMAIL PASSWRD');
+	  var userToSignUp = { email: email, password: password, firstName: 'test', lastName: 'test' };
 	  return function (dispatch) {
-	    $.ajax(server.API_LOCATION + '/users', {
+	    console.log('in CALLBACK WITH ', userToSignUp, server.API_LOCATION + '/users');
+	    return $.ajax(server.API_LOCATION + '/users', {
 	      method: 'POST',
-	      data: { email: email, password: password, firstName: 'test', lastName: 'test' }
+	      data: userToSignUp
 	    }).then(function (newUser) {
+	      // newUser = newUser.json()
+	      console.log('made it into the new user section?');
 	      return newUser ? dispatch(sendUserAuthAction(newUser)) : console.log('no User created');
 	    }).catch(function (err) {
-	      return console.log(err);
+	      return console.log('THERE IS AN ERRORRRRR', err.statusCode());
 	    });
 	  };
 	}
@@ -31777,7 +31784,7 @@
 	
 	function submissionSubmit(link, user) {
 	  return function (dispatch) {
-	    fetch('https://api.soundcloud.com/resolve?url=' + link + '&client_id=' + auth.CLIENT_ID).then(function (song) {
+	    return fetch('https://api.soundcloud.com/resolve?url=' + link + '&client_id=' + auth.CLIENT_ID).then(function (song) {
 	      return song.json();
 	    }).then(function (song) {
 	      dispatch(sendSubmissionSubmitAction(song));
@@ -31789,8 +31796,7 @@
 	}
 	
 	function analyzeSong(song, postedUser, dispatch) {
-	  console.log('in analyze song');
-	  fetch('https://api.soundcloud.com/users/' + song.user.id + '?client_id=' + auth.CLIENT_ID).then(function (user) {
+	  return fetch('https://api.soundcloud.com/users/' + song.user.id + '?client_id=' + auth.CLIENT_ID).then(function (user) {
 	    return user.json();
 	  }).then(function (user) {
 	    return user.followers_count < 12000 ? checkForSongInDb(song, postedUser, dispatch) : tooManyFollowers();
@@ -31800,13 +31806,10 @@
 	}
 	
 	function checkForSongInDb(song, user, dispatch) {
-	  console.log('checking for song in db');
-	  console.log(user);
 	  var songToAdd = { artwork_url: song.artwork_url, duration: song.duration, genre: song.genre, trackId: song.id, permalink_url: song.permalink_url, reposts_count: song.reposts_count, title: song.title, artist: song.user.username, artist_uri: song.user.uri, playback_count: song.playback_count, artist_permalink: song.user.permalink_url, stream_url: song.stream_url, artist_id: song.user.id, waveform_url: song.waveform_url };
-	  console.log('bout tos end ajasx');
-	  $.ajax(server.API_LOCATION + ('/songs/' + user.id + '/' + song.id), {
+	  return fetch(server.API_LOCATION + ('/songs/' + user.id + '/' + song.id), {
 	    method: 'POST',
-	    data: songToAdd
+	    body: songToAdd
 	  }).then(function (song) {
 	    if (song) {
 	      dispatch((0, _track.setUserTracks)(song));
@@ -32035,16 +32038,14 @@
 	      var activeTrack = _props$player2.activeTrack;
 	
 	      return _react2.default.createElement(
-	        'div',
+	        'player',
 	        { className: 'player' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'play-pause-button' },
-	          nowPlaying ? _react2.default.createElement(_reactFontawesome2.default, { onClick: function onClick() {
+	          { onClick: function onClick() {
 	              return _this2.props.toggleTrack();
-	            }, name: 'pause-circle-o', size: '2x' }) : _react2.default.createElement(_reactFontawesome2.default, { onClick: function onClick() {
-	              return _this2.props.toggleTrack();
-	            }, name: 'play-circle-o', size: '2x' })
+	            }, className: 'play-pause-button' },
+	          nowPlaying ? _react2.default.createElement(_reactFontawesome2.default, { name: 'pause-circle-o', size: '2x' }) : _react2.default.createElement(_reactFontawesome2.default, { name: 'play-circle-o', size: '2x' })
 	        ),
 	        activeTrack ? _react2.default.createElement('audio', { id: 'audio', ref: 'player', src: activeTrack.stream_url + '?client_id=' + _auth.CLIENT_ID }) : null
 	      );
@@ -32274,7 +32275,7 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
+	        'header',
 	        { className: 'header' },
 	        _react2.default.createElement(
 	          'h1',
@@ -32647,7 +32648,7 @@
 	      var _this2 = this;
 	
 	      return _react2.default.createElement(
-	        "div",
+	        "submission",
 	        { className: "submission" },
 	        _react2.default.createElement(
 	          "p",

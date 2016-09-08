@@ -11,6 +11,7 @@ export function signUpEmailFormChange(e){
 }
 
 export function signUpPasswordFormChange(e){
+  console.log(e);
   let password = e.target.value
   return {
     type: actionTypes.SIGNUP_PASSWORD_CHANGE,
@@ -19,6 +20,7 @@ export function signUpPasswordFormChange(e){
 }
 
 export function sendUserAuthAction(user){
+  console.log(user, 'THIS IS USERRRRR');
   return {
     type: actionTypes.ME_SET,
     user
@@ -27,12 +29,20 @@ export function sendUserAuthAction(user){
 
 
 export function signUpSubmit(email, password){
+  console.log(email, password, 'EMAIL PASSWRD');
+  const userToSignUp = {email: email, password: password, firstName: 'test', lastName: 'test'}
   return function(dispatch){
-    $.ajax(server.API_LOCATION + '/users', {
+    console.log('in CALLBACK WITH ', userToSignUp, server.API_LOCATION + '/users');
+    return $.ajax(server.API_LOCATION + '/users', {
       method: 'POST',
-      data: {email: email, password: password, firstName: 'test', lastName: 'test'}
+      data: userToSignUp
     })
-    .then(newUser => newUser ? dispatch(sendUserAuthAction(newUser)) : console.log('no User created'))
-    .catch(err => console.log(err))
+    .then(newUser => {
+      // newUser = newUser.json()
+      console.log('made it into the new user section?');
+      return newUser ? dispatch(sendUserAuthAction(newUser)) : console.log('no User created')
+
+    })
+    .catch(err => console.log('THERE IS AN ERRORRRRR', err.statusCode()))
   }
 }
