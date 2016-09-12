@@ -45,10 +45,14 @@
     "redux-mock-store": "^1.2.0"
   },
   "dependencies": {
+    "connect-session-sequelize": "^3.1.0",
     "ejs": "^2.5.1",
     "es6-promise": "^3.2.1",
     "eslint-plugin-react": "^6.2.0",
+    "express-session": "^1.14.1",
     "isomorphic-fetch": "^2.2.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "pg": "^6.1.0",
     "pg-helper": "0.0.8",
     "react": "^15.3.1",

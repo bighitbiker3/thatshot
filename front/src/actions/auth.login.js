@@ -27,11 +27,11 @@ export function sendUserAuthAction(user){
 
 export function loginSubmit(email, password){
   return function(dispatch){
-    $.ajax(server.API_LOCATION + '/users/auth', {
+    $.ajax(server.SERVER_LOCATION + '/login', {
       method: 'POST',
       data: {email: email, password: password}
     })
-    .then(user => dispatch(sendUserAuthAction(user)))
+    .then(user => dispatch(sendUserAuthAction(user.user)))
     .catch(err => console.log(err))
   }
 }

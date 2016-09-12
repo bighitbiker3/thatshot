@@ -7,6 +7,7 @@ function Track({ track = {}, toggleTrack }) {
       <UpVote trackId = {track.id} />
       <h3 onClick={() => toggleTrack(track)}>{track.title} - {track.artist}</h3>
       <p>Plays: {track.playback_count} UpVotes: {track.upvotes}</p>
+      <p>Posted By: {track.user.firstName}</p>
     </div>
   )
 }

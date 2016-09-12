@@ -20,7 +20,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
   return {
-    onAuth: bindActionCreators(actions.auth, dispatch),
     setSavantTracks: bindActionCreators(actions.setSavantTracks, dispatch),
     setUserTracks: bindActionCreators(actions.setUserTracks, dispatch),
     showUserTracks: bindActionCreators(actions.showUserTracks, dispatch),

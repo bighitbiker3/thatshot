@@ -26,14 +26,17 @@ function trackSetUser(tracks){
   }
 }
 
-export function setUserTracks(song){
+export function setUserTracks(song, user){
   return function (dispatch){
-      console.log(song, 'song in set user tracks');
-    if(song) return dispatch(trackSetUser(song))
+    if(song) {
+      song.user = user
+      return dispatch(trackSetUser(song))
+    }
     else{
       return fetch(server.API_LOCATION + '/songs?isSavant=false')
       .then(data => data.json())
       .then(dataJSON => dispatch(trackSetUser(dataJSON)))
+      .catch(err => console.log(err))
     }
   }
 }
@@ -49,9 +52,10 @@ function alreadyUpvoted(){
   return {type: actionTypes.ALREADY_UPVOTED}
 }
 
-export function upVoteTrack(trackId, userId){
+export function upVoteTrack(trackId, user){
   return function (dispatch){
-    return fetch(server.API_LOCATION + `/songs/${trackId}/${userId}/upvote`, {method: "POST"})
+    if(!user) return dispatch(notifSend({message: 'You must be logged in to upvote tunes', kind: 'danger',dismissAfter: 1000}))
+    return fetch(server.API_LOCATION + `/songs/${trackId}/${user.id}/upvote`, {method: "POST"})
       .then(track => {
         console.log(track);
         if(track) {

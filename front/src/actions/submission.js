@@ -32,7 +32,10 @@ export function submissionSubmit(link, user){
       dispatch(sendSubmissionSubmitAction(song))
       analyzeSong(song, user, dispatch)
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err);
+      dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger',dismissAfter: 1000}))
+    })
   }
 }
 
@@ -44,23 +47,27 @@ function analyzeSong(song, postedUser, dispatch){
 }
 
 function checkForSongInDb(song, user, dispatch){
+  console.log(song);
   const songToAdd = {artwork_url: song.artwork_url, duration: song.duration, genre: song.genre, trackId: song.id, permalink_url: song.permalink_url, reposts_count: song.reposts_count, title: song.title, artist: song.user.username, artist_uri: song.user.uri, playback_count: song.playback_count, artist_permalink: song.user.permalink_url, stream_url: song.stream_url, artist_id: song.user.id, waveform_url: song.waveform_url}
-  return fetch(server.API_LOCATION + `/songs/${user.id}/${song.id}`, {
+  return $.ajax(server.API_LOCATION + `/songs/${user.id}/${song.id}`, {
     method: 'POST',
-    body: songToAdd
+    data: songToAdd
   })
   .then(song => {
     if(song) {
-      dispatch(setUserTracks(song))
+      dispatch(setUserTracks(song, user))
       dispatch(notifSend({message: 'Song posted. Thanks :)', kind: 'success',dismissAfter: 1000}))
     } else {
-      console.log('already posted');
+      dispatch(notifSend({message: 'This song was already posted', kind: 'danger',dismissAfter: 1000}))
     }
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+      console.log(err);
+      dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger',dismissAfter: 1000}))
+  })
 
 }
 
 function tooManyFollowers(){
-  console.log('too many followers sry');
+  dispatch(notifSend({message: 'This artist is over our 13k follower limit :(', kind: 'danger',dismissAfter: 1000}))
 }

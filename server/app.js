@@ -1,11 +1,10 @@
 'use strict';
 var express = require('express');
 var bodyParser = require('body-parser');
-var app = express();
 var router = require('./routes');
-var Models = require('./db');
-var path = require('path')
-
+var db = require('./db');
+var path = require('path');
+var app = express();
 
 app.use(express.static('dist'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -17,6 +16,7 @@ app.set('view engine','html');
 
 console.log("listening on port 3000");
 
+var auth = require('./auth')(app, db)
 app.use('/api', router)
 
 app.get('/*', function (req, res) {
@@ -25,6 +25,6 @@ app.get('/*', function (req, res) {
 
 
 
-Models.sync();
+db.sync();
 
 app.listen(3000);

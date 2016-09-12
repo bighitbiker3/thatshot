@@ -33,7 +33,7 @@ describe('Sign Up Test', () => {
     expect(actions.signUpPasswordFormChange(payload)).to.deep.equal(expectedPassWordAction)
     expect(actions.signUpEmailFormChange(payload)).to.deep.equal(expectedEmailAction)
   })
-  it('should send input change actions', () => {
+  xit('should send input change actions', () => {
     const expectedAction = {type: actionTypes.ME_SET, hi: ''}
     const store = mockStore();
     return store.dispatch(actions.signUpSubmit('el@gmail.com', 'mc'))

@@ -1,13 +1,15 @@
-import { auth } from './auth';
-import { setSavantTracks, upVoteTrack, setUserTracks } from './track';
-import { toggleTrack } from './player';
+import { getSession, logout } from './auth'
+import { setSavantTracks, upVoteTrack, setUserTracks } from './track'
+import { toggleTrack } from './player'
 import { signUpSubmit, signUpEmailFormChange, signUpPasswordFormChange } from './auth.signup.js'
 import { loginSubmit, loginEmailFormChange, loginPasswordFormChange } from './auth.login.js'
 import { submissionFormChange, submissionSubmit } from './submission'
 import { showUserTracks, showSavantTracks } from './stream'
+import { showSignUp, showLogin, closeHeader, showSubmission } from './header'
 
 export {
-  auth,
+  getSession,
+  logout,
   signUpSubmit,
   signUpEmailFormChange,
   signUpPasswordFormChange,
@@ -21,5 +23,9 @@ export {
   showUserTracks,
   showSavantTracks,
   upVoteTrack,
-  toggleTrack
+  toggleTrack,
+  showSignUp,
+  showLogin,
+  showSubmission,
+  closeHeader
 };

@@ -7,6 +7,7 @@ import signup from './auth.signup'
 import login from './auth.login'
 import submission from './submission'
 import stream from './stream'
+import header from './header'
 import { reducer as notifReducer } from 'redux-notifications';
 
 
@@ -16,6 +17,7 @@ export default combineReducers({
   signup,
   login,
   submission,
+  header,
   player,
   stream,
   notifs: notifReducer,

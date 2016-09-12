@@ -1,3 +1,4 @@
+'use strict'
 var express = require('express');
 var router = express.Router();
 var db = require('../db');
@@ -5,21 +6,15 @@ var User = db.model('user')
 var Song = db.model('song');
 var UpVotes = db.model('upvotes')
 var Promise = require('bluebird');
+var passport = require('passport')
 
 
 router.get('/songs', function (req, res, next) {
   Song.findAll({
-    include: [User]
+    include: [{model: User, where: req.query}]
   })
   .then(songs => {
-    let key = Object.keys(req.query)
-    let filteredSongs = songs.filter(obj => {
-      console.log(obj.user[key], req.query[key]);
-      console.log(obj.user[key] == Boolean(req.query[key]));
-      obj.user[key]
-
-    })
-    res.json(filteredSongs)
+    res.json(songs)
   })
   .catch(next)
 });
@@ -34,7 +29,7 @@ router.post('/songs/:trackId/:userId/upvote', function(req, res, next) {
       .then(updated => {
         return updated.save()
       })
-      .then(track => res.send(track))    }
+      .then(track => res.send(track))}
     else {
       res.send(false)
     }
@@ -43,6 +38,7 @@ router.post('/songs/:trackId/:userId/upvote', function(req, res, next) {
 });
 
 router.post('/songs/:userId/:trackId', function(req, res, next){
+  console.log(req.body);
   Song.findOne({
     where: {trackId: req.params.trackId}
   })
@@ -77,16 +73,6 @@ router.post('/users', function(req, res, next){
   .catch(next)
 });
 
-router.post('/users/auth', function(req, res, next){
-  User.findOne({
-    where: {
-      email: req.body.email
-    }
-  })
-  .then(user => user ? Promise.all([user, user.correctPassword(req.body.password)]) : console.log('no user found'))
-  .spread((user, correctPassword) => correctPassword ? res.send(user) : console.log('pw incorrect'))
-  .catch(next)
-});
 
 
 
