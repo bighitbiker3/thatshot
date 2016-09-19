@@ -15,6 +15,7 @@ function mapDispatchToProps(dispatch){
   return {
     signUpEmailFormChange: bindActionCreators(actions.signUpEmailFormChange, dispatch),
     signUpPasswordFormChange: bindActionCreators(actions.signUpPasswordFormChange, dispatch),
+    signUpUsernameChange: bindActionCreators(actions.signUpUsernameChange, dispatch),
     signUpSubmit: bindActionCreators(actions.signUpSubmit, dispatch)
   }
 }

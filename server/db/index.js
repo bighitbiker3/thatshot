@@ -9,7 +9,5 @@ var Song = require('./models/song')
 var UpVotes = require('./models/upvotes')
 
 
-User.hasOne(Song, {foreignKey: 'postingUserId'})
 User.hasMany(Song)
-
 Song.belongsTo(User, {foreignKey: 'userId'})

@@ -29,9 +29,11 @@ describe('Sign Up Test', () => {
     const payload = {target: {value: 'a'}};
     const expectedPassWordAction = {type: actionTypes.SIGNUP_PASSWORD_CHANGE, password: 'a'};
     const expectedEmailAction = {type: actionTypes.SIGNUP_EMAIL_CHANGE, email: 'a'};
+    const expectedUsernameAction = {type: actionTypes.SIGNUP_USERNAME_CHANGE, username: 'a'}
 
     expect(actions.signUpPasswordFormChange(payload)).to.deep.equal(expectedPassWordAction)
     expect(actions.signUpEmailFormChange(payload)).to.deep.equal(expectedEmailAction)
+    expect(actions.signUpUsernameChange(payload)).to.deep.equal(expectedUsernameAction)
   })
   xit('should send input change actions', () => {
     const expectedAction = {type: actionTypes.ME_SET, hi: ''}

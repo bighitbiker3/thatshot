@@ -14,7 +14,7 @@ const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares);
 
 function setup(){
-  const props = {header: {show: 'none', active: false}, auth: {user: {email: 'el@gmail.com', firstName: 'test'}}}
+  const props = {getSession: function(){}, header: {show: 'none', active: false}, auth: {user: {email: 'el@gmail.com', firstName: 'test'}}}
 
   const enzymeWrapper = shallow(<Header {...props} />)
 

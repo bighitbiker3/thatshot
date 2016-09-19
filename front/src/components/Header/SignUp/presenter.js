@@ -12,9 +12,10 @@ class SignUp extends React.Component {
     return (
         <div className="signup">
           <p>Sign Up</p>
-            <input onChange={this.props.signUpEmailFormChange} ref="email" type="email"/>
-            <input onChange={this.props.signUpPasswordFormChange} ref="password" type="password"/>
-            <button onClick={() => this.props.signUpSubmit(this.props.signup.email, this.props.signup.password)}>Submit</button>
+            <input onChange={this.props.signUpEmailFormChange} ref="email" placeholder="Email" type="email"/>
+            <input onChange={this.props.signUpPasswordFormChange} ref="password" placeholder="Password" type="password"/>
+            <input onChange={this.props.signUpUsernameChange} ref="username" placeholder="Username" type="text"/>
+            <button onClick={() => this.props.signUpSubmit(this.props.signup.email, this.props.signup.password, this.props.signup.username)}>Submit</button>
         </div>
     )
   }

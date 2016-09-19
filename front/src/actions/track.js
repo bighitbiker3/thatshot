@@ -41,13 +41,6 @@ export function setUserTracks(song, user){
   }
 }
 
-function sendUpvoteAction(track){
-  return {
-    type: actionTypes.UPVOTE_TRACK,
-    track
-  }
-}
-
 function alreadyUpvoted(){
   return {type: actionTypes.ALREADY_UPVOTED}
 }
@@ -55,20 +48,33 @@ function alreadyUpvoted(){
 export function upVoteTrack(trackId, user){
   return function (dispatch){
     if(!user) return dispatch(notifSend({message: 'You must be logged in to upvote tunes', kind: 'danger',dismissAfter: 1000}))
-    return fetch(server.API_LOCATION + `/songs/${trackId}/${user.id}/upvote`, {method: "POST"})
+    return $.ajax(server.API_LOCATION + `/songs/${trackId}/${user.id}/upvote`, {method: "POST"})
       .then(track => {
         console.log(track);
-        if(track) {
-          console.log('we got a track');
-          return track.json()
-        }
-        else return null
-      })
-      .then(trackJSON => {
-        console.log(trackJSON);
-        trackJSON ? dispatch(sendUpvoteAction(trackJSON)) : dispatch(notifSend({message: 'You already upvoted that', kind: 'danger',dismissAfter: 1000}));
-
+        if(track) dispatch(sendUpvoteAction(track))
+        else dispatch(notifSend({message: 'You already upvoted that', kind: 'danger', dismissAfter: 1000}));
       })
       .catch(err => console.log(err))
+  }
+}
+
+function sendUpvoteAction(track){
+  return {
+    type: actionTypes.UPVOTE_TRACK,
+    track
+  }
+}
+
+export function mouseEnterUpvote(){
+  return {
+    type: actionTypes.MOUSE_ENTER_UPVOTE,
+    upVoteHover: true
+  }
+}
+
+export function mouseLeaveUpvote(){
+  return {
+    type: actionTypes.MOUSE_LEAVE_UPVOTE,
+    upVoteHover: false
   }
 }

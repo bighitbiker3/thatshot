@@ -5,17 +5,20 @@ import * as actions from '../../../actions';
 import UpVote from './presenter';
 
 function mapStateToProps(state, props){
-  const trackId = props.trackId;
+  console.log(props, 'THIS IS PROPSSSS');
+  const track = props.track;
   const user = state.auth.user
   return {
-    trackId,
+    track,
     user
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    upVoteTrack: bindActionCreators(actions.upVoteTrack, dispatch)
+    upVoteTrack: bindActionCreators(actions.upVoteTrack, dispatch),
+    mouseEnterUpvote: bindActionCreators(actions.mouseEnterUpvote, dispatch),
+    mouseLeaveUpvote: bindActionCreators(actions.mouseLeaveUpvote, dispatch)
   }
 }
 

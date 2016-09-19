@@ -2,6 +2,7 @@ import SC from 'soundcloud';
 import * as actionTypes from '../constants/actionTypes';
 import { setSavantTracks } from '../actions/track';
 import * as server from '../constants/server'
+import { closeHeader } from './header'
 
 function setMe(user) {
   return {
@@ -27,7 +28,10 @@ export function getSession(){
 export function logout(){
   return function (dispatch){
     $.get(server.SERVER_LOCATION + '/logout')
-    .then(() => dispatch(logoutMe()))
+    .then(() => {
+      dispatch(logoutMe())
+      dispatch(closeHeader())
+    })
     .catch(err => console.log(err))
   }
 }

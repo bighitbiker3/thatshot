@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Sequelize = require('sequelize');
 
 var db = require('../_db');
+var Song = require('./song')
 
 module.exports = db.define('user', {
     email: {
@@ -38,10 +39,14 @@ module.exports = db.define('user', {
         allowNull: true
 
     },
-
     isSavant: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
+    },
+    score: {
+      type: Sequelize.VIRTUAL,
+      allowNull: false,
+      defaultValue: 0,
     }
 
 
@@ -79,6 +84,14 @@ module.exports = db.define('user', {
                 user.salt = user.Model.generateSalt();
                 user.password = user.Model.encryptPassword(user.password, user.salt);
             }
+        },
+        afterFind: function(user){
+          if(user){
+            return Song.findAll({where: {userId: user.id}})
+            .then(songArr => {
+              user.set('score', songArr.reduce((a, b) => {return a + b.upvotes}, 0))
+            })
+          }
         }
     }
 });

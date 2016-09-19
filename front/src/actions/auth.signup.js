@@ -1,5 +1,6 @@
 import * as actionTypes from '../constants/actionTypes';
 import * as server from '../constants/server';
+import { closeHeader } from './header'
 
 
 export function signUpEmailFormChange(e){
@@ -11,11 +12,18 @@ export function signUpEmailFormChange(e){
 }
 
 export function signUpPasswordFormChange(e){
-  console.log(e);
   let password = e.target.value
   return {
     type: actionTypes.SIGNUP_PASSWORD_CHANGE,
     password
+  }
+}
+
+export function signUpUsernameChange(e){
+  let username = e.target.value
+  return {
+    type: actionTypes.SIGNUP_USERNAME_CHANGE,
+    username
   }
 }
 
@@ -28,20 +36,20 @@ export function sendUserAuthAction(user){
 }
 
 
-export function signUpSubmit(email, password){
-  console.log(email, password, 'EMAIL PASSWRD');
-  const userToSignUp = {email: email, password: password, firstName: 'test', lastName: 'test'}
+export function signUpSubmit(email, password, username){
+  const userToSignUp = {email: email, password: password, username: username, firstName: 'test', lastName: 'test'}
   return function(dispatch){
-    console.log('in CALLBACK WITH ', userToSignUp, server.API_LOCATION + '/users');
     return $.ajax(server.API_LOCATION + '/users', {
       method: 'POST',
       data: userToSignUp
     })
     .then(newUser => {
-      // newUser = newUser.json()
-      console.log('made it into the new user section?');
-      return newUser ? dispatch(sendUserAuthAction(newUser)) : console.log('no User created')
-
+      if(newUser){
+        dispatch(sendUserAuthAction(newUser))
+        dispatch(closeHeader())
+      } else {
+        console.log('no User created')
+      }
     })
     .catch(err => console.log('THERE IS AN ERRORRRRR', err.statusCode()))
   }

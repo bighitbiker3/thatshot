@@ -1,5 +1,6 @@
 import * as actionTypes from '../constants/actionTypes';
 import * as server from '../constants/server';
+import { closeHeader } from './header'
 
 export function loginEmailFormChange(e){
   console.log(email, 'in action login');
@@ -31,7 +32,10 @@ export function loginSubmit(email, password){
       method: 'POST',
       data: {email: email, password: password}
     })
-    .then(user => dispatch(sendUserAuthAction(user.user)))
+    .then(user => {
+     dispatch(sendUserAuthAction(user.user))
+     dispatch(closeHeader())
+    })
     .catch(err => console.log(err))
   }
 }
