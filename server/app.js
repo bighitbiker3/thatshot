@@ -7,7 +7,6 @@ var router = require('./routes')
 var db = require('./db')
 var path = require('path')
 var morgan = require('morgan')
-const Savant = require('./funStuff/savant').runSavant
 
 app.use(morgan('dev'))
 app.use(express.static('dist'))

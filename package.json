@@ -73,5 +73,8 @@
     "request-promise": "^4.1.1",
     "soundcloud": "^3.1.2",
     "whatwg-fetch": "^1.0.0"
+  },
+  "engines" : {
+    "node" : ">=6.1.0" 
   }
 }
