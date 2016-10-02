@@ -4,7 +4,7 @@ const Song = require('../db/models/song')
 const User = require('../db/models/user')
 const Promise = require('bluebird')
 
-const job = new CronJob('00 58 08 * * 0-6', () => persistToDb(), null, true, 'America/Los_Angeles')
+const job = new CronJob('30 00 00 * * 0-6', () => persistToDb(), null, true, 'America/Los_Angeles')
 
 function persistToDb() {
   Promise.all([runSavant(), User.findOne({where: {username: 'The Savant'}})])
