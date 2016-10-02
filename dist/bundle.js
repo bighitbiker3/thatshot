@@ -31253,7 +31253,7 @@
 	
 	function setSavantTracks() {
 	  return function (dispatch) {
-	    return fetch(server.API_LOCATION + '/songs?isSavant=true').then(function (data) {
+	    return fetch(server.API_LOCATION + '/songs?is_savant=true').then(function (data) {
 	      return data.json();
 	    }).then(function (dataJSON) {
 	      return dispatch(trackSetSavant(dataJSON));
@@ -31276,7 +31276,7 @@
 	      song.user = user;
 	      return dispatch(trackSetUser(song));
 	    } else {
-	      return fetch(server.API_LOCATION + '/songs?isSavant=false').then(function (data) {
+	      return fetch(server.API_LOCATION + '/songs?is_savant=false').then(function (data) {
 	        return data.json();
 	      }).then(function (dataJSON) {
 	        return dispatch(trackSetUser(dataJSON));
