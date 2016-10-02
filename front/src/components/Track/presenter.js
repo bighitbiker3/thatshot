@@ -7,7 +7,7 @@ function Track ({ track = {}, toggleTrack }) {
       <UpVote track={track} />
       <div className='song-title-div'>
           <p className='song-title' onClick={() => toggleTrack(track)}>{track.title}</p>
-          <p className='artist-name'>{track.artist}</p>
+          <p className='artist-name'><a href={track.artist_permalink} target='_blank'>{track.artist} </a></p>
       </div>
       <div className='link-item-right'>
         <div className='posted-by'>

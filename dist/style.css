@@ -316,6 +316,12 @@ textarea:focus, input:focus {
   height: 150px;
   margin-bottom: 60px; }
 
+.artist-name {
+  cursor: pointer; }
+
+.song-title {
+  cursor: pointer; }
+
 .song-title-div {
   padding-left: 40px;
   display: inline-block;

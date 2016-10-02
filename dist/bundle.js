@@ -34618,7 +34618,12 @@
 	      _react2.default.createElement(
 	        'p',
 	        { className: 'artist-name' },
-	        track.artist
+	        _react2.default.createElement(
+	          'a',
+	          { href: track.artist_permalink, target: '_blank' },
+	          track.artist,
+	          ' '
+	        )
 	      )
 	    ),
 	    _react2.default.createElement(
