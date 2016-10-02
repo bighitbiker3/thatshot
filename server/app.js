@@ -30,7 +30,7 @@ app.get('/*', function (req, res) {
 })
 
 
-db.sync({})
+db.sync({force: true})
 // Savant()
 
 app.listen(process.env.PORT || 3000)
