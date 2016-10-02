@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/app --watch server",
+    "start": "node server/app",
+    "start-watch": "nodemon server/app --watch server",
     "test": "mocha --compilers js:babel-core/register --require ./front/test/setup.js 'front/src/**/*spec.js'",
     "test:watch": "npm run test -- --watch"
   },
@@ -75,6 +76,6 @@
     "whatwg-fetch": "^1.0.0"
   },
   "engines" : {
-    "node" : ">=6.1.0" 
+    "node" : ">=6.1.0"
   }
 }
