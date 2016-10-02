@@ -6,9 +6,9 @@ var cookieParser = require('cookie-parser')
 var router = require('./routes')
 var db = require('./db')
 var path = require('path')
-var morgan = require('morgan')
+// var morgan = require('morgan') // comment out for prod?
 
-app.use(morgan('dev'))
+// app.use(morgan('dev'))
 app.use(express.static('dist'))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
