@@ -34,4 +34,4 @@ app.get('/*', function (req, res) {
 db.sync({})
 // Savant()
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000)

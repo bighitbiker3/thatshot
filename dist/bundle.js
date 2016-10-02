@@ -31785,8 +31785,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var API_LOCATION = exports.API_LOCATION = 'http://localhost:3000/api';
-	var SERVER_LOCATION = exports.SERVER_LOCATION = 'http://localhost:3000';
+	var API_LOCATION = exports.API_LOCATION = window.location.protocol + '//' + window.location.host + '/api';
+	var SERVER_LOCATION = exports.SERVER_LOCATION = window.location.protocol + '//' + window.location.host;
+	
+	console.log(API_LOCATION, SERVER_LOCATION);
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "server.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
