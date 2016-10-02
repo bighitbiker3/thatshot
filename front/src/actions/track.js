@@ -12,7 +12,7 @@ function trackSetSavant (tracks) {
 
 export function setSavantTracks () {
   return function (dispatch) {
-    return fetch(server.API_LOCATION + '/songs?isSavant=true')
+    return fetch(server.API_LOCATION + '/songs?is_savant=true')
       .then(data => data.json())
       .then(dataJSON => dispatch(trackSetSavant(dataJSON)))
       .catch(err => console.log(err))
@@ -33,7 +33,7 @@ export function setUserTracks (song, user) {
       return dispatch(trackSetUser(song))
     }
     else {
-      return fetch(server.API_LOCATION + '/songs?isSavant=false')
+      return fetch(server.API_LOCATION + '/songs?is_savant=false')
       .then(data => data.json())
       .then(dataJSON => dispatch(trackSetUser(dataJSON)))
       .catch(err => console.log(err))

@@ -19,11 +19,11 @@ var ensureAuthenticated = function (req, res, next) {
 
 // GET SONGS
 router.get('/songs', function (req, res, next) {
-  req.query.isSavant = (req.query.isSavant === 'true')
+  req.query.is_savant = (req.query.is_savant === 'true')
   Song.findAll({
     include: [{model: User, where: req.query}],
     order: [['createdAt', 'DESC'],['upvotes', 'DESC']],
-    limit: req.query.isSavant ? 15 : null
+    limit: req.query.is_savant ? 15 : null
   })
   .then(songs => {
     res.json(songs)

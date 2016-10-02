@@ -14,10 +14,10 @@ function createUserArray () {
     let email = chance.email()
     let password = chance.string()
     let username = chance.string()
-    let firstName = chance.first()
-    let lastName = chance.last()
-    let isSavant = i % 10 === 0 ? true : false
-    userArray.push({email: email, password: password, firstName: firstName, lastName: lastName, username: username, isSavant: isSavant})
+    let first_name = chance.first()
+    let last_name = chance.last()
+    let is_savant = i % 10 === 0 ? true : false
+    userArray.push({email: email, password: password, first_name: first_name, last_name: last_name, username: username, is_savant: is_savant})
   }
   return userArray
 }

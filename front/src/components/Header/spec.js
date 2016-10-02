@@ -14,7 +14,7 @@ const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
 function setup () {
-  const props = {getSession: function () {}, header: {show: 'none', active: false}, auth: {user: {email: 'el@gmail.com', firstName: 'test'}}}
+  const props = {getSession: function () {}, header: {show: 'none', active: false}, auth: {user: {email: 'el@gmail.com', first_name: 'test'}}}
 
   const enzymeWrapper = shallow(<Header {...props} />)
 
@@ -27,7 +27,7 @@ function setup () {
 describe('header welcome', () => {
   const { enzymeWrapper, props } = setup()
   it('welcomes user if logged in', () => {
-    expect(enzymeWrapper.find('p').text()).to.contain('Hello ' + props.auth.user.firstName)
+    expect(enzymeWrapper.find('p').text()).to.contain('Hello ' + props.auth.user.first_name)
   })
 })
 

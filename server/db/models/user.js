@@ -30,11 +30,11 @@ module.exports = db.define('user', {
   google_id: {
     type: Sequelize.STRING
   },
-  firstName: {
+  first_name: {
     type: Sequelize.STRING,
     allowNull: true
   },
-  lastName: {
+  last_name: {
     type: Sequelize.STRING,
     allowNull: true
 
@@ -43,7 +43,7 @@ module.exports = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  isSavant: {
+  is_savant: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
