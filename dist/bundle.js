@@ -32095,7 +32095,7 @@
 	  return fetch('https://api.soundcloud.com/users/' + song.user.id + '?client_id=' + auth.CLIENT_ID).then(function (user) {
 	    return user.json();
 	  }).then(function (user) {
-	    return user.followers_count < 12000 ? checkForSongInDb(song, postedUser, dispatch) : tooManyFollowers();
+	    return user.followers_count < 12000 ? checkForSongInDb(song, postedUser, dispatch) : tooManyFollowers(dispatch);
 	  }).catch(function (err) {
 	    return console.log(err);
 	  });
@@ -32120,7 +32120,7 @@
 	  });
 	}
 	
-	function tooManyFollowers() {
+	function tooManyFollowers(dispatch) {
 	  dispatch(notifSend({ message: 'This artist is over our 13k follower limit :(', kind: 'danger', dismissAfter: 1000 }));
 	}
 	
