@@ -1,19 +1,17 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 // import * as actions from '../../actions';
 import Overlay from './presenter'
 
-function mapStateToProps(state, props){
-  const header = state.header;
-  const auth = state.auth;
+function mapStateToProps (state, props) {
+  const header = state.header
   return {
-    header,
-    auth
+    header
   }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps (dispatch) {
   return {
     // showSignUp: bindActionCreators(actions.showSignUp, dispatch),
     // showLogin: bindActionCreators(actions.showLogin, dispatch),

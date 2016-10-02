@@ -1,9 +1,9 @@
-import * as actionTypes from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes'
 
-export function showUserTracks(){
+export function showUserTracks () {
   return {type: actionTypes.SHOW_USER_TRACKS}
 }
 
-export function showSavantTracks(){
+export function showSavantTracks () {
   return {type: actionTypes.SHOW_SAVANT_TRACKS}
 }

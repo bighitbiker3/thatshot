@@ -1,4 +1,4 @@
-var webpack = require('webpack');
+var webpack = require('webpack')
 
 module.exports = {
   entry: [
@@ -31,4 +31,4 @@ module.exports = {
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     })
   ]
-};
+}

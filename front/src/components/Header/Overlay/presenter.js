@@ -1,15 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-export default class Overlay extends React.Component{
-  constructor(props){
+export default class Overlay extends React.Component {
+  constructor (props) {
     super(props)
   }
 
-  render(){
+  render () {
     return (
-      <div className="header-overlay-off">
-
-      </div>
+      <div className={this.props.header.active ? 'header-overlay-on' : 'header-overlay-off'} />
     )
   }
 }

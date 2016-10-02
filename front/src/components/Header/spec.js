@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { shallow } from 'enzyme'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import * as server from '../../constants/server'
@@ -6,18 +6,17 @@ import * as actionTypes from '../../constants/actionTypes'
 import * as actions from '../../actions'
 import nock from 'nock'
 import { expect } from 'chai' // You can use any testing library
-import Header from './presenter';
+import Header from './presenter'
 
-require('isomorphic-fetch');
+require('isomorphic-fetch')
 
 const middlewares = [ thunk ]
-const mockStore = configureMockStore(middlewares);
+const mockStore = configureMockStore(middlewares)
 
-function setup(){
-  const props = {getSession: function(){}, header: {show: 'none', active: false}, auth: {user: {email: 'el@gmail.com', firstName: 'test'}}}
+function setup () {
+  const props = {getSession: function () {}, header: {show: 'none', active: false}, auth: {user: {email: 'el@gmail.com', firstName: 'test'}}}
 
   const enzymeWrapper = shallow(<Header {...props} />)
-
 
   return {
     props,
@@ -62,6 +61,4 @@ describe('header state working', () => {
     let expectedActionShowSubmission = {type: actionTypes.SHOW_SUBMISSION, payload}
     expect(actions.showSubmission(payload)).to.deep.equal(expectedActionShowSubmission)
   })
-
-
 })

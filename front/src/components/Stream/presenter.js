@@ -1,31 +1,30 @@
-import React from 'react';
-import Track from '../Track';
+import React from 'react'
+import Track from '../Track'
 
 class Stream extends React.Component {
-  constructor(props){
+  constructor (props) {
     super(props)
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.props.setSavantTracks()
     this.props.setUserTracks()
   }
 
-  render(){
-    var stream;
-    if(this.props.stream === 'savantTracks') stream = this.props.tracks.savantTracks.map((track, key) => {return track ? <Track className="track" key={key} track={track} /> : null;})
-    else stream = this.props.tracks.userTracks.map((track, key) => {return track ? <Track className="track" key={key} track={track} /> : null;})
+  render () {
+    var stream
+    if (this.props.stream === 'savantTracks') stream = this.props.tracks.savantTracks.map((track, key) => { return track ? <Track className='track' key={key} track={track} /> : null })
+    else stream = this.props.tracks.userTracks.map((track, key) => { return track ? <Track className='track' key={key} track={track} /> : null })
     return (
       <div>
-        <br/>
-        <p>Track Types: <a onClick={() => this.props.showSavantTracks()}>Savant</a> <a onClick={() => this.props.showUserTracks()}>User Posted</a></p>
+        <br />
+        <p className="track-types">Track Types: <a style={this.props.stream === 'savantTracks' ? null : {textDecoration: 'underline'}} onClick={() => this.props.showUserTracks()}>User Posted</a> <a style={this.props.stream === 'savantTracks' ? {textDecoration: 'underline'} : null} onClick={() => this.props.showSavantTracks()}>Savant</a></p>
         <div>
           {stream}
         </div>
       </div>
-    );
+    )
   }
 }
 
-
-export default Stream;
+export default Stream

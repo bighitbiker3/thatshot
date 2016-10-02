@@ -1,31 +1,31 @@
-import * as actionTypes from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes'
 
 const initialState = {
   show: 'none',
-  active: false,
+  active: false
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
-    case actionTypes.SHOW_SIGNUP: return showSignUp(state, action);
-    case actionTypes.SHOW_LOGIN: return showLogin(state, action);
-    case actionTypes.SHOW_SUBMISSION: return showLogin(state, action);
+    case actionTypes.SHOW_SIGNUP: return showSignUp(state, action)
+    case actionTypes.SHOW_LOGIN: return showLogin(state, action)
+    case actionTypes.SHOW_SUBMISSION: return showLogin(state, action)
     case actionTypes.CLOSE_HEADER: return closeHeader(state, action)
 
   }
-  return state;
+  return state
 }
 
-function showSignUp(state, action){
+function showSignUp (state, action) {
   return Object.assign({}, state, action.payload)
 }
 
-function showLogin(state, action){
+function showLogin (state, action) {
   return Object.assign({}, state, action.payload)
 }
-function closeHeader(state, action){
+function closeHeader (state, action) {
   return Object.assign({}, state, action.payload)
 }
-function showSubmission(state, action){
+function showSubmission (state, action) {
   return Object.assign({}, state, action.payload)
 }

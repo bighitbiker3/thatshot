@@ -1,0 +1,12 @@
+.track-types{
+  a{
+    float: right;
+    cursor: pointer;
+  }
+  a:first-child{
+    margin-left: 20px;
+  }
+  a:last-child{
+    margin-left: 20px;
+  }
+}

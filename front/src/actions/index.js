@@ -6,6 +6,7 @@ import { loginSubmit, loginEmailFormChange, loginPasswordFormChange } from './au
 import { submissionFormChange, submissionSubmit } from './submission'
 import { showUserTracks, showSavantTracks } from './stream'
 import { showSignUp, showLogin, closeHeader, showSubmission } from './header'
+import { subscribeFormChange, subscribeSubmit } from './header.subscribe'
 
 export {
   getSession,
@@ -17,6 +18,8 @@ export {
   loginSubmit,
   loginEmailFormChange,
   loginPasswordFormChange,
+  subscribeFormChange,
+  subscribeSubmit,
   submissionFormChange,
   submissionSubmit,
   setUserTracks,
@@ -31,4 +34,4 @@ export {
   showLogin,
   showSubmission,
   closeHeader
-};
+}

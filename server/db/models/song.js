@@ -1,11 +1,11 @@
-var db = require('../_db');
-var Sequelize = require('sequelize');
-var UpVotes = require('./upvotes');
+var db = require('../_db')
+var Sequelize = require('sequelize')
+var UpVotes = require('./upvotes')
 
 module.exports = db.define('song', {
   artwork_url: {
     type: Sequelize.STRING,
-    allowNull: true,
+    allowNull: true
 
   },
   duration: {
@@ -25,12 +25,12 @@ module.exports = db.define('song', {
     allowNull: false
   },
   reposts_count: {
-    type:  Sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 0
   },
   title: {
-    type:  Sequelize.STRING,
+    type: Sequelize.STRING,
     allowNull: false
   },
   artist: {
@@ -38,7 +38,7 @@ module.exports = db.define('song', {
     allowNull: false
   },
   artist_uri: {
-    type:  Sequelize.STRING,
+    type: Sequelize.STRING,
     allowNull: false
   },
   artist_permalink: {
@@ -50,7 +50,7 @@ module.exports = db.define('song', {
     allowNull: true
   },
   artist_id: {
-    type:  Sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     allowNull: false
   },
   waveform_url: {
@@ -69,10 +69,17 @@ module.exports = db.define('song', {
   }
 }, {
   instanceMethods: {
-    upvote: function(userId){
-      console.log(this.upvotes);
-      let newUpvotes = this.upvotes + 1;
+    upvote: function (userId) {
+      console.log(this.upvotes)
+      let newUpvotes = this.upvotes + 1
       return this.set('upvotes', newUpvotes)
     }
-  }
+  },
+  indexes: [
+    {
+      type: 'FULLTEXT',
+      fields: ['createdAt'],
+      concurrently: true
+    }
+  ]
 })

@@ -1,12 +1,12 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as actions from '../../actions'
 import Header from './presenter'
 
-function mapStateToProps(state, props){
-  console.log(state, 'STATE IN HEADER');
-  const header = state.header;
+function mapStateToProps (state, props) {
+  console.log(state, 'STATE IN HEADER')
+  const header = state.header
   return {
     header
   }

@@ -1,8 +1,27 @@
+$phone: "(min-width: 300px) and (max-width: 420px)";
+
+@media #{$phone}{
+}
+
 .track-group{
   display: flex;
   align-items: flex-end;
   height: 150px;
   margin-bottom: 20px;
+  @media #{$phone}{
+    display: block;
+    width: 90%;
+    height: auto;
+    height: 200px;
+    margin-bottom: 200px;
+    margin-top: 100px;
+  }
+}
+.track-group:last-child{
+  display: flex;
+  align-items: flex-end;
+  height: 150px;
+  margin-bottom: 60px;
 }
 .artist-name{
 
@@ -15,6 +34,9 @@
 .song-title-div{
   p:first-child{
     margin-bottom: 25px;
+    @media #{$phone}{
+      margin-bottom: 5px;
+    }
   }
   p{
     margin: 0;
@@ -22,6 +44,13 @@
   padding-left: 40px;
   display: inline-block;
   width: 70%;
+  @media #{$phone}{
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+    padding: 0;
+  }
 }
 
 .link-item-right{
@@ -35,17 +64,36 @@
   text-align: right;
   width: 10%;
   font-size: 12px;
+  @media #{$phone}{
+    display: block;
+    float: none;
+    text-align: center;
+    width: 100%;
+    right: 0;
+    position: relative;
+  }
 }
 
 .posted-by{
-
+  @media #{$phone}{
+    display: inline-block;
+    margin-right: 5px;
+  }
 
 }
 
 .up-votes{
+  @media #{$phone}{
+    display: inline-block;
+    margin-right: 5px;
+  }
 }
 
 .genre{
+  @media #{$phone}{
+    display: inline-block;
+    margin-right: 5px;
+  }
 }
 
 .album-art-div{
@@ -54,6 +102,11 @@
   width: 150px;
   height: 125px;
   display: block;
+  @media #{$phone}{
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+  }
   .upvote-box{
     background-color: black;
     height: 25px;
@@ -62,10 +115,14 @@
     text-align: center;
     bottom: -25px;
     right: 0;
+    @media #{$phone}{
+      width: 90%;
+    }
     p{
       color: white;
       font-size: 15px;
-      display: inline;
+      margin-top: 3px;
+      display: block;
     }
   }
   .album-art{
@@ -75,6 +132,10 @@
     right: 0;
     width: 125px;
     height:125px;
+    @media #{$phone}{
+      width: 90%;
+      height: auto;
+    }
   }
   .album-art:hover{
     position: absolute;
@@ -82,5 +143,9 @@
     right: 0;
     width: 125px;
     height:125px;
+    @media #{$phone}{
+      width: 90%;
+      height: auto;
+    }
   }
 }

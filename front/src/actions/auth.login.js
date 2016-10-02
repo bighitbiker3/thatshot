@@ -1,9 +1,9 @@
-import * as actionTypes from '../constants/actionTypes';
-import * as server from '../constants/server';
+import * as actionTypes from '../constants/actionTypes'
+import * as server from '../constants/server'
 import { closeHeader } from './header'
 
-export function loginEmailFormChange(e){
-  console.log(email, 'in action login');
+export function loginEmailFormChange (e) {
+  console.log(email, 'in action login')
   let email = e.target.value
   return {
     type: actionTypes.LOGIN_EMAIL_CHANGE,
@@ -11,7 +11,7 @@ export function loginEmailFormChange(e){
   }
 }
 
-export function loginPasswordFormChange(e){
+export function loginPasswordFormChange (e) {
   let password = e.target.value
   return {
     type: actionTypes.LOGIN_PASSWORD_CHANGE,
@@ -19,22 +19,22 @@ export function loginPasswordFormChange(e){
   }
 }
 
-export function sendUserAuthAction(user){
+export function sendUserAuthAction (user) {
   return {
     type: actionTypes.ME_SET,
     user
   }
 }
 
-export function loginSubmit(email, password){
-  return function(dispatch){
+export function loginSubmit (email, password) {
+  return function (dispatch) {
     $.ajax(server.SERVER_LOCATION + '/login', {
       method: 'POST',
       data: {email: email, password: password}
     })
     .then(user => {
-     dispatch(sendUserAuthAction(user.user))
-     dispatch(closeHeader())
+      dispatch(sendUserAuthAction(user.user))
+      dispatch(closeHeader())
     })
     .catch(err => console.log(err))
   }

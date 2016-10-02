@@ -1,5 +1,5 @@
-import Stream from './presenter';
-import { shallow } from 'enzyme';
+import Stream from './presenter'
+import { shallow } from 'enzyme'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import * as server from '../../constants/server'
@@ -8,10 +8,10 @@ import * as actions from '../../actions'
 import nock from 'nock'
 import { expect } from 'chai' // You can use any testing library
 
-require('isomorphic-fetch');
+require('isomorphic-fetch')
 
 const middlewares = [ thunk ]
-const mockStore = configureMockStore(middlewares);
+const mockStore = configureMockStore(middlewares)
 
 xdescribe('async actions', () => {
   afterEach(() => {
@@ -37,11 +37,11 @@ xdescribe('async actions', () => {
 
 describe('sync actions', () => {
   it('sends action for showing savant posts', () => {
-    const expectedAction = {type: actionTypes.SHOW_SAVANT_TRACKS};
+    const expectedAction = {type: actionTypes.SHOW_SAVANT_TRACKS}
     expect(actions.showSavantTracks()).to.deep.equal(expectedAction)
   })
   it('sends action for showing user posts', () => {
-    const expectedAction = {type: actionTypes.SHOW_USER_TRACKS};
+    const expectedAction = {type: actionTypes.SHOW_USER_TRACKS}
     expect(actions.showUserTracks()).to.deep.equal(expectedAction)
   })
 })

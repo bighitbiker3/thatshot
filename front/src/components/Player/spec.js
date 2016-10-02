@@ -1,5 +1,5 @@
-import Stream from './presenter';
-import { shallow } from 'enzyme';
+import Stream from './presenter'
+import { shallow } from 'enzyme'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import * as server from '../../constants/server'
@@ -8,21 +8,20 @@ import * as actionTypes from '../../constants/actionTypes'
 import * as actions from '../../actions'
 import nock from 'nock'
 import { expect } from 'chai' // You can use any testing library
-import Player from './presenter';
+import Player from './presenter'
 
-
-require('isomorphic-fetch');
+require('isomorphic-fetch')
 
 const middlewares = [ thunk ]
-const mockStore = configureMockStore(middlewares);
+const mockStore = configureMockStore(middlewares)
 
-function setup(){
+function setup () {
   const props = {
     player: {
       activeTrack: {title: 'sick', stream_url: 'google.com', id: '1'},
       nowPlaying: false
     },
-    toggleTrack: function(){
+    toggleTrack: function () {
       this.player.nowPlaying = !this.player.nowPlaying
     }
   }
@@ -45,7 +44,7 @@ xdescribe('player', () => {
 
   describe('player Render', () => {
     it('should render self', () => {
-      const { enzymeWrapper, props } = setup();
+      const { enzymeWrapper, props } = setup()
       expect(enzymeWrapper.find('player').hasClass('player')).to.equal(true)
       expect(enzymeWrapper.find('audio')).to.have.length(1)
       expect(enzymeWrapper.find('audio').props().src).to.equal(props.player.activeTrack.stream_url + '?client_id=' + auth.CLIENT_ID)
@@ -61,5 +60,4 @@ xdescribe('player', () => {
       expect(props.player.nowPlaying).to.equal(false)
     })
   })
-
 })

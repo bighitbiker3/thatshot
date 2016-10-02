@@ -1,24 +1,23 @@
-import * as actionTypes from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes'
 
 const initialState = {
   email: '',
-  password: '',
+  password: ''
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
-    case actionTypes.LOGIN_EMAIL_CHANGE: return loginEmailFormChange(state, action);
-    case actionTypes.LOGIN_PASSWORD_CHANGE: return loginPasswordFormChange(state, action);
+    case actionTypes.LOGIN_EMAIL_CHANGE: return loginEmailFormChange(state, action)
+    case actionTypes.LOGIN_PASSWORD_CHANGE: return loginPasswordFormChange(state, action)
 
   }
-  return state;
+  return state
 }
 
-
-function loginEmailFormChange(state, action){
+function loginEmailFormChange (state, action) {
   return Object.assign({}, state, {email: action.email})
 }
 
-function loginPasswordFormChange(state, action){
+function loginPasswordFormChange (state, action) {
   return Object.assign({}, state, {password: action.password})
 }

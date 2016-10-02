@@ -1,8 +1,7 @@
-'use strict';
-var _ = require('lodash');
-var Sequelize = require('sequelize');
+'use strict'
+var Sequelize = require('sequelize')
 
-var db = require('../_db');
+var db = require('../_db')
 
 module.exports = db.define('upvotes', {
   user_id: {

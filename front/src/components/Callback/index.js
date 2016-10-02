@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
 class Callback extends React.Component {
 
-  componentDidMount() {
-    window.setTimeout(opener.SC.connectCallback, 1);
+  componentDidMount () {
+    window.setTimeout(opener.SC.connectCallback, 1)
   }
 
-  render() {
+  render () {
     return <div><p>Hellooooooo</p></div>
   }
 }
 
-export default Callback;
+export default Callback
