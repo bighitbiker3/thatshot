@@ -3,7 +3,7 @@ const { API_LOCATION } = require('../constants/server')
 console.log(CLIENT_ID, API_LOCATION);
 const request = require('request-promise')
 const Promise = require('bluebird')
-let usersArr = ['duvetcover', 'balconies_co', 'ollyjamesmusic', 'bl3rmusic', 'sakuraburst', 'maca-music', 'crvvcksuk', 'brothelmusic', 'tippermusic']
+let usersArr = ['duvetcover', 'balconies_co', 'ollyjamesmusic', 'bl3rmusic', 'sakuraburst', 'maca-music', 'crvvcksuk', 'brothelmusic', 'tippermusic', 'colten-jackson-1', 'joeldarling']
 
 
 module.exports = {
