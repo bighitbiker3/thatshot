@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const runSavant = require('../server/funStuff/savant').runSavant
-const Song = require('../server.db/models/song')
+const Song = require('../server/db/models/song')
 const User = require('../server/db/models/user')
 const Promise = require('bluebird')
 
