@@ -31256,7 +31256,11 @@
 	    return fetch(server.API_LOCATION + '/songs?is_savant=true').then(function (data) {
 	      return data.json();
 	    }).then(function (dataJSON) {
-	      return dispatch(trackSetSavant(dataJSON));
+	      return dataJSON.sort(function (a, b) {
+	        return b.upvotes - a.upvotes;
+	      });
+	    }).then(function (dataSorted) {
+	      return dispatch(trackSetSavant(dataSorted));
 	    }).catch(function (err) {
 	      return console.log(err);
 	    });

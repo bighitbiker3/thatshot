@@ -14,7 +14,8 @@ export function setSavantTracks () {
   return function (dispatch) {
     return fetch(server.API_LOCATION + '/songs?is_savant=true')
       .then(data => data.json())
-      .then(dataJSON => dispatch(trackSetSavant(dataJSON)))
+      .then(dataJSON => dataJSON.sort((a, b) => b.upvotes - a.upvotes))
+      .then(dataSorted => dispatch(trackSetSavant(dataSorted)))
       .catch(err => console.log(err))
   }
 }
