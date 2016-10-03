@@ -1,5 +1,6 @@
 const { CLIENT_ID } = require('../constants/auth')
 const { API_LOCATION } = require('../constants/server')
+const Song = require('../db/models/song')
 console.log(CLIENT_ID, API_LOCATION);
 const request = require('request-promise')
 const Promise = require('bluebird')
@@ -14,7 +15,8 @@ module.exports = {
     .then(flatArr => getUserFollowers(flatArr))
     .then(songObjArr => songObjArr.filter(songObj => (songObj.userInfo.followers_count < 15000)))
     .then(lessThan15kArr => lessThan15kArr.filter(songObj => (songObj.favoritings_count / songObj.playback_count > 0.39 && songObj.playback_count < 10000) || (songObj.playback_count > 10000 && songObj.comment_count > 9)))
-    .then(itsFire => itsFire)
+    .then(itsFire => getNew15(itsFire))
+    .then(itsFire15 => itsFire15)
     .catch(err => console.log(err))
   }
 }
@@ -33,10 +35,19 @@ function getUserFollowers(arrOfSongs){
   }))
 }
 
-function shuffle(arr){
-  let currentIndex = arr.length
+function getNew15(arr){
+  console.log(arr.length);
+  return Promise.all(arr.map(song => Song.findOne({where: {trackId: song.id}})))
+  .then(arrOfFound => arrOfFound.map(track => track ? track.trackId : null))
+  .then(arrOfTrackIds => arr.filter(song => !arrOfTrackIds.includes(song.id)))
+  .then(newSongs => shuffle(newSongs, 15))
+}
+
+function shuffle(arr, size){
+  let currentIndex = size || arr.length
 
   while(currentIndex !== 0) {
+    console.log(currentIndex);
     let randomIndex = Math.floor(Math.random() * currentIndex)
     currentIndex -= 1
 
@@ -44,5 +55,6 @@ function shuffle(arr){
     arr[currentIndex] = arr[randomIndex]
     arr[randomIndex] = holder
   }
-  return arr
+  if(size) arr.length = size;
+  return arr;
 }

@@ -31,4 +31,4 @@ function persistToDb() {
 
 }
 
-persistToDb()
+// persistToDb()
