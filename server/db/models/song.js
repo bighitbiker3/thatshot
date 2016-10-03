@@ -18,7 +18,8 @@ module.exports = db.define('song', {
   },
   trackId: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   permalink_url: {
     type: Sequelize.STRING,
