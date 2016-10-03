@@ -22,7 +22,7 @@ module.exports = {
 }
 
 function getUserLikes () {
-  return Promise.all(usersArr.map(username => request(`https://api.soundcloud.com/users/${username}/favorites/?client_id=${CLIENT_ID}&limit=20`).catch(e => console.log(e))))
+  return Promise.all(usersArr.map(username => request(`https://api.soundcloud.com/users/${username}/favorites/?client_id=${CLIENT_ID}&limit=200`).catch(e => console.log(e))))
 }
 
 function getUserFollowers(arrOfSongs){
