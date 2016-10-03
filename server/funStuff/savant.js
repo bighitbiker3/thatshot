@@ -4,12 +4,12 @@ const Song = require('../db/models/song')
 console.log(CLIENT_ID, API_LOCATION);
 const request = require('request-promise')
 const Promise = require('bluebird')
-let usersArr = ['duvetcover', 'balconies_co', 'ollyjamesmusic', 'bl3rmusic', 'sakuraburst', 'maca-music', 'crvvcksuk', 'brothelmusic', 'tippermusic', 'colten-jackson-1', 'joeldarling']
+let usersArr = ['duvetcover', 'balconies_co', 'ollyjamesmusic', 'bl3rmusic', 'sakuraburst', 'maca-music', 'crvvcksuk', 'brothelmusic']
 
 
 module.exports = {
   runSavant: () => {
-    return getUserLikes()
+    return getUserLikes(shuffle(usersArr))
     .then(likesArr => likesArr.map(string => JSON.parse(string)))
     .then(parsedArr => parsedArr.reduce((a, b) => a.concat(b)))
     .then(flatArr => getUserFollowers(flatArr))
@@ -21,8 +21,9 @@ module.exports = {
   }
 }
 
-function getUserLikes () {
-  return Promise.all(usersArr.map(username => request(`https://api.soundcloud.com/users/${username}/favorites/?client_id=${CLIENT_ID}&limit=200`).catch(e => console.log(e))))
+function getUserLikes (arr) {
+
+  return Promise.all(arr.map(username => request(`https://api.soundcloud.com/users/${username}/favorites/?client_id=${CLIENT_ID}&limit=200`).catch(e => console.log(e))))
 }
 
 function getUserFollowers(arrOfSongs){
@@ -56,5 +57,6 @@ function shuffle(arr, size){
     arr[randomIndex] = holder
   }
   if(size) arr.length = size;
+  console.log(arr);
   return arr;
 }
