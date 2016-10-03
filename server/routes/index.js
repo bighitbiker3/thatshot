@@ -22,7 +22,7 @@ router.get('/songs', function (req, res, next) {
   req.query.is_savant = (req.query.is_savant === 'true')
   Song.findAll({
     include: [{model: User, where: req.query}],
-    order: [['upvotes', 'DESC'],['createdAt', 'DESC']],
+    order: [['createdAt', 'DESC']],
     limit: req.query.is_savant ? 15 : null
   })
   .then(songs => {
