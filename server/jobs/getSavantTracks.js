@@ -27,4 +27,3 @@ function persistToDb() {
   .catch(err => console.log(err))
 
 }
-persistToDb()
