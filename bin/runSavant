@@ -4,8 +4,13 @@ const runSavant = require('../server/funStuff/savant').runSavant
 const Song = require('../server/db/models/song')
 const User = require('../server/db/models/user')
 const Promise = require('bluebird')
+const db = require('./db')
 
 // const job = new CronJob('00 36 0 * * 0-6', () => persistToDb(), null, true, 'America/Los_Angeles')
+
+db.sync()
+.then(() => persistToDb())
+
 
 function persistToDb() {
   Promise.all([runSavant(), User.findOne({where: {username: 'The Savant'}})])
@@ -30,4 +35,3 @@ function persistToDb() {
   .catch(err => console.log(err))
 
 }
-persistToDb()

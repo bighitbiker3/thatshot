@@ -6,9 +6,12 @@ const Promise = require('bluebird')
 
 // const job = new CronJob('00 36 0 * * 0-6', () => persistToDb(), null, true, 'America/Los_Angeles')
 
+
 function persistToDb() {
   Promise.all([runSavant(), User.findOne({where: {username: 'The Savant'}})])
-  .spread((flames, user) => Promise.all(flames.map(song => user.createSong({
+  .spread((flames, user) => Promise.all(flames.map(song => {
+    console.log(Object.getPrototypeOf(user));
+   user.createSong({
     artwork_url: song.artwork_url,
     duration: song.duration,
     genre: song.genre,
@@ -23,7 +26,9 @@ function persistToDb() {
     stream_url: song.stream_url,
     artist_id: song.user.id,
     waveform_url: song.waveform_url
-  }))))
+  })})))
   .catch(err => console.log(err))
 
 }
+
+persistToDb()

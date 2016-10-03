@@ -19,7 +19,7 @@ app.set('view engine', 'html')
 
 console.log('listening on port 3000')
 
-// require('./jobs/getSavantTracks')
+require('./jobs/getSavantTracks')
 
 require('./auth')(app, db)
 
