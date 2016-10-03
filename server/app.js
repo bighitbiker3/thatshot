@@ -19,8 +19,8 @@ app.set('view engine', 'html')
 
 console.log('listening on port 3000')
 
-require('./funStuff/savant').runSavant()
-require('./jobs/getSavantTracks')
+// require('./funStuff/savant').runSavant()
+// require('./jobs/getSavantTracks')
 
 require('./auth')(app, db)
 
