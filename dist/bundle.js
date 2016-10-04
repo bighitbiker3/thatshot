@@ -32099,7 +32099,7 @@
 	  return fetch('https://api.soundcloud.com/users/' + song.user.id + '?client_id=' + auth.CLIENT_ID).then(function (user) {
 	    return user.json();
 	  }).then(function (user) {
-	    return user.followers_count < 12000 ? checkForSongInDb(song, postedUser, dispatch) : tooManyFollowers(dispatch);
+	    return user.followers_count < 15000 ? checkForSongInDb(song, postedUser, dispatch) : tooManyFollowers(dispatch);
 	  }).catch(function (err) {
 	    return console.log(err);
 	  });
@@ -32125,7 +32125,7 @@
 	}
 	
 	function tooManyFollowers(dispatch) {
-	  dispatch(notifSend({ message: 'This artist is over our 13k follower limit :(', kind: 'danger', dismissAfter: 1000 }));
+	  dispatch(notifSend({ message: 'This artist is over our 15k follower limit :(', kind: 'danger', dismissAfter: 1000 }));
 	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "submission.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
