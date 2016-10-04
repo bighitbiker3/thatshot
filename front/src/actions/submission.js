@@ -41,7 +41,7 @@ export function submissionSubmit (link, user) {
 function analyzeSong (song, postedUser, dispatch) {
   return fetch(`https://api.soundcloud.com/users/${song.user.id}?client_id=${auth.CLIENT_ID}`)
   .then(user => user.json())
-  .then(user => user.followers_count < 12000 ? checkForSongInDb(song, postedUser, dispatch) : tooManyFollowers(dispatch))
+  .then(user => user.followers_count < 15000 ? checkForSongInDb(song, postedUser, dispatch) : tooManyFollowers(dispatch))
   .catch(err => console.log(err))
 }
 
@@ -67,5 +67,5 @@ function checkForSongInDb (song, user, dispatch) {
 }
 
 function tooManyFollowers (dispatch) {
-  dispatch(notifSend({message: 'This artist is over our 13k follower limit :(', kind: 'danger', dismissAfter: 1000}))
+  dispatch(notifSend({message: 'This artist is over our 15k follower limit :(', kind: 'danger', dismissAfter: 1000}))
 }
