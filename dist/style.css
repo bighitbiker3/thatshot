@@ -154,7 +154,7 @@
   height: 2em;
   left: 50%;
   margin: -1.5em;
-  position: absolute;
+  position: fixed;
   top: -10%;
   width: 2em;
   z-index: 2; }
