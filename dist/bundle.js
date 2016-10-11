@@ -32382,13 +32382,12 @@
 	  var dataToSend = { email: email };
 	  return function (dispatch) {
 	    dispatch({ type: actionTypes.START_LOADING });
-	    return $.ajax(server.API_LOCATION + '/subscribers', { method: 'POST', data: dataToSend }).then(function (user) {
-	      return dispatch(sendUserAuthAction());
-	    }).then(function () {
+	    return $.ajax(server.API_LOCATION + '/subscribers', { method: 'POST', data: dataToSend }).then(function (sub) {
 	      dispatch({ type: actionTypes.STOP_LOADING });
 	      dispatch(notifSend({ message: 'Thanks for subscribing!', kind: 'success', dismissAfter: 1000 }));
-	    }).catch(function () {
+	    }).catch(function (err) {
 	      dispatch({ type: actionTypes.STOP_LOADING });
+	      if (err.responseText.indexOf('Validation')) return dispatch(notifSend({ message: 'You\'re already subscribed!', kind: 'success', dismissAfter: 1000 }));
 	      dispatch(notifSend({ message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000 }));
 	    });
 	  };

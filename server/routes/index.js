@@ -4,6 +4,7 @@ var router = express.Router()
 var db = require('../db')
 var User = db.model('user')
 var Song = db.model('song')
+var Subscriber = db.model('subscriber')
 var Promise = require('bluebird')
 
 // USER IS ON REQ.USER
@@ -97,7 +98,9 @@ router.get('/users/:userId/tracks', function (req, res, next) {
 
 // ADD SUBSCRIBER
 router.post('/subscribers', function (req, res, next) {
-  console.log(req.body)
+  Subscriber.create(req.body)
+  .then(newSub => res.send(newSub))
+  .catch(next)
 })
 
 module.exports = router
