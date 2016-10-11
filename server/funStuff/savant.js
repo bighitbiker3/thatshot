@@ -15,6 +15,8 @@ module.exports = {
     .then(songObjArr => songObjArr.filter(songObj => (songObj.userInfo.followers_count < 15000)))
     .then(lessThan15kArr => lessThan15kArr.filter(songObj => (songObj.favoritings_count / songObj.playback_count > 0.39 && songObj.playback_count < 10000) || (songObj.playback_count > 10000 && songObj.comment_count > 9)))
     .then(itsFire => getNew15(itsFire))
+    .then(fireTracks => getStreamUrl(fireTracks))
+    .then(thing => console.log(thing[0]))
     .then(itsFire15 => itsFire15)
     .catch(err => console.log(err))
   }
@@ -35,11 +37,19 @@ function getUserFollowers(arrOfSongs){
 }
 
 function getNew15(arr){
-  console.log(arr.length);
   return Promise.all(arr.map(song => Song.findOne({where: {trackId: song.id}})))
   .then(arrOfFound => arrOfFound.map(track => track ? track.trackId : null))
   .then(arrOfTrackIds => arr.filter(song => !arrOfTrackIds.includes(song.id)))
   .then(newSongs => shuffle(newSongs, 15))
+}
+
+function getStreamUrl(arr){
+  return Promise.all(arr.map(song => request(`https://api.soundcloud.com/tracks/${song.id}/?client_id=${CLIENT_ID}`)))
+  .then(arrOfSongStreams => arrOfSongStreams.map(song => JSON.parse(song)))
+  .then(arrOfSongStreams => arr.map((song, i) => {
+    song.stream_url = arrOfSongStreams[i].stream_url
+    return song
+  }))
 }
 
 function shuffle(arr, size){
