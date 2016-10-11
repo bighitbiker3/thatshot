@@ -28,7 +28,7 @@ class Header extends React.Component {
       <header style={this.props.header.active ? {color: 'white'} : {color: 'black'}} className='header'>
       <Overlay />
         <div className='brand-div'>
-          <h1 className='brand'>That's Hot</h1>
+          <Link to={`/`}><h1 className='brand'>That's Hot</h1></Link>
         </div>
 
         <div className='header-right'>

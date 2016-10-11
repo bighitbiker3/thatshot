@@ -33795,9 +33795,13 @@
 	          'div',
 	          { className: 'brand-div' },
 	          _react2.default.createElement(
-	            'h1',
-	            { className: 'brand' },
-	            'That\'s Hot'
+	            _reactRouter.Link,
+	            { to: '/' },
+	            _react2.default.createElement(
+	              'h1',
+	              { className: 'brand' },
+	              'That\'s Hot'
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(
