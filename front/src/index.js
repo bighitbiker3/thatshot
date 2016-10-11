@@ -23,6 +23,7 @@ ReactDOM.render(
       <Route path='/' component={App}>
         <IndexRoute component={Stream} />
         <Route path='/:user' component={ProfilePage} />
+        <Route path='/me' component={ProfilePage} />
         <Route path='/callback' component={Callback} />
       </Route>
     </Router>

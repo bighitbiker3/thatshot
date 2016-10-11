@@ -32,7 +32,7 @@ class Header extends React.Component {
         </div>
 
         <div className='header-right'>
-          { this.props.auth.user ? <div><Link to={`/${this.props.auth.user.username}`}><p>Hi {this.props.auth.user.username}</p></Link> <p>Score: {this.props.auth.user.score} </p> <p onClick={() => this.props.showSubmission()}>Submit Tune</p><p onClick={() => this.props.logout()}>Logout</p></div> : <div> <p onClick={() => this.props.showSignUp()}>Sign Up</p> <p onClick={() => this.props.showLogin()}>Login</p></div> }
+          { this.props.auth.user ? <div><Link to={`/me`}><p>Hi {this.props.auth.user.username}</p></Link> <p>Score: {this.props.auth.user.score} </p> <p onClick={() => this.props.showSubmission()}>Submit Tune</p><p onClick={() => this.props.logout()}>Logout</p></div> : <div> <p onClick={() => this.props.showSignUp()}>Sign Up</p> <p onClick={() => this.props.showLogin()}>Login</p></div> }
         </div>
         <div className='header-input'>
         {input}

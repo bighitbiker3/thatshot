@@ -1,3 +1,8 @@
+$phone: "(min-width: 300px) and (max-width: 420px)";
+
+@media #{$phone}{
+}
+
 .player{
   transition: bottom 0.5s ease;
   position: fixed;
@@ -50,7 +55,8 @@
   }
 }
 
-.currentTimeDiv{
+
+.current-time-div{
   color: white;
   margin: 0;
   display: block;
@@ -78,8 +84,43 @@
     font-size: 14px;
   }
 }
+
+.current-song-div{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 12px;
+  @media #{$phone}{
+    width: 16%;
+    right: 10px;
+  }
+  p:first-child{
+    margin: 0;
+    flex-basis: 100%;
+    font-size: 1em;
+    @media #{$phone}{
+      font-size: 8px;
+    }
+  }
+  p:last-child{
+    margin: 0;
+    font-size: 14px;
+    @media #{$phone}{
+      font-size: 10px;
+    }
+  }
+}
 .player:hover{
-  .currentTimeDiv{
+  .current-time-div{
     p:first-child{
       opacity: 1;
       position: absolute;

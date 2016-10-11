@@ -116,6 +116,7 @@
 	      { path: '/', component: _App2.default },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Stream2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/:user', component: _ProfilePage2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/me', component: _ProfilePage2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/callback', component: _Callback2.default })
 	    )
 	  )
@@ -29424,6 +29425,7 @@
 	var CLOSE_HEADER = exports.CLOSE_HEADER = 'CLOSE_HEADER';
 	var SHOW_SUBMISSION = exports.SHOW_SUBMISSION = 'SHOW_SUBMISSION';
 	var SET_PROFILE_TRACKS = exports.SET_PROFILE_TRACKS = "SET_PROFILE_TRACKS";
+	var REMOVE_PROFILE_TRACKS = exports.REMOVE_PROFILE_TRACKS = 'REMOVE_PROFILE_TRACKS';
 	var LOGOUT = exports.LOGOUT = 'LOGOUT';
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "actionTypes.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -29902,6 +29904,8 @@
 	  switch (action.type) {
 	    case actionTypes.SET_PROFILE_TRACKS:
 	      return setProfilePageTracks(state, action);
+	    case actionTypes.REMOVE_PROFILE_TRACKS:
+	      return removeProfileTracks(state, action);
 	  }
 	  return state;
 	};
@@ -29923,6 +29927,13 @@
 	  var profileTracks = {};
 	  profileTracks.upvoted = action.upVotedTracks;
 	  profileTracks.posted = action.postedTracks;
+	  return _extends({}, state, { profileTracks: profileTracks });
+	}
+	
+	function removeProfileTracks(state, action) {
+	  var profileTracks = {};
+	  profileTracks.upvoted = [];
+	  profileTracks.posted = [];
 	  return _extends({}, state, { profileTracks: profileTracks });
 	}
 	
@@ -31104,7 +31115,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.setProfilePageTracks = exports.closeHeader = exports.showProfilePage = exports.showSubmission = exports.showLogin = exports.showSignUp = exports.toggleTrack = exports.upVoteTrack = exports.showSavantTracks = exports.showUserTracks = exports.setSavantTracks = exports.mouseLeaveUpvote = exports.mouseEnterUpvote = exports.setUserTracks = exports.submissionSubmit = exports.submissionFormChange = exports.subscribeSubmit = exports.subscribeFormChange = exports.loginPasswordFormChange = exports.loginEmailFormChange = exports.loginSubmit = exports.signUpUsernameChange = exports.signUpPasswordFormChange = exports.signUpEmailFormChange = exports.signUpSubmit = exports.logout = exports.getSession = undefined;
+	exports.removeProfileTracks = exports.setProfilePageTracks = exports.closeHeader = exports.showProfilePage = exports.showSubmission = exports.showLogin = exports.showSignUp = exports.toggleTrack = exports.upVoteTrack = exports.showSavantTracks = exports.showUserTracks = exports.setSavantTracks = exports.mouseLeaveUpvote = exports.mouseEnterUpvote = exports.setUserTracks = exports.submissionSubmit = exports.submissionFormChange = exports.subscribeSubmit = exports.subscribeFormChange = exports.loginPasswordFormChange = exports.loginEmailFormChange = exports.loginSubmit = exports.signUpUsernameChange = exports.signUpPasswordFormChange = exports.signUpEmailFormChange = exports.signUpSubmit = exports.logout = exports.getSession = undefined;
 	
 	var _auth = __webpack_require__(290);
 	
@@ -31153,6 +31164,7 @@
 	exports.showProfilePage = _header.showProfilePage;
 	exports.closeHeader = _header.closeHeader;
 	exports.setProfilePageTracks = _profilePage.setProfilePageTracks;
+	exports.removeProfileTracks = _profilePage.removeProfileTracks;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -32319,6 +32331,7 @@
 	  value: true
 	});
 	exports.setProfilePageTracks = setProfilePageTracks;
+	exports.removeProfileTracks = removeProfileTracks;
 	
 	var _actionTypes = __webpack_require__(267);
 	
@@ -32340,6 +32353,12 @@
 	    }).catch(function (err) {
 	      return console.warn(err);
 	    });
+	  };
+	}
+	
+	function removeProfileTracks() {
+	  return {
+	    type: actionTypes.REMOVE_PROFILE_TRACKS
 	  };
 	}
 	
@@ -32503,7 +32522,6 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //I am keeping the state for player seeking and positioning in the presenter.
 	//Using redux seemed like overkill for this and could slow things down firing so many actions
 	
-	
 	var Player = function (_React$Component) {
 	  _inherits(Player, _React$Component);
 	
@@ -32581,7 +32599,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'currentTimeDiv' },
+	          { className: 'current-time-div' },
 	          _react2.default.createElement(
 	            'p',
 	            null,
@@ -32591,6 +32609,20 @@
 	            'p',
 	            null,
 	            this.getTimeFormat(this.state.duration)
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'current-song-div' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            activeTrack ? activeTrack.title : null
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            activeTrack ? activeTrack.artist : null
 	          )
 	        ),
 	        _react2.default.createElement(_reactSlider2.default, { className: 'progress-slider', handleClassName: 'progress-slider-handle', onSliderClick: this.onSliderClick, defaultValue: 0 }),
@@ -33812,7 +33844,7 @@
 	            null,
 	            _react2.default.createElement(
 	              _reactRouter.Link,
-	              { to: '/' + this.props.auth.user.username },
+	              { to: '/me' },
 	              _react2.default.createElement(
 	                'p',
 	                null,
@@ -34993,21 +35025,25 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(state) {
+	function mapStateToProps(state, props) {
+	  console.log(state, props, 'state and propssss');
 	  var route = state.routing.locationBeforeTransitions;
+	  var routeParams = props.routeParams;
 	  var profilePage = state.profilePage;
 	  var user = state.auth.user;
 	
 	  return {
 	    profilePage: profilePage,
 	    user: user,
-	    route: route
+	    route: route,
+	    routeParams: routeParams
 	  };
 	}
 	
 	function mapDispatchToProps(dispatch) {
 	  return {
-	    setProfilePageTracks: (0, _redux.bindActionCreators)(actions.setProfilePageTracks, dispatch)
+	    setProfilePageTracks: (0, _redux.bindActionCreators)(actions.setProfilePageTracks, dispatch),
+	    removeProfileTracks: (0, _redux.bindActionCreators)(actions.removeProfileTracks, dispatch)
 	  };
 	}
 	
@@ -35055,9 +35091,24 @@
 	  }
 	
 	  _createClass(ProfilePage, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.props.setProfilePageTracks(this.props.route.pathname.slice(1));
+	    key: 'fetchData',
+	    value: function fetchData() {
+	      if (this.props.route.pathname === '/me') this.props.setProfilePageTracks(this.props.user.id);else this.props.setProfilePageTracks(this.props.routeParams.user);
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.fetchData();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(prevProps) {
+	      if (prevProps.route.pathname !== this.props.route.pathname) this.fetchData();
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.props.removeProfileTracks();
 	    }
 	  }, {
 	    key: 'render',
@@ -35068,7 +35119,7 @@
 	        _react2.default.createElement(
 	          'h1',
 	          { className: 'username' },
-	          this.props.route.pathname.slice(1)
+	          this.props.route.pathname === '/me' ? 'You :)' : this.props.routeParams.user
 	        ),
 	        _react2.default.createElement(
 	          'h3',

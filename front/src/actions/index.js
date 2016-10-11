@@ -7,7 +7,7 @@ import { submissionFormChange, submissionSubmit } from './submission'
 import { showUserTracks, showSavantTracks } from './stream'
 import { showSignUp, showLogin, closeHeader, showSubmission, showProfilePage } from './header'
 import { subscribeFormChange, subscribeSubmit } from './header.subscribe'
-import { setProfilePageTracks } from './profilePage'
+import { setProfilePageTracks, removeProfileTracks } from './profilePage'
 
 export {
   getSession,
@@ -36,5 +36,6 @@ export {
   showSubmission,
   showProfilePage,
   closeHeader,
-  setProfilePageTracks
+  setProfilePageTracks,
+  removeProfileTracks
 }

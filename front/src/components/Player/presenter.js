@@ -1,5 +1,6 @@
 //I am keeping the state for player seeking and positioning in the presenter.
 //Using redux seemed like overkill for this and could slow things down firing so many actions
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import FontAwesome from 'react-fontawesome'
@@ -44,7 +45,7 @@ class Player extends React.Component {
     this.setState({currentTime: audioElement.currentTime})
   }
 
-  getTimeFormat(time){
+  getTimeFormat (time) {
     let minutes = Math.floor(time/60)
     let seconds = Math.floor(time%60)
     seconds = '' + seconds
@@ -59,9 +60,13 @@ class Player extends React.Component {
         <div onClick={() => this.props.toggleTrack()} className='play-pause-button'>
           {nowPlaying ? <FontAwesome name='pause' size='2x' /> : <FontAwesome name='play' size='2x' />}
         </div>
-        <div className='currentTimeDiv'>
+        <div className='current-time-div'>
           <p>{this.getTimeFormat(this.state.currentTime)}</p>
           <p>{this.getTimeFormat(this.state.duration)}</p>
+        </div>
+        <div className='current-song-div'>
+          <p>{activeTrack ? activeTrack.title : null}</p>
+          <p>{activeTrack ? activeTrack.artist : null}</p>
         </div>
         <Slider className={'progress-slider'} handleClassName ={'progress-slider-handle'} onSliderClick={this.onSliderClick} defaultValue={0} />
         <Interval timeout={50} enabled={true} callback={() => {

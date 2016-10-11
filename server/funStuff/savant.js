@@ -26,7 +26,6 @@ function getUserLikes (arr) {
 }
 
 function getUserFollowers(arrOfSongs){
-  // console.log(arrOfSongs);
   return Promise.all(arrOfSongs.map(songObj => request(`https://api.soundcloud.com/users/${songObj.user.id}/?client_id=${CLIENT_ID}`)))
   .then(arrOfUsers => arrOfUsers.map(user => user ? JSON.parse(user) : null))
   .then(parsedArrOfUsers => arrOfSongs.map((songObj, i) => {

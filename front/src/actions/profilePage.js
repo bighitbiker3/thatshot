@@ -11,6 +11,12 @@ export function setProfilePageTracks(id){
   }
 }
 
+export function removeProfileTracks(){
+  return {
+    type: actionTypes.REMOVE_PROFILE_TRACKS
+  }
+}
+
 function setTracks(tracks, id){
   tracks = tracks.map(track => {
     track.reqUserId = id
