@@ -24,12 +24,6 @@ function setup () {
   }
 }
 
-describe('header welcome', () => {
-  const { enzymeWrapper, props } = setup()
-  it('welcomes user if logged in', () => {
-    expect(enzymeWrapper.find('p').text()).to.contain('Hello ' + props.auth.user.first_name)
-  })
-})
 
 describe('header show Login/Signup', () => {
   const { enzymeWrapper, props } = setup()

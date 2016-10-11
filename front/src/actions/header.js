@@ -27,3 +27,9 @@ export function showSubmission () {
     payload: {active: true, show: 'submission'}
   }
 }
+
+export function showProfilePage () {
+  return {
+    type: actionTypes.SHOW_PROFILE_PAGE
+  }
+}

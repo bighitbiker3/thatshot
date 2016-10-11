@@ -70,8 +70,7 @@ module.exports = db.define('song', {
   }
 }, {
   instanceMethods: {
-    upvote: function (userId) {
-      console.log(this.upvotes)
+    upvote: function () {
       let newUpvotes = this.upvotes + 1
       return this.set('upvotes', newUpvotes)
     }

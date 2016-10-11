@@ -4,15 +4,12 @@ var router = express.Router()
 var db = require('../db')
 var User = db.model('user')
 var Song = db.model('song')
-var UpVotes = db.model('upvotes')
 var Promise = require('bluebird')
-var passport = require('passport')
 
 // USER IS ON REQ.USER
 
 // ENSURE AUTH
 var ensureAuthenticated = function (req, res, next) {
-  console.log(req.isAuthenticated())
   if (req.isAuthenticated()) return next()
   else res.sendStatus(401)
 }
@@ -33,15 +30,14 @@ router.get('/songs', function (req, res, next) {
 
 // UPVOTE TRACK
 router.post('/songs/:trackId/:userId/upvote', ensureAuthenticated, function (req, res, next) {
-  UpVotes.findOne({where: {song_id: req.params.trackId, user_id: req.params.userId}})
-  .then(result => {
-    if (!result) {
-      UpVotes.create({song_id: req.params.trackId, user_id: req.params.userId})
-      .then(() => Song.findById(req.params.trackId, {include: [{model: User}]}))
-      .then(song => song.upvote(req.params.userId))
-      .then(updated => {
-        return updated.save()
-      })
+  Song.findById(req.params.trackId, {include: [{model: User}]})
+  .then(song => Promise.all([song, song.getUpVotingUsers()]))
+  .spread((song, result) => Promise.all([song, result.filter(user => user.id === +req.params.userId)]))
+  .spread((song, filtered) => {
+    if (!filtered.length) {
+      return song.addUpVotingUsers(req.params.userId)
+      .then(() => song.upvote())
+      .then(updated => updated.save())
       .then(track => res.send(track))
     } else {
       res.send(false)
@@ -84,6 +80,18 @@ router.post('/users', function (req, res, next) {
 router.get('/users/:userId', function (req, res, next) {
   User.findById(req.params.userId)
   .then(user => res.send(user))
+  .catch(next)
+})
+
+// GET SPECIFIC USERS TRACKS
+router.get('/users/:userId/tracks', function (req, res, next) {
+  //Allow for passing of ID's or usernames
+  let findBy = Number(req.params.userId) ? User.findById(req.params.userId) : User.findOne({where:{username:req.params.userId}})
+
+  findBy
+  .then(user => Promise.all([user.getSongs({include: {model: User}}), user.getUpVotedSongs({include: [User]})]))
+  .then(songs => songs.reduce((a, b) => a.concat(b), []))
+  .then(songs => res.send(songs))
   .catch(next)
 })
 

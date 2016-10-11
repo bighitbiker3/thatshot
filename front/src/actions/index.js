@@ -5,8 +5,9 @@ import { signUpSubmit, signUpEmailFormChange, signUpPasswordFormChange, signUpUs
 import { loginSubmit, loginEmailFormChange, loginPasswordFormChange } from './auth.login.js'
 import { submissionFormChange, submissionSubmit } from './submission'
 import { showUserTracks, showSavantTracks } from './stream'
-import { showSignUp, showLogin, closeHeader, showSubmission } from './header'
+import { showSignUp, showLogin, closeHeader, showSubmission, showProfilePage } from './header'
 import { subscribeFormChange, subscribeSubmit } from './header.subscribe'
+import { setProfilePageTracks } from './profilePage'
 
 export {
   getSession,
@@ -33,5 +34,7 @@ export {
   showSignUp,
   showLogin,
   showSubmission,
-  closeHeader
+  showProfilePage,
+  closeHeader,
+  setProfilePageTracks
 }

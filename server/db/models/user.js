@@ -89,7 +89,7 @@ module.exports = db.define('user', {
       }
     },
     afterFind: function (user) {
-      if (user) {
+      if (user && !Array.isArray(user)) {
         return Song.findAll({where: {userId: user.id}})
             .then(songArr => {
               user.set('score', songArr.reduce((a, b) => { return a + b.upvotes }, 0))

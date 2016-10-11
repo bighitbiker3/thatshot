@@ -8,6 +8,7 @@ import * as actions from './actions'
 import App from './components/App'
 import Callback from './components/Callback'
 import Stream from './components/Stream'
+import ProfilePage from './components/ProfilePage'
 import { CLIENT_ID, REDIRECT_URI } from './constants/auth'
 
 SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI })
@@ -21,7 +22,7 @@ ReactDOM.render(
     <Router history={history}>
       <Route path='/' component={App}>
         <IndexRoute component={Stream} />
-        <Route path='/' component={Stream} />
+        <Route path='/:user' component={ProfilePage} />
         <Route path='/callback' component={Callback} />
       </Route>
     </Router>

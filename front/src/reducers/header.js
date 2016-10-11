@@ -2,7 +2,8 @@ import * as actionTypes from '../constants/actionTypes'
 
 const initialState = {
   show: 'none',
-  active: false
+  active: false,
+  profilePage: false
 }
 
 export default function (state = initialState, action) {
@@ -11,6 +12,7 @@ export default function (state = initialState, action) {
     case actionTypes.SHOW_LOGIN: return showLogin(state, action)
     case actionTypes.SHOW_SUBMISSION: return showLogin(state, action)
     case actionTypes.CLOSE_HEADER: return closeHeader(state, action)
+    case actionTypes.SHOW_PROFILE_PAGE: return showProfilePage(state, action)
 
   }
   return state
@@ -28,4 +30,7 @@ function closeHeader (state, action) {
 }
 function showSubmission (state, action) {
   return Object.assign({}, state, action.payload)
+}
+function showProfilePage (state, action) {
+  return Object.assign({}, state, {profilePage: !state.profilePage})
 }

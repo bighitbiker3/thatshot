@@ -9,6 +9,7 @@ import submission from './submission'
 import stream from './stream'
 import header from './header'
 import subscribe from './header.subscribe'
+import profilePage from './profilePage'
 import { reducer as notifReducer } from 'redux-notifications'
 
 export default combineReducers({
@@ -21,6 +22,7 @@ export default combineReducers({
   header,
   player,
   stream,
+  profilePage,
   notifs: notifReducer,
   routing: routerReducer
 })

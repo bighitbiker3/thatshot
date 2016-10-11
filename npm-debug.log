@@ -7,7 +7,7 @@
 6 silly lifecycle thatsHot@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle thatsHot@1.0.0~start: thatsHot@1.0.0
 8 verbose lifecycle thatsHot@1.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle thatsHot@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/.bin:/usr/local/bin:/Users/El_Is_Based/.rbenv/shims:/Users/El_Is_Based/Library/Android/sdk/platform-tools:/Users/El_Is_Based/Library/Android/sdk/tools:/Users/El_Is_Based/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
+9 verbose lifecycle thatsHot@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/.bin:/usr/local/bin:/Users/El_Is_Based/google-cloud-sdk/bin:/Users/El_Is_Based/.rbenv/shims:/Users/El_Is_Based/Library/Android/sdk/platform-tools:/Users/El_Is_Based/Library/Android/sdk/tools:/Users/El_Is_Based/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
 10 verbose lifecycle thatsHot@1.0.0~start: CWD: /Users/El_Is_Based/nodeProjects/thatsHot
 11 silly lifecycle thatsHot@1.0.0~start: Args: [ '-c', 'node server/app' ]
 12 silly lifecycle thatsHot@1.0.0~start: Returned: code: 1  signal: null

@@ -1,5 +1,6 @@
 import React from 'react'
 import UpVote from './UpVote'
+import { Link } from 'react-router'
 
 function Track ({ track = {}, toggleTrack }) {
   return (
@@ -11,7 +12,7 @@ function Track ({ track = {}, toggleTrack }) {
       </div>
       <div className='link-item-right'>
         <div className='posted-by'>
-          {track.user.username}
+          <Link to={`/${track.user.username}`}>{track.user.username}</Link>
         </div>
         <div className='up-votes'>
           <p>{track.upvotes} upvotes</p>

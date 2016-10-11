@@ -23,4 +23,5 @@ export const SHOW_SIGNUP = 'SHOW_SIGNUP'
 export const SHOW_LOGIN = 'SHOW_LOGIN'
 export const CLOSE_HEADER = 'CLOSE_HEADER'
 export const SHOW_SUBMISSION = 'SHOW_SUBMISSION'
+export const SET_PROFILE_TRACKS = "SET_PROFILE_TRACKS"
 export const LOGOUT = 'LOGOUT'

@@ -59,7 +59,7 @@ export function upVoteTrack (trackId, user) {
   }
 }
 
-function sendUpvoteAction (track) {
+export function sendUpvoteAction (track) {
   return {
     type: actionTypes.UPVOTE_TRACK,
     track

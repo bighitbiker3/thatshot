@@ -5,11 +5,13 @@ import * as actions from '../../actions'
 import Header from './presenter'
 
 function mapStateToProps (state, props) {
+  const route = state.routing.locationBeforeTransitions
   const header = state.header
   const auth = state.auth
   return {
     header,
-    auth
+    auth,
+    route
   }
 }
 
@@ -20,7 +22,8 @@ function mapDispatchToProps (dispatch) {
     showSubmission: bindActionCreators(actions.showSubmission, dispatch),
     closeHeader: bindActionCreators(actions.closeHeader, dispatch),
     getSession: bindActionCreators(actions.getSession, dispatch),
-    logout: bindActionCreators(actions.logout, dispatch)
+    logout: bindActionCreators(actions.logout, dispatch),
+    showProfilePage: bindActionCreators(actions.showProfilePage, dispatch)
   }
 }
 

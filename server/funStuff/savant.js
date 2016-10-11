@@ -1,17 +1,16 @@
 const { CLIENT_ID } = require('../constants/auth')
 const { API_LOCATION } = require('../constants/server')
 const Song = require('../db/models/song')
-console.log(CLIENT_ID, API_LOCATION);
 const request = require('request-promise')
 const Promise = require('bluebird')
 let usersArr = ['duvetcover', 'balconies_co', 'ollyjamesmusic', 'bl3rmusic', 'sakuraburst', 'maca-music', 'crvvcksuk', 'brothelmusic']
-
+let usersArrIds = [22158004, 44180050, 58544051, 66089549, 42680724, 44776911, 40811082, 24980742]
 
 module.exports = {
   runSavant: () => {
-    return getUserLikes(shuffle(usersArr))
-    .then(likesArr => likesArr.map(string => JSON.parse(string)))
-    .then(parsedArr => parsedArr.reduce((a, b) => a.concat(b)))
+    return getUserLikes(shuffle(usersArrIds))
+    .then(likesArr => likesArr.map(string => JSON.parse(string).collection).reduce((a, b) => a.concat(b)))
+    .then(objWithTrackArr => objWithTrackArr.map(obj => obj.track))
     .then(flatArr => getUserFollowers(flatArr))
     .then(songObjArr => songObjArr.filter(songObj => (songObj.userInfo.followers_count < 15000)))
     .then(lessThan15kArr => lessThan15kArr.filter(songObj => (songObj.favoritings_count / songObj.playback_count > 0.39 && songObj.playback_count < 10000) || (songObj.playback_count > 10000 && songObj.comment_count > 9)))
@@ -22,8 +21,7 @@ module.exports = {
 }
 
 function getUserLikes (arr) {
-
-  return Promise.all(arr.map(username => request(`https://api.soundcloud.com/users/${username}/favorites/?client_id=${CLIENT_ID}&limit=200`).catch(e => console.log(e))))
+  return Promise.all(arr.map(userId => request(`https://api-v2.soundcloud.com/users/${userId}/track_likes?&limit=100&client_id=${CLIENT_ID}`).catch(e => console.log(e))))
 }
 
 function getUserFollowers(arrOfSongs){

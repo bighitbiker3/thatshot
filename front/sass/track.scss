@@ -58,15 +58,15 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
 }
 
 .link-item-right{
-  position: absolute;
-  right: 5%;
+  position: relative;
+  right: 0;
   p{
     margin: 0;
   }
   display: inline-block;
   float: right;
   text-align: right;
-  width: 10%;
+  width: 100px;
   font-size: 12px;
   @media #{$phone}{
     display: block;
@@ -103,7 +103,7 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
 .album-art-div{
   position: relative;
   background-color: red;
-  width: 150px;
+  min-width: 150px;
   height: 125px;
   display: block;
   @media #{$phone}{

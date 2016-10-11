@@ -1,0 +1,37 @@
+.upvoted-tracks{
+  float:left;
+  width: 45%;
+  .track-group{
+    width: 100%;
+  }
+}
+
+.posted-tracks{
+  float: right;
+  margin-right: 30px;
+  width: 45%;
+  .track-group{
+    width: 100%;
+  }
+}
+
+profile-page{
+  .username{
+    font-family: 'Times New Roman';
+    font-style: italic;
+    text-align: center;
+    margin-top: 0px;
+  }
+  .upvotes-title{
+    float: left;
+    top: 0;
+    width: 45%;
+    text-align: center;
+  }
+  .posted-title{
+    float: right;
+    top: 0;
+    width: 45%;
+    text-align: center;
+  }
+}

@@ -23,8 +23,9 @@ function setup () {
   }
 }
 
-xdescribe('Submission Spec', () => {
-  it('fetches song from soundcloud', () => {
+describe('Submission Spec', () => {
+  //Test when you have internet and a valid link - Test passes tho
+  xit('fetches song from soundcloud', () => {
     const store = mockStore()
     return store.dispatch(actions.submissionSubmit('https://soundcloud.com/duvetcover/i-am', {user: {id: 1}}))
     .then(() => {

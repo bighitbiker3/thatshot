@@ -1,7 +1,6 @@
 const db = require('./server/db')
 const Song = db.model('song')
 const User = db.model('user')
-const UpVotes = db.model('upvotes')
 const request = require('request-promise')
 const Promise = require('bluebird')
 const Chance = require('chance')
@@ -82,20 +81,22 @@ function seed (id) {
 //   seed(i*3);
 //   seed(i*9)
 // }
+db.sync({force: true})
+.then(() => {
+  Promise.all(createUserArray().map(user => User.create(user)))
+  .then(users => {
+    return Promise.all([users, request.get('https://api.soundcloud.com/users/17826556/favorites/?client_id=622c5a5338becb1365fb57b6bdc97f09')])
+  })
+  .spread((users, songs) => {
+    songs = JSON.parse(songs)
+    return songs
+  })
+  .then(data => {
+    return Promise.all(data.map(song => Song.create({artwork_url: song.artwork_url, duration: song.duration, genre: song.genre, trackId: song.id, permalink_url: song.permalink_url, reposts_count: song.reposts_count, title: song.title, artist: song.user.username, artist_uri: song.user.uri, playback_count: song.playback_count, artist_permalink: song.user.permalink_url, stream_url: song.stream_url, artist_id: song.user.id, waveform_url: song.waveform_url})))
+  })
+  .catch(err => console.log(err))
+})
 
-Promise.all(createUserArray().map(user => User.create(user)))
-.then(users => {
-  return Promise.all([users, request.get('https://api.soundcloud.com/users/17826556/favorites/?client_id=622c5a5338becb1365fb57b6bdc97f09')])
-})
-.spread((users, songs) => {
-  songs = JSON.parse(songs)
-  return songs
-})
-.then(data => {
-  return Promise.all(data.map(song => Song.create({artwork_url: song.artwork_url, duration: song.duration, genre: song.genre, trackId: song.id, permalink_url: song.permalink_url, reposts_count: song.reposts_count, title: song.title, artist: song.user.username, artist_uri: song.user.uri, playback_count: song.playback_count, artist_permalink: song.user.permalink_url, stream_url: song.stream_url, artist_id: song.user.id, waveform_url: song.waveform_url})))
-})
-.then(() => Promise.all(createUpVoteArray().map(obj => UpVotes.create(obj))))
-.catch(err => console.log(err))
 
 // .then(users => {
 //   users.forEach(user => seed(user.id))

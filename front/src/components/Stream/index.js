@@ -6,10 +6,12 @@ import Stream from './presenter'
 
 function mapStateToProps (state) {
   const { user } = state.auth
+  const { profilePage } = state.header
   const tracks = state.track
   const stream = state.stream.show
   return {
     user,
+    profilePage,
     tracks,
     stream
   }

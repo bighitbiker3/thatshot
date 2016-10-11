@@ -7,6 +7,7 @@ class Stream extends React.Component {
   }
 
   componentWillMount () {
+    console.log('this shit renderr');
     this.props.setSavantTracks()
     this.props.setUserTracks()
   }
