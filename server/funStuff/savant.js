@@ -16,7 +16,6 @@ module.exports = {
     .then(lessThan15kArr => lessThan15kArr.filter(songObj => (songObj.favoritings_count / songObj.playback_count > 0.39 && songObj.playback_count < 10000) || (songObj.playback_count > 10000 && songObj.comment_count > 9)))
     .then(itsFire => getNew15(itsFire))
     .then(fireTracks => getStreamUrl(fireTracks))
-    .then(thing => console.log(thing[0]))
     .then(itsFire15 => itsFire15)
     .catch(err => console.log(err))
   }
