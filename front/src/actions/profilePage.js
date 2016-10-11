@@ -2,14 +2,19 @@ import * as actionTypes from '../constants/actionTypes'
 import * as server from '../constants/server'
 
 export function setProfilePageTracks(id){
-  console.log(id, 'THIS IS ID BEING PASSSEDDDDDDD');
   return function (dispatch) {
+    dispatch({type: actionTypes.START_LOADING})
     return fetch(server.API_LOCATION + `/users/${id}/tracks`)
     .then(res => res.json())
-    .then(userStuff => dispatch(setTracks(userStuff, id)))
+    .then(userStuff => {
+      dispatch(setTracks(userStuff, id))
+      dispatch({type: actionTypes.STOP_LOADING})
+    })
     .catch(err => console.warn(err))
   }
 }
+
+
 
 export function removeProfileTracks(){
   return {

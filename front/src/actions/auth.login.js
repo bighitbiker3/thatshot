@@ -1,6 +1,8 @@
 import * as actionTypes from '../constants/actionTypes'
 import * as server from '../constants/server'
 import { closeHeader } from './header'
+import { reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications'
+const { notifSend } = notifActions
 
 export function loginEmailFormChange (e) {
   console.log(email, 'in action login')
@@ -28,6 +30,7 @@ export function sendUserAuthAction (user) {
 
 export function loginSubmit (email, password) {
   return function (dispatch) {
+    dispatch({type: actionTypes.START_LOADING})
     $.ajax(server.SERVER_LOCATION + '/login', {
       method: 'POST',
       data: {email: email, password: password}
@@ -35,7 +38,12 @@ export function loginSubmit (email, password) {
     .then(user => {
       dispatch(sendUserAuthAction(user.user))
       dispatch(closeHeader())
+      dispatch({type: actionTypes.STOP_LOADING})
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      dispatch({type: actionTypes.STOP_LOADING})
+      notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000})
+      console.log(err)
+    })
   }
 }

@@ -73,27 +73,27 @@
 	
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _App = __webpack_require__(304);
+	var _App = __webpack_require__(306);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _Callback = __webpack_require__(323);
+	var _Callback = __webpack_require__(327);
 	
 	var _Callback2 = _interopRequireDefault(_Callback);
 	
-	var _Stream = __webpack_require__(324);
+	var _Stream = __webpack_require__(328);
 	
 	var _Stream2 = _interopRequireDefault(_Stream);
 	
-	var _ProfilePage = __webpack_require__(330);
+	var _ProfilePage = __webpack_require__(334);
 	
 	var _ProfilePage2 = _interopRequireDefault(_ProfilePage);
 	
-	var _auth = __webpack_require__(300);
+	var _auth = __webpack_require__(301);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -29319,7 +29319,11 @@
 	
 	var _profilePage2 = _interopRequireDefault(_profilePage);
 	
-	var _reduxNotifications = __webpack_require__(277);
+	var _loader = __webpack_require__(277);
+	
+	var _loader2 = _interopRequireDefault(_loader);
+	
+	var _reduxNotifications = __webpack_require__(278);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29334,6 +29338,7 @@
 	  player: _player2.default,
 	  stream: _stream2.default,
 	  profilePage: _profilePage2.default,
+	  loader: _loader2.default,
 	  notifs: _reduxNotifications.reducer,
 	  routing: _reactRouterRedux.routerReducer
 	});
@@ -29424,9 +29429,11 @@
 	var SHOW_LOGIN = exports.SHOW_LOGIN = 'SHOW_LOGIN';
 	var CLOSE_HEADER = exports.CLOSE_HEADER = 'CLOSE_HEADER';
 	var SHOW_SUBMISSION = exports.SHOW_SUBMISSION = 'SHOW_SUBMISSION';
-	var SET_PROFILE_TRACKS = exports.SET_PROFILE_TRACKS = "SET_PROFILE_TRACKS";
+	var SET_PROFILE_TRACKS = exports.SET_PROFILE_TRACKS = 'SET_PROFILE_TRACKS';
 	var REMOVE_PROFILE_TRACKS = exports.REMOVE_PROFILE_TRACKS = 'REMOVE_PROFILE_TRACKS';
 	var LOGOUT = exports.LOGOUT = 'LOGOUT';
+	var START_LOADING = exports.START_LOADING = 'START_LOADING';
+	var STOP_LOADING = exports.STOP_LOADING = 'STOP_LOADING';
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "actionTypes.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -29943,6 +29950,49 @@
 /* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case actionTypes.START_LOADING:
+	      return startLoading(state, action);
+	    case actionTypes.STOP_LOADING:
+	      return stopLoading(state, action);
+	  }
+	  return state;
+	};
+	
+	var _actionTypes = __webpack_require__(267);
+	
+	var actionTypes = _interopRequireWildcard(_actionTypes);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	var initialState = false;
+	
+	function startLoading(state, action) {
+	  return true;
+	}
+	
+	function stopLoading(state, action) {
+	  return false;
+	}
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "loader.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, '__esModule', {
@@ -29953,15 +30003,15 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _reducersNotifs = __webpack_require__(278);
+	var _reducersNotifs = __webpack_require__(279);
 	
 	var _reducersNotifs2 = _interopRequireDefault(_reducersNotifs);
 	
-	var _actionsNotifs = __webpack_require__(279);
+	var _actionsNotifs = __webpack_require__(280);
 	
 	var actions = _interopRequireWildcard(_actionsNotifs);
 	
-	var _componentsNotifs = __webpack_require__(280);
+	var _componentsNotifs = __webpack_require__(281);
 	
 	var _componentsNotifs2 = _interopRequireDefault(_componentsNotifs);
 	
@@ -29970,7 +30020,7 @@
 	exports.reducer = _reducersNotifs2['default'];
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29982,7 +30032,7 @@
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 	
-	var _actionsNotifs = __webpack_require__(279);
+	var _actionsNotifs = __webpack_require__(280);
 	
 	function notifs(domain, action) {
 	  if (domain === undefined) domain = [];
@@ -30006,7 +30056,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30062,7 +30112,7 @@
 	}
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30079,7 +30129,7 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _reactAddonsCssTransitionGroup = __webpack_require__(281);
+	var _reactAddonsCssTransitionGroup = __webpack_require__(282);
 	
 	var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
 	
@@ -30087,7 +30137,7 @@
 	
 	// require('../../css/styles.css');
 	
-	var _Notif = __webpack_require__(288);
+	var _Notif = __webpack_require__(289);
 	
 	var _Notif2 = _interopRequireDefault(_Notif);
 	
@@ -30161,13 +30211,13 @@
 
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(282);
+	module.exports = __webpack_require__(283);
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30187,8 +30237,8 @@
 	
 	var React = __webpack_require__(3);
 	
-	var ReactTransitionGroup = __webpack_require__(283);
-	var ReactCSSTransitionGroupChild = __webpack_require__(285);
+	var ReactTransitionGroup = __webpack_require__(284);
+	var ReactCSSTransitionGroupChild = __webpack_require__(286);
 	
 	function createTransitionTimeoutPropValidator(transitionType) {
 	  var timeoutPropName = 'transition' + transitionType + 'Timeout';
@@ -30259,7 +30309,7 @@
 	module.exports = ReactCSSTransitionGroup;
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -30279,7 +30329,7 @@
 	
 	var React = __webpack_require__(3);
 	var ReactInstanceMap = __webpack_require__(120);
-	var ReactTransitionChildMapping = __webpack_require__(284);
+	var ReactTransitionChildMapping = __webpack_require__(285);
 	
 	var emptyFunction = __webpack_require__(13);
 	
@@ -30511,7 +30561,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -30620,7 +30670,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30639,8 +30689,8 @@
 	var React = __webpack_require__(3);
 	var ReactDOM = __webpack_require__(36);
 	
-	var CSSCore = __webpack_require__(286);
-	var ReactTransitionEvents = __webpack_require__(287);
+	var CSSCore = __webpack_require__(287);
+	var ReactTransitionEvents = __webpack_require__(288);
 	
 	var onlyChild = __webpack_require__(34);
 	
@@ -30792,7 +30842,7 @@
 	module.exports = ReactCSSTransitionGroupChild;
 
 /***/ },
-/* 286 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -30919,7 +30969,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 287 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30997,7 +31047,7 @@
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 288 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31105,7 +31155,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 289 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -31115,27 +31165,29 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.removeProfileTracks = exports.setProfilePageTracks = exports.closeHeader = exports.showProfilePage = exports.showSubmission = exports.showLogin = exports.showSignUp = exports.toggleTrack = exports.upVoteTrack = exports.showSavantTracks = exports.showUserTracks = exports.setSavantTracks = exports.mouseLeaveUpvote = exports.mouseEnterUpvote = exports.setUserTracks = exports.submissionSubmit = exports.submissionFormChange = exports.subscribeSubmit = exports.subscribeFormChange = exports.loginPasswordFormChange = exports.loginEmailFormChange = exports.loginSubmit = exports.signUpUsernameChange = exports.signUpPasswordFormChange = exports.signUpEmailFormChange = exports.signUpSubmit = exports.logout = exports.getSession = undefined;
+	exports.stopLoading = exports.startLoading = exports.removeProfileTracks = exports.setProfilePageTracks = exports.closeHeader = exports.showProfilePage = exports.showSubmission = exports.showLogin = exports.showSignUp = exports.toggleTrack = exports.upVoteTrack = exports.showSavantTracks = exports.showUserTracks = exports.setSavantTracks = exports.mouseLeaveUpvote = exports.mouseEnterUpvote = exports.setUserTracks = exports.submissionSubmit = exports.submissionFormChange = exports.subscribeSubmit = exports.subscribeFormChange = exports.loginPasswordFormChange = exports.loginEmailFormChange = exports.loginSubmit = exports.signUpUsernameChange = exports.signUpPasswordFormChange = exports.signUpEmailFormChange = exports.signUpSubmit = exports.logout = exports.getSession = undefined;
 	
-	var _auth = __webpack_require__(290);
+	var _auth = __webpack_require__(291);
 	
-	var _track = __webpack_require__(292);
+	var _track = __webpack_require__(293);
 	
-	var _player = __webpack_require__(296);
+	var _player = __webpack_require__(297);
 	
-	var _authSignup = __webpack_require__(297);
+	var _authSignup = __webpack_require__(298);
 	
-	var _authLogin = __webpack_require__(298);
+	var _authLogin = __webpack_require__(299);
 	
-	var _submission = __webpack_require__(299);
+	var _submission = __webpack_require__(300);
 	
-	var _stream = __webpack_require__(301);
+	var _stream = __webpack_require__(302);
 	
-	var _header = __webpack_require__(295);
+	var _header = __webpack_require__(296);
 	
-	var _header2 = __webpack_require__(302);
+	var _header2 = __webpack_require__(303);
 	
-	var _profilePage = __webpack_require__(303);
+	var _profilePage = __webpack_require__(304);
+	
+	var _loader = __webpack_require__(305);
 	
 	exports.getSession = _auth.getSession;
 	exports.logout = _auth.logout;
@@ -31165,11 +31217,13 @@
 	exports.closeHeader = _header.closeHeader;
 	exports.setProfilePageTracks = _profilePage.setProfilePageTracks;
 	exports.removeProfileTracks = _profilePage.removeProfileTracks;
+	exports.startLoading = _loader.startLoading;
+	exports.stopLoading = _loader.stopLoading;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 290 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -31182,7 +31236,7 @@
 	exports.getSession = getSession;
 	exports.logout = logout;
 	
-	var _soundcloud = __webpack_require__(291);
+	var _soundcloud = __webpack_require__(292);
 	
 	var _soundcloud2 = _interopRequireDefault(_soundcloud);
 	
@@ -31190,13 +31244,13 @@
 	
 	var actionTypes = _interopRequireWildcard(_actionTypes);
 	
-	var _track = __webpack_require__(292);
+	var _track = __webpack_require__(293);
 	
-	var _server = __webpack_require__(294);
+	var _server = __webpack_require__(295);
 	
 	var server = _interopRequireWildcard(_server);
 	
-	var _header = __webpack_require__(295);
+	var _header = __webpack_require__(296);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -31259,7 +31313,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 291 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	!function(t,e){if(true)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n=e();for(var i in n)("object"==typeof exports?exports:t)[i]=n[i]}}(this,function(){return function(t){function e(i){if(n[i])return n[i].exports;var r=n[i]={exports:{},id:i,loaded:!1};return t[i].call(r.exports,r,r.exports,e),r.loaded=!0,r.exports}var n={};return e.m=t,e.c=n,e.p="",e(0)}([function(t,e,n){(function(e){"use strict";var i=n(4),r=n(8),o=n(2),s=n(9),a=n(1).Promise,u=n(15),h=n(16);t.exports=e.SC={initialize:function(){var t=arguments.length<=0||void 0===arguments[0]?{}:arguments[0];o.set("oauth_token",t.oauth_token),o.set("client_id",t.client_id),o.set("redirect_uri",t.redirect_uri),o.set("baseURL",t.baseURL),o.set("connectURL",t.connectURL)},get:function(t,e){return i.request("GET",t,e)},post:function(t,e){return i.request("POST",t,e)},put:function(t,e){return i.request("PUT",t,e)},"delete":function(t){return i.request("DELETE",t)},upload:function(t){return i.upload(t)},connect:function(t){return s(t)},isConnected:function(){return void 0!==o.get("oauth_token")},oEmbed:function(t,e){return i.oEmbed(t,e)},resolve:function(t){return i.resolve(t)},Recorder:u,Promise:a,stream:function(t,e){return h(t,e)},connectCallback:function(){r.notifyDialog(this.location)}}}).call(e,function(){return this}())},function(t,e,n){var i;(function(t,r,o,s){/*!
@@ -31292,7 +31346,7 @@
 	//# sourceMappingURL=sdk.js.map
 
 /***/ },
-/* 292 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(fetch) {/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -31313,11 +31367,11 @@
 	
 	var actionTypes = _interopRequireWildcard(_actionTypes);
 	
-	var _server = __webpack_require__(294);
+	var _server = __webpack_require__(295);
 	
 	var server = _interopRequireWildcard(_server);
 	
-	var _reduxNotifications = __webpack_require__(277);
+	var _reduxNotifications = __webpack_require__(278);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -31333,6 +31387,7 @@
 	
 	function setSavantTracks() {
 	  return function (dispatch) {
+	    dispatch({ type: actionTypes.START_LOADING });
 	    return fetch(server.API_LOCATION + '/songs?is_savant=true').then(function (data) {
 	      return data.json();
 	    }).then(function (dataJSON) {
@@ -31340,7 +31395,8 @@
 	        return b.upvotes - a.upvotes;
 	      });
 	    }).then(function (dataSorted) {
-	      return dispatch(trackSetSavant(dataSorted));
+	      dispatch({ type: actionTypes.STOP_LOADING });
+	      dispatch(trackSetSavant(dataSorted));
 	    }).catch(function (err) {
 	      return console.log(err);
 	    });
@@ -31360,10 +31416,12 @@
 	      song.user = user;
 	      return dispatch(trackSetUser(song));
 	    } else {
+	      dispatch({ type: actionTypes.START_LOADING });
 	      return fetch(server.API_LOCATION + '/songs?is_savant=false').then(function (data) {
 	        return data.json();
 	      }).then(function (dataJSON) {
-	        return dispatch(trackSetUser(dataJSON));
+	        dispatch({ type: actionTypes.STOP_LOADING });
+	        dispatch(trackSetUser(dataJSON));
 	      }).catch(function (err) {
 	        return console.log(err);
 	      });
@@ -31409,10 +31467,10 @@
 	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "track.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(293)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 293 */
+/* 294 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*** IMPORTS FROM imports-loader ***/
@@ -31859,7 +31917,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 294 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -31877,7 +31935,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "server.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 295 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -31936,7 +31994,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "header.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 296 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -31964,7 +32022,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "player.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 297 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -31984,15 +32042,15 @@
 	
 	var actionTypes = _interopRequireWildcard(_actionTypes);
 	
-	var _server = __webpack_require__(294);
+	var _server = __webpack_require__(295);
 	
 	var server = _interopRequireWildcard(_server);
 	
-	var _header = __webpack_require__(295);
+	var _header = __webpack_require__(296);
 	
-	var _reduxNotifications = __webpack_require__(277);
+	var _reduxNotifications = __webpack_require__(278);
 	
-	var _auth = __webpack_require__(298);
+	var _auth = __webpack_require__(299);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -32033,6 +32091,7 @@
 	  var userToSignUp = { email: email, password: password, username: username };
 	  return function (dispatch) {
 	    if (!email || !password || !username) return dispatch(notifSend({ message: 'All fields are require, noob.', kind: 'danger', dismissAfter: 1000 }));
+	    dispatch({ type: actionTypes.START_LOADING });
 	    return $.ajax(server.API_LOCATION + '/users', {
 	      method: 'POST',
 	      data: userToSignUp
@@ -32043,7 +32102,9 @@
 	      } else {
 	        dispatch(notifSend({ message: 'That user already exists :(', kind: 'danger', dismissAfter: 1000 }));
 	      }
+	      dispatch({ type: actionTypes.STOP_LOADING });
 	    }).catch(function (err) {
+	      dispatch({ type: actionTypes.STOP_LOADING });
 	      if (err.responseText.includes('Validation isEmail')) return dispatch(notifSend({ message: 'Need a real email pls :)', kind: 'danger', dismissAfter: 1000 }));else return dispatch(notifSend({ message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000 }));
 	    });
 	  };
@@ -32052,7 +32113,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.signup.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 298 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32071,14 +32132,17 @@
 	
 	var actionTypes = _interopRequireWildcard(_actionTypes);
 	
-	var _server = __webpack_require__(294);
+	var _server = __webpack_require__(295);
 	
 	var server = _interopRequireWildcard(_server);
 	
-	var _header = __webpack_require__(295);
+	var _header = __webpack_require__(296);
+	
+	var _reduxNotifications = __webpack_require__(278);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
+	var notifSend = _reduxNotifications.actions.notifSend;
 	function loginEmailFormChange(e) {
 	  console.log(email, 'in action login');
 	  var email = e.target.value;
@@ -32105,14 +32169,18 @@
 	
 	function loginSubmit(email, password) {
 	  return function (dispatch) {
+	    dispatch({ type: actionTypes.START_LOADING });
 	    $.ajax(server.SERVER_LOCATION + '/login', {
 	      method: 'POST',
 	      data: { email: email, password: password }
 	    }).then(function (user) {
 	      dispatch(sendUserAuthAction(user.user));
 	      dispatch((0, _header.closeHeader)());
+	      dispatch({ type: actionTypes.STOP_LOADING });
 	    }).catch(function (err) {
-	      return console.log(err);
+	      dispatch({ type: actionTypes.STOP_LOADING });
+	      notifSend({ message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000 });
+	      console.log(err);
 	    });
 	  };
 	}
@@ -32120,7 +32188,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.login.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(fetch) {/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32137,17 +32205,17 @@
 	
 	var actionTypes = _interopRequireWildcard(_actionTypes);
 	
-	var _server = __webpack_require__(294);
+	var _server = __webpack_require__(295);
 	
 	var server = _interopRequireWildcard(_server);
 	
-	var _auth = __webpack_require__(300);
+	var _auth = __webpack_require__(301);
 	
 	var auth = _interopRequireWildcard(_auth);
 	
-	var _track = __webpack_require__(292);
+	var _track = __webpack_require__(293);
 	
-	var _reduxNotifications = __webpack_require__(277);
+	var _reduxNotifications = __webpack_require__(278);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -32170,6 +32238,7 @@
 	
 	function submissionSubmit(link, user) {
 	  return function (dispatch) {
+	    dispatch({ type: actionTypes.START_LOADING });
 	    return fetch('https://api.soundcloud.com/resolve?url=' + link + '&client_id=' + auth.CLIENT_ID).then(function (song) {
 	      return song.json();
 	    }).then(function (song) {
@@ -32177,6 +32246,7 @@
 	      analyzeSong(song, user, dispatch);
 	    }).catch(function (err) {
 	      console.log(err);
+	      dispatch({ type: actionTypes.STOP_LOADING });
 	      dispatch(notifSend({ message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000 }));
 	    });
 	  };
@@ -32199,6 +32269,7 @@
 	    method: 'POST',
 	    data: songToAdd
 	  }).then(function (song) {
+	    dispatch({ type: actionTypes.STOP_LOADING });
 	    if (song) {
 	      dispatch((0, _track.setUserTracks)(song, user));
 	      dispatch(notifSend({ message: 'Song posted. Thanks :)', kind: 'success', dismissAfter: 1000 }));
@@ -32207,19 +32278,21 @@
 	    }
 	  }).catch(function (err) {
 	    console.log(err);
+	    dispatch({ type: actionTypes.STOP_LOADING });
 	    dispatch(notifSend({ message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000 }));
 	  });
 	}
 	
 	function tooManyFollowers(dispatch) {
+	  dispatch({ type: actionTypes.STOP_LOADING });
 	  dispatch(notifSend({ message: 'This artist is over our 15k follower limit :(', kind: 'danger', dismissAfter: 1000 }));
 	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "submission.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(293)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32235,7 +32308,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32265,7 +32338,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "stream.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32282,11 +32355,11 @@
 	
 	var actionTypes = _interopRequireWildcard(_actionTypes);
 	
-	var _server = __webpack_require__(294);
+	var _server = __webpack_require__(295);
 	
 	var server = _interopRequireWildcard(_server);
 	
-	var _reduxNotifications = __webpack_require__(277);
+	var _reduxNotifications = __webpack_require__(278);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -32307,20 +32380,24 @@
 	
 	function subscribeSubmit(email) {
 	  var dataToSend = { email: email };
-	  console.log(dataToSend, 'data to seennnnnndddd!~!!!!');
 	  return function (dispatch) {
+	    dispatch({ type: actionTypes.START_LOADING });
 	    return $.ajax(server.API_LOCATION + '/subscribers', { method: 'POST', data: dataToSend }).then(function (user) {
 	      return dispatch(sendUserAuthAction());
 	    }).then(function () {
-	      return dispatch(notifSend({ message: 'Thanks for subscribing!', kind: 'success', dismissAfter: 1000 }));
-	    }).catch(dispatch(notifSend({ message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000 })));
+	      dispatch({ type: actionTypes.STOP_LOADING });
+	      dispatch(notifSend({ message: 'Thanks for subscribing!', kind: 'success', dismissAfter: 1000 }));
+	    }).catch(function () {
+	      dispatch({ type: actionTypes.STOP_LOADING });
+	      dispatch(notifSend({ message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000 }));
+	    });
 	  };
 	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "header.subscribe.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(fetch) {/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32337,19 +32414,20 @@
 	
 	var actionTypes = _interopRequireWildcard(_actionTypes);
 	
-	var _server = __webpack_require__(294);
+	var _server = __webpack_require__(295);
 	
 	var server = _interopRequireWildcard(_server);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function setProfilePageTracks(id) {
-	  console.log(id, 'THIS IS ID BEING PASSSEDDDDDDD');
 	  return function (dispatch) {
+	    dispatch({ type: actionTypes.START_LOADING });
 	    return fetch(server.API_LOCATION + ('/users/' + id + '/tracks')).then(function (res) {
 	      return res.json();
 	    }).then(function (userStuff) {
-	      return dispatch(setTracks(userStuff, id));
+	      dispatch(setTracks(userStuff, id));
+	      dispatch({ type: actionTypes.STOP_LOADING });
 	    }).catch(function (err) {
 	      return console.warn(err);
 	    });
@@ -32381,10 +32459,44 @@
 	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "profilePage.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(293)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 304 */
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.startLoading = startLoading;
+	exports.stopLoading = stopLoading;
+	
+	var _actionTypes = __webpack_require__(267);
+	
+	var actionTypes = _interopRequireWildcard(_actionTypes);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function startLoading() {
+	  return {
+	    type: actionTypes.START_LOADING
+	  };
+	}
+	
+	function stopLoading() {
+	  return {
+	    type: actionTypes.STOP_LOADING
+	  };
+	}
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "loader.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32399,15 +32511,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Player = __webpack_require__(305);
+	var _Player = __webpack_require__(307);
 	
 	var _Player2 = _interopRequireDefault(_Player);
 	
-	var _Header = __webpack_require__(311);
+	var _Header = __webpack_require__(313);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _reduxNotifications = __webpack_require__(277);
+	var _reduxNotifications = __webpack_require__(278);
+	
+	var _Loader = __webpack_require__(325);
+	
+	var _Loader2 = _interopRequireDefault(_Loader);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32418,6 +32534,7 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(_reduxNotifications.Notifs, null),
+	    _react2.default.createElement(_Loader2.default, null),
 	    _react2.default.createElement(_Header2.default, null),
 	    children,
 	    _react2.default.createElement(_Player2.default, null)
@@ -32429,7 +32546,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 305 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32448,11 +32565,11 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _presenter = __webpack_require__(306);
+	var _presenter = __webpack_require__(308);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -32478,7 +32595,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 306 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32499,17 +32616,17 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactFontawesome = __webpack_require__(307);
+	var _reactFontawesome = __webpack_require__(309);
 	
 	var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
 	
-	var _auth = __webpack_require__(300);
+	var _auth = __webpack_require__(301);
 	
-	var _reactInterval = __webpack_require__(308);
+	var _reactInterval = __webpack_require__(310);
 	
 	var _reactInterval2 = _interopRequireDefault(_reactInterval);
 	
-	var _reactSlider = __webpack_require__(310);
+	var _reactSlider = __webpack_require__(312);
 	
 	var _reactSlider2 = _interopRequireDefault(_reactSlider);
 	
@@ -32676,7 +32793,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 307 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32789,12 +32906,12 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 308 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var ReactInterval = __webpack_require__(309).ReactInterval;
+	var ReactInterval = __webpack_require__(311).ReactInterval;
 	
 	ReactInterval.ReactInterval = ReactInterval;
 	
@@ -32802,7 +32919,7 @@
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 309 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32880,7 +32997,7 @@
 	//# sourceMappingURL=Component.js.map
 
 /***/ },
-/* 310 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
@@ -33686,7 +33803,7 @@
 
 
 /***/ },
-/* 311 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -33705,11 +33822,11 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _presenter = __webpack_require__(312);
+	var _presenter = __webpack_require__(314);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -33745,7 +33862,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 312 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -33762,23 +33879,23 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SignUp = __webpack_require__(313);
+	var _SignUp = __webpack_require__(315);
 	
 	var _SignUp2 = _interopRequireDefault(_SignUp);
 	
-	var _Login = __webpack_require__(315);
+	var _Login = __webpack_require__(317);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _Submission = __webpack_require__(317);
+	var _Submission = __webpack_require__(319);
 	
 	var _Submission2 = _interopRequireDefault(_Submission);
 	
-	var _Overlay = __webpack_require__(319);
+	var _Overlay = __webpack_require__(321);
 	
 	var _Overlay2 = _interopRequireDefault(_Overlay);
 	
-	var _Subscribe = __webpack_require__(321);
+	var _Subscribe = __webpack_require__(323);
 	
 	var _Subscribe2 = _interopRequireDefault(_Subscribe);
 	
@@ -33934,7 +34051,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 313 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -33953,11 +34070,11 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _presenter = __webpack_require__(314);
+	var _presenter = __webpack_require__(316);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -33986,7 +34103,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 314 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34054,7 +34171,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 315 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34073,11 +34190,11 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _presenter = __webpack_require__(316);
+	var _presenter = __webpack_require__(318);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -34105,7 +34222,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 316 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34172,7 +34289,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 317 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34191,11 +34308,11 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _presenter = __webpack_require__(318);
+	var _presenter = __webpack_require__(320);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -34224,7 +34341,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 318 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34286,7 +34403,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 319 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34305,7 +34422,7 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _presenter = __webpack_require__(320);
+	var _presenter = __webpack_require__(322);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -34336,7 +34453,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 320 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34385,7 +34502,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 321 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34400,11 +34517,11 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _presenter = __webpack_require__(322);
+	var _presenter = __webpack_require__(324);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -34431,7 +34548,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 322 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34495,7 +34612,84 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 323 */
+/* 325 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _redux = __webpack_require__(248);
+	
+	var _reactRedux = __webpack_require__(241);
+	
+	var _actions = __webpack_require__(290);
+	
+	var actions = _interopRequireWildcard(_actions);
+	
+	var _presenter = __webpack_require__(326);
+	
+	var _presenter2 = _interopRequireDefault(_presenter);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function mapStateToProps(state, props) {
+	  var loader = state.loader;
+	  var header = state.header;
+	
+	  return {
+	    loader: loader,
+	    header: header
+	  };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_presenter2.default);
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 326 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (_ref) {
+	  var loader = _ref.loader;
+	  var header = _ref.header;
+	
+	  console.log('this is loadeerrrr', loader, header);
+	  return (
+	    // TODO: I don't like this double ternary
+	    _react2.default.createElement('i', { style: loader ? header.active ? { top: '10%', border: '.5em solid #FFF' } : { top: '10%' } : null, className: 'loader' })
+	  );
+	};
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34557,7 +34751,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 324 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34576,11 +34770,11 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _presenter = __webpack_require__(325);
+	var _presenter = __webpack_require__(329);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -34616,7 +34810,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 325 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34633,9 +34827,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Track = __webpack_require__(326);
+	var _Track = __webpack_require__(330);
 	
 	var _Track2 = _interopRequireDefault(_Track);
+	
+	var _presenter = __webpack_require__(326);
+	
+	var _presenter2 = _interopRequireDefault(_presenter);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -34713,7 +34911,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 326 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34732,11 +34930,11 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _presenter = __webpack_require__(327);
+	var _presenter = __webpack_require__(331);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -34762,7 +34960,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 327 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34777,7 +34975,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _UpVote = __webpack_require__(328);
+	var _UpVote = __webpack_require__(332);
 	
 	var _UpVote2 = _interopRequireDefault(_UpVote);
 	
@@ -34856,7 +35054,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 328 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34875,11 +35073,11 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _presenter = __webpack_require__(329);
+	var _presenter = __webpack_require__(333);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -34909,7 +35107,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 329 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -34994,7 +35192,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 330 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -35013,11 +35211,11 @@
 	
 	var _reactRedux = __webpack_require__(241);
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(290);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
-	var _presenter = __webpack_require__(331);
+	var _presenter = __webpack_require__(335);
 	
 	var _presenter2 = _interopRequireDefault(_presenter);
 	
@@ -35052,7 +35250,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 331 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -35069,7 +35267,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Track = __webpack_require__(326);
+	var _Track = __webpack_require__(330);
 	
 	var _Track2 = _interopRequireDefault(_Track);
 	

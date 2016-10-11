@@ -1,5 +1,6 @@
 import React from 'react'
 import Track from '../Track'
+import Loader from '../Loader/presenter'
 
 class Stream extends React.Component {
   constructor (props) {

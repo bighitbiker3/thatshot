@@ -19,11 +19,17 @@ function sendSubscribeSubmitAction () {
 
 export function subscribeSubmit (email) {
   let dataToSend = {email: email}
-  console.log(dataToSend, 'data to seennnnnndddd!~!!!!')
   return function (dispatch) {
+    dispatch({type: actionTypes.START_LOADING})
     return $.ajax(`${server.API_LOCATION}/subscribers`, {method: 'POST', data: dataToSend})
     .then(user => dispatch(sendUserAuthAction()))
-    .then(() => dispatch(notifSend({message: 'Thanks for subscribing!', kind: 'success', dismissAfter: 1000})))
-    .catch(dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000})))
+    .then(() => {
+      dispatch({type: actionTypes.STOP_LOADING})
+      dispatch(notifSend({message: 'Thanks for subscribing!', kind: 'success', dismissAfter: 1000}))
+    })
+    .catch(() => {
+      dispatch({type: actionTypes.STOP_LOADING})
+      dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000}))
+    })
   }
 }

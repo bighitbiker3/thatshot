@@ -12,10 +12,14 @@ function trackSetSavant (tracks) {
 
 export function setSavantTracks () {
   return function (dispatch) {
+    dispatch({type: actionTypes.START_LOADING})
     return fetch(server.API_LOCATION + '/songs?is_savant=true')
       .then(data => data.json())
       .then(dataJSON => dataJSON.sort((a, b) => b.upvotes - a.upvotes))
-      .then(dataSorted => dispatch(trackSetSavant(dataSorted)))
+      .then(dataSorted => {
+        dispatch({type: actionTypes.STOP_LOADING})
+        dispatch(trackSetSavant(dataSorted))
+      })
       .catch(err => console.log(err))
   }
 }
@@ -34,9 +38,13 @@ export function setUserTracks (song, user) {
       return dispatch(trackSetUser(song))
     }
     else {
+      dispatch({type: actionTypes.START_LOADING})
       return fetch(server.API_LOCATION + '/songs?is_savant=false')
       .then(data => data.json())
-      .then(dataJSON => dispatch(trackSetUser(dataJSON)))
+      .then(dataJSON => {
+        dispatch({type: actionTypes.STOP_LOADING})
+        dispatch(trackSetUser(dataJSON))
+      })
       .catch(err => console.log(err))
     }
   }

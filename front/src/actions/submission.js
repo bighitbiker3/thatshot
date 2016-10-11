@@ -23,6 +23,7 @@ function sendSubmissionSubmitAction (song) {
 
 export function submissionSubmit (link, user) {
   return function (dispatch) {
+    dispatch({type: actionTypes.START_LOADING})
     return fetch(`https://api.soundcloud.com/resolve?url=${link}&client_id=${auth.CLIENT_ID}`)
     .then(song => {
       return song.json()
@@ -33,6 +34,7 @@ export function submissionSubmit (link, user) {
     })
     .catch(err => {
       console.log(err)
+      dispatch({type: actionTypes.STOP_LOADING})
       dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000}))
     })
   }
@@ -53,6 +55,7 @@ function checkForSongInDb (song, user, dispatch) {
     data: songToAdd
   })
   .then(song => {
+    dispatch({type: actionTypes.STOP_LOADING})
     if (song) {
       dispatch(setUserTracks(song, user))
       dispatch(notifSend({message: 'Song posted. Thanks :)', kind: 'success', dismissAfter: 1000}))
@@ -62,10 +65,12 @@ function checkForSongInDb (song, user, dispatch) {
   })
   .catch(err => {
     console.log(err)
+    dispatch({type: actionTypes.STOP_LOADING})
     dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000}))
   })
 }
 
 function tooManyFollowers (dispatch) {
+  dispatch({type: actionTypes.STOP_LOADING})
   dispatch(notifSend({message: 'This artist is over our 15k follower limit :(', kind: 'danger', dismissAfter: 1000}))
 }

@@ -41,6 +41,7 @@ export function signUpSubmit (email, password, username) {
   const userToSignUp = {email: email, password: password, username: username}
   return function (dispatch) {
     if (!email || !password || !username) return dispatch(notifSend({message: 'All fields are require, noob.', kind: 'danger', dismissAfter: 1000}))
+    dispatch({type: actionTypes.START_LOADING})
     return $.ajax(server.API_LOCATION + '/users', {
       method: 'POST',
       data: userToSignUp
@@ -52,8 +53,10 @@ export function signUpSubmit (email, password, username) {
       } else {
         dispatch(notifSend({message: 'That user already exists :(', kind: 'danger', dismissAfter: 1000}))
       }
+      dispatch({type: actionTypes.STOP_LOADING})
     })
     .catch(err => {
+      dispatch({type: actionTypes.STOP_LOADING})
       if(err.responseText.includes('Validation isEmail')) return dispatch(notifSend({message: 'Need a real email pls :)', kind: 'danger', dismissAfter: 1000}))
       else return dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000}))
     })
