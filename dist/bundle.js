@@ -35068,7 +35068,7 @@
 	        _react2.default.createElement(
 	          'h1',
 	          { className: 'username' },
-	          this.props.user.username || this.props.route.pathname.slice(1)
+	          this.props.route.pathname.slice(1)
 	        ),
 	        _react2.default.createElement(
 	          'h3',

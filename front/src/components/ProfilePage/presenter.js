@@ -13,7 +13,7 @@ export default class ProfilePage extends React.Component {
   render () {
     return (
       <profile-page>
-        <h1 className="username">{this.props.user.username || this.props.route.pathname.slice(1)}</h1>
+        <h1 className="username">{this.props.route.pathname.slice(1)}</h1>
         <h3 className="upvotes-title">Upvotes</h3>
         <h3 className="posted-title">Submissions</h3>
         <div className='upvoted-tracks'>
