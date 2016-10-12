@@ -32306,7 +32306,7 @@
 	    method: 'POST',
 	    data: songToAdd
 	  }).then(function (song) {
-	    dispatch({ type: actionTypes.STOP_LOADING });
+	    console.log(song, 'THIS IS SONG IN SUBMITTTTTTT');
 	    if (song) {
 	      dispatch((0, _track.setUserTracks)(song, user));
 	      dispatch(clearSubmissionInput());
@@ -32315,6 +32315,7 @@
 	      dispatch(notifSend({ message: 'This song was already posted', kind: 'danger', dismissAfter: 1000 }));
 	      dispatch(clearSubmissionInput());
 	    }
+	    dispatch({ type: actionTypes.STOP_LOADING });
 	  }).catch(function (err) {
 	    console.log(err);
 	    dispatch({ type: actionTypes.STOP_LOADING });

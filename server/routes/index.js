@@ -51,7 +51,7 @@ router.post('/songs/:trackId/:userId/upvote', ensureAuthenticated, function (req
 router.post('/songs/:userId/:trackId', ensureAuthenticated, function (req, res, next) {
   Song.findOne({where: {trackId: req.params.trackId}})
   .then(song => {
-    if (song) res.send(null)
+    if (song) res.send(false)
     else return req.user.createSong(req.body)
   })
   .then(song => res.send(song))

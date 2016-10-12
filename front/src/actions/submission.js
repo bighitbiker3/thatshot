@@ -63,7 +63,7 @@ function checkForSongInDb (song, user, dispatch) {
     data: songToAdd
   })
   .then(song => {
-    dispatch({type: actionTypes.STOP_LOADING})
+    console.log(song, 'THIS IS SONG IN SUBMITTTTTTT');
     if (song) {
       dispatch(setUserTracks(song, user))
       dispatch(clearSubmissionInput())
@@ -72,6 +72,7 @@ function checkForSongInDb (song, user, dispatch) {
       dispatch(notifSend({message: 'This song was already posted', kind: 'danger', dismissAfter: 1000}))
       dispatch(clearSubmissionInput())
     }
+    dispatch({type: actionTypes.STOP_LOADING})
   })
   .catch(err => {
     console.log(err)
