@@ -29434,6 +29434,8 @@
 	var LOGOUT = exports.LOGOUT = 'LOGOUT';
 	var START_LOADING = exports.START_LOADING = 'START_LOADING';
 	var STOP_LOADING = exports.STOP_LOADING = 'STOP_LOADING';
+	var CLEAR_HEADER_INPUT = exports.CLEAR_HEADER_INPUT = 'CLEAR_HEADER_INPUT';
+	var CLEAR_SUBMISSION_INPUT = exports.CLEAR_SUBMISSION_INPUT = 'CLEAR_SUBMISSION_INPUT';
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "actionTypes.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -29705,6 +29707,8 @@
 	      return submissionFormChange(state, action);
 	    case actionTypes.SUBMISSION_SUBMIT:
 	      return submissionSubmit(state, action);
+	    case actionTypes.CLEAR_SUBMISSION_INPUT:
+	      return clearSubmissionInput(state, action);
 	  }
 	  return state;
 	};
@@ -29726,9 +29730,12 @@
 	}
 	
 	function submissionSubmit(state, action) {
-	  console.log('submission submit reducer');
 	  var song = action.song;
 	  return Object.assign({}, state, { song: song });
+	}
+	
+	function clearSubmissionInput(state, action) {
+	  return Object.assign({}, state, { link: '' });
 	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "submission.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -29865,6 +29872,8 @@
 	      return subscribeFormChange(state, action);
 	    case actionTypes.SUBSCRIBE_SUBMIT:
 	      return subscribeSubmit(state, action);
+	    case actionTypes.CLEAR_SUBSCRIBE_INPUT:
+	      return clearSubscribeInput(state, action);
 	  }
 	  return state;
 	};
@@ -29884,8 +29893,11 @@
 	}
 	
 	function subscribeSubmit(state, action) {
-	  console.log('submit pressed in reducer returning statel maoooooooo');
 	  return _extends({}, state);
+	}
+	
+	function clearSubscribeInput() {
+	  return { email: '' };
 	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "header.subscribe.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -31165,7 +31177,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.removeProfileTracks = exports.setProfilePageTracks = exports.closeHeader = exports.showProfilePage = exports.showSubmission = exports.showLogin = exports.showSignUp = exports.toggleTrack = exports.upVoteTrack = exports.showSavantTracks = exports.showUserTracks = exports.setSavantTracks = exports.mouseLeaveUpvote = exports.mouseEnterUpvote = exports.setUserTracks = exports.submissionSubmit = exports.submissionFormChange = exports.subscribeSubmit = exports.subscribeFormChange = exports.loginPasswordFormChange = exports.loginEmailFormChange = exports.loginSubmit = exports.signUpUsernameChange = exports.signUpPasswordFormChange = exports.signUpEmailFormChange = exports.signUpSubmit = exports.logout = exports.getSession = undefined;
+	exports.clearSubmissionInput = exports.clearSubscribeInput = exports.removeProfileTracks = exports.setProfilePageTracks = exports.closeHeader = exports.showProfilePage = exports.showSubmission = exports.showLogin = exports.showSignUp = exports.toggleTrack = exports.upVoteTrack = exports.showSavantTracks = exports.showUserTracks = exports.setSavantTracks = exports.mouseLeaveUpvote = exports.mouseEnterUpvote = exports.setUserTracks = exports.submissionSubmit = exports.submissionFormChange = exports.subscribeSubmit = exports.subscribeFormChange = exports.loginPasswordFormChange = exports.loginEmailFormChange = exports.loginSubmit = exports.signUpUsernameChange = exports.signUpPasswordFormChange = exports.signUpEmailFormChange = exports.signUpSubmit = exports.logout = exports.getSession = undefined;
 	
 	var _auth = __webpack_require__(291);
 	
@@ -31215,6 +31227,8 @@
 	exports.closeHeader = _header.closeHeader;
 	exports.setProfilePageTracks = _profilePage.setProfilePageTracks;
 	exports.removeProfileTracks = _profilePage.removeProfileTracks;
+	exports.clearSubscribeInput = _header2.clearSubscribeInput;
+	exports.clearSubmissionInput = _submission.clearSubmissionInput;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -32243,15 +32257,24 @@
 	}
 	
 	function sendSubmissionSubmitAction(song) {
-	  console.log('send submission action');
 	  return {
 	    type: actionTypes.SUBMISSION_SUBMIT,
 	    song: song
 	  };
 	}
 	
-	function submissionSubmit(link, user) {
-	  return function (dispatch) {
+	function clearSubmissionInput() {
+	  return {
+	    type: actionTypes.CLEAR_SUBMISSION_INPUT
+	  };
+	}
+	
+	function submissionSubmit(event) {
+	  event.preventDefault();
+	  return function (dispatch, getState) {
+	    var link = getState().submission.link;
+	    var user = getState().auth.user;
+	
 	    dispatch({ type: actionTypes.START_LOADING });
 	    return fetch('https://api.soundcloud.com/resolve?url=' + link + '&client_id=' + auth.CLIENT_ID).then(function (song) {
 	      return song.json();
@@ -32277,7 +32300,7 @@
 	}
 	
 	function checkForSongInDb(song, user, dispatch) {
-	  console.log(song);
+	  console.log(song, user);
 	  var songToAdd = { artwork_url: song.artwork_url, duration: song.duration, genre: song.genre, trackId: song.id, permalink_url: song.permalink_url, reposts_count: song.reposts_count, title: song.title, artist: song.user.username, artist_uri: song.user.uri, playback_count: song.playback_count, artist_permalink: song.user.permalink_url, stream_url: song.stream_url, artist_id: song.user.id, waveform_url: song.waveform_url };
 	  return $.ajax(server.API_LOCATION + ('/songs/' + user.id + '/' + song.id), {
 	    method: 'POST',
@@ -32286,9 +32309,11 @@
 	    dispatch({ type: actionTypes.STOP_LOADING });
 	    if (song) {
 	      dispatch((0, _track.setUserTracks)(song, user));
+	      dispatch(clearSubmissionInput());
 	      dispatch(notifSend({ message: 'Song posted. Thanks :)', kind: 'success', dismissAfter: 1000 }));
 	    } else {
 	      dispatch(notifSend({ message: 'This song was already posted', kind: 'danger', dismissAfter: 1000 }));
+	      dispatch(clearSubmissionInput());
 	    }
 	  }).catch(function (err) {
 	    console.log(err);
@@ -32300,6 +32325,7 @@
 	function tooManyFollowers(dispatch) {
 	  dispatch({ type: actionTypes.STOP_LOADING });
 	  dispatch(notifSend({ message: 'This artist is over our 15k follower limit :(', kind: 'danger', dismissAfter: 1000 }));
+	  dispatch(clearSubmissionInput());
 	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "submission.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -32392,6 +32418,12 @@
 	  };
 	}
 	
+	function clearSubscribeInput() {
+	  return {
+	    type: actionTypes.CLEAR_SUBSCRIBE_INPUT
+	  };
+	}
+	
 	function subscribeSubmit(event) {
 	  event.preventDefault();
 	  return function (dispatch, getState) {
@@ -32401,6 +32433,7 @@
 	    return $.ajax(server.API_LOCATION + '/subscribers', { method: 'POST', data: { email: email } }).then(function (sub) {
 	      dispatch({ type: actionTypes.STOP_LOADING });
 	      dispatch(notifSend({ message: 'Thanks for subscribing!', kind: 'success', dismissAfter: 1000 }));
+	      dispatch(clearSubscribeInput());
 	    }).catch(function (err) {
 	      dispatch({ type: actionTypes.STOP_LOADING });
 	      if (err.responseText.includes('Validation')) return dispatch(notifSend({ message: 'You\'re already subscribed!', kind: 'success', dismissAfter: 1000 }));
@@ -34359,23 +34392,22 @@
 	  function Submission(props) {
 	    _classCallCheck(this, Submission);
 	
-	    return _possibleConstructorReturn(this, (Submission.__proto__ || Object.getPrototypeOf(Submission)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Submission.__proto__ || Object.getPrototypeOf(Submission)).call(this, props));
+	
+	    _this.submissionSubmit = _this.props.submissionSubmit.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Submission, [{
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-	
 	      return _react2.default.createElement(
 	        'submission',
 	        { className: 'submission' },
 	        _react2.default.createElement(
 	          'form',
-	          { onSubmit: function onSubmit() {
-	              return _this2.props.submissionSubmit(_this2.props.submission.link, _this2.props.user);
-	            } },
-	          _react2.default.createElement('input', { onChange: this.props.submissionFormChange, placeholder: 'Soundcloud Link Here', type: 'text' }),
+	          { onSubmit: this.submissionSubmit },
+	          _react2.default.createElement('input', { onChange: this.props.submissionFormChange, value: this.props.submission.link, placeholder: 'Soundcloud Link Here', type: 'text' }),
 	          _react2.default.createElement(
 	            'button',
 	            { type: 'submit' },
@@ -34586,7 +34618,7 @@
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.subscribeSubmit },
-	          _react2.default.createElement('input', { onChange: this.subscribeFormChange, placeholder: 'Email Address' }),
+	          _react2.default.createElement('input', { onChange: this.subscribeFormChange, value: this.props.subscribe.email, placeholder: 'Email Address' }),
 	          _react2.default.createElement(
 	            'button',
 	            { type: 'submit' },

@@ -14,15 +14,23 @@ export function submissionFormChange (e) {
 }
 
 function sendSubmissionSubmitAction (song) {
-  console.log('send submission action')
   return {
     type: actionTypes.SUBMISSION_SUBMIT,
     song
   }
 }
 
-export function submissionSubmit (link, user) {
-  return function (dispatch) {
+function clearSubmissionInput () {
+  return {
+    type: actionTypes.CLEAR_SUBMISSION_INPUT
+  }
+}
+
+export function submissionSubmit (event) {
+  event.preventDefault()
+  return function (dispatch, getState) {
+    const { link } = getState().submission
+    const { user } = getState().auth
     dispatch({type: actionTypes.START_LOADING})
     return fetch(`https://api.soundcloud.com/resolve?url=${link}&client_id=${auth.CLIENT_ID}`)
     .then(song => {
@@ -48,7 +56,7 @@ function analyzeSong (song, postedUser, dispatch) {
 }
 
 function checkForSongInDb (song, user, dispatch) {
-  console.log(song)
+  console.log(song, user)
   const songToAdd = {artwork_url: song.artwork_url, duration: song.duration, genre: song.genre, trackId: song.id, permalink_url: song.permalink_url, reposts_count: song.reposts_count, title: song.title, artist: song.user.username, artist_uri: song.user.uri, playback_count: song.playback_count, artist_permalink: song.user.permalink_url, stream_url: song.stream_url, artist_id: song.user.id, waveform_url: song.waveform_url}
   return $.ajax(server.API_LOCATION + `/songs/${user.id}/${song.id}`, {
     method: 'POST',
@@ -58,9 +66,11 @@ function checkForSongInDb (song, user, dispatch) {
     dispatch({type: actionTypes.STOP_LOADING})
     if (song) {
       dispatch(setUserTracks(song, user))
+      dispatch(clearSubmissionInput())
       dispatch(notifSend({message: 'Song posted. Thanks :)', kind: 'success', dismissAfter: 1000}))
     } else {
       dispatch(notifSend({message: 'This song was already posted', kind: 'danger', dismissAfter: 1000}))
+      dispatch(clearSubmissionInput())
     }
   })
   .catch(err => {
@@ -73,4 +83,5 @@ function checkForSongInDb (song, user, dispatch) {
 function tooManyFollowers (dispatch) {
   dispatch({type: actionTypes.STOP_LOADING})
   dispatch(notifSend({message: 'This artist is over our 15k follower limit :(', kind: 'danger', dismissAfter: 1000}))
+  dispatch(clearSubmissionInput())
 }

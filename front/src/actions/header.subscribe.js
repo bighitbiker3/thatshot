@@ -17,6 +17,12 @@ function sendSubscribeSubmitAction () {
   }
 }
 
+function clearSubscribeInput () {
+  return {
+    type: actionTypes.CLEAR_SUBSCRIBE_INPUT
+  }
+}
+
 export function subscribeSubmit (event) {
   event.preventDefault()
   return function (dispatch, getState) {
@@ -26,6 +32,7 @@ export function subscribeSubmit (event) {
     .then((sub) => {
       dispatch({type: actionTypes.STOP_LOADING})
       dispatch(notifSend({message: 'Thanks for subscribing!', kind: 'success', dismissAfter: 1000}))
+      dispatch(clearSubscribeInput())
     })
     .catch((err) => {
       dispatch({type: actionTypes.STOP_LOADING})

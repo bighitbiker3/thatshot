@@ -11,7 +11,7 @@ export default class Subscribe extends React.Component {
     return (
       <div className="subscribe">
       <form onSubmit={this.subscribeSubmit}>
-        <input onChange={this.subscribeFormChange} placeholder='Email Address' />
+        <input onChange={this.subscribeFormChange} value={this.props.subscribe.email} placeholder='Email Address' />
         <button type="submit">Subscribe</button>
       </form>
       </div>

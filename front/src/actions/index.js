@@ -3,10 +3,10 @@ import { setSavantTracks, upVoteTrack, setUserTracks, mouseEnterUpvote, mouseLea
 import { toggleTrack } from './player'
 import { signUpSubmit, signUpEmailFormChange, signUpPasswordFormChange, signUpUsernameChange } from './auth.signup.js'
 import { loginSubmit, loginEmailFormChange, loginPasswordFormChange } from './auth.login.js'
-import { submissionFormChange, submissionSubmit } from './submission'
+import { submissionFormChange, submissionSubmit, clearSubmissionInput } from './submission'
 import { showUserTracks, showSavantTracks } from './stream'
 import { showSignUp, showLogin, closeHeader, showSubmission, showProfilePage } from './header'
-import { subscribeFormChange, subscribeSubmit } from './header.subscribe'
+import { subscribeFormChange, subscribeSubmit, clearSubscribeInput } from './header.subscribe'
 import { setProfilePageTracks, removeProfileTracks } from './profilePage'
 
 
@@ -38,5 +38,7 @@ export {
   showProfilePage,
   closeHeader,
   setProfilePageTracks,
-  removeProfileTracks
+  removeProfileTracks,
+  clearSubscribeInput,
+  clearSubmissionInput
 }

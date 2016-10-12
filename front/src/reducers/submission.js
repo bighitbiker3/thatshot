@@ -9,6 +9,7 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.SUBMISSION_CHANGE: return submissionFormChange(state, action)
     case actionTypes.SUBMISSION_SUBMIT: return submissionSubmit(state, action)
+    case actionTypes.CLEAR_SUBMISSION_INPUT: return clearSubmissionInput(state, action)
   }
   return state
 }
@@ -19,7 +20,11 @@ function submissionFormChange (state, action) {
 }
 
 function submissionSubmit (state, action) {
-  console.log('submission submit reducer')
   let song = action.song
   return Object.assign({}, state, {song: song})
+}
+
+
+function clearSubmissionInput (state, action) {
+  return Object.assign({}, state, {link: ''})
 }
