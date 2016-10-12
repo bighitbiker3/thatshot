@@ -8,7 +8,7 @@ import { showUserTracks, showSavantTracks } from './stream'
 import { showSignUp, showLogin, closeHeader, showSubmission, showProfilePage } from './header'
 import { subscribeFormChange, subscribeSubmit } from './header.subscribe'
 import { setProfilePageTracks, removeProfileTracks } from './profilePage'
-import { startLoading, stopLoading } from './loader'
+
 
 export {
   getSession,
@@ -38,7 +38,5 @@ export {
   showProfilePage,
   closeHeader,
   setProfilePageTracks,
-  removeProfileTracks,
-  startLoading,
-  stopLoading
+  removeProfileTracks
 }

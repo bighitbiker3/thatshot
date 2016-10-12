@@ -11,7 +11,8 @@ function trackSetSavant (tracks) {
 }
 
 export function setSavantTracks () {
-  return function (dispatch) {
+  return function (dispatch, getState ) {
+      console.log('THIS IS GET STATEEEEE', getState);
     dispatch({type: actionTypes.START_LOADING})
     return fetch(server.API_LOCATION + '/songs?is_savant=true')
       .then(data => data.json())

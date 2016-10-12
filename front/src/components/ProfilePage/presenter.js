@@ -10,7 +10,7 @@ export default class ProfilePage extends React.Component {
     if (this.props.route.pathname === '/me') this.props.setProfilePageTracks(this.props.user.id)
     else this.props.setProfilePageTracks(this.props.routeParams.user)
   }
-  
+
   componentDidMount () {
     this.fetchData()
   }
@@ -27,12 +27,18 @@ export default class ProfilePage extends React.Component {
     return (
       <profile-page>
         <h1 className='username'>{this.props.route.pathname === '/me' ? 'You :)' : this.props.routeParams.user}</h1>
-        <h3 className='upvotes-title'>Upvotes</h3>
-        <h3 className='posted-title'>Submissions</h3>
+        {
+          this.props.routeParams.user === 'The Savant' ?
+          null
+          : <div>
+              <h3 className='upvotes-title'>Upvotes</h3>
+              <h3 className='posted-title'>Submissions</h3>
+            </div>
+        }
         <div className='upvoted-tracks'>
           {this.props.profilePage.profileTracks.upvoted.map((track, i) => <Track className='track' key={i} track={track} />)}
         </div>
-        <div className='posted-tracks'>
+        <div className={this.props.routeParams.user === 'The Savant' ? null : 'posted-tracks'}>
           {this.props.profilePage.profileTracks.posted.map((track, i) => <Track className='track' key={i} track={track} />)}
         </div>
       </profile-page>

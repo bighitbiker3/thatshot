@@ -3,13 +3,17 @@ import React from 'react'
 export default class Subscribe extends React.Component {
   constructor (props) {
     super(props)
+    this.subscribeSubmit = this.props.subscribeSubmit.bind(this)
+    this.subscribeFormChange = this.props.subscribeFormChange.bind(this)
   }
 
   render () {
     return (
       <div className="subscribe">
-        <input onChange={(e) => this.props.subscribeFormChange(e)} placeholder='Email Address' />
-        <button onClick={() => this.props.subscribeSubmit(this.props.subscribe.email)}>Subscribe</button>
+      <form onSubmit={this.subscribeSubmit}>
+        <input onChange={this.subscribeFormChange} placeholder='Email Address' />
+        <button type="submit">Subscribe</button>
+      </form>
       </div>
     )
   }

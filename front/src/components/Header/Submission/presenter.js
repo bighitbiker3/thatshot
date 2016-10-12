@@ -8,8 +8,10 @@ class Submission extends React.Component {
   render () {
     return (
         <submission className='submission'>
-            <input onChange={this.props.submissionFormChange} placeholder='Soundcloud Link Here' type='text' />
-            <button onClick={() => this.props.submissionSubmit(this.props.submission.link, this.props.user)}>Submit</button>
+          <form onSubmit={() => this.props.submissionSubmit(this.props.submission.link, this.props.user)}>
+          <input onChange={this.props.submissionFormChange} placeholder='Soundcloud Link Here' type='text' />
+          <button type="submit">Submit</button>
+          </form>
         </submission>
     )
   }

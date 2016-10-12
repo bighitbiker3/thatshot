@@ -5,7 +5,6 @@ import { reducer as notifReducer, actions as notifActions, Notifs } from 'redux-
 const { notifSend } = notifActions
 
 export function loginEmailFormChange (e) {
-  console.log(email, 'in action login')
   let email = e.target.value
   return {
     type: actionTypes.LOGIN_EMAIL_CHANGE,
@@ -28,8 +27,10 @@ export function sendUserAuthAction (user) {
   }
 }
 
-export function loginSubmit (email, password) {
-  return function (dispatch) {
+export function loginSubmit (event) {
+  event.preventDefault()
+  return function (dispatch, getState) {
+    const { email, password } = getState().login
     dispatch({type: actionTypes.START_LOADING})
     $.ajax(server.SERVER_LOCATION + '/login', {
       method: 'POST',
@@ -42,7 +43,8 @@ export function loginSubmit (email, password) {
     })
     .catch(err => {
       dispatch({type: actionTypes.STOP_LOADING})
-      notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000})
+      if(err.responseText.includes('Invalid login credentials')) dispatch(notifSend({message: 'Wrong login credentials', kind: 'danger', dismissAfter: 1000}))
+      else dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000}))
       console.log(err)
     })
   }
