@@ -60,7 +60,6 @@ router.post('/songs/:userId/:trackId', ensureAuthenticated, function (req, res, 
 
 // CREATE NEW USER
 router.post('/users', function (req, res, next) {
-  console.log(req.body)
   User.findOrCreate({
     where: {
       $or: [

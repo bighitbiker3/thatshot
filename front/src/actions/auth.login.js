@@ -45,7 +45,7 @@ export function loginSubmit (event) {
       dispatch({type: actionTypes.STOP_LOADING})
       if(err.responseText.includes('Invalid login credentials')) dispatch(notifSend({message: 'Wrong login credentials', kind: 'danger', dismissAfter: 1000}))
       else dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000}))
-      console.log(err)
+      console.warn(err)
     })
   }
 }

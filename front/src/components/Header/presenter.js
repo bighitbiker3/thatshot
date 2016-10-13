@@ -10,7 +10,6 @@ var input
 class Header extends React.Component {
   constructor (props) {
     super(props)
-    console.log(this.props);
   }
 
   componentWillMount () {

@@ -12,7 +12,6 @@ function trackSetSavant (tracks) {
 
 export function setSavantTracks () {
   return function (dispatch, getState ) {
-      console.log('THIS IS GET STATEEEEE', getState);
     dispatch({type: actionTypes.START_LOADING})
     return fetch(server.API_LOCATION + '/songs?is_savant=true')
       .then(data => data.json())
@@ -21,7 +20,7 @@ export function setSavantTracks () {
         dispatch({type: actionTypes.STOP_LOADING})
         dispatch(trackSetSavant(dataSorted))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.warn(err))
   }
 }
 
@@ -46,7 +45,7 @@ export function setUserTracks (song, user) {
         dispatch({type: actionTypes.STOP_LOADING})
         dispatch(trackSetUser(dataJSON))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.warn(err))
     }
   }
 }
@@ -60,11 +59,10 @@ export function upVoteTrack (trackId, user) {
     if (!user) return dispatch(notifSend({message: 'You must be logged in to upvote tunes', kind: 'danger', dismissAfter: 1000}))
     return $.ajax(server.API_LOCATION + `/songs/${trackId}/${user.id}/upvote`, {method: 'POST'})
       .then(track => {
-        console.log(track)
         if (track) dispatch(sendUpvoteAction(track))
         else dispatch(notifSend({message: 'You already upvoted that', kind: 'danger', dismissAfter: 1000}))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.warn(err))
   }
 }
 

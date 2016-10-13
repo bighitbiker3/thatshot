@@ -42,10 +42,6 @@ function upVoteTrack (state, action) {
   const upvoted = Object.assign({}, action.track, {
     upvotes: newUpvotes
   })
-  console.log(Object.assign({}, state, {
-    savantTracks: state.savantTracks.map(track => track.id === upvoted.id ? upvoted : track),
-    userTracks: state.userTracks.map(track => track.id === upvoted.id ? upvoted : track)
-  }))
   return Object.assign({}, state, {
     savantTracks: state.savantTracks.map(track => track.id === upvoted.id ? upvoted : track),
     userTracks: state.userTracks.map(track => track.id === upvoted.id ? upvoted : track)
@@ -53,7 +49,6 @@ function upVoteTrack (state, action) {
 }
 
 function alreadyUpvoted (state, action) {
-  console.log('already upvoted lol')
   return {...state}
 }
 

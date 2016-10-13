@@ -5,7 +5,6 @@ import * as actions from '../../actions'
 import ProfilePage from './presenter'
 
 function mapStateToProps (state, props) {
-  console.log(state, props, 'state and propssss');
   const route = state.routing.locationBeforeTransitions
   const routeParams = props.routeParams
   const { profilePage } = state;

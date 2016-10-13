@@ -41,7 +41,7 @@ export function submissionSubmit (event) {
       analyzeSong(song, user, dispatch)
     })
     .catch(err => {
-      console.log(err)
+      console.warn(err)
       dispatch({type: actionTypes.STOP_LOADING})
       dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000}))
     })
@@ -52,18 +52,16 @@ function analyzeSong (song, postedUser, dispatch) {
   return fetch(`https://api.soundcloud.com/users/${song.user.id}?client_id=${auth.CLIENT_ID}`)
   .then(user => user.json())
   .then(user => user.followers_count < 15000 ? checkForSongInDb(song, postedUser, dispatch) : tooManyFollowers(dispatch))
-  .catch(err => console.log(err))
+  .catch(err => console.warn(err))
 }
 
 function checkForSongInDb (song, user, dispatch) {
-  console.log(song, user)
   const songToAdd = {artwork_url: song.artwork_url, duration: song.duration, genre: song.genre, trackId: song.id, permalink_url: song.permalink_url, reposts_count: song.reposts_count, title: song.title, artist: song.user.username, artist_uri: song.user.uri, playback_count: song.playback_count, artist_permalink: song.user.permalink_url, stream_url: song.stream_url, artist_id: song.user.id, waveform_url: song.waveform_url}
   return $.ajax(server.API_LOCATION + `/songs/${user.id}/${song.id}`, {
     method: 'POST',
     data: songToAdd
   })
   .then(song => {
-    console.log(song, 'THIS IS SONG IN SUBMITTTTTTT');
     if (song) {
       dispatch(setUserTracks(song, user))
       dispatch(clearSubmissionInput())
@@ -75,7 +73,7 @@ function checkForSongInDb (song, user, dispatch) {
     dispatch({type: actionTypes.STOP_LOADING})
   })
   .catch(err => {
-    console.log(err)
+    console.warn(err)
     dispatch({type: actionTypes.STOP_LOADING})
     dispatch(notifSend({message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000}))
   })

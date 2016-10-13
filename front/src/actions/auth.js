@@ -21,7 +21,7 @@ export function getSession () {
   return function (dispatch) {
     $.get(server.SERVER_LOCATION + '/session')
     .then(data => data.user ? dispatch(setMe(data.user)) : null)
-    .catch(err => console.log(err))
+    .catch(err => console.warn(err))
   }
 }
 
@@ -32,7 +32,7 @@ export function logout () {
       dispatch(logoutMe())
       dispatch(closeHeader())
     })
-    .catch(err => console.log(err))
+    .catch(err => console.warn(err))
   }
 }
 // export function auth(){

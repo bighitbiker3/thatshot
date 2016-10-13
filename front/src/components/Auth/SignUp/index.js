@@ -5,7 +5,6 @@ import * as actions from '../../../actions'
 import SignUp from './presenter'
 
 function mapStateToProps (state, props) {
-  console.log(state, 'STATE IN SignUp')
   const header = state.header
   return {
     header
