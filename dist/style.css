@@ -383,6 +383,20 @@ profile-page .posted-title {
   width: 45%;
   text-align: center; }
 
+.settings-cog {
+  position: absolute;
+  right: 62px; }
+
+.user-settings {
+  height: 200px; }
+  .user-settings h1 {
+    font-family: 'Times New Roman';
+    font-style: italic;
+    text-align: center;
+    margin-top: 0px; }
+  .user-settings h3 {
+    text-align: center; }
+
 .track-types a {
   float: right;
   cursor: pointer; }

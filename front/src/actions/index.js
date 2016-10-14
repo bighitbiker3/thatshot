@@ -1,4 +1,4 @@
-import { getSession, logout } from './auth'
+import { getSession, logout, soundCloudAuth, fetchMeSoundCloud } from './auth'
 import { setSavantTracks, upVoteTrack, setUserTracks, mouseEnterUpvote, mouseLeaveUpvote } from './track'
 import { toggleTrack } from './player'
 import { signUpSubmit, signUpEmailFormChange, signUpPasswordFormChange, signUpUsernameChange } from './auth.signup.js'
@@ -7,12 +7,14 @@ import { submissionFormChange, submissionSubmit, clearSubmissionInput } from './
 import { showUserTracks, showSavantTracks } from './stream'
 import { showSignUp, showLogin, closeHeader, showSubmission, showProfilePage } from './header'
 import { subscribeFormChange, subscribeSubmit, clearSubscribeInput } from './header.subscribe'
-import { setProfilePageTracks, removeProfileTracks } from './profilePage'
+import { setProfilePageTracks, removeProfileTracks, toggleSettings } from './profilePage'
 
 
 export {
   getSession,
   logout,
+  soundCloudAuth,
+  fetchMeSoundCloud,
   signUpSubmit,
   signUpEmailFormChange,
   signUpPasswordFormChange,
@@ -40,5 +42,6 @@ export {
   setProfilePageTracks,
   removeProfileTracks,
   clearSubscribeInput,
-  clearSubmissionInput
+  clearSubmissionInput,
+  toggleSettings
 }

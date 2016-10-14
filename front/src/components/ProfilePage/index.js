@@ -20,7 +20,8 @@ function mapStateToProps (state, props) {
 function mapDispatchToProps (dispatch) {
   return {
     setProfilePageTracks: bindActionCreators(actions.setProfilePageTracks, dispatch),
-    removeProfileTracks: bindActionCreators(actions.removeProfileTracks, dispatch)
+    removeProfileTracks: bindActionCreators(actions.removeProfileTracks, dispatch),
+    toggleSettings: bindActionCreators(actions.toggleSettings, dispatch)
   }
 }
 

@@ -9,6 +9,7 @@ import App from './components/App'
 import Callback from './components/Callback'
 import Stream from './components/Stream'
 import ProfilePage from './components/ProfilePage'
+import ProfileSettings from './components/ProfilePage/Settings'
 import { CLIENT_ID, REDIRECT_URI } from './constants/auth'
 
 SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI })
@@ -20,11 +21,13 @@ const history = syncHistoryWithStore(browserHistory, store)
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
+      <Route path='/callback' component={Callback} />
       <Route path='/' component={App}>
         <IndexRoute component={Stream} />
         <Route path='/:user' component={ProfilePage} />
-        <Route path='/me' component={ProfilePage} />
-        <Route path='/callback' component={Callback} />
+        <Route path='/me' component={ProfilePage}>
+          <Route path='/me/settings' component={ProfileSettings} />
+        </Route>
       </Route>
     </Router>
   </Provider>,

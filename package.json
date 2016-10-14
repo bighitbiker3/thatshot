@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/app",
-    "start-watch": "nodemon server/app --watch server",
+    "start-watch": "gulp & nodemon server/app --watch server",
     "test": "mocha --compilers js:babel-core/register --require ./front/test/setup.js 'front/src/**/*spec.js'",
     "test:watch": "npm run test -- --watch"
   },
@@ -28,6 +28,10 @@
     "chai": "^3.5.0",
     "chance": "^1.0.4",
     "enzyme": "^2.4.1",
+    "eslint": "^3.7.1",
+    "eslint-config-standard": "^6.2.0",
+    "eslint-plugin-promise": "^3.0.0",
+    "eslint-plugin-standard": "^2.0.1",
     "expect": "^1.20.2",
     "exports-loader": "^0.6.3",
     "gulp-concat": "^2.6.0",
@@ -75,7 +79,7 @@
     "soundcloud": "^3.1.2",
     "whatwg-fetch": "^1.0.0"
   },
-  "engines" : {
-    "node" : ">=6.1.0"
+  "engines": {
+    "node": ">=6.1.0"
   }
 }

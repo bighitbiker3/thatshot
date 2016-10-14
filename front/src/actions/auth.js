@@ -35,23 +35,27 @@ export function logout () {
     .catch(err => console.warn(err))
   }
 }
-// export function auth(){
-//   return function (dispatch){
-//     SC.connect()
-//     .then((session) => {
-//       dispatch(fetchMe(session));
-//     })
-//     .catch(err => console.log(err.message));
-//   }
-// };
-//
-// function fetchMe(session){
-//   return function(dispatch){
-//     fetch(`https://api.soundcloud.com/me?oauth_token=${session.oauth_token}`)
-//     .then(res => {
-//       return res.json()
-//     })
-//     .then(data => dispatch(setMe(data)))
-//     .catch(err => console.log('ERROR ', err))
-//   }
-// };
+
+export function soundCloudAuth () {
+  return function (dispatch) {
+    SC.connect()
+    .then((session) => {
+      console.log(session, 'sessionsssssslslsls')
+      dispatch(fetchMeSoundCloud(session))
+    })
+    .catch(err => console.log(err.message))
+  }
+};
+
+function fetchMeSoundCloud (session) {
+  return function (dispatch) {
+    fetch(`https://api.soundcloud.com/me?oauth_token=${session.oauth_token}`)
+    .then(res => {
+      return res.json()
+    })
+    .then(data => {
+      console.log(data, 'this is SC dataaaa')
+    })
+    .catch(err => console.log('ERROR ', err))
+  }
+};
