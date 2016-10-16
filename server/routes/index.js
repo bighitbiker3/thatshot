@@ -102,4 +102,13 @@ router.post('/subscribers', function (req, res, next) {
   .catch(next)
 })
 
+
+//ADD SOUNDCLOUD API TOKEN
+router.post('/soundCloudAuth', function (req, res, next) {
+  console.log(Object.getPrototypeOf(req.user))
+  const access_token = req.body.access_token
+  req.user.createScAuthToken({access_token})
+  .then(createdToken => res.send(createdToken))
+  .catch(next)
+})
 module.exports = router

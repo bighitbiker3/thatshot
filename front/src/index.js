@@ -18,6 +18,10 @@ const store = configureStore()
 
 const history = syncHistoryWithStore(browserHistory, store)
 
+const test = () => {
+  console.log('in the fuckin thing')
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
@@ -25,7 +29,7 @@ ReactDOM.render(
       <Route path='/' component={App}>
         <IndexRoute component={Stream} />
         <Route path='/:user' component={ProfilePage} />
-        <Route path='/me' component={ProfilePage}>
+        <Route path='/me' component={ProfilePage} onEnter={test}>
           <Route path='/me/settings' component={ProfileSettings} />
         </Route>
       </Route>

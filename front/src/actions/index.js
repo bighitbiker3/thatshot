@@ -27,8 +27,6 @@ export {
   submissionFormChange,
   submissionSubmit,
   setUserTracks,
-  mouseEnterUpvote,
-  mouseLeaveUpvote,
   setSavantTracks,
   showUserTracks,
   showSavantTracks,

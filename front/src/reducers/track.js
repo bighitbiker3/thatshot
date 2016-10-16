@@ -2,8 +2,7 @@ import * as actionTypes from '../constants/actionTypes'
 
 const initialState = {
   savantTracks: [],
-  userTracks: [],
-  upVoteHover: false
+  userTracks: []
 }
 
 export default function (state = initialState, action) {
@@ -12,8 +11,6 @@ export default function (state = initialState, action) {
     case actionTypes.TRACKS_SET_USER: return setUserTracks(state, action)
     case actionTypes.UPVOTE_TRACK: return upVoteTrack(state, action)
     case actionTypes.ALREADY_UPVOTED: return alreadyUpvoted(state, action)
-    case actionTypes.MOUSE_ENTER_UPVOTE: return mouseEnterUpvote(state, action)
-    case actionTypes.MOUSE_LEAVE_UPVOTE: return mouseLeaveUpvote(state, action)
   }
   return state
 }
@@ -50,12 +47,4 @@ function upVoteTrack (state, action) {
 
 function alreadyUpvoted (state, action) {
   return {...state}
-}
-
-function mouseEnterUpvote (state, action) {
-  return Object.assign({}, state, action.upVoteHover)
-}
-
-function mouseLeaveUpvote (state, action) {
-  return Object.assign({}, state, action.upVoteHover)
 }

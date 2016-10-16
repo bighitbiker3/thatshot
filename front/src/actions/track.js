@@ -72,17 +72,3 @@ export function sendUpvoteAction (track) {
     track
   }
 }
-
-export function mouseEnterUpvote () {
-  return {
-    type: actionTypes.MOUSE_ENTER_UPVOTE,
-    upVoteHover: true
-  }
-}
-
-export function mouseLeaveUpvote () {
-  return {
-    type: actionTypes.MOUSE_LEAVE_UPVOTE,
-    upVoteHover: false
-  }
-}

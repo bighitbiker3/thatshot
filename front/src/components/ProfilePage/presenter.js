@@ -7,12 +7,7 @@ export default class ProfilePage extends React.Component {
   constructor (props) {
     super(props)
     this.toggleSettings = this.props.toggleSettings.bind(this)
-    console.log(this.props, 'this.props in profileeeee')
-  }
-
-  fetchData () {
-    if (this.props.route.pathname === '/me') this.props.setProfilePageTracks(this.props.user.id)
-    else this.props.setProfilePageTracks(this.props.routeParams.user)
+    this.removeProfileTracks = this.props.removeProfileTracks.bind(this)
   }
 
   componentDidMount () {
@@ -20,17 +15,17 @@ export default class ProfilePage extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (prevProps.route.pathname !== this.props.route.pathname && !this.props.profilePage.showSettings) this.fetchData()
+    if (prevProps.route.pathname !== this.props.route.pathname &&
+    !this.props.profilePage.showSettings &&
+    prevProps.route.pathname !== '/me/settings') {
+      this.removeProfileTracks()
+      this.fetchData()
+    }
   }
 
   componentWillUnmount () {
-    this.props.removeProfileTracks()
+    this.removeProfileTracks()
   }
-
-  // shouldComponentUpdate () {
-  //   if (this.props.profilePage.showSettings) return false
-  //   else return true
-  // }
 
   render () {
     return (
@@ -55,4 +50,11 @@ export default class ProfilePage extends React.Component {
       </profile-page>
     )
   }
+
+    // Helpers
+  fetchData () {
+    if (this.props.route.pathname === '/me') this.props.setProfilePageTracks(this.props.user.id)
+    else this.props.setProfilePageTracks(this.props.routeParams.user)
+  }
+
 }

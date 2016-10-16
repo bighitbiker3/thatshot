@@ -15,9 +15,7 @@ function mapStateToProps (state, props) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    upVoteTrack: bindActionCreators(actions.upVoteTrack, dispatch),
-    mouseEnterUpvote: bindActionCreators(actions.mouseEnterUpvote, dispatch),
-    mouseLeaveUpvote: bindActionCreators(actions.mouseLeaveUpvote, dispatch)
+    upVoteTrack: bindActionCreators(actions.upVoteTrack, dispatch)
   }
 }
 

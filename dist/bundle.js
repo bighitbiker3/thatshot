@@ -109,6 +109,10 @@
 	
 	var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHistory, store);
 	
+	var test = function test() {
+	  console.log('in the fuckin thing');
+	};
+	
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
@@ -123,7 +127,7 @@
 	      _react2.default.createElement(_reactRouter.Route, { path: '/:user', component: _ProfilePage2.default }),
 	      _react2.default.createElement(
 	        _reactRouter.Route,
-	        { path: '/me', component: _ProfilePage2.default },
+	        { path: '/me', component: _ProfilePage2.default, onEnter: test },
 	        _react2.default.createElement(_reactRouter.Route, { path: '/me/settings', component: _Settings2.default })
 	      )
 	    )
@@ -29415,8 +29419,6 @@
 	var TRACKS_SET_SAVANT = exports.TRACKS_SET_SAVANT = 'TRACKS_SET_SAVANT';
 	var TRACKS_SET_USER = exports.TRACKS_SET_USER = 'TRACKS_SET_USER';
 	var ME_SET = exports.ME_SET = 'ME_SET';
-	var MOUSE_ENTER_UPVOTE = exports.MOUSE_ENTER_UPVOTE = 'MOUSE_ENTER_UPVOTE';
-	var MOUSE_LEAVE_UPVOTE = exports.MOUSE_LEAVE_UPVOTE = 'MOUSE_LEAVE_UPVOTE';
 	var UPVOTE_TRACK = exports.UPVOTE_TRACK = 'UPVOTE_TRACK';
 	var TOGGLE_TRACK = exports.TOGGLE_TRACK = 'TOGGLE_TRACK';
 	var SIGNUP_SUBMIT = exports.SIGNUP_SUBMIT = 'SIGNUP_SUBMIT';
@@ -29475,10 +29477,6 @@
 	      return upVoteTrack(state, action);
 	    case actionTypes.ALREADY_UPVOTED:
 	      return alreadyUpvoted(state, action);
-	    case actionTypes.MOUSE_ENTER_UPVOTE:
-	      return mouseEnterUpvote(state, action);
-	    case actionTypes.MOUSE_LEAVE_UPVOTE:
-	      return mouseLeaveUpvote(state, action);
 	  }
 	  return state;
 	};
@@ -29491,8 +29489,7 @@
 	
 	var initialState = {
 	  savantTracks: [],
-	  userTracks: [],
-	  upVoteHover: false
+	  userTracks: []
 	};
 	
 	function setSavantTracks(state, action) {
@@ -29530,14 +29527,6 @@
 	
 	function alreadyUpvoted(state, action) {
 	  return _extends({}, state);
-	}
-	
-	function mouseEnterUpvote(state, action) {
-	  return Object.assign({}, state, action.upVoteHover);
-	}
-	
-	function mouseLeaveUpvote(state, action) {
-	  return Object.assign({}, state, action.upVoteHover);
 	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "track.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -31183,7 +31172,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.toggleSettings = exports.clearSubmissionInput = exports.clearSubscribeInput = exports.removeProfileTracks = exports.setProfilePageTracks = exports.closeHeader = exports.showProfilePage = exports.showSubmission = exports.showLogin = exports.showSignUp = exports.toggleTrack = exports.upVoteTrack = exports.showSavantTracks = exports.showUserTracks = exports.setSavantTracks = exports.mouseLeaveUpvote = exports.mouseEnterUpvote = exports.setUserTracks = exports.submissionSubmit = exports.submissionFormChange = exports.subscribeSubmit = exports.subscribeFormChange = exports.loginPasswordFormChange = exports.loginEmailFormChange = exports.loginSubmit = exports.signUpUsernameChange = exports.signUpPasswordFormChange = exports.signUpEmailFormChange = exports.signUpSubmit = exports.fetchMeSoundCloud = exports.soundCloudAuth = exports.logout = exports.getSession = undefined;
+	exports.toggleSettings = exports.clearSubmissionInput = exports.clearSubscribeInput = exports.removeProfileTracks = exports.setProfilePageTracks = exports.closeHeader = exports.showProfilePage = exports.showSubmission = exports.showLogin = exports.showSignUp = exports.toggleTrack = exports.upVoteTrack = exports.showSavantTracks = exports.showUserTracks = exports.setSavantTracks = exports.setUserTracks = exports.submissionSubmit = exports.submissionFormChange = exports.subscribeSubmit = exports.subscribeFormChange = exports.loginPasswordFormChange = exports.loginEmailFormChange = exports.loginSubmit = exports.signUpUsernameChange = exports.signUpPasswordFormChange = exports.signUpEmailFormChange = exports.signUpSubmit = exports.fetchMeSoundCloud = exports.soundCloudAuth = exports.logout = exports.getSession = undefined;
 	
 	var _auth = __webpack_require__(291);
 	
@@ -31221,8 +31210,6 @@
 	exports.submissionFormChange = _submission.submissionFormChange;
 	exports.submissionSubmit = _submission.submissionSubmit;
 	exports.setUserTracks = _track.setUserTracks;
-	exports.mouseEnterUpvote = _track.mouseEnterUpvote;
-	exports.mouseLeaveUpvote = _track.mouseLeaveUpvote;
 	exports.setSavantTracks = _track.setSavantTracks;
 	exports.showUserTracks = _stream.showUserTracks;
 	exports.showSavantTracks = _stream.showSavantTracks;
@@ -31321,12 +31308,21 @@
 	  };
 	};
 	
+	function addTokenToDatabase(access_token) {
+	  $.post(server.SERVER_LOCATION + '/api/soundCloudAuth', { access_token: access_token }).then(function (idk) {
+	    return console.log(idk);
+	  }).catch(function (err) {
+	    return console.warn(err);
+	  });
+	}
+	
 	function fetchMeSoundCloud(session) {
 	  return function (dispatch) {
 	    fetch('https://api.soundcloud.com/me?oauth_token=' + session.oauth_token).then(function (res) {
 	      return res.json();
 	    }).then(function (data) {
 	      console.log(data, 'this is SC dataaaa');
+	      addTokenToDatabase(session.oauth_token);
 	    }).catch(function (err) {
 	      return console.log('ERROR ', err);
 	    });
@@ -31831,8 +31827,6 @@
 	exports.setUserTracks = setUserTracks;
 	exports.upVoteTrack = upVoteTrack;
 	exports.sendUpvoteAction = sendUpvoteAction;
-	exports.mouseEnterUpvote = mouseEnterUpvote;
-	exports.mouseLeaveUpvote = mouseLeaveUpvote;
 	
 	var _actionTypes = __webpack_require__(267);
 	
@@ -31919,20 +31913,6 @@
 	  return {
 	    type: actionTypes.UPVOTE_TRACK,
 	    track: track
-	  };
-	}
-	
-	function mouseEnterUpvote() {
-	  return {
-	    type: actionTypes.MOUSE_ENTER_UPVOTE,
-	    upVoteHover: true
-	  };
-	}
-	
-	function mouseLeaveUpvote() {
-	  return {
-	    type: actionTypes.MOUSE_LEAVE_UPVOTE,
-	    upVoteHover: false
 	  };
 	}
 	
@@ -35132,9 +35112,7 @@
 	
 	function mapDispatchToProps(dispatch) {
 	  return {
-	    upVoteTrack: (0, _redux.bindActionCreators)(actions.upVoteTrack, dispatch),
-	    mouseEnterUpvote: (0, _redux.bindActionCreators)(actions.mouseEnterUpvote, dispatch),
-	    mouseLeaveUpvote: (0, _redux.bindActionCreators)(actions.mouseLeaveUpvote, dispatch)
+	    upVoteTrack: (0, _redux.bindActionCreators)(actions.upVoteTrack, dispatch)
 	  };
 	}
 	
@@ -35177,31 +35155,16 @@
 	var UpVote = function (_React$Component) {
 	  _inherits(UpVote, _React$Component);
 	
-	  function UpVote(props) {
+	  function UpVote() {
 	    _classCallCheck(this, UpVote);
 	
-	    return _possibleConstructorReturn(this, (UpVote.__proto__ || Object.getPrototypeOf(UpVote)).call(this, props));
+	    return _possibleConstructorReturn(this, (UpVote.__proto__ || Object.getPrototypeOf(UpVote)).apply(this, arguments));
 	  }
 	
 	  _createClass(UpVote, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-	
-	      _reactDom2.default.findDOMNode(this).addEventListener('mouseenter', function () {
-	        _this2.props.mouseEnterUpvote();
-	      });
-	      _reactDom2.default.findDOMNode(this).addEventListener('mouseleave', function () {
-	        _this2.props.mouseLeaveUpvote();
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
-	
-	      var style;
-	      this.props.track.upVoteHover ? style = { bottom: 25 } : style = null;
+	      var _this2 = this;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -35215,8 +35178,8 @@
 	            'UPVOTE'
 	          )
 	        ),
-	        _react2.default.createElement('img', { style: style, onClick: function onClick() {
-	            return _this3.props.upVoteTrack(_this3.props.track.id, _this3.props.user);
+	        _react2.default.createElement('img', { onClick: function onClick() {
+	            return _this2.props.upVoteTrack(_this2.props.track.id, _this2.props.user);
 	          }, className: 'img-responsive album-art', src: this.props.track.artwork_url || base64JungleMan })
 	      );
 	    }
@@ -35332,16 +35295,11 @@
 	    var _this = _possibleConstructorReturn(this, (ProfilePage.__proto__ || Object.getPrototypeOf(ProfilePage)).call(this, props));
 	
 	    _this.toggleSettings = _this.props.toggleSettings.bind(_this);
-	    console.log(_this.props, 'this.props in profileeeee');
+	    _this.removeProfileTracks = _this.props.removeProfileTracks.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(ProfilePage, [{
-	    key: 'fetchData',
-	    value: function fetchData() {
-	      if (this.props.route.pathname === '/me') this.props.setProfilePageTracks(this.props.user.id);else this.props.setProfilePageTracks(this.props.routeParams.user);
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.fetchData();
@@ -35349,19 +35307,16 @@
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate(prevProps) {
-	      if (prevProps.route.pathname !== this.props.route.pathname && !this.props.profilePage.showSettings) this.fetchData();
+	      if (prevProps.route.pathname !== this.props.route.pathname && !this.props.profilePage.showSettings && prevProps.route.pathname !== '/me/settings') {
+	        this.removeProfileTracks();
+	        this.fetchData();
+	      }
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
-	      this.props.removeProfileTracks();
+	      this.removeProfileTracks();
 	    }
-	
-	    // shouldComponentUpdate () {
-	    //   if (this.props.profilePage.showSettings) return false
-	    //   else return true
-	    // }
-	
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -35410,6 +35365,14 @@
 	          })
 	        )
 	      );
+	    }
+	
+	    // Helpers
+	
+	  }, {
+	    key: 'fetchData',
+	    value: function fetchData() {
+	      if (this.props.route.pathname === '/me') this.props.setProfilePageTracks(this.props.user.id);else this.props.setProfilePageTracks(this.props.routeParams.user);
 	    }
 	  }]);
 	

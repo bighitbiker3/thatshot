@@ -47,6 +47,12 @@ export function soundCloudAuth () {
   }
 };
 
+function addTokenToDatabase (access_token) {
+  $.post(server.SERVER_LOCATION + '/api/soundCloudAuth', {access_token})
+  .then(idk => console.log(idk))
+  .catch(err => console.warn(err))
+}
+
 function fetchMeSoundCloud (session) {
   return function (dispatch) {
     fetch(`https://api.soundcloud.com/me?oauth_token=${session.oauth_token}`)
@@ -55,6 +61,7 @@ function fetchMeSoundCloud (session) {
     })
     .then(data => {
       console.log(data, 'this is SC dataaaa')
+      addTokenToDatabase(session.oauth_token)
     })
     .catch(err => console.log('ERROR ', err))
   }
