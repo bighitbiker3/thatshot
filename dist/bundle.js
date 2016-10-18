@@ -31351,7 +31351,7 @@
 	      addTokenToDatabase(session.oauth_token);
 	      dispatch(setMeSC(data));
 	    }).catch(function (err) {
-	      return console.log('ERROR ', err);
+	      return console.warn(err);
 	    });
 	  };
 	};
@@ -35414,13 +35414,6 @@
 	      return _react2.default.createElement(
 	        'profile-page',
 	        null,
-	        this.props.route.pathname === '/me' ? _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/me/settings' },
-	          ' ',
-	          _react2.default.createElement(_reactFontawesome2.default, { onClick: this.toggleSettings, className: 'settings-cog', name: 'cog', size: '2x' }),
-	          ' '
-	        ) : null,
 	        _react2.default.createElement(
 	          'h1',
 	          { className: 'username' },
