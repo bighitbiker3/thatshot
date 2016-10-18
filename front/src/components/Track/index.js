@@ -6,14 +6,17 @@ import Track from './presenter'
 
 function mapStateToProps (state, props) {
   const track = props.track
+  const auth = state.auth
   return {
-    track
+    track,
+    auth
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    toggleTrack: bindActionCreators(actions.toggleTrack, dispatch)
+    toggleTrack: bindActionCreators(actions.toggleTrack, dispatch),
+    likeOnSoundCloud: bindActionCreators(actions.likeOnSoundCloud, dispatch)
   }
 }
 

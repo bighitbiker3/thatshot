@@ -11,14 +11,14 @@ function trackSetSavant (tracks) {
 }
 
 export function setSavantTracks () {
-  return function (dispatch, getState ) {
+  return function (dispatch, getState) {
     dispatch({type: actionTypes.START_LOADING})
     return fetch(server.API_LOCATION + '/songs?is_savant=true')
       .then(data => data.json())
       .then(dataJSON => dataJSON.sort((a, b) => b.upvotes - a.upvotes))
       .then(dataSorted => {
-        dispatch({type: actionTypes.STOP_LOADING})
         dispatch(trackSetSavant(dataSorted))
+        dispatch({type: actionTypes.STOP_LOADING})
       })
       .catch(err => console.warn(err))
   }
@@ -32,7 +32,7 @@ function trackSetUser (tracks) {
 }
 
 export function setUserTracks (song, user) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     if (song) {
       song.user = user
       return dispatch(trackSetUser(song))
@@ -42,8 +42,8 @@ export function setUserTracks (song, user) {
       return fetch(server.API_LOCATION + '/songs?is_savant=false')
       .then(data => data.json())
       .then(dataJSON => {
-        dispatch({type: actionTypes.STOP_LOADING})
         dispatch(trackSetUser(dataJSON))
+        dispatch({type: actionTypes.STOP_LOADING})
       })
       .catch(err => console.warn(err))
     }
@@ -55,7 +55,7 @@ function alreadyUpvoted () {
 }
 
 export function upVoteTrack (trackId, user) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     if (!user) return dispatch(notifSend({message: 'You must be logged in to upvote tunes', kind: 'danger', dismissAfter: 1000}))
     return $.ajax(server.API_LOCATION + `/songs/${trackId}/${user.id}/upvote`, {method: 'POST'})
       .then(track => {
@@ -70,5 +70,20 @@ export function sendUpvoteAction (track) {
   return {
     type: actionTypes.UPVOTE_TRACK,
     track
+  }
+}
+
+export function addToLikesOnState (trackId) {
+  return {
+    type: actionTypes.LIKE_ON_SOUNDCLOUD,
+    trackId
+  }
+}
+
+export function likeOnSoundCloud (trackId) {
+  return function (dispatch, getState) {
+    dispatch(addToLikesOnState(trackId))
+    SC.put(`/me/favorites/${trackId}`)
+    .catch(err => console.warn(err))
   }
 }

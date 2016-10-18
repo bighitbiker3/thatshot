@@ -50,9 +50,17 @@ profile-page{
     margin-top: 0px;
   }
   h3{
+    display: inline;
     text-align: center;
+    margin-left: 18%;
+  }
+  .settings-soundcloud{
+    margin-top: 20px;
+    cursor: pointer;
   }
   .settings-soundcloud-fa{
-
+    color: #ff7700;
+    margin-right: 21%;
+    float: right;
   }
 }

@@ -97,21 +97,13 @@
 	
 	var _Settings2 = _interopRequireDefault(_Settings);
 	
-	var _auth = __webpack_require__(301);
-	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	SC.initialize({ client_id: _auth.CLIENT_ID, redirect_uri: _auth.REDIRECT_URI });
-	
 	var store = (0, _configureStore2.default)();
 	
 	var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHistory, store);
-	
-	var test = function test() {
-	  console.log('in the fuckin thing');
-	};
 	
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
@@ -127,7 +119,7 @@
 	      _react2.default.createElement(_reactRouter.Route, { path: '/:user', component: _ProfilePage2.default }),
 	      _react2.default.createElement(
 	        _reactRouter.Route,
-	        { path: '/me', component: _ProfilePage2.default, onEnter: test },
+	        { path: '/me', component: _ProfilePage2.default },
 	        _react2.default.createElement(_reactRouter.Route, { path: '/me/settings', component: _Settings2.default })
 	      )
 	    )
@@ -29378,8 +29370,12 @@
 	  switch (action.type) {
 	    case actionTypes.ME_SET:
 	      return setMe(state, action);
+	    case actionTypes.ME_SET_SOUNDCLOUD:
+	      return setMeSoundCloud(state, action);
 	    case actionTypes.LOGOUT:
 	      return logout(state, action);
+	    case actionTypes.LIKE_ON_SOUNDCLOUD:
+	      return likeOnSoundcloud(state, action);
 	  }
 	  return state;
 	};
@@ -29394,13 +29390,26 @@
 	
 	function setMe(state, action) {
 	  var user = action.user;
+	  var soundcloud = action.soundcloud;
 	
 	  return _extends({}, state, { user: user });
 	}
 	
+	function setMeSoundCloud(state, action) {
+	  var soundcloud = action.soundcloud;
+	
+	  return _extends({}, state, { soundcloud: soundcloud });
+	}
+	
 	function logout(state, action) {
 	  var user = null;
-	  return _extends({}, state, { user: user });
+	  var soundcloud = null;
+	  return Object.assign({}, state, { soundcloud: soundcloud, user: user });
+	}
+	
+	function likeOnSoundcloud(state, action) {
+	  state.soundcloud.favorites.push(action.trackId);
+	  return Object.assign({}, state, state.soundcloud.favorites);
 	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -29447,6 +29456,8 @@
 	var CLEAR_HEADER_INPUT = exports.CLEAR_HEADER_INPUT = 'CLEAR_HEADER_INPUT';
 	var CLEAR_SUBMISSION_INPUT = exports.CLEAR_SUBMISSION_INPUT = 'CLEAR_SUBMISSION_INPUT';
 	var TOGGLE_SETTINGS = exports.TOGGLE_SETTINGS = 'TOGGLE_SETTINGS';
+	var ME_SET_SOUNDCLOUD = exports.ME_SET_SOUNDCLOUD = 'ME_SET_SOUNDCLOUD';
+	var LIKE_ON_SOUNDCLOUD = exports.LIKE_ON_SOUNDCLOUD = 'LIKE_ON_SOUNDCLOUD';
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "actionTypes.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -31172,19 +31183,19 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.toggleSettings = exports.clearSubmissionInput = exports.clearSubscribeInput = exports.removeProfileTracks = exports.setProfilePageTracks = exports.closeHeader = exports.showProfilePage = exports.showSubmission = exports.showLogin = exports.showSignUp = exports.toggleTrack = exports.upVoteTrack = exports.showSavantTracks = exports.showUserTracks = exports.setSavantTracks = exports.setUserTracks = exports.submissionSubmit = exports.submissionFormChange = exports.subscribeSubmit = exports.subscribeFormChange = exports.loginPasswordFormChange = exports.loginEmailFormChange = exports.loginSubmit = exports.signUpUsernameChange = exports.signUpPasswordFormChange = exports.signUpEmailFormChange = exports.signUpSubmit = exports.fetchMeSoundCloud = exports.soundCloudAuth = exports.logout = exports.getSession = undefined;
+	exports.likeOnSoundCloud = exports.toggleSettings = exports.clearSubmissionInput = exports.clearSubscribeInput = exports.removeProfileTracks = exports.setProfilePageTracks = exports.closeHeader = exports.showProfilePage = exports.showSubmission = exports.showLogin = exports.showSignUp = exports.toggleTrack = exports.upVoteTrack = exports.showSavantTracks = exports.showUserTracks = exports.setSavantTracks = exports.setUserTracks = exports.submissionSubmit = exports.submissionFormChange = exports.subscribeSubmit = exports.subscribeFormChange = exports.loginPasswordFormChange = exports.loginEmailFormChange = exports.loginSubmit = exports.signUpUsernameChange = exports.signUpPasswordFormChange = exports.signUpEmailFormChange = exports.signUpSubmit = exports.fetchMeSoundCloud = exports.soundCloudAuth = exports.logout = exports.getSession = undefined;
 	
 	var _auth = __webpack_require__(291);
 	
 	var _track = __webpack_require__(294);
 	
-	var _player = __webpack_require__(297);
+	var _player = __webpack_require__(298);
 	
-	var _authSignup = __webpack_require__(298);
+	var _authSignup = __webpack_require__(299);
 	
-	var _authLogin = __webpack_require__(299);
+	var _authLogin = __webpack_require__(300);
 	
-	var _submission = __webpack_require__(300);
+	var _submission = __webpack_require__(301);
 	
 	var _stream = __webpack_require__(302);
 	
@@ -31225,6 +31236,7 @@
 	exports.clearSubscribeInput = _header2.clearSubscribeInput;
 	exports.clearSubmissionInput = _submission.clearSubmissionInput;
 	exports.toggleSettings = _profilePage.toggleSettings;
+	exports.likeOnSoundCloud = _track.likeOnSoundCloud;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -31239,9 +31251,15 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
+	exports.setMeSC = setMeSC;
 	exports.getSession = getSession;
 	exports.logout = logout;
 	exports.soundCloudAuth = soundCloudAuth;
+	exports.fetchMeSoundCloud = fetchMeSoundCloud;
+	exports.initSoundCloud = initSoundCloud;
 	
 	var _soundcloud = __webpack_require__(293);
 	
@@ -31259,6 +31277,8 @@
 	
 	var _header = __webpack_require__(296);
 	
+	var _auth = __webpack_require__(297);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31267,6 +31287,13 @@
 	  return {
 	    type: actionTypes.ME_SET,
 	    user: user
+	  };
+	}
+	
+	function setMeSC(soundcloud) {
+	  return {
+	    type: actionTypes.ME_SET_SOUNDCLOUD,
+	    soundcloud: soundcloud
 	  };
 	}
 	
@@ -31279,7 +31306,10 @@
 	function getSession() {
 	  return function (dispatch) {
 	    $.get(server.SERVER_LOCATION + '/session').then(function (data) {
-	      return data.user ? dispatch(setMe(data.user)) : null;
+	      data.user ? dispatch(setMe(data.user)) : null;
+	      return data;
+	    }).then(function (data) {
+	      dispatch(initSoundCloud(data.token));
 	    }).catch(function (err) {
 	      return console.warn(err);
 	    });
@@ -31297,10 +31327,9 @@
 	  };
 	}
 	
-	function soundCloudAuth() {
+	function soundCloudAuth(token) {
 	  return function (dispatch) {
 	    _soundcloud2.default.connect().then(function (session) {
-	      console.log(session, 'sessionsssssslslsls');
 	      dispatch(fetchMeSoundCloud(session));
 	    }).catch(function (err) {
 	      return console.log(err.message);
@@ -31308,26 +31337,51 @@
 	  };
 	};
 	
-	function addTokenToDatabase(access_token) {
-	  $.post(server.SERVER_LOCATION + '/api/soundCloudAuth', { access_token: access_token }).then(function (idk) {
-	    return console.log(idk);
-	  }).catch(function (err) {
+	function addTokenToDatabase(accessToken) {
+	  $.post(server.SERVER_LOCATION + '/api/soundCloudAuth', { access_token: accessToken }).catch(function (err) {
 	    return console.warn(err);
 	  });
 	}
 	
 	function fetchMeSoundCloud(session) {
-	  return function (dispatch) {
+	  return function (dispatch, getState) {
 	    fetch('https://api.soundcloud.com/me?oauth_token=' + session.oauth_token).then(function (res) {
 	      return res.json();
 	    }).then(function (data) {
-	      console.log(data, 'this is SC dataaaa');
 	      addTokenToDatabase(session.oauth_token);
+	      dispatch(setMeSC(data));
 	    }).catch(function (err) {
 	      return console.log('ERROR ', err);
 	    });
 	  };
 	};
+	
+	function initSoundCloud(token) {
+	  return function (dispatch) {
+	    dispatch({ type: actionTypes.STOP_LOADING });
+	    if (token) {
+	      _soundcloud2.default.initialize({ client_id: _auth.CLIENT_ID, redirect_uri: _auth.REDIRECT_URI, oauth_token: token });
+	      _soundcloud2.default.get('/me').then(function (me) {
+	        return Promise.all([_soundcloud2.default.get('/me/favorites', { limit: 200 }), me]);
+	      }).then(function (_ref) {
+	        var _ref2 = _slicedToArray(_ref, 2);
+	
+	        var favs = _ref2[0];
+	        var me = _ref2[1];
+	
+	        me.favorites = favs.map(function (fav) {
+	          return fav.id;
+	        });
+	        dispatch(setMeSC(me));
+	        dispatch({ type: actionTypes.STOP_LOADING });
+	      });
+	    } else {
+	      _soundcloud2.default.initialize({ client_id: _auth.CLIENT_ID, redirect_uri: _auth.REDIRECT_URI });
+	      dispatch({ type: actionTypes.STOP_LOADING });
+	      return null;
+	    }
+	  };
+	}
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(292)))
@@ -31827,6 +31881,8 @@
 	exports.setUserTracks = setUserTracks;
 	exports.upVoteTrack = upVoteTrack;
 	exports.sendUpvoteAction = sendUpvoteAction;
+	exports.addToLikesOnState = addToLikesOnState;
+	exports.likeOnSoundCloud = likeOnSoundCloud;
 	
 	var _actionTypes = __webpack_require__(267);
 	
@@ -31860,8 +31916,8 @@
 	        return b.upvotes - a.upvotes;
 	      });
 	    }).then(function (dataSorted) {
-	      dispatch({ type: actionTypes.STOP_LOADING });
 	      dispatch(trackSetSavant(dataSorted));
+	      dispatch({ type: actionTypes.STOP_LOADING });
 	    }).catch(function (err) {
 	      return console.warn(err);
 	    });
@@ -31876,7 +31932,7 @@
 	}
 	
 	function setUserTracks(song, user) {
-	  return function (dispatch) {
+	  return function (dispatch, getState) {
 	    if (song) {
 	      song.user = user;
 	      return dispatch(trackSetUser(song));
@@ -31885,8 +31941,8 @@
 	      return fetch(server.API_LOCATION + '/songs?is_savant=false').then(function (data) {
 	        return data.json();
 	      }).then(function (dataJSON) {
-	        dispatch({ type: actionTypes.STOP_LOADING });
 	        dispatch(trackSetUser(dataJSON));
+	        dispatch({ type: actionTypes.STOP_LOADING });
 	      }).catch(function (err) {
 	        return console.warn(err);
 	      });
@@ -31899,7 +31955,7 @@
 	}
 	
 	function upVoteTrack(trackId, user) {
-	  return function (dispatch) {
+	  return function (dispatch, getState) {
 	    if (!user) return dispatch(notifSend({ message: 'You must be logged in to upvote tunes', kind: 'danger', dismissAfter: 1000 }));
 	    return $.ajax(server.API_LOCATION + ('/songs/' + trackId + '/' + user.id + '/upvote'), { method: 'POST' }).then(function (track) {
 	      if (track) dispatch(sendUpvoteAction(track));else dispatch(notifSend({ message: 'You already upvoted that', kind: 'danger', dismissAfter: 1000 }));
@@ -31913,6 +31969,22 @@
 	  return {
 	    type: actionTypes.UPVOTE_TRACK,
 	    track: track
+	  };
+	}
+	
+	function addToLikesOnState(trackId) {
+	  return {
+	    type: actionTypes.LIKE_ON_SOUNDCLOUD,
+	    trackId: trackId
+	  };
+	}
+	
+	function likeOnSoundCloud(trackId) {
+	  return function (dispatch, getState) {
+	    dispatch(addToLikesOnState(trackId));
+	    SC.put('/me/favorites/' + trackId).catch(function (err) {
+	      return console.warn(err);
+	    });
 	  };
 	}
 	
@@ -32005,6 +32077,22 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	var CLIENT_ID = exports.CLIENT_ID = '2fd5b79e3498c867ce3b817dce252dd2';
+	var REDIRECT_URI = exports.REDIRECT_URI = 'http://localhost:3000/callback';
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 298 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.toggleTrack = toggleTrack;
 	
 	var _actionTypes = __webpack_require__(267);
@@ -32023,7 +32111,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "player.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 298 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32051,7 +32139,7 @@
 	
 	var _reduxNotifications = __webpack_require__(278);
 	
-	var _auth = __webpack_require__(299);
+	var _auth = __webpack_require__(300);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -32127,7 +32215,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.signup.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32153,6 +32241,8 @@
 	var _header = __webpack_require__(296);
 	
 	var _reduxNotifications = __webpack_require__(278);
+	
+	var _auth = __webpack_require__(291);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -32193,8 +32283,13 @@
 	      data: { email: email, password: password }
 	    }).then(function (user) {
 	      dispatch(sendUserAuthAction(user.user));
-	      dispatch((0, _header.closeHeader)());
-	      dispatch({ type: actionTypes.STOP_LOADING });
+	      if (user.token) {
+	        dispatch((0, _auth.initSoundCloud)(user.token));
+	        dispatch((0, _header.closeHeader)());
+	      } else {
+	        dispatch((0, _header.closeHeader)());
+	        dispatch({ type: actionTypes.STOP_LOADING });
+	      }
 	    }).catch(function (err) {
 	      dispatch({ type: actionTypes.STOP_LOADING });
 	      if (err.responseText.includes('Invalid login credentials')) dispatch(notifSend({ message: 'Wrong login credentials', kind: 'danger', dismissAfter: 1000 }));else dispatch(notifSend({ message: 'Sorry, there was an error. Please try again', kind: 'danger', dismissAfter: 1000 }));
@@ -32206,7 +32301,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.login.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(fetch) {/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32227,7 +32322,7 @@
 	
 	var server = _interopRequireWildcard(_server);
 	
-	var _auth = __webpack_require__(301);
+	var _auth = __webpack_require__(297);
 	
 	var auth = _interopRequireWildcard(_auth);
 	
@@ -32319,22 +32414,6 @@
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "submission.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(292)))
-
-/***/ },
-/* 301 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var CLIENT_ID = exports.CLIENT_ID = '2fd5b79e3498c867ce3b817dce252dd2';
-	var REDIRECT_URI = exports.REDIRECT_URI = 'http://localhost:3000/callback';
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 302 */
@@ -32630,7 +32709,7 @@
 	
 	var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
 	
-	var _auth = __webpack_require__(301);
+	var _auth = __webpack_require__(297);
 	
 	var _reactInterval = __webpack_require__(309);
 	
@@ -34960,14 +35039,17 @@
 	
 	function mapStateToProps(state, props) {
 	  var track = props.track;
+	  var auth = state.auth;
 	  return {
-	    track: track
+	    track: track,
+	    auth: auth
 	  };
 	}
 	
 	function mapDispatchToProps(dispatch) {
 	  return {
-	    toggleTrack: (0, _redux.bindActionCreators)(actions.toggleTrack, dispatch)
+	    toggleTrack: (0, _redux.bindActionCreators)(actions.toggleTrack, dispatch),
+	    likeOnSoundCloud: (0, _redux.bindActionCreators)(actions.likeOnSoundCloud, dispatch)
 	  };
 	}
 	
@@ -34997,12 +35079,18 @@
 	
 	var _reactRouter = __webpack_require__(173);
 	
+	var _reactFontawesome = __webpack_require__(308);
+	
+	var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function Track(_ref) {
 	  var _ref$track = _ref.track;
 	  var track = _ref$track === undefined ? {} : _ref$track;
 	  var toggleTrack = _ref.toggleTrack;
+	  var auth = _ref.auth;
+	  var likeOnSoundCloud = _ref.likeOnSoundCloud;
 	
 	  return _react2.default.createElement(
 	    'div',
@@ -35027,7 +35115,10 @@
 	          track.artist,
 	          ' '
 	        )
-	      )
+	      ),
+	      auth.soundcloud ? _react2.default.createElement(_reactFontawesome2.default, { onClick: function onClick() {
+	          return likeOnSoundCloud(track.trackId);
+	        }, className: 'soundcloud-like', name: auth.soundcloud.favorites.includes(track.trackId) ? 'heart' : 'heart-o', size: 'lg' }) : null
 	    ),
 	    _react2.default.createElement(
 	      'div',
@@ -35307,7 +35398,7 @@
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate(prevProps) {
-	      if (prevProps.route.pathname !== this.props.route.pathname && !this.props.profilePage.showSettings && prevProps.route.pathname !== '/me/settings') {
+	      if (prevProps.route.pathname !== this.props.route.pathname && this.props.route.pathname !== '/me/settings' && (prevProps.route.pathname !== '/me/settings' || this.props.route.pathname !== '/me')) {
 	        this.removeProfileTracks();
 	        this.fetchData();
 	      }
@@ -35372,7 +35463,7 @@
 	  }, {
 	    key: 'fetchData',
 	    value: function fetchData() {
-	      if (this.props.route.pathname === '/me') this.props.setProfilePageTracks(this.props.user.id);else this.props.setProfilePageTracks(this.props.routeParams.user);
+	      if (this.props.route.pathname === '/me' && this.props.user.id) this.props.setProfilePageTracks(this.props.user.id);else this.props.setProfilePageTracks(this.props.routeParams.user);
 	    }
 	  }]);
 	
@@ -35407,9 +35498,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	var mapStateToProps = function mapStateToProps(_ref, ownProps) {
+	  var auth = _ref.auth;
+	
 	  return {
-	    prop: state.prop
+	    auth: auth
 	  };
 	};
 	
@@ -35440,6 +35533,8 @@
 	  value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -35452,28 +35547,65 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function (props) {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'user-settings' },
-	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { to: '/me' },
-	      _react2.default.createElement(_reactFontawesome2.default, { onClick: props.toggleSettings, className: 'settings-cog', name: 'cog', size: '2x' })
-	    ),
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'Settings'
-	    ),
-	    _react2.default.createElement(
-	      'h3',
-	      { onClick: props.soundCloudAuth },
-	      'Connect with SoundCloud ',
-	      _react2.default.createElement(_reactFontawesome2.default, { className: 'settings-soundcloud-fa', name: 'soundcloud', size: '2x' })
-	    )
-	  );
-	};
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Settings = function (_React$Component) {
+	  _inherits(Settings, _React$Component);
+	
+	  function Settings(props) {
+	    _classCallCheck(this, Settings);
+	
+	    var _this = _possibleConstructorReturn(this, (Settings.__proto__ || Object.getPrototypeOf(Settings)).call(this, props));
+	
+	    _this.soundCloudAuth = _this.props.soundCloudAuth.bind(_this);
+	    _this.toggleSettings = _this.props.toggleSettings.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(Settings, [{
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.toggleSettings();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'user-settings' },
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/me' },
+	          _react2.default.createElement(_reactFontawesome2.default, { className: 'settings-cog', name: 'cog', size: '2x' })
+	        ),
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Settings'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'settings-soundcloud' },
+	          _react2.default.createElement(
+	            'h3',
+	            { onClick: this.props.auth.soundcloud ? null : this.soundCloudAuth },
+	            ' ',
+	            this.props.auth.soundcloud ? 'Connected To SoundCloud' : 'Connect With SoundCloud'
+	          ),
+	          _react2.default.createElement(_reactFontawesome2.default, { className: 'settings-soundcloud-fa', name: 'soundcloud', size: '2x' })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Settings;
+	}(_react2.default.Component);
+	
+	exports.default = Settings;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/El_Is_Based/nodeProjects/thatsHot/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "presenter.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 

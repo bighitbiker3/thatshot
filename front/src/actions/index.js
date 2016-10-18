@@ -1,5 +1,5 @@
 import { getSession, logout, soundCloudAuth, fetchMeSoundCloud } from './auth'
-import { setSavantTracks, upVoteTrack, setUserTracks, mouseEnterUpvote, mouseLeaveUpvote } from './track'
+import { setSavantTracks, upVoteTrack, setUserTracks, likeOnSoundCloud } from './track'
 import { toggleTrack } from './player'
 import { signUpSubmit, signUpEmailFormChange, signUpPasswordFormChange, signUpUsernameChange } from './auth.signup.js'
 import { loginSubmit, loginEmailFormChange, loginPasswordFormChange } from './auth.login.js'
@@ -41,5 +41,6 @@ export {
   removeProfileTracks,
   clearSubscribeInput,
   clearSubmissionInput,
-  toggleSettings
+  toggleSettings,
+  likeOnSoundCloud
 }

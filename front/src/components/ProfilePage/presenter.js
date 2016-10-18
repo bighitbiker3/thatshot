@@ -16,8 +16,8 @@ export default class ProfilePage extends React.Component {
 
   componentDidUpdate (prevProps) {
     if (prevProps.route.pathname !== this.props.route.pathname &&
-    !this.props.profilePage.showSettings &&
-    prevProps.route.pathname !== '/me/settings') {
+    this.props.route.pathname !== '/me/settings' &&
+    (prevProps.route.pathname !== '/me/settings' || this.props.route.pathname !== '/me')) {
       this.removeProfileTracks()
       this.fetchData()
     }
@@ -34,8 +34,8 @@ export default class ProfilePage extends React.Component {
         <h1 className='username'>{this.props.route.pathname === '/me' ? 'You :)' : this.props.routeParams.user}</h1>
         {this.props.children}
         {
-          this.props.routeParams.user === 'The Savant' ?
-          null
+          this.props.routeParams.user === 'The Savant'
+          ? null
           : <div>
               <h3 className='upvotes-title'>Upvotes</h3>
               <h3 className='posted-title'>Submissions</h3>
@@ -53,7 +53,7 @@ export default class ProfilePage extends React.Component {
 
     // Helpers
   fetchData () {
-    if (this.props.route.pathname === '/me') this.props.setProfilePageTracks(this.props.user.id)
+    if (this.props.route.pathname === '/me' && this.props.user.id) this.props.setProfilePageTracks(this.props.user.id)
     else this.props.setProfilePageTracks(this.props.routeParams.user)
   }
 

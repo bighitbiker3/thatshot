@@ -6,6 +6,7 @@ var User = db.model('user')
 var Song = db.model('song')
 var Subscriber = db.model('subscriber')
 var Promise = require('bluebird')
+var scAuthToken = db.model('scAuthToken')
 
 // USER IS ON REQ.USER
 
@@ -102,13 +103,19 @@ router.post('/subscribers', function (req, res, next) {
   .catch(next)
 })
 
-
-//ADD SOUNDCLOUD API TOKEN
+// ADD SOUNDCLOUD API TOKEN
 router.post('/soundCloudAuth', function (req, res, next) {
-  console.log(Object.getPrototypeOf(req.user))
   const access_token = req.body.access_token
-  req.user.createScAuthToken({access_token})
-  .then(createdToken => res.send(createdToken))
+  scAuthToken.findOne({where: {access_token}})
+  .then(foundToken => {
+    if (!foundToken) {
+      return req.user.createScAuthToken({access_token})
+    } else {
+      return foundToken
+    }
+  })
+  .then(token => res.send(token))
   .catch(next)
 })
+
 module.exports = router

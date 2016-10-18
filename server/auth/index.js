@@ -3,6 +3,7 @@ var path = require('path')
 var session = require('express-session')
 var passport = require('passport')
 var SequelizeStore = require('connect-session-sequelize')(session.Store)
+// var SC = require('soundcloud')
 
 var ENABLED_AUTH_STRATEGIES = [
   'local'
@@ -49,11 +50,19 @@ module.exports = function (app, db) {
   })
 
     // We provide a simple GET /session in order to get session information directly.
-    // This is used by the browser application (Angular) to determine if a user is
+    // This is used by the browser application (React/Redux) to determine if a user is
     // logged in already.
   app.get('/session', function (req, res) {
     if (req.user) {
-      res.send({ user: req.user.sanitize() })
+      req.user.getScAuthToken()
+      .then(token => {
+        if (token) {
+          res.send({ user: req.user.sanitize(), token: token.access_token })
+        } else {
+          res.send({ user: req.user.sanitize() })
+        }
+      })
+      .catch(err => console.log(err))
     } else {
       res.status(401).send('No authenticated user.')
     }

@@ -3,8 +3,8 @@ const { API_LOCATION } = require('../constants/server')
 const Song = require('../db/models/song')
 const request = require('request-promise')
 const Promise = require('bluebird')
-let usersArr = ['duvetcover', 'balconies_co', 'ollyjamesmusic', 'bl3rmusic', 'sakuraburst', 'maca-music', 'crvvcksuk', 'brothelmusic']
-let usersArrIds = [22158004, 44180050, 58544051, 66089549, 42680724, 44776911, 40811082, 24980742]
+let usersArr = ['duvetcover', 'balconies_co', 'ollyjamesmusic', 'bl3rmusic', 'sakuraburst', 'maca-music', 'crvvcksuk', 'brothelmusic', 'iamspont']
+let usersArrIds = [22158004, 44180050, 58544051, 66089549, 42680724, 44776911, 40811082, 24980742, 136833642]
 
 module.exports = {
   runSavant: () => {

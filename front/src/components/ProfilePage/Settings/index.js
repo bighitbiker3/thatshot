@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { soundCloudAuth } from '../../../actions/auth'
 import { toggleSettings } from '../../../actions/profilePage'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ auth }, ownProps) => {
   return {
-    prop: state.prop
+    auth
   }
 }
 

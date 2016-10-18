@@ -395,7 +395,16 @@ profile-page .posted-title {
     text-align: center;
     margin-top: 0px; }
   .user-settings h3 {
-    text-align: center; }
+    display: inline;
+    text-align: center;
+    margin-left: 18%; }
+  .user-settings .settings-soundcloud {
+    margin-top: 20px;
+    cursor: pointer; }
+  .user-settings .settings-soundcloud-fa {
+    color: #ff7700;
+    margin-right: 21%;
+    float: right; }
 
 .track-types a {
   float: right;
@@ -409,7 +418,7 @@ profile-page .posted-title {
 
 .track-group {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   height: 150px;
   margin-bottom: 20px; }
   @media (min-width: 300px) and (max-width: 420px) {
@@ -447,14 +456,21 @@ profile-page .posted-title {
 .song-title-div {
   padding-left: 40px;
   display: inline-block;
-  width: 70%; }
+  width: 70%;
+  margin-top: 65px; }
   .song-title-div p:first-child {
-    margin-bottom: 25px; }
+    margin-bottom: 15px; }
     @media (min-width: 300px) and (max-width: 420px) {
       .song-title-div p:first-child {
         margin-bottom: 5px; } }
   .song-title-div p {
     margin: 0; }
+  .song-title-div .soundcloud-like {
+    position: relative;
+    margin-top: 15px;
+    padding-left: 0px;
+    cursor: pointer;
+    color: #ff7700; }
   @media (min-width: 300px) and (max-width: 420px) {
     .song-title-div {
       width: 100%;
@@ -470,7 +486,8 @@ profile-page .posted-title {
   float: right;
   text-align: right;
   width: 100px;
-  font-size: 12px; }
+  font-size: 12px;
+  margin-top: 82px; }
   .link-item-right p {
     margin: 0; }
   @media (min-width: 300px) and (max-width: 420px) {

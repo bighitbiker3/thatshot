@@ -10,17 +10,10 @@ import Callback from './components/Callback'
 import Stream from './components/Stream'
 import ProfilePage from './components/ProfilePage'
 import ProfileSettings from './components/ProfilePage/Settings'
-import { CLIENT_ID, REDIRECT_URI } from './constants/auth'
-
-SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI })
 
 const store = configureStore()
 
 const history = syncHistoryWithStore(browserHistory, store)
-
-const test = () => {
-  console.log('in the fuckin thing')
-}
 
 ReactDOM.render(
   <Provider store={store}>
@@ -29,7 +22,7 @@ ReactDOM.render(
       <Route path='/' component={App}>
         <IndexRoute component={Stream} />
         <Route path='/:user' component={ProfilePage} />
-        <Route path='/me' component={ProfilePage} onEnter={test}>
+        <Route path='/me' component={ProfilePage}>
           <Route path='/me/settings' component={ProfileSettings} />
         </Route>
       </Route>

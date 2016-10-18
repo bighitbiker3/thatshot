@@ -3,6 +3,7 @@ import * as server from '../constants/server'
 import { closeHeader } from './header'
 import { reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications'
 const { notifSend } = notifActions
+import { initSoundCloud } from './auth'
 
 export function loginEmailFormChange (e) {
   let email = e.target.value
@@ -38,8 +39,13 @@ export function loginSubmit (event) {
     })
     .then(user => {
       dispatch(sendUserAuthAction(user.user))
-      dispatch(closeHeader())
-      dispatch({type: actionTypes.STOP_LOADING})
+      if (user.token) {
+        dispatch(initSoundCloud(user.token))
+        dispatch(closeHeader())
+      } else {
+        dispatch(closeHeader())
+        dispatch({type: actionTypes.STOP_LOADING})
+      }
     })
     .catch(err => {
       dispatch({type: actionTypes.STOP_LOADING})

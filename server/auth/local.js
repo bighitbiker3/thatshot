@@ -8,7 +8,6 @@ module.exports = function (app, db) {
     // When passport.authenticate('local') is used, this function will receive
     // the email and password to run the actual authentication logic.
   var strategyFn = function (email, password, done) {
-    console.log(email, password, 'in strategyfnnnnn')
     User.findOne({
       where: {
         email: email
@@ -39,10 +38,15 @@ module.exports = function (app, db) {
             // req.logIn will establish our session.
       req.logIn(user, function (loginErr) {
         if (loginErr) return next(loginErr)
-                // We respond with a response object that has user with _id and email.
-        res.status(200).send({
-          user: user.sanitize()
+        user.getScAuthToken()
+        .then(token => {
+          if (token) {
+            res.send({ user: req.user.sanitize(), token: token.access_token })
+          } else {
+            res.send({ user: req.user.sanitize() })
+          }
         })
+        .catch(err => console.log(err))
       })
     }
 
