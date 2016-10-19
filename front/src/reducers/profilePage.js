@@ -20,8 +20,8 @@ export default function (state = initialState, action) {
 
 function setProfilePageTracks (state, action) {
   let profileTracks = {}
-  profileTracks.upvoted = action.upVotedTracks
-  profileTracks.posted = action.postedTracks
+  profileTracks.upvoted = action.upVotedTracks || []
+  profileTracks.posted = action.postedTracks || []
   return {...state, profileTracks}
 }
 

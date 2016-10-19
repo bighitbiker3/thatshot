@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/app",
-    "start-watch": "gulp & nodemon server/app --watch server",
+    "start-watch": "gulp & webpack --progress --colors --watch & nodemon server/app --watch server",
     "test": "mocha --compilers js:babel-core/register --require ./front/test/setup.js 'front/src/**/*spec.js'",
     "test:watch": "npm run test -- --watch"
   },
@@ -56,8 +56,13 @@
     "ejs": "^2.5.1",
     "es6-promise": "^3.2.1",
     "eslint-plugin-react": "^6.2.0",
+    "express": "^4.14.0",
     "express-session": "^1.14.1",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-webpack": "^1.5.0",
     "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.1.1",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
@@ -73,10 +78,13 @@
     "react-slider": "^0.7.0",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
-    "redux-notifications": "^2.1.1",
+    "redux-notifications": "^3.0.0",
     "redux-thunk": "^2.1.0",
     "request-promise": "^4.1.1",
+    "sequelize": "^3.24.4",
+    "sinon": "^1.17.6",
     "soundcloud": "^3.1.2",
+    "webpack": "^1.13.2",
     "whatwg-fetch": "^1.0.0"
   },
   "engines": {

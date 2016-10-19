@@ -14,7 +14,7 @@ const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
 function setup () {
-  const props = {submission: {link: 'https://soundcloud.com/duvetcover/i-am', song: {}}}
+  const props = {submission: {link: 'https://soundcloud.com/duvetcover/i-am', song: {}}, submissionSubmit: () => {}}
   const enzymeWrapper = shallow(<Submission {...props} />)
 
   return {

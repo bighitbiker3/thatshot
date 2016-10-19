@@ -357,6 +357,9 @@ a:link {
   width: 45%; }
   .upvoted-tracks .track-group {
     width: 100%; }
+    @media (min-width: 300px) and (max-width: 420px) {
+      .upvoted-tracks .track-group .link-item-right {
+        display: none; } }
 
 .posted-tracks {
   float: right;
@@ -364,6 +367,9 @@ a:link {
   width: 45%; }
   .posted-tracks .track-group {
     width: 100%; }
+    @media (min-width: 300px) and (max-width: 420px) {
+      .posted-tracks .track-group .link-item-right {
+        display: none; } }
 
 profile-page .username {
   font-family: 'Times New Roman';

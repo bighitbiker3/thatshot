@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import * as auth from '../../constants/auth'
 import * as actionTypes from '../../constants/actionTypes'
 import * as actions from '../../actions'
-import { expect } from 'chai' // You can use any testing library
+import { expect } from 'chai'
 import Player from './presenter'
 
 require('isomorphic-fetch')

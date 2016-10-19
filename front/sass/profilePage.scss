@@ -1,8 +1,18 @@
+$phone: "(min-width: 300px) and (max-width: 420px)";
+
+@media #{$phone}{
+}
+
 .upvoted-tracks{
   float:left;
   width: 45%;
   .track-group{
     width: 100%;
+    .link-item-right{
+      @media #{$phone}{
+        display: none;
+      }
+    }
   }
 }
 
@@ -12,6 +22,11 @@
   width: 45%;
   .track-group{
     width: 100%;
+    .link-item-right{
+      @media #{$phone}{
+        display: none;
+      }
+    }
   }
 }
 

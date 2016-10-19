@@ -31,5 +31,5 @@ function logout (state, action) {
 
 function likeOnSoundcloud (state, action) {
   state.soundcloud.favorites.push(action.trackId)
-  return Object.assign({}, state, state.soundcloud.favorites)
+  return Object.assign({}, state)
 }
