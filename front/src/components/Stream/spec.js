@@ -13,7 +13,7 @@ require('isomorphic-fetch')
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
-xdescribe('async actions', () => {
+xdescribe('Stream Component', () => {
   afterEach(() => {
     nock.cleanAll()
   })

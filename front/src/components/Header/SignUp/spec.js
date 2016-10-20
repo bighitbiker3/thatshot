@@ -32,13 +32,4 @@ describe('Sign Up Test', () => {
     expect(actions.signUpEmailFormChange(payload)).to.deep.equal(expectedEmailAction)
     expect(actions.signUpUsernameChange(payload)).to.deep.equal(expectedUsernameAction)
   })
-  xit('should send input change actions', () => {
-    const expectedAction = {type: actionTypes.ME_SET, hi: ''}
-    const store = mockStore()
-    return store.dispatch(actions.signUpSubmit('el@gmail.com', 'mc'))
-    .then(() => {
-      expect(store.getActions()[0]).to.deep.equal(expectedAction)
-    })
-    enzymeWrapper.ref('email').simulate('keypress')
-  })
 })

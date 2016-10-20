@@ -27,7 +27,7 @@ describe('Submission Spec', () => {
   //Test when you have internet and a valid link - Test passes tho
   xit('fetches song from soundcloud', () => {
     const store = mockStore()
-    return store.dispatch(actions.submissionSubmit('https://soundcloud.com/duvetcover/i-am', {user: {id: 1}}))
+    return store.dispatch(actions.submissionSubmit('link', {user: {id: 1}}))
     .then(() => {
       expect(store.getActions()[0].type).to.equal('SUBMISSION_SUBMIT')
       expect(store.getActions()[0]).to.have.property('song')
