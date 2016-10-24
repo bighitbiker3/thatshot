@@ -47,8 +47,12 @@
       float: none;
       top: 0; }
       .header-right p {
-        display: inline-block;
+        text-decoration: none;
+        display: block;
         margin-right: 5px; } }
+    @media (min-width: 300px) and (max-width: 420px) and (min-width: 300px) and (max-width: 320px) {
+      .header-right p {
+        display: inline-block; } }
 
 .header-overlay-off {
   transition: top 0.5s ease;
@@ -359,7 +363,8 @@ a:link {
     width: 100%; }
   @media (min-width: 300px) and (max-width: 420px) {
     .upvoted-tracks {
-      width: 100%; }
+      width: 100%;
+      float: none; }
       .upvoted-tracks .track-group {
         width: 90%; } }
 
@@ -371,6 +376,7 @@ a:link {
     width: 100%; }
   @media (min-width: 300px) and (max-width: 420px) {
     .posted-tracks {
+      float: none;
       width: 100%; }
       .posted-tracks .track-group {
         width: 90%; } }
@@ -386,12 +392,18 @@ profile-page .upvotes-title {
   top: 0;
   width: 45%;
   text-align: center; }
+  @media (min-width: 300px) and (max-width: 420px) {
+    profile-page .upvotes-title {
+      display: none; } }
 
 profile-page .posted-title {
   float: right;
   top: 0;
   width: 45%;
   text-align: center; }
+  @media (min-width: 300px) and (max-width: 420px) {
+    profile-page .posted-title {
+      display: none; } }
 
 .settings-cog {
   position: absolute;

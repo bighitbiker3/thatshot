@@ -11,6 +11,7 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
   }
   @media #{$phone}{
     width: 100%;
+    float: none;
     .track-group{
       width: 90%;
     }
@@ -25,6 +26,7 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
     width: 100%;
   }
   @media #{$phone}{
+    float: none;
     width: 100%;
     .track-group{
       width: 90%;
@@ -44,12 +46,18 @@ profile-page{
     top: 0;
     width: 45%;
     text-align: center;
+    @media #{$phone}{
+      display: none;
+    }
   }
   .posted-title{
     float: right;
     top: 0;
     width: 45%;
     text-align: center;
+    @media #{$phone}{
+      display: none;
+    }
   }
 }
 

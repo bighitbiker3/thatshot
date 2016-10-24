@@ -1,4 +1,5 @@
 $phone: "(min-width: 300px) and (max-width: 420px)";
+$iPhone5: "(min-width: 300px) and (max-width: 320px)";
 
 .header{
    transition: color 0.5s ease
@@ -54,8 +55,12 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
     float: none;
     top: 0;
     p{
-      display: inline-block;
+      text-decoration: none;
+      display: block;
       margin-right: 5px;
+      @media #{$iPhone5}{
+        display: inline-block;
+      }
     }
   }
 }
