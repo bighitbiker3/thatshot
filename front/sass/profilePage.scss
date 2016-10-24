@@ -8,10 +8,11 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
   width: 45%;
   .track-group{
     width: 100%;
-    .link-item-right{
-      @media #{$phone}{
-        display: none;
-      }
+  }
+  @media #{$phone}{
+    width: 100%;
+    .track-group{
+      width: 90%;
     }
   }
 }
@@ -22,10 +23,11 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
   width: 45%;
   .track-group{
     width: 100%;
-    .link-item-right{
-      @media #{$phone}{
-        display: none;
-      }
+  }
+  @media #{$phone}{
+    width: 100%;
+    .track-group{
+      width: 90%;
     }
   }
 }

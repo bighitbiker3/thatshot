@@ -51,7 +51,7 @@ export default class ProfilePage extends React.Component {
     )
   }
 
-    // Helpers
+  // Helpers
   fetchData () {
     if (this.props.route.pathname === '/me' && this.props.user.id) this.props.setProfilePageTracks(this.props.user.id)
     else this.props.setProfilePageTracks(this.props.routeParams.user)

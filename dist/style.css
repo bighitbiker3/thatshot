@@ -357,9 +357,11 @@ a:link {
   width: 45%; }
   .upvoted-tracks .track-group {
     width: 100%; }
-    @media (min-width: 300px) and (max-width: 420px) {
-      .upvoted-tracks .track-group .link-item-right {
-        display: none; } }
+  @media (min-width: 300px) and (max-width: 420px) {
+    .upvoted-tracks {
+      width: 100%; }
+      .upvoted-tracks .track-group {
+        width: 90%; } }
 
 .posted-tracks {
   float: right;
@@ -367,9 +369,11 @@ a:link {
   width: 45%; }
   .posted-tracks .track-group {
     width: 100%; }
-    @media (min-width: 300px) and (max-width: 420px) {
-      .posted-tracks .track-group .link-item-right {
-        display: none; } }
+  @media (min-width: 300px) and (max-width: 420px) {
+    .posted-tracks {
+      width: 100%; }
+      .posted-tracks .track-group {
+        width: 90%; } }
 
 profile-page .username {
   font-family: 'Times New Roman';
