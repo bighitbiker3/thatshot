@@ -67,7 +67,6 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.1.0",
-    "node-sass": "3.1.0",
     "pg-helper": "0.0.8",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
@@ -89,6 +88,6 @@
     "whatwg-fetch": "^1.0.0"
   },
   "engines": {
-    "node": ">=6.1.0"
+    "node": "6.1.0"
   }
 }
