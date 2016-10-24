@@ -503,7 +503,8 @@ profile-page .posted-title {
       text-align: center;
       width: 100%;
       right: 0;
-      position: relative; } }
+      position: relative;
+      margin-top: 0px; } }
 
 @media (min-width: 300px) and (max-width: 420px) {
   .posted-by {
