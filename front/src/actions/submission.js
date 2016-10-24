@@ -32,7 +32,7 @@ export function submissionSubmit (event) {
     const { link } = getState().submission
     const { user } = getState().auth
     dispatch({type: actionTypes.START_LOADING})
-    return $.get(`https://api.soundcloud.com/resolve?url=${link}&client_id=${auth.CLIENT_ID}`)
+    return fetch(`https://api.soundcloud.com/resolve?url=${link}&client_id=${auth.CLIENT_ID}`)
     .then(song => {
       return song.json()
     })
@@ -49,7 +49,7 @@ export function submissionSubmit (event) {
 }
 
 function analyzeSong (song, postedUser, dispatch) {
-  return $.get(`https://api.soundcloud.com/users/${song.user.id}?client_id=${auth.CLIENT_ID}`)
+  return fetch(`https://api.soundcloud.com/users/${song.user.id}?client_id=${auth.CLIENT_ID}`)
   .then(user => user.json())
   .then(user => user.followers_count < 15000 ? checkForSongInDb(song, postedUser, dispatch) : tooManyFollowers(dispatch))
   .catch(err => console.warn(err))

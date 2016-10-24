@@ -68,7 +68,7 @@ function addTokenToDatabase (accessToken) {
 
 export function fetchMeSoundCloud (session) {
   return function (dispatch, getState) {
-    $.get(`https://api.soundcloud.com/me?oauth_token=${session.oauth_token}`)
+    fetch(`https://api.soundcloud.com/me?oauth_token=${session.oauth_token}`)
     .then(res => {
       return res.json()
     })
