@@ -13,6 +13,7 @@ module.exports = {
   entry: [
     // 'babel-polyfill',
     // 'webpack-hot-middleware/client',
+    'whatwg-fetch',
     './front/src/index.js'
   ],
   output: {
