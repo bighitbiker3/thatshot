@@ -13,7 +13,7 @@ function trackSetSavant (tracks) {
 export function setSavantTracks () {
   return function (dispatch, getState) {
     dispatch({type: actionTypes.START_LOADING})
-    return fetch(server.API_LOCATION + '/songs?is_savant=true')
+    return $.get(server.API_LOCATION + '/songs?is_savant=true')
       .then(data => data.json())
       .then(dataJSON => dataJSON.sort((a, b) => b.upvotes - a.upvotes))
       .then(dataSorted => {
@@ -39,7 +39,7 @@ export function setUserTracks (song, user) {
     }
     else {
       dispatch({type: actionTypes.START_LOADING})
-      return fetch(server.API_LOCATION + '/songs?is_savant=false')
+      return $.get(server.API_LOCATION + '/songs?is_savant=false')
       .then(data => data.json())
       .then(dataJSON => {
         dispatch(trackSetUser(dataJSON))

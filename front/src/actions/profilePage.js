@@ -4,7 +4,7 @@ import * as server from '../constants/server'
 export function setProfilePageTracks (id) {
   return function (dispatch) {
     dispatch({type: actionTypes.START_LOADING})
-    return fetch(server.API_LOCATION + `/users/${id}/tracks`)
+    return $.get(server.API_LOCATION + `/users/${id}/tracks`)
     .then(res => res.json())
     .then(userStuff => {
       dispatch(setTracks(userStuff, id))
