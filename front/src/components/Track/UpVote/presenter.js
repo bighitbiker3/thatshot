@@ -7,7 +7,7 @@ export default class UpVote extends React.Component {
     return (
       <div className='album-art-div'>
         <div className='upvote-box'><p>UPVOTE</p></div>
-        <img onClick={() => this.props.upVoteTrack(this.props.track.id, this.props.user)} className='img-responsive album-art' src={this.props.track.artwork_url || base64JungleMan} />
+        <img onClick={() => this.props.upVoteTrack(this.props.track.id, this.props.user)} className='img-responsive album-art' src={this.props.track.artwork_url ? this.props.track.artwork_url.replace('large', 't300x300') : base64JungleMan} />
       </div>
     )
   }
