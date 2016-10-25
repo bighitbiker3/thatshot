@@ -180,11 +180,16 @@
 
 body {
   font-family: 'Helvetica Neue', "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, sans-serif;
-  font-weight: 500;
+  font-weight: 300;
   font-style: normal;
   font-variant: normal;
   padding: 30px;
   margin: 0px; }
+  body h1 span, body h2 span, body h3 span, body h4 span, body h5 span, body p span {
+    background-color: black; }
+  body h1 span, body h2 span, body h3 span, body h4 span, body h5 span, body p span, body a span {
+    padding-left: 10px;
+    padding-right: 10px; }
 
 textarea:focus, input:focus {
   outline: none; }
@@ -470,10 +475,12 @@ profile-page .posted-title {
   cursor: pointer; }
   .artist-name a {
     text-decoration: none;
-    color: black; }
+    color: white; }
 
 .song-title {
   cursor: pointer; }
+  .song-title span {
+    color: white; }
 
 .song-title-div {
   padding-left: 40px;
@@ -507,11 +514,16 @@ profile-page .posted-title {
   display: inline-block;
   float: right;
   text-align: right;
-  width: 100px;
+  width: 110px;
   font-size: 12px;
   margin-top: 82px; }
+  .link-item-right span {
+    color: white;
+    background-color: black; }
   .link-item-right p {
     margin: 0; }
+  .link-item-right div {
+    margin-top: 3px; }
   @media (min-width: 300px) and (max-width: 420px) {
     .link-item-right {
       display: block;

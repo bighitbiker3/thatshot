@@ -35,12 +35,15 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
   cursor: pointer;
   a{
     text-decoration: none;
-    color: black
+    color: white
   }
 }
 
 .song-title{
   cursor: pointer;
+  span{
+    color: white
+  }
 }
 
 .song-title-div{
@@ -74,15 +77,23 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
 }
 
 .link-item-right{
+  span{
+    color: white;
+    background-color: black
+  }
   position: relative;
   right: 0;
+
   p{
     margin: 0;
+  }
+  div{
+    margin-top: 3px;
   }
   display: inline-block;
   float: right;
   text-align: right;
-  width: 100px;
+  width: 110px;
   font-size: 12px;
   margin-top: 82px;
   @media #{$phone}{
