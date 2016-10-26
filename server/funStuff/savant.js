@@ -64,5 +64,5 @@ function shuffle(arr, size){
   }
   if(size) arr.length = size;
   console.log(arr);
-  return arr.filter(thing => thing)
+  return arr
 }
