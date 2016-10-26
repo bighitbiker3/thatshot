@@ -3,8 +3,8 @@ const { API_LOCATION } = require('../constants/server')
 const Song = require('../db/models/song')
 const request = require('request-promise')
 const Promise = require('bluebird')
-let usersArr = ['duvetcover', 'balconies_co', 'ollyjamesmusic', 'bl3rmusic', 'sakuraburst', 'maca-music', 'crvvcksuk', 'brothelmusic', 'iamspont']
-let usersArrIds = [22158004, 44180050, 58544051, 66089549, 42680724, 44776911, 40811082, 24980742, 136833642]
+let usersArr = ['duvetcover', 'balconies_co', 'ollyjamesmusic', 'bl3rmusic', 'sakuraburst', 'maca-music', 'crvvcksuk', 'brothelmusic', 'iamspont', 'mrfijiwiji', 'almandmusic']
+let usersArrIds = [22158004, 44180050, 58544051, 66089549, 42680724, 44776911, 40811082, 24980742, 136833642, 762863, 6957274]
 
 module.exports = {
   runSavant: () => {
@@ -23,7 +23,7 @@ module.exports = {
 }
 
 function getUserLikes (arr) {
-  return Promise.all(arr.map(userId => request(`https://api-v2.soundcloud.com/users/${userId}/track_likes?&limit=100&client_id=${CLIENT_ID}`).catch(e => console.log(e))))
+  return Promise.all(arr.map(userId => request(`https://api-v2.soundcloud.com/users/${userId}/track_likes?&limit=200&client_id=${CLIENT_ID}`).catch(e => console.log(e))))
 }
 
 function getUserFollowers(arrOfSongs){
