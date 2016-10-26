@@ -66,7 +66,7 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
   padding-left: 40px;
   display: inline-block;
   width: 70%;
-  margin-top: 65px;
+  margin-top: 71px;
   @media #{$phone}{
     width: 100%;
     margin-top: 30px;
@@ -86,16 +86,20 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
 
   p{
     margin: 0;
+    white-space: nowrap;
   }
   div{
-    margin-top: 3px;
+    margin-top: 8px;
+  }
+  a{
+    text-decoration: none;
   }
   display: inline-block;
   float: right;
   text-align: right;
   width: 130px;
   font-size: 12px;
-  margin-top: 82px;
+  margin-top: 53px;
   @media #{$phone}{
     display: block;
     float: none;

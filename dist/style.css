@@ -188,8 +188,7 @@ body {
   body h1 span, body h2 span, body h3 span, body h4 span, body h5 span, body p span {
     background-color: black; }
   body h1 span, body h2 span, body h3 span, body h4 span, body h5 span, body p span, body a span {
-    padding-left: 10px;
-    padding-right: 10px; }
+    padding: 2px 10px 2px 10px; }
 
 textarea:focus, input:focus {
   outline: none; }
@@ -257,6 +256,7 @@ a:link {
   width: 100%;
   height: 50px;
   background-color: black;
+  opacity: 0.95;
   bottom: -50px; }
 
 .play-pause-button {
@@ -389,12 +389,14 @@ a:link {
 profile-page .username {
   font-family: 'Times New Roman';
   font-style: italic;
+  font-weight: 300;
   text-align: center;
   margin-top: 0px; }
 
 profile-page .upvotes-title {
   float: left;
   top: 0;
+  font-weight: 300;
   width: 45%;
   text-align: center; }
   @media (min-width: 300px) and (max-width: 420px) {
@@ -404,6 +406,7 @@ profile-page .upvotes-title {
 profile-page .posted-title {
   float: right;
   top: 0;
+  font-weight: 300;
   width: 45%;
   text-align: center; }
   @media (min-width: 300px) and (max-width: 420px) {
@@ -486,7 +489,7 @@ profile-page .posted-title {
   padding-left: 40px;
   display: inline-block;
   width: 70%;
-  margin-top: 65px; }
+  margin-top: 71px; }
   .song-title-div p:first-child {
     margin-bottom: 15px; }
     @media (min-width: 300px) and (max-width: 420px) {
@@ -514,16 +517,19 @@ profile-page .posted-title {
   display: inline-block;
   float: right;
   text-align: right;
-  width: 110px;
+  width: 130px;
   font-size: 12px;
-  margin-top: 82px; }
+  margin-top: 53px; }
   .link-item-right span {
     color: white;
     background-color: black; }
   .link-item-right p {
-    margin: 0; }
+    margin: 0;
+    white-space: nowrap; }
   .link-item-right div {
-    margin-top: 3px; }
+    margin-top: 8px; }
+  .link-item-right a {
+    text-decoration: none; }
   @media (min-width: 300px) and (max-width: 420px) {
     .link-item-right {
       display: block;

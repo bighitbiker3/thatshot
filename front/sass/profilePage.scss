@@ -38,12 +38,14 @@ profile-page{
   .username{
     font-family: 'Times New Roman';
     font-style: italic;
+    font-weight: 300;
     text-align: center;
     margin-top: 0px;
   }
   .upvotes-title{
     float: left;
     top: 0;
+    font-weight: 300;
     width: 45%;
     text-align: center;
     @media #{$phone}{
@@ -53,6 +55,7 @@ profile-page{
   .posted-title{
     float: right;
     top: 0;
+    font-weight: 300;
     width: 45%;
     text-align: center;
     @media #{$phone}{
