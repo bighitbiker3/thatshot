@@ -558,6 +558,7 @@ profile-page .posted-title {
 .album-art-div {
   position: relative;
   background-color: red;
+  cursor: pointer;
   min-width: 150px;
   height: 125px;
   display: block; }
