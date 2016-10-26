@@ -11,6 +11,7 @@ module.exports = {
     return getUserLikes(shuffle(usersArrIds))
     .then(likesArr => likesArr.map(string => JSON.parse(string).collection).reduce((a, b) => a.concat(b)))
     .then(objWithTrackArr => objWithTrackArr.map(obj => obj.track))
+    .then(flatArr => flatArr.filter(obj => obj))
     .then(flatArr => getUserFollowers(flatArr))
     .then(songObjArr => songObjArr.filter(songObj => (songObj.userInfo.followers_count < 15000)))
     .then(lessThan15kArr => lessThan15kArr.filter(songObj => (songObj.favoritings_count / songObj.playback_count > 0.39 && songObj.playback_count < 10000) || (songObj.playback_count > 10000 && songObj.comment_count > 9)))
