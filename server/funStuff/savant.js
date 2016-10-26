@@ -55,7 +55,6 @@ function shuffle(arr, size){
   let currentIndex = size || arr.length
 
   while(currentIndex !== 0) {
-    console.log(currentIndex);
     let randomIndex = Math.floor(Math.random() * currentIndex)
     currentIndex -= 1
 
@@ -65,5 +64,5 @@ function shuffle(arr, size){
   }
   if(size) arr.length = size;
   console.log(arr);
-  return arr;
+  return arr.filter(thing => thing)
 }
