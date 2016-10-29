@@ -18,8 +18,8 @@ export default class Settings extends React.Component {
       <div className="user-settings">
         <Link to='/me'><FontAwesome className="settings-cog" name='cog' size='2x' /></Link>
         <h1>Settings</h1>
-        <div className="settings-soundcloud">
-          <h3 onClick={this.props.auth.soundcloud ? null : this.soundCloudAuth}> {this.props.auth.soundcloud ? 'Connected To SoundCloud' : 'Connect With SoundCloud'}</h3>   
+        <div className="settings-soundcloud" onClick={this.props.auth.soundcloud ? null : this.soundCloudAuth}>
+          <h3> {this.props.auth.soundcloud ? 'Connected To SoundCloud' : 'Connect With SoundCloud'}</h3>   
           <FontAwesome className="settings-soundcloud-fa" name='soundcloud' size='2x' />
         </div>
       </div>

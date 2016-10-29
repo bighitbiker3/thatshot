@@ -30,7 +30,7 @@ export default class ProfilePage extends React.Component {
   render () {
     return (
       <profile-page>
-       {/* {this.props.route.pathname === '/me' ? <Link to='/me/settings'> <FontAwesome onClick={this.toggleSettings} className="settings-cog" name='cog' size='2x' /> </Link> : null} */}
+       {this.props.route.pathname === '/me' ? <Link to='/me/settings'> <FontAwesome onClick={this.toggleSettings} className="settings-cog" name='cog' size='2x' /> </Link> : null}
         <h1 className='username'>{this.props.route.pathname === '/me' ? 'You :)' : this.props.routeParams.user}</h1>
         {this.props.children}
         {
