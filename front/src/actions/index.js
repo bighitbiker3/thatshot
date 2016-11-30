@@ -8,6 +8,7 @@ import { showUserTracks, showSavantTracks } from './stream'
 import { showSignUp, showLogin, closeHeader, showSubmission, showProfilePage } from './header'
 import { subscribeFormChange, subscribeSubmit, clearSubscribeInput } from './header.subscribe'
 import { setProfilePageTracks, removeProfileTracks, toggleSettings } from './profilePage'
+import { setArtistPageTracks } from './artistPage'
 
 
 export {
@@ -42,5 +43,6 @@ export {
   clearSubscribeInput,
   clearSubmissionInput,
   toggleSettings,
-  likeOnSoundCloud
+  likeOnSoundCloud,
+  setArtistPageTracks
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import Track from '../Track'
 import FontAwesome from 'react-fontawesome'
 import { Link } from 'react-router'
+import UserPage from '../UserPage/presenter'
 
 export default class ProfilePage extends React.Component {
   constructor (props) {
@@ -26,35 +27,22 @@ export default class ProfilePage extends React.Component {
   componentWillUnmount () {
     this.removeProfileTracks()
   }
-
-  render () {
-    return (
-      <profile-page>
-      {/* {this.props.route.pathname === '/me' ? <Link to='/me/settings'> <FontAwesome onClick={this.toggleSettings} className="settings-cog" name='cog' size='2x' /> </Link> : null}*/} 
-        <h1 className='username'>{this.props.route.pathname === '/me' ? 'You :)' : this.props.routeParams.user}</h1>
-        {this.props.children}
-        {
-          this.props.routeParams.user === 'The Savant'
-          ? null
-          : <div>
-              <h3 className='upvotes-title'>Upvotes</h3>
-              <h3 className='posted-title'>Submissions</h3>
-            </div>
-        }
-        <div className='upvoted-tracks'>
-          {this.props.profilePage.profileTracks.upvoted.map((track, i) => <Track className='track' key={i} track={track} />)}
-        </div>
-        <div className={this.props.routeParams.user === 'The Savant' ? null : 'posted-tracks'}>
-          {this.props.profilePage.profileTracks.posted.map((track, i) => <Track className='track' key={i} track={track} />)}
-        </div>
-      </profile-page>
-    )
-  }
-
+  
   // Helpers
   fetchData () {
     if (this.props.route.pathname === '/me' && this.props.user.id) this.props.setProfilePageTracks(this.props.user.id)
     else this.props.setProfilePageTracks(this.props.routeParams.user)
   }
 
+  render () {
+    //Add settings when Soundcloud gets URI updated
+    {/* {this.props.route.pathname === '/me' ? <Link to='/me/settings'> <FontAwesome onClick={this.toggleSettings} className="settings-cog" name='cog' size='2x' /> </Link> : null}*/}
+    return (
+      <UserPage name={this.props.route.pathname === '/me' ? 'You :)' : this.props.routeParams.user}
+                oneColumn={this.props.routeParams.user === 'The Savant' ? true : false}
+                upvotedTracks={this.props.profilePage.profileTracks.upvoted}
+                postedTracks={this.props.profilePage.profileTracks.posted}>
+      </UserPage>
+    )
+  }
 }

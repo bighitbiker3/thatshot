@@ -10,6 +10,7 @@ import Callback from './components/Callback'
 import Stream from './components/Stream'
 import ProfilePage from './components/ProfilePage'
 import ProfileSettings from './components/ProfilePage/Settings'
+import ArtistPage from './components/ArtistPage'
 
 const store = configureStore()
 
@@ -22,6 +23,7 @@ ReactDOM.render(
       <Route path='/' component={App}>
         <IndexRoute component={Stream} />
         <Route path='/:user' component={ProfilePage} />
+        <Route path='/artist/:artistName' component={ArtistPage} />
         <Route path='/me' component={ProfilePage}>
           <Route path='/me/settings' component={ProfileSettings} />
         </Route>

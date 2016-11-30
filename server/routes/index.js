@@ -30,6 +30,21 @@ router.get('/songs', function (req, res, next) {
   .catch(next)
 })
 
+//FIND SONGS BY ARTIST
+router.get('/artists/:artistName/songs', function(req, res, next) {
+    console.log(req.params.artistName, 'artist anmeeee')
+  Song.findAll({
+    where: {
+      artist: {
+        $iLike: req.params.artistName
+      }
+    },
+    include: [{model: User, where: req.query}]
+  })
+  .then(songs => res.json(songs))
+  .catch(next)
+})
+
 // UPVOTE TRACK
 router.post('/songs/:trackId/:userId/upvote', ensureAuthenticated, function (req, res, next) {
   Song.findById(req.params.trackId, {include: [{model: User}]})

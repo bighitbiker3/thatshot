@@ -11,6 +11,7 @@ import header from './header'
 import subscribe from './header.subscribe'
 import profilePage from './profilePage'
 import loader from './loader'
+import artist from './artist'
 import { reducer as notifReducer } from 'redux-notifications'
 
 export default combineReducers({
@@ -25,6 +26,7 @@ export default combineReducers({
   stream,
   profilePage,
   loader,
+  artist,
   notifs: notifReducer,
   routing: routerReducer
 })
