@@ -1,12 +1,12 @@
 'use strict'
 
-const path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const indexPath = path.join(__dirname, './server', 'app', 'views', 'index.html');
+const path = require('path')
+const webpack = require('webpack')
+const autoprefixer = require('autoprefixer')
+const precss = require('precss')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const indexPath = path.join(__dirname, './server', 'app', 'views', 'index.html')
 
 module.exports = {
   devtool: 'eval',
