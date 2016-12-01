@@ -1,12 +1,12 @@
 'use strict'
-var express = require('express')
-var app = express()
-var bodyParser = require('body-parser')
-var cookieParser = require('cookie-parser')
-var router = require('./routes')
-var db = require('./db')
-var path = require('path')
-// var morgan = require('morgan') // comment out for prod?
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const router = require('./routes')
+const db = require('./db')
+const path = require('path')
+// const morgan = require('morgan') // comment out for prod?
 
 // app.use(morgan('dev'))
 app.use(express.static('dist'))

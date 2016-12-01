@@ -62,7 +62,7 @@ export function soundCloudAuth (token) {
 };
 
 function addTokenToDatabase (accessToken) {
-  $.post(server.SERVER_LOCATION + '/api/soundCloudAuth', {access_token: accessToken})
+  $.post(server.SERVER_LOCATION + '/api/users/soundCloudAuth', {access_token: accessToken})
   .catch(err => console.warn(err))
 }
 
