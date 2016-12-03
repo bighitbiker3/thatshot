@@ -18,6 +18,7 @@ class Player extends React.Component {
       seekPosition: 0
     }
     this.durationInterval = null
+    this.onSliderClick = this.onSliderClick.bind(this)
   }
 
   componentDidUpdate () {
@@ -39,15 +40,15 @@ class Player extends React.Component {
     return returnVal
   }
 
-  onSliderClick = (seekPosition) => {
+  onSliderClick (seekPosition) {
     const audioElement = ReactDOM.findDOMNode(this.refs.player)
     audioElement.currentTime = this.state.duration * (seekPosition * 0.01)
     this.setState({currentTime: audioElement.currentTime})
   }
 
   getTimeFormat (time) {
-    let minutes = Math.floor(time/60)
-    let seconds = Math.floor(time%60)
+    let minutes = Math.floor(time / 60)
+    let seconds = Math.floor(time % 60)
     seconds = '' + seconds
     seconds = seconds.length < 2 ? '0' + seconds : seconds
     return `${minutes}:${seconds}`

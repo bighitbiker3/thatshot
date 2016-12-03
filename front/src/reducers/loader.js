@@ -10,10 +10,10 @@ export default function (state = initialState, action) {
   return state
 }
 
-function startLoading(state, action){
+function startLoading (state, action) {
   return true
 }
 
-function stopLoading(state, action){
+function stopLoading (state, action) {
   return false
 }

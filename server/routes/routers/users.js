@@ -35,8 +35,8 @@ router.get('/:userId', function (req, res, next) {
 
 // GET SPECIFIC USERS TRACKS
 router.get('/:userId/tracks', function (req, res, next) {
-  //Allow for passing of ID's or usernames
-  let findBy = Number(req.params.userId) ? User.findById(req.params.userId) : User.findOne({where:{username:req.params.userId}})
+  // Allow for passing of ID's or usernames
+  const findBy = Number(req.params.userId) ? User.findById(req.params.userId) : User.findOne({where:{username:req.params.userId}})
 
   findBy
   .then(user => Promise.all([user.getSongs({include: {model: User}}), user.getUpVotedSongs({include: [User]})]))
@@ -68,12 +68,12 @@ router.post('/soundCloudAuth', function (req, res, next) {
 
 // HELPERS
 
-function makeScUri(scUserId, endpoint) {
-  if (!endpoint) throw new Error('NEED ENDPOINT IN makeScUri FUNC')
+function makeScUri (scUserId, endpoint) {
+  if (!endpoint) throw new Error('NEED ENDPOINT IN makeScUri FUNC el')
   return `https://api-v2.soundcloud.com/users/${scUserId}/${endpoint}?&limit=200&client_id=622c5a5338becb1365fb57b6bdc97f09`
 }
 
-function getListOfSavants(scUserId) {
+function getListOfSavants (scUserId) {
   return axios.get(makeScUri(scUserId, 'followings'))
   .then(res => res.data) // res.data ={collection: [obj, obj, obj], next_href: '', query_urn: ''}
   .then(data => data.collection) // data.collection = [obj, obj, obj]

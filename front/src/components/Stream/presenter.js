@@ -5,11 +5,13 @@ import Loader from '../Loader/presenter'
 class Stream extends React.Component {
   constructor (props) {
     super(props)
+    this.setUserTracks = this.props.setUserTracks.bind(this)
+    this.setSavantTracks = this.props.setSavantTracks.bind(this)
   }
 
-  componentWillMount () {
-    this.props.setSavantTracks()
-    this.props.setUserTracks()
+  componentDidMount () {
+    this.setSavantTracks()
+    this.setUserTracks()
   }
 
   render () {

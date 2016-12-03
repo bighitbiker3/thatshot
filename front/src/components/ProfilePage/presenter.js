@@ -16,6 +16,7 @@ export default class ProfilePage extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
+    // Prevent reloading when going to settings page
     if (prevProps.route.pathname !== this.props.route.pathname &&
     this.props.route.pathname !== '/me/settings' &&
     (prevProps.route.pathname !== '/me/settings' || this.props.route.pathname !== '/me')) {
@@ -35,7 +36,7 @@ export default class ProfilePage extends React.Component {
   }
 
   render () {
-    //Add settings when Soundcloud gets URI updated
+    // Add settings when Soundcloud gets URI updated
     {/* {this.props.route.pathname === '/me' ? <Link to='/me/settings'> <FontAwesome onClick={this.toggleSettings} className="settings-cog" name='cog' size='2x' /> </Link> : null}*/}
     return (
       <UserPage name={this.props.route.pathname === '/me' ? 'You :)' : this.props.routeParams.user}

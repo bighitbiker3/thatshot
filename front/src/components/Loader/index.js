@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import * as actions from '../../actions'
 import Loader from './presenter'
 
-function mapStateToProps(state, props){
+function mapStateToProps (state, props) {
   const { loader, header } = state
   return {
     loader,
