@@ -3,6 +3,7 @@ const router = express.Router()
 const db = require('../../db')
 const Song = db.model('song')
 const User = db.model('user')
+const getSavantTracks = require('../../funStuff/savant')
 const Promise = require('bluebird')
 const ensureAuthenticated = require('../middleware').ensureAuthenticated
 
@@ -18,6 +19,26 @@ router.get('/', function (req, res, next) {
   .then(songs => {
     res.json(songs)
   })
+  .catch(next)
+})
+
+// ADD OR GET USER'S SAVANT TUNES
+router.post('/:userId/savantTracks', function (req, res, next) {
+  console.log('THIS IS REQ PARAMSSSS', req.params)
+  const day = new Date()
+  req.user.getUserSavantTracks({
+    where: {
+        createdAt: {
+          $lt: new Date(),
+          $gt: new Date(new Date() - 24 * 60 * 60 * 1000)
+        }
+    }
+  })
+  .then(tracks => {
+    if (tracks.length) return tracks
+    else return createSavantTracks(req.params.userId, req)
+  })
+  .then(tracks => res.send(tracks))
   .catch(next)
 })
 
@@ -49,5 +70,37 @@ router.post('/:userId/:trackId', ensureAuthenticated, function (req, res, next) 
   .then(song => res.send(song))
   .catch(next)
 })
+
+
+// HELPERS
+
+function createSavantTracks (id, req) {
+  console.log('THIS IS ID', id);
+  return getSavantTracks.runSavant(id)
+  .then(data => Promise.all(data.map(song => {
+    const songToAdd = {
+      artwork_url: song.artwork_url,
+      duration: song.duration,
+      genre: song.genre,
+      trackId: song.id,
+      permalink_url: song.permalink_url,
+      reposts_count: song.reposts_count,
+      title: song.title,
+      artist: song.user.username,
+      artist_uri: song.user.uri,
+      playback_count: song.playback_count,
+      artist_permalink: song.user.permalink_url,
+      stream_url: song.stream_url,
+      artist_id: song.user.id,
+      waveform_url: song.waveform_url
+    }
+    return Song.findOrCreate({where: songToAdd})
+  }))) // returns [[songObj, bool],[songObj, bool],[songObj, bool]]
+  .then(foundOrCreated => foundOrCreated.reduce((a, b) => a.concat(b)).filter(thing => {
+    if (typeof thing === 'object') return thing
+  }))
+  .then(songsAdded => Promise.all(songsAdded.map(song => req.user.addUserSavantTracks(song))))
+  .then(added => added.reduce((a, b) => a.concat(b[0]), []))
+}
 
 module.exports = router

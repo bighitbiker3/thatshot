@@ -5,7 +5,8 @@ import { Link } from 'react-router'
 
 //PROPS ARE: name; oneColumn; upvotedTracks; postedTracks
 
-export default function(props) {
+export default function (props) {
+  console.log(props)
     return (
       <profile-page>
       {/* {this.props.route.pathname === '/me' ? <Link to='/me/settings'> <FontAwesome onClick={this.toggleSettings} className="settings-cog" name='cog' size='2x' /> </Link> : null}*/} 

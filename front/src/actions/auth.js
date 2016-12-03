@@ -35,6 +35,7 @@ export function getSession () {
     })
     .then(data => {
       dispatch(initSoundCloud(data.token))
+      dispatch(addOrGetSavantTracks(data.user.id))
     })
     .catch(err => console.warn(err))
   }
@@ -61,8 +62,8 @@ export function soundCloudAuth (token) {
   }
 };
 
-function addTokenToDatabase (accessToken) {
-  $.post(server.SERVER_LOCATION + '/api/users/soundCloudAuth', {access_token: accessToken})
+function addTokenToDatabase (accessToken, scUserId) {
+  $.post(server.SERVER_LOCATION + '/api/users/soundCloudAuth', {access_token: accessToken, scUserId})
   .catch(err => console.warn(err))
 }
 
@@ -73,7 +74,7 @@ export function fetchMeSoundCloud (session) {
       return res.json()
     })
     .then(data => {
-      addTokenToDatabase(session.oauth_token)
+      addTokenToDatabase(session.oauth_token, data.id)
       dispatch(setMeSC(data))
     })
     .catch(err => console.warn(err))
@@ -98,5 +99,14 @@ export function initSoundCloud (token) {
       dispatch({type: actionTypes.STOP_LOADING})
       return null
     }
+  }
+}
+
+function addOrGetSavantTracks (id) {
+  console.log('we finnna fire thisssssssssssssss')
+  return function (dispatch) {
+    $.post(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
+    .then(data => console.log(data))
+    .catch(err => console.log(err, 'errrrrr'))
   }
 }

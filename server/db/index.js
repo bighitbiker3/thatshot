@@ -14,6 +14,8 @@ Song.belongsToMany(User, {through: 'UpVotes', as: 'UpVotingUsers'})
 Song.belongsTo(User, {foreignKey: 'userId'})
 
 User.belongsToMany(Song, {through: 'UpVotes', as: 'UpVotedSongs'})
+User.belongsToMany(Song, {through: 'userSavantTracks', as: 'UserSavantTracks'})
+User.belongsToMany(Savant, {through: 'userSavants'})
+
 User.hasOne(scAuthToken)
 User.hasMany(Song)
-User.hasMany(Savant)

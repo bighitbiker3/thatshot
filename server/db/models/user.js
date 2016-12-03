@@ -51,6 +51,9 @@ module.exports = db.define('user', {
     type: Sequelize.VIRTUAL,
     allowNull: false,
     defaultValue: 0
+  },
+  soundcloud_id: {
+    type: Sequelize.INTEGER
   }
 
 }, {
