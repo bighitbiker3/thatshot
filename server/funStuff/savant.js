@@ -62,14 +62,19 @@ function getStreamUrl (arr) {
   .then(arrOfSongStreams => arrOfSongStreams.filter(song => song))
   .then(arrOfSongStreams => arrOfSongStreams.map(song => JSON.parse(song)))
   .then(arrOfSongStreams => arr.map((song, i) => {
-    song.stream_url = arrOfSongStreams[i].stream_url
-    return song
+    if (arrOfSongStreams[i]) {
+      song.stream_url = arrOfSongStreams[i].stream_url
+      return song
+    }
   }))
 }
 
 function shuffle (arr, size) {
   let currentIndex = size || arr.length
-
+  arr = arr.filter(thing => {
+    if (thing) return thing
+  })
+  console.log( 'THIS IS THE SHUFFLED ARR,', arr.length)
   while (currentIndex !== 0) {
     let randomIndex = Math.floor(Math.random() * currentIndex)
     currentIndex -= 1
@@ -80,6 +85,5 @@ function shuffle (arr, size) {
   }
   if (size) arr.length = size
   arr.length = 15
-  console.log(arr, 'THIS IS THE SHUFFLED ARR')
   return arr
 }

@@ -25,13 +25,12 @@ router.get('/', function (req, res, next) {
 // ADD OR GET USER'S SAVANT TUNES
 router.post('/:userId/savantTracks', function (req, res, next) {
   console.log('THIS IS REQ PARAMSSSS', req.params)
-  const day = new Date()
   req.user.getUserSavantTracks({
     where: {
-        createdAt: {
-          $lt: new Date(),
-          $gt: new Date(new Date() - 24 * 60 * 60 * 1000)
-        }
+      createdAt: {
+        $lt: new Date(),
+        $gt: new Date(new Date() - 24 * 60 * 60 * 1000)
+      }
     }
   })
   .then(tracks => {
@@ -75,7 +74,6 @@ router.post('/:userId/:trackId', ensureAuthenticated, function (req, res, next) 
 // HELPERS
 
 function createSavantTracks (id, req) {
-  console.log('THIS IS ID', id);
   return getSavantTracks.runSavant(id)
   .then(data => Promise.all(data.map(song => {
     const songToAdd = {
@@ -94,13 +92,16 @@ function createSavantTracks (id, req) {
       artist_id: song.user.id,
       waveform_url: song.waveform_url
     }
-    return Song.findOrCreate({where: songToAdd})
+    return Song.findOrCreate({where: songToAdd, include: [User]})
   }))) // returns [[songObj, bool],[songObj, bool],[songObj, bool]]
   .then(foundOrCreated => foundOrCreated.reduce((a, b) => a.concat(b)).filter(thing => {
+    // console.log(thing, 'THIIIIIIIIIIIIINNNNNNNNNGGGGGGGGGG')
     if (typeof thing === 'object') return thing
   }))
-  .then(songsAdded => Promise.all(songsAdded.map(song => req.user.addUserSavantTracks(song))))
-  .then(added => added.reduce((a, b) => a.concat(b[0]), []))
+  .then(songsAdded => {
+    Promise.all(songsAdded.map(song => req.user.addUserSavantTracks(song)))
+    return songsAdded
+  })
 }
 
 module.exports = router

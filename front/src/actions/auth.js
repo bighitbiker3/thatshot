@@ -30,12 +30,14 @@ export function getSession () {
   return function (dispatch) {
     $.get(server.SERVER_LOCATION + '/session')
     .then(data => {
-      data.user ? dispatch(setMe(data.user)) : null
+      if (data.user) {
+        dispatch(addOrGetSavantTracks(data.user.id))
+        dispatch(setMe(data.user))
+      }
       return data
     })
     .then(data => {
       dispatch(initSoundCloud(data.token))
-      dispatch(addOrGetSavantTracks(data.user.id))
     })
     .catch(err => console.warn(err))
   }

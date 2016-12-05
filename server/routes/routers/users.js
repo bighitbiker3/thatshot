@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../../db')
 const User = db.model('user')
+const Savant = db.model('savant')
 const scAuthToken = db.model('scAuthToken')
 const Promise = require('bluebird')
 const axios = require('axios')
@@ -71,6 +72,7 @@ router.post('/soundCloudAuth', function (req, res, next) {
   })
   .then(token => res.send(token))
   .then(() => {
+    console.log('WERE GOING TO GET THESE')
     return setSavants(req.user.soundcloud_id, req)
   })
   .catch(next)
@@ -95,15 +97,25 @@ function setSavants (scUserId, req) {
     if (potentialSavant.likes_count > 50) return potentialSavant
   }))
   .then(savants => Promise.all(savants.map(savant => {
-    return req.user.createSavant({
-      soundcloud_id: savant.id,
-      permalink: savant.permalink,
-      avatar_url: savant.avatar_url,
-      username: savant.username,
-      description: savant.description,
-      city: savant.city
+    return Savant.findOrCreate({
+      where: {
+        soundcloud_id: savant.id,
+        permalink: savant.permalink,
+        avatar_url: savant.avatar_url,
+        username: savant.username,
+        description: savant.description,
+        city: savant.city
+      }
     })
   })))
+  .then(foundOrCreated => foundOrCreated
+    .reduce((a, b) => a.concat(b))
+    .filter(thing => {
+      if(typeof thing === 'object') return thing
+    })
+  )
+  .then(savants => req.user.addSavants(savants))
+  .then(added => console.log('GOT TO ADDEDDDDDDDDDDDDDDDDD'))
   .catch(err => console.log(err))
 }
 
