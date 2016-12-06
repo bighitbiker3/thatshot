@@ -30,7 +30,7 @@ router.get('/savants', function (req, res, next) {
   .then(songs => {
     res.send(songs)
   })
-  .catch(err => res.send('THIS IS AN ERRORR'))
+  .catch(err => res.send('THIS IS AN ERROR', err))
 })
 
 // GET SPECIFIC USER
@@ -81,7 +81,7 @@ router.post('/soundCloudAuth', function (req, res, next) {
 // HELPERS
 
 function makeScUri (scUserId, endpoint) {
-  if (!endpoint) throw new Error('NEED ENDPOINT IN makeScUri FUNC stupid El')
+  if (!endpoint) throw new Error('NEED ENDPOINT IN makeScUri FUNC El')
   return `https://api-v2.soundcloud.com/users/${scUserId}/${endpoint}?&limit=200&client_id=622c5a5338becb1365fb57b6bdc97f09`
 }
 
@@ -111,7 +111,7 @@ function setSavants (scUserId, req) {
   .then(foundOrCreated => foundOrCreated
     .reduce((a, b) => a.concat(b))
     .filter(thing => {
-      if(typeof thing === 'object') return thing
+      if (typeof thing === 'object') return thing
     })
   )
   .then(savants => req.user.addSavants(savants))

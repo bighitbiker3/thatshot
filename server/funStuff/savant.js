@@ -35,13 +35,13 @@ function getSavants (reqUserId) {
 
 function getUserLikes (arr) {
   return Promise.all(arr.map(userId => request(`https://api-v2.soundcloud.com/users/${userId}/track_likes?&limit=200&client_id=${CLIENT_ID}`)
-  .catch(err => console.log(err, 'THIS WAS AN ERROR BUT FUCK IT KEEP GOING LMAOOO'))))
+  .catch(err => console.log(err, 'THIS WAS AN ERROR BUT KEEP GOING LMAOOO'))))
 }
 
 function getUserFollowers (arrOfSongs) {
   console.log(arrOfSongs, 'THIS IS ARR OF SONGSSSSSSSSSSSSSSSSSS')
   return Promise.all(arrOfSongs.map(songObj => request(`https://api.soundcloud.com/users/${songObj.user.id}/?client_id=${CLIENT_ID}`)
-  .catch(err => console.log(err, 'THIS WAS AN ERROR BUT FUCK IT KEEP GOING LMAOOO'))))
+  .catch(err => console.log(err, 'THIS WAS AN ERROR BUT KEEP GOING LMAOOO'))))
   .then(arrOfUsers => arrOfUsers.map(user => user ? JSON.parse(user) : null))
   .then(parsedArrOfUsers => arrOfSongs.map((songObj, i) => {
     let user = parsedArrOfUsers[i]
@@ -58,7 +58,7 @@ function getNew15 (arr) {
 
 function getStreamUrl (arr) {
   return Promise.all(arr.map(song => request(`https://api.soundcloud.com/tracks/${song.id}/?client_id=${CLIENT_ID}`)
-  .catch(err => console.log(err, 'THIS WAS AN ERROR BUT FUCK IT KEEP GOING LMAOOO'))))
+  .catch(err => console.log(err, 'THIS WAS AN ERROR BUT KEEP GOING LMAOOO'))))
   .then(arrOfSongStreams => arrOfSongStreams.filter(song => song))
   .then(arrOfSongStreams => arrOfSongStreams.map(song => JSON.parse(song)))
   .then(arrOfSongStreams => arr.map((song, i) => {
@@ -74,7 +74,6 @@ function shuffle (arr, size) {
   arr = arr.filter(thing => {
     if (thing) return thing
   })
-  console.log( 'THIS IS THE SHUFFLED ARR,', arr.length)
   while (currentIndex !== 0) {
     let randomIndex = Math.floor(Math.random() * currentIndex)
     currentIndex -= 1
@@ -85,5 +84,6 @@ function shuffle (arr, size) {
   }
   if (size) arr.length = size
   arr.length = 15
+  console.log( 'THIS IS THE SHUFFLED ARR,', arr)
   return arr
 }

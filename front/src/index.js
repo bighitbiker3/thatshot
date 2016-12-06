@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import configureStore from './stores/configureStore'
@@ -14,7 +14,7 @@ import ArtistPage from './components/ArtistPage'
 
 const store = configureStore()
 
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(hashHistory, store)
 
 ReactDOM.render(
   <Provider store={store}>
@@ -23,7 +23,7 @@ ReactDOM.render(
       <Route path='/' component={App}>
         <IndexRoute component={Stream} />
         <Route path='/:user' component={ProfilePage} />
-        <Route path='/artist/:artistName' component={ArtistPage} />
+        <Route path='/artist/:artistName' beforeEnter={() => console.log('bitchhhhhhhhhh')}component={ArtistPage} />
         <Route path='/me' component={ProfilePage}>
           <Route path='/me/settings' component={ProfileSettings} />
         </Route>
