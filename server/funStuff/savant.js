@@ -13,6 +13,7 @@ module.exports = {
     return getSavants(reqUserId)
     .then(savantArr => shuffle(savantArr))
     .then(shuffledArr => getUserLikes(shuffledArr))
+    // TODO SPLIT THESE INTO VERBOSE FUNCTION NAMES FOR THE SYNC STUFF
     .then(likesArr => likesArr.map(string => JSON.parse(string).collection).reduce((a, b) => a.concat(b)))
     .then(objWithTrackArr => objWithTrackArr.map(obj => obj.track))
     .then(flatArr => flatArr.filter(songObj => (songObj.favoritings_count / songObj.playback_count > 0.39 && songObj.playback_count < 10000) || (songObj.playback_count > 10000 && songObj.comment_count > 9)))

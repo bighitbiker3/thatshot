@@ -1,5 +1,7 @@
 import React from 'react'
 
+// TODO Check out CSS modules
+
 export default ({loader, header}) => {
   return (
     // TODO: I don't like this double ternary

@@ -8,6 +8,7 @@ import { Link } from 'react-router'
 export default function (props) {
   console.log(props)
     return (
+      // TODO - Check the 'profile-page' re best practices and how react treats it
       <profile-page>
       {/* {this.props.route.pathname === '/me' ? <Link to='/me/settings'> <FontAwesome onClick={this.toggleSettings} className="settings-cog" name='cog' size='2x' /> </Link> : null}*/} 
         <h1 className='username'>{props.name}</h1>

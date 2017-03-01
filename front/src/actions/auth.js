@@ -88,6 +88,9 @@ export function initSoundCloud (token) {
     dispatch({type: actionTypes.STOP_LOADING})
     if (token) {
       SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI, oauth_token: token })
+      // Perhaps handle this on the back end and try to make it
+      // so I'm not grabbing 1200+ songs and storing on the state (potentially cache responses for likes?)
+      // perhaps grab all for users who don't like a lot of then only the ones I care about it there are a lot'
       SC.get('/me').then(me => {
         return Promise.all([SC.get('/me/favorites', {limit: 200}), me])
       })
