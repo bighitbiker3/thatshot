@@ -12,7 +12,7 @@ const mapStateToProps = ({artist}, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getArtistTracks: (artistName) => { 
+    getArtistTracks: (artistName) => {
       dispatch(actions.setArtistPageTracks(artistName))
     }
   }

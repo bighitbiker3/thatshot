@@ -71,6 +71,8 @@
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "passport-oauth2-refresh": "^1.0.0",
+    "passport-soundcloud": "^0.2.0",
     "pg": "^6.1.0",
     "pg-helper": "0.0.8",
     "precss": "^1.4.0",

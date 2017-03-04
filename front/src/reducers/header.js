@@ -12,6 +12,7 @@ export default function (state = initialState, action) {
     case actionTypes.SHOW_LOGIN: return showLogin(state, action)
     case actionTypes.SHOW_SUBMISSION: return showLogin(state, action)
     case actionTypes.CLOSE_HEADER: return closeHeader(state, action)
+    case actionTypes.OPEN_HEADER: return openHeader(state, action)
     case actionTypes.SHOW_PROFILE_PAGE: return showProfilePage(state, action)
 
   }
@@ -25,12 +26,15 @@ function showSignUp (state, action) {
 function showLogin (state, action) {
   return Object.assign({}, state, action.payload)
 }
+
 function closeHeader (state, action) {
   return Object.assign({}, state, action.payload)
 }
-function showSubmission (state, action) {
+
+function openHeader (state, action) {
   return Object.assign({}, state, action.payload)
 }
+
 function showProfilePage (state, action) {
   return Object.assign({}, state, {profilePage: !state.profilePage})
 }

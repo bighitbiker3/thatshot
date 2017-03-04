@@ -6,7 +6,6 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import configureStore from './stores/configureStore'
 import App from './components/App'
-import Callback from './components/Callback'
 import Stream from './components/Stream'
 import ProfilePage from './components/ProfilePage'
 import ProfileSettings from './components/ProfilePage/Settings'
@@ -23,7 +22,6 @@ const history = syncHistoryWithStore(browserHistory, store)
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path='/callback' component={Callback} />
       <Route path='/' component={App}>
         <IndexRoute component={Stream} />
         <Route path='/:user' component={ProfilePage} />

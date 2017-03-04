@@ -28,16 +28,15 @@ export default class ProfilePage extends React.Component {
   componentWillUnmount () {
     this.removeProfileTracks()
   }
-  
+
   // Helpers
   fetchData () {
-    if (this.props.route.pathname === '/me' && this.props.user.id) this.props.setProfilePageTracks(this.props.user.id)
+    if (this.props.route.pathname === 'me' && this.props.user.id) this.props.setProfilePageTracks(this.props.user.id)
     else this.props.setProfilePageTracks(this.props.routeParams.user)
   }
 
   render () {
-    //Add settings when Soundcloud gets URI updated
-    
+    // Add settings when Soundcloud gets URI updated
     return (
       <div>
       {this.props.route.pathname === '/me' ? <Link to='/me/settings'> <FontAwesome onClick={this.toggleSettings} className="settings-cog" name='cog' size='2x' /> </Link> : null}

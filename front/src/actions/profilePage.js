@@ -32,11 +32,11 @@ function setTracks (tracks, id) {
     track.reqUserId = id
     return track
   })
-  let upVotedTracks = tracks.filter(track => track.reqUserId !== track.userId && track.reqUserId !== track.user.username)
-  let postedTracks = tracks.filter(track => track.reqUserId === track.userId || track.reqUserId === track.user.username)
+  // let upVotedTracks = tracks.filter(track => track.reqUserId !== track.userId && track.reqUserId !== track.user.username)
+  // let postedTracks = tracks.filter(track => track.reqUserId === track.userId || track.reqUserId === track.user.username)
   return {
     type: actionTypes.SET_PROFILE_TRACKS,
-    upVotedTracks,
-    postedTracks
+    upVotedTracks: tracks,
+    postedTracks: []
   }
 }

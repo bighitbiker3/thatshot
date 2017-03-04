@@ -19,7 +19,6 @@ function mapDispatchToProps (dispatch) {
   return {
     showSignUp: bindActionCreators(actions.showSignUp, dispatch),
     showLogin: bindActionCreators(actions.showLogin, dispatch),
-    showSubmission: bindActionCreators(actions.showSubmission, dispatch),
     closeHeader: bindActionCreators(actions.closeHeader, dispatch),
     getSession: bindActionCreators(actions.getSession, dispatch),
     logout: bindActionCreators(actions.logout, dispatch),

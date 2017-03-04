@@ -7,7 +7,7 @@ import ProfilePage from './presenter'
 function mapStateToProps (state, props) {
   const route = state.routing.locationBeforeTransitions
   const routeParams = props.routeParams
-  const { profilePage } = state;
+  const { profilePage } = state
   const { user } = state.auth
   return {
     profilePage,

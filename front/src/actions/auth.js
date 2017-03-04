@@ -1,10 +1,22 @@
 import SC from 'soundcloud'
+import axios from 'axios'
+import { actions as notifActions } from 'redux-notifications'
+const { notifSend } = notifActions
+
 import * as actionTypes from '../constants/actionTypes'
-import { setSavantTracks } from '../actions/track'
+import { openHeader } from '../actions'
+import { trackSetSavant } from '../actions/track'
 import * as server from '../constants/server'
 import { closeHeader } from './header'
 import { CLIENT_ID, REDIRECT_URI } from '../constants/auth'
 
+const stopLoadingHelper = () => {
+  return (dispatch, getState) => {
+    const { soundcloud } = getState().auth
+    const { savantTracks } = getState().track
+    if (soundcloud.favorites.length && savantTracks.length) dispatch({type: actionTypes.STOP_LOADING})
+  }
+}
 
 function setMe (user) {
   return {
@@ -28,45 +40,35 @@ function logoutMe () {
 
 export function getSession () {
   return function (dispatch) {
-    $.get(server.SERVER_LOCATION + '/session')
+    axios.get(server.SERVER_LOCATION + '/session')
+    .then(res => res.data)
     .then(data => {
+      if (data.created) dispatch(openHeader())
       if (data.user) {
-        dispatch(addOrGetSavantTracks(data.user.id))
+        data.user.created = data.created
         dispatch(setMe(data.user))
+        if (!data.created) {
+          dispatch(getSavantTracks(data.user.id))
+          dispatch(initSoundCloud())
+        }
       }
       return data
     })
-    .then(data => {
-      dispatch(initSoundCloud(data.token))
+    .catch(err => {
+      if (err) dispatch(openHeader())
     })
-    .catch(err => console.warn(err))
   }
 }
 
 export function logout () {
   return function (dispatch) {
-    $.get(server.SERVER_LOCATION + '/logout')
+    axios.get(server.SERVER_LOCATION + '/logout')
     .then(() => {
       dispatch(logoutMe())
       dispatch(closeHeader())
     })
     .catch(err => console.warn(err))
   }
-}
-
-export function soundCloudAuth (token) {
-  return function (dispatch) {
-    SC.connect()
-    .then((session) => {
-      dispatch(fetchMeSoundCloud(session))
-    })
-    .catch(err => console.log(err.message))
-  }
-};
-
-function addTokenToDatabase (accessToken, scUserId) {
-  $.post(server.SERVER_LOCATION + '/api/users/soundCloudAuth', {access_token: accessToken, scUserId})
-  .catch(err => console.warn(err))
 }
 
 export function fetchMeSoundCloud (session) {
@@ -76,42 +78,63 @@ export function fetchMeSoundCloud (session) {
       return res.json()
     })
     .then(data => {
-      addTokenToDatabase(session.oauth_token, data.id)
       dispatch(setMeSC(data))
     })
     .catch(err => console.warn(err))
   }
 };
 
-export function initSoundCloud (token) {
-  return function (dispatch) {
-    dispatch({type: actionTypes.STOP_LOADING})
-    if (token) {
-      SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI, oauth_token: token })
-      // Perhaps handle this on the back end and try to make it
-      // so I'm not grabbing 1200+ songs and storing on the state (potentially cache responses for likes?)
-      // perhaps grab all for users who don't like a lot of then only the ones I care about it there are a lot'
-      SC.get('/me').then(me => {
-        return Promise.all([SC.get('/me/favorites', {limit: 200}), me])
-      })
-      .then(([favs, me]) => {
-        me.favorites = favs.map(fav => fav.id)
-        dispatch(setMeSC(me))
-        dispatch({type: actionTypes.STOP_LOADING})
-      })
-    } else {
-      SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI })
-      dispatch({type: actionTypes.STOP_LOADING})
-      return null
-    }
+export function initSoundCloud () {
+  return function (dispatch, getState) {
+    dispatch(notifSend({message: 'Fetching your SoundCloud data', kind: 'info', dismissAfter: 3000}))
+    SC.initialize({
+      client_id: CLIENT_ID,
+      redirect_uri: REDIRECT_URI,
+      oauth_token: getState().auth.user.soundcloud_accessToken
+    })
+    return SC.get('/me').then(me => {
+      return Promise.all([SC.get('/me/favorites', {limit: 200}), me])
+    })
+    .then(([favs, me]) => {
+      me.favorites = favs.map(fav => fav.id)
+      return dispatch(setMeSC(me))
+    })
+    .catch(err => {
+      if (err) return dispatch(getSoundCloudRefreshToken())
+    })
   }
 }
 
-function addOrGetSavantTracks (id) {
-  console.log('we finnna fire thisssssssssssssss')
+export const getSoundCloudRefreshToken = () => {
+  return (dispatch, getState) => {
+    axios.get(`${server.SERVER_LOCATION}/login/soundcloud/refresh`)
+    .then(user => dispatch(initSoundCloud()))
+    .catch(err => console.log('another errr', err))
+  }
+}
+
+function getSavantTracks (id) {
   return function (dispatch) {
-    $.post(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
-    .then(data => console.log(data))
+    axios.get(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
+    .then(response => {
+      if (response.status === 204) dispatch(addSavantTracks(id))
+      else dispatch(trackSetSavant(response.data))
+    })
     .catch(err => console.log(err, 'errrrrr'))
+  }
+}
+
+function addSavantTracks (id) {
+  return (dispatch) => {
+    dispatch(notifSend({
+      message: 'We\'re getting your new tracks for the day. This might take a minute. Please don\'t refresh',
+      kind: 'info',
+      dismissAfter: 20000
+    }))
+    axios.post(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
+    .then(response => response.data)
+    .then(songs => dispatch(trackSetSavant(songs)))
+    .then(() => dispatch(notifSend({message: 'Got em! :)', kind: 'success', dismissAfter: 3000})))
+    .catch(err => dispatch(notifSend({message: err, kind: 'danger', dismissAfter: 3000})))
   }
 }

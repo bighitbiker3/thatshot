@@ -5,7 +5,6 @@ import track from './track'
 import player from './player'
 import signup from './auth.signup'
 import login from './auth.login'
-import submission from './submission'
 import stream from './stream'
 import header from './header'
 import subscribe from './header.subscribe'
@@ -20,7 +19,6 @@ export default combineReducers({
   track,
   signup,
   login,
-  submission,
   header,
   player,
   stream,

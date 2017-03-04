@@ -1,11 +1,10 @@
-import { getSession, logout, soundCloudAuth, fetchMeSoundCloud } from './auth'
-import { setSavantTracks, upVoteTrack, setUserTracks, likeOnSoundCloud } from './track'
+import { getSession, logout, soundCloudAuth, fetchMeSoundCloud, initSoundCloud } from './auth'
+import { setSavantTracks, upVoteTrack, setUserTracks, likeOnSoundCloud, trackSetSavant } from './track'
 import { toggleTrack } from './player'
 import { signUpSubmit, signUpEmailFormChange, signUpPasswordFormChange, signUpUsernameChange } from './auth.signup.js'
 import { loginSubmit, loginEmailFormChange, loginPasswordFormChange } from './auth.login.js'
-import { submissionFormChange, submissionSubmit, clearSubmissionInput } from './submission'
 import { showUserTracks, showSavantTracks } from './stream'
-import { showSignUp, showLogin, closeHeader, showSubmission, showProfilePage } from './header'
+import { showSignUp, showLogin, closeHeader, openHeader, showProfilePage } from './header'
 import { subscribeFormChange, subscribeSubmit, clearSubscribeInput } from './header.subscribe'
 import { setProfilePageTracks, removeProfileTracks, toggleSettings } from './profilePage'
 import { setArtistPageTracks } from './artistPage'
@@ -16,6 +15,7 @@ export {
   logout,
   soundCloudAuth,
   fetchMeSoundCloud,
+  initSoundCloud,
   signUpSubmit,
   signUpEmailFormChange,
   signUpPasswordFormChange,
@@ -25,8 +25,6 @@ export {
   loginPasswordFormChange,
   subscribeFormChange,
   subscribeSubmit,
-  submissionFormChange,
-  submissionSubmit,
   setUserTracks,
   setSavantTracks,
   showUserTracks,
@@ -35,14 +33,14 @@ export {
   toggleTrack,
   showSignUp,
   showLogin,
-  showSubmission,
   showProfilePage,
   closeHeader,
+  openHeader,
   setProfilePageTracks,
   removeProfileTracks,
   clearSubscribeInput,
-  clearSubmissionInput,
   toggleSettings,
   likeOnSoundCloud,
-  setArtistPageTracks
+  setArtistPageTracks,
+  trackSetSavant
 }

@@ -1,6 +1,11 @@
 import * as actionTypes from '../constants/actionTypes'
 
-const initialState = {}
+const initialState = {
+  user: {},
+  soundcloud: {
+    favorites: []
+  }
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -14,7 +19,6 @@ export default function (state = initialState, action) {
 
 function setMe (state, action) {
   const { user } = action
-  const { soundcloud } = action
   return {...state, user}
 }
 

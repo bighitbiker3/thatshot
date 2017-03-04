@@ -22,9 +22,8 @@ router.get('/', function (req, res, next) {
   .catch(next)
 })
 
-// ADD OR GET USER'S SAVANT TUNES
-router.post('/:userId/savantTracks', function (req, res, next) {
-  console.log('THIS IS REQ PARAMSSSS', req.params)
+// GET USER'S SAVANT TUNES
+router.get('/:userId/savantTracks', function (req, res, next) {
   req.user.getUserSavantTracks({
     where: {
       createdAt: {
@@ -34,9 +33,15 @@ router.post('/:userId/savantTracks', function (req, res, next) {
     }
   })
   .then(tracks => {
-    if (tracks.length) return tracks
-    else return createSavantTracks(req.params.userId, req)
+    if (tracks.length) res.send(tracks)
+    else res.send(204)
   })
+  .catch(next)
+})
+
+// ADD USER'S SAVANT TUNES
+router.post('/:userId/savantTracks', function (req, res, next) {
+  createSavantTracks(req.params.userId, req)
   .then(tracks => res.send(tracks))
   .catch(next)
 })
@@ -58,18 +63,6 @@ router.post('/:trackId/:userId/upvote', ensureAuthenticated, function (req, res,
   })
   .catch(next)
 })
-
-// POST NEW TRACK FROM USER SUBMISSION
-router.post('/:userId/:trackId', ensureAuthenticated, function (req, res, next) {
-  Song.findOne({where: {trackId: req.params.trackId}})
-  .then(song => {
-    if (song) res.send(false)
-    else return req.user.createSong(req.body)
-  })
-  .then(song => res.send(song))
-  .catch(next)
-})
-
 
 // HELPERS
 

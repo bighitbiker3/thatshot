@@ -1,12 +1,9 @@
 const { CLIENT_ID } = require('../constants/auth')
-const { API_LOCATION } = require('../constants/server')
 const Song = require('../db/models/song')
 const request = require('request-promise')
 const Promise = require('bluebird')
 const db = require('../db')
 const User = db.model('user')
-let usersArr = ['duvetcover', 'balconies_co', 'ollyjamesmusic', 'bl3rmusic', 'sakuraburst', 'maca-music', 'crvvcksuk', 'brothelmusic', 'iamspont', 'mrfijiwiji', 'almandmusic']
-let usersArrIds = [22158004, 44180050, 58544051, 66089549, 42680724, 44776911, 40811082, 24980742, 136833642, 762863, 6957274]
 
 module.exports = {
   runSavant: (reqUserId) => {
@@ -40,7 +37,6 @@ function getUserLikes (arr) {
 }
 
 function getUserFollowers (arrOfSongs) {
-  console.log(arrOfSongs, 'THIS IS ARR OF SONGSSSSSSSSSSSSSSSSSS')
   return Promise.all(arrOfSongs.map(songObj => request(`https://api.soundcloud.com/users/${songObj.user.id}/?client_id=${CLIENT_ID}`)
   .catch(err => console.log(err, 'THIS WAS AN ERROR BUT KEEP GOING LMAOOO'))))
   .then(arrOfUsers => arrOfUsers.map(user => user ? JSON.parse(user) : null))
@@ -54,7 +50,7 @@ function getNew15 (arr) {
   return Promise.all(arr.map(song => Song.findOne({where: {trackId: song.id}})))
   .then(arrOfFound => arrOfFound.map(track => track ? track.trackId : null))
   .then(arrOfTrackIds => arr.filter(song => !arrOfTrackIds.includes(song.id)))
-  .then(newSongs => shuffle(newSongs, 15))
+  .then(newSongs => shuffle(newSongs, 9))
 }
 
 function getStreamUrl (arr) {
@@ -84,7 +80,6 @@ function shuffle (arr, size) {
     arr[randomIndex] = holder
   }
   if (size) arr.length = size
-  arr.length = 15
-  console.log( 'THIS IS THE SHUFFLED ARR,', arr)
+  arr.length = 9
   return arr
 }

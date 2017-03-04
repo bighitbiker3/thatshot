@@ -16,5 +16,10 @@ module.exports = {
     'clientSecret': 'INSERT_GOOGLE_CLIENT_SECRET_HERE',
     'callbackURL': 'INSERT_GOOGLE_CALLBACK_HERE'
   },
+  'SOUNDCLOUD': {
+    'clientID': '2fd5b79e3498c867ce3b817dce252dd2',
+    'clientSecret': 'f4aca71f0560950db4ed8c3ae5d1ae19'
+  },
+
   'LOGGING': false
 }

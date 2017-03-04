@@ -3,7 +3,7 @@ import * as server from '../constants/server'
 import { reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications'
 const { notifSend } = notifActions
 
-function trackSetSavant (tracks) {
+export function trackSetSavant (tracks) {
   return {
     type: actionTypes.TRACKS_SET_SAVANT,
     tracks
@@ -36,14 +36,11 @@ export function setUserTracks (song, user) {
     if (song) {
       song.user = user
       return dispatch(trackSetUser(song))
-    }
-    else {
-      dispatch({type: actionTypes.START_LOADING})
+    } else {
       return fetch(server.API_LOCATION + '/songs?is_savant=false')
       .then(data => data.json())
       .then(dataJSON => {
         dispatch(trackSetUser(dataJSON))
-        dispatch({type: actionTypes.STOP_LOADING})
       })
       .catch(err => console.warn(err))
     }

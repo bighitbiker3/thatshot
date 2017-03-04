@@ -14,17 +14,18 @@ export function showLogin () {
   }
 }
 
-export function closeHeader () {
+export function openHeader () {
   return {
-    type: actionTypes.CLOSE_HEADER,
-    payload: {active: false, show: 'none'}
+    type: actionTypes.OPEN_HEADER,
+    payload: {active: true, show: 'none'}
   }
 }
 
-export function showSubmission () {
+export function closeHeader () {
+  console.log('firedddd')
   return {
-    type: actionTypes.SHOW_SUBMISSION,
-    payload: {active: true, show: 'submission'}
+    type: actionTypes.CLOSE_HEADER,
+    payload: {active: false, show: 'none'}
   }
 }
 
