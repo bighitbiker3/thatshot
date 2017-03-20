@@ -6,6 +6,7 @@ const clientID = env.SOUNDCLOUD.clientID
 const clientSecret = env.SOUNDCLOUD.clientSecret
 const callbackURL = env.SOUNDCLOUD.callbackUrl
 
+console.log(callbackURL,'a;sldfjas;lfdjas;lfasf');
 
 module.exports = function (app, db) {
   const User = db.model('user')
