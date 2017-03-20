@@ -6,7 +6,7 @@ const clientID = env.SOUNDCLOUD.clientID
 const clientSecret = env.SOUNDCLOUD.clientSecret
 const callbackURL = env.SOUNDCLOUD.callbackUrl
 
-console.log(callbackURL,'a;sldfjas;lfdjas;lfasf');
+
 
 module.exports = function (app, db) {
   const User = db.model('user')
@@ -51,6 +51,7 @@ module.exports = function (app, db) {
   })
 
   app.get('/login/soundcloud', function (req, res, next) {
+    console.log(callbackURL,'a;sldfjas;lfdjas;lfasf');
     passport.authenticate('soundcloud')(req, res, next)
   })
 
