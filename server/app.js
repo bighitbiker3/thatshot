@@ -1,9 +1,9 @@
 'use strict'
 const express = require('express')
 const app = express()
-var http = require('http');
-var server = http.createServer(app);
-var io = require('socket.io').listen(server);
+const http = require('http')
+const server = http.createServer(app)
+const io = require('socket.io').listen(server)
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const router = require('./routes')(io)

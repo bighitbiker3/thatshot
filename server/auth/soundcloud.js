@@ -4,14 +4,15 @@ const refresh = require('passport-oauth2-refresh')
 const env = require('../env')
 const clientID = env.SOUNDCLOUD.clientID
 const clientSecret = env.SOUNDCLOUD.clientSecret
+const callbackURL = env.SOUNDCLOUD.callbackUrl
 
 
 module.exports = function (app, db) {
   const User = db.model('user')
   const strategy = new SoundCloudStrategy({
-    clientID: clientID,
-    clientSecret: clientSecret,
-    callbackURL: 'http://localhost:3000/callback'
+    clientID,
+    clientSecret,
+    callbackURL
   }, (accessToken, refreshToken, profile, done) => {
     User.findOrCreate({
       where: {

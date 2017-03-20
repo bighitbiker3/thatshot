@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import io from 'socket.io-client'
-let socket = io('http://localhost:3000')
+let socket = io(window.location.origin)
 import Loader from '../../Loader'
 import { SERVER_LOCATION, API_LOCATION } from '../../../constants/server'
 import { trackSetSavant, closeHeader, openHeader, initSoundCloud } from '../../../actions'

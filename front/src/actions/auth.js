@@ -3,7 +3,7 @@ import axios from 'axios'
 import io from 'socket.io-client'
 import { actions as notifActions } from 'redux-notifications'
 const { notifSend } = notifActions
-let socket = io('http://localhost:3000')
+let socket = io(window.location.origin)
 
 import * as actionTypes from '../constants/actionTypes'
 import { openHeader } from '../actions'

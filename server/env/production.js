@@ -24,5 +24,10 @@ module.exports = {
     'clientSecret': process.env.GOOGLE_CLIENT_SECRET,
     'callbackURL': process.env.GOOGLE_CALLBACK_URL
   },
+  'SOUNDCLOUD': {
+    'clientID': process.env.SOUNDCLOUD_CLIENT_ID,
+    'clientSecret': process.env.SOUNDCLOUD_CLIENT_SECRET,
+    'callbackUrl': process.env.SOUNDCLOUD_CALLBACK_URL
+  },
   'LOGGING': true
 }
