@@ -13,7 +13,7 @@ module.exports = {
   runSavant: (reqUserId) => {
     return getSavants(reqUserId)
     .then(savantArr => shuffle(shuffle(shuffle(savantArr)))) // lol (for good measure 3 is my lucky num)
-    .then(shuffledArr => getUserLikes(shuffledArr))
+    .then(shuffledArr => getUserLikes(shuffledArr.filter(s => s)))
     // TODO SPLIT THESE INTO VERBOSE FUNCTION NAMES FOR THE SYNC STUFF
     .then(likesArr => likesArr.map(data => data.collection).reduce((a, b) => a.concat(b)))
     .then(objWithTrackArr => shuffle(objWithTrackArr, objWithTrackArr.length).map(obj => obj.track))
