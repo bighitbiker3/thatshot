@@ -64,6 +64,7 @@ router.get('/:userId/tracks', function (req, res, next) {
   .catch(next)
 })
 
+// Set Savants
 router.post('/:soundcloudId/savants', function (req, res, next) {
   const soundcloudId = req.params.soundcloudId
   setSavants(soundcloudId, req)

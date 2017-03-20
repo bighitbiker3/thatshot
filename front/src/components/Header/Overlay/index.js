@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import io from 'socket.io-client'
+let socket = io('http://localhost:3000')
 import Loader from '../../Loader'
 import { SERVER_LOCATION, API_LOCATION } from '../../../constants/server'
 import { trackSetSavant, closeHeader, openHeader, initSoundCloud } from '../../../actions'
@@ -45,14 +47,18 @@ class Overlay extends React.Component {
         return axios.post(`${API_LOCATION}/songs/${id}/savantTracks`)
       }
     })
-    .then(res => res.data)
-    .then(songs => {
-      this.setState({songs: false, soundcloudData: true})
-      this.props.trackSetSavant(songs)
-      return this.props.initSoundCloud()
-    })
-    .then(() => {
-      this.props.closeHeader()
+    socket.on('doneCreateSavantTracks', () => {
+      axios.get(`${API_LOCATION}/songs/${id}/savantTracks`)
+      .then(res => res.data)
+      .then(songs => {
+        console.log(songs)
+        this.setState({songs: false, soundcloudData: true})
+        this.props.trackSetSavant(songs)
+        return this.props.initSoundCloud()
+      })
+      .then(() => {
+        this.props.closeHeader()
+      })
     })
   }
 

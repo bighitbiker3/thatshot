@@ -1,6 +1,5 @@
 'use strict'
 var crypto = require('crypto')
-var _ = require('lodash')
 var Sequelize = require('sequelize')
 
 var db = require('../_db')
@@ -14,6 +13,10 @@ module.exports = db.define('user', {
     validate: {
       isEmail: true
     }
+  },
+  allow_marketing: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
   },
   first_name: {
     type: Sequelize.STRING,
@@ -47,6 +50,10 @@ module.exports = db.define('user', {
   soundcloud_refreshToken: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  last_updated: {
+    type: Sequelize.DATE,
+    defaultValue: null
   }
 
 }, {

@@ -1,100 +1,70 @@
 const express = require('express')
+const moment = require('moment')
+const Promise = require('bluebird')
 const router = express.Router()
 const db = require('../../db')
 const Song = db.model('song')
 const User = db.model('user')
-const getSavantTracks = require('../../funStuff/savant')
-const Promise = require('bluebird')
+const createSavantTracks = require('../../funStuff/createSavantTracks')
+const getTodaysTracks = require('../../funStuff/getTodaysTracks')
 const ensureAuthenticated = require('../middleware').ensureAuthenticated
 
+console.log(typeof moment().startOf('day').toDate())
 
-// GET SONGS
-router.get('/', function (req, res, next) {
-  req.query.is_savant = (req.query.is_savant === 'true')
-  Song.findAll({
-    include: [{model: User, where: req.query}],
-    order: [['createdAt', 'DESC']],
-    limit: req.query.is_savant ? 15 : null
+module.exports = (io) => {
+  // GET SONGS
+  router.get('/', function (req, res, next) {
+    req.query.is_savant = (req.query.is_savant === 'true')
+    Song.findAll({
+      include: [{model: User, where: req.query}],
+      order: [['createdAt', 'DESC']],
+      limit: req.query.is_savant ? 15 : null
+    })
+    .then(songs => {
+      res.json(songs)
+    })
+    .catch(next)
   })
-  .then(songs => {
-    res.json(songs)
-  })
-  .catch(next)
-})
 
-// GET USER'S SAVANT TUNES
-router.get('/:userId/savantTracks', function (req, res, next) {
-  req.user.getUserSavantTracks({
-    where: {
-      createdAt: {
-        $lt: new Date(),
-        $gt: new Date(new Date() - 24 * 60 * 60 * 1000)
+  // GET USER'S SAVANT TUNES
+  router.get('/:userId/savantTracks', function (req, res, next) {
+    console.log(req.user.last_updated)
+    const { userId } = req.params
+    getTodaysTracks(userId, Song)
+    .then(tracks => {
+      if (tracks.length === 9) return Promise.all(tracks.map(track => track.update({posted: true, posted_date: moment().startOf('day').toDate()})))
+      else res.send(204)
+    })
+    .then(tracks => {
+      if (tracks) res.send(tracks.map(track => track.song))
+    })
+    .catch(next)
+  })
+
+  // ADD USER'S SAVANT TUNES
+  router.post('/:userId/savantTracks', function (req, res, next) {
+    createSavantTracks(req.params.userId, req, io)
+    // .then(tracks => res.send(201))
+    .catch(next)
+    res.send(201)
+  })
+
+  // UPVOTE TRACK
+  router.post('/:trackId/:userId/upvote', ensureAuthenticated, function (req, res, next) {
+    Song.findById(req.params.trackId, {include: [{model: User}]})
+    .then(song => Promise.all([song, song.getUpVotingUsers()]))
+    .spread((song, result) => Promise.all([song, result.filter(user => user.id === +req.params.userId)]))
+    .spread((song, filtered) => {
+      if (!filtered.length) {
+        return song.addUpVotingUsers(req.params.userId)
+        .then(() => song.upvote())
+        .then(updated => updated.save())
+        .then(track => res.send(track))
+      } else {
+        res.send(false)
       }
-    }
+    })
+    .catch(next)
   })
-  .then(tracks => {
-    if (tracks.length) res.send(tracks)
-    else res.send(204)
-  })
-  .catch(next)
-})
-
-// ADD USER'S SAVANT TUNES
-router.post('/:userId/savantTracks', function (req, res, next) {
-  createSavantTracks(req.params.userId, req)
-  .then(tracks => res.send(tracks))
-  .catch(next)
-})
-
-// UPVOTE TRACK
-router.post('/:trackId/:userId/upvote', ensureAuthenticated, function (req, res, next) {
-  Song.findById(req.params.trackId, {include: [{model: User}]})
-  .then(song => Promise.all([song, song.getUpVotingUsers()]))
-  .spread((song, result) => Promise.all([song, result.filter(user => user.id === +req.params.userId)]))
-  .spread((song, filtered) => {
-    if (!filtered.length) {
-      return song.addUpVotingUsers(req.params.userId)
-      .then(() => song.upvote())
-      .then(updated => updated.save())
-      .then(track => res.send(track))
-    } else {
-      res.send(false)
-    }
-  })
-  .catch(next)
-})
-
-// HELPERS
-
-function createSavantTracks (id, req) {
-  return getSavantTracks.runSavant(id)
-  .then(data => Promise.all(data.map(song => {
-    const songToAdd = {
-      artwork_url: song.artwork_url,
-      duration: song.duration,
-      genre: song.genre,
-      trackId: song.id,
-      permalink_url: song.permalink_url,
-      reposts_count: song.reposts_count,
-      title: song.title,
-      artist: song.user.username,
-      artist_uri: song.user.uri,
-      playback_count: song.playback_count,
-      artist_permalink: song.user.permalink_url,
-      stream_url: song.stream_url,
-      artist_id: song.user.id,
-      waveform_url: song.waveform_url
-    }
-    return Song.findOrCreate({where: songToAdd, include: [User]})
-  }))) // returns [[songObj, bool],[songObj, bool],[songObj, bool]]
-  .then(foundOrCreated => foundOrCreated.reduce((a, b) => a.concat(b)).filter(thing => {
-    // console.log(thing, 'THIIIIIIIIIIIIINNNNNNNNNGGGGGGGGGG')
-    if (typeof thing === 'object') return thing
-  }))
-  .then(songsAdded => {
-    Promise.all(songsAdded.map(song => req.user.addUserSavantTracks(song)))
-    return songsAdded
-  })
+  return router
 }
-
-module.exports = router

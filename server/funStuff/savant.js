@@ -1,25 +1,30 @@
-const { CLIENT_ID } = require('../constants/auth')
+const { CLIENT_ID, CLIENT_ID_DUP1, CLIENT_ID_DUP2 } = require('../constants/auth')
 const Song = require('../db/models/song')
-const request = require('request-promise')
+const axios = require('axios')
+const axiosRetry = require('axios-retry')
 const Promise = require('bluebird')
+const _ = require('lodash')
 const db = require('../db')
 const User = db.model('user')
+
+axiosRetry(axios, { retries: 10 })
 
 module.exports = {
   runSavant: (reqUserId) => {
     return getSavants(reqUserId)
-    .then(savantArr => shuffle(savantArr))
+    .then(savantArr => shuffle(shuffle(shuffle(savantArr)))) // lol (for good measure 3 is my lucky num)
     .then(shuffledArr => getUserLikes(shuffledArr))
     // TODO SPLIT THESE INTO VERBOSE FUNCTION NAMES FOR THE SYNC STUFF
-    .then(likesArr => likesArr.map(string => JSON.parse(string).collection).reduce((a, b) => a.concat(b)))
-    .then(objWithTrackArr => objWithTrackArr.map(obj => obj.track))
+    .then(likesArr => likesArr.map(data => data.collection).reduce((a, b) => a.concat(b)))
+    .then(objWithTrackArr => shuffle(objWithTrackArr, objWithTrackArr.length).map(obj => obj.track))
     .then(flatArr => flatArr.filter(songObj => (songObj.favoritings_count / songObj.playback_count > 0.39 && songObj.playback_count < 10000) || (songObj.playback_count > 10000 && songObj.comment_count > 9)))
     .then(filteredArr => getUserFollowers(filteredArr))
-    .then(songObjArr => songObjArr.filter(songObj => (songObj.userInfo && songObj.userInfo.followers_count < 15000)))
-    .then(itsFire => getNew15(itsFire))
+    // .then(shit => console.log(shit, 'shitttt'))
+    .then(songObjArr => shuffle(songObjArr, songObjArr.length).filter(songObj => (songObj.userInfo && songObj.userInfo.followers_count < 15000)))
+    .then(itsFire => getNew(itsFire))
     .then(newFire => newFire.filter(obj => obj))
     .then(fireTracks => getStreamUrl(fireTracks))
-    .then(itsFire15 => itsFire15)
+    .then(itsFire15 => itsFire15.filter(obj => obj))
     .catch(err => console.log(err))
   }
 }
@@ -32,32 +37,41 @@ function getSavants (reqUserId) {
 }
 
 function getUserLikes (arr) {
-  return Promise.all(arr.map(userId => request(`https://api-v2.soundcloud.com/users/${userId}/track_likes?&limit=200&client_id=${CLIENT_ID}`)
-  .catch(err => console.log(err, 'THIS WAS AN ERROR BUT KEEP GOING LMAOOO'))))
+  console.log('lolllllllllllllllllll');
+  return Promise.all(arr.map(userId => axios.get(`https://api-v2.soundcloud.com/users/${userId}/track_likes?&limit=200&client_id=${CLIENT_ID_DUP1}`)
+    .catch(err => console.log(err, 'THIS WAS AN ERROR get user likes BUT KEEP GOING LMAOOO'))))
+  .then(arrOfResp => arrOfResp.map(resp => resp.data))
 }
 
 function getUserFollowers (arrOfSongs) {
-  return Promise.all(arrOfSongs.map(songObj => request(`https://api.soundcloud.com/users/${songObj.user.id}/?client_id=${CLIENT_ID}`)
-  .catch(err => console.log(err, 'THIS WAS AN ERROR BUT KEEP GOING LMAOOO'))))
-  .then(arrOfUsers => arrOfUsers.map(user => user ? JSON.parse(user) : null))
-  .then(parsedArrOfUsers => arrOfSongs.map((songObj, i) => {
-    let user = parsedArrOfUsers[i]
-    return Object.assign(songObj, {userInfo: user})
+  return Promise.all(arrOfSongs.map(songObj => axios.get(`https://api.soundcloud.com/users/${songObj.user.id}/?client_id=${CLIENT_ID}`, {timeout: 60000})
+    .catch(err => console.log(err, 'THIS WAS AN ERROR get user followers BUT KEEP GOING LMAOOO'))))
+  .then(responses => responses.filter(r => r))
+  .then(arrOfResp => arrOfResp.map(resp => resp.data).filter(user => user))
+  .then(arrOfUsers => {
+    const userObj = {}
+    arrOfUsers.forEach(user => (userObj[user.id] = user))
+    return userObj
+  })
+  .then(userObj => arrOfSongs.map((songObj) => {
+    const songUserId = songObj.user.id
+    return Object.assign(songObj, {userInfo: userObj[songUserId]})
   }))
 }
 
-function getNew15 (arr) {
+function getNew (arr) {
   return Promise.all(arr.map(song => Song.findOne({where: {trackId: song.id}})))
   .then(arrOfFound => arrOfFound.map(track => track ? track.trackId : null))
   .then(arrOfTrackIds => arr.filter(song => !arrOfTrackIds.includes(song.id)))
-  .then(newSongs => shuffle(newSongs, 9))
+  .then(newSongs => _.uniqBy(newSongs, 'id')) // filter only unique vals
+  .then(newSongs => shuffle(newSongs, newSongs.length))
 }
 
 function getStreamUrl (arr) {
-  return Promise.all(arr.map(song => request(`https://api.soundcloud.com/tracks/${song.id}/?client_id=${CLIENT_ID}`)
-  .catch(err => console.log(err, 'THIS WAS AN ERROR BUT KEEP GOING LMAOOO'))))
+  return Promise.all(arr.map(song => axios.get(`https://api.soundcloud.com/tracks/${song.id}/?client_id=${CLIENT_ID_DUP2}`)
+  .catch(err => console.log(err, 'THIS WAS AN ERROR getting streams BUT KEEP GOING LMAOOO'))))
   .then(arrOfSongStreams => arrOfSongStreams.filter(song => song))
-  .then(arrOfSongStreams => arrOfSongStreams.map(song => JSON.parse(song)))
+  .then(arrOfSongStreams => arrOfSongStreams.map(song => song.data))
   .then(arrOfSongStreams => arr.map((song, i) => {
     if (arrOfSongStreams[i]) {
       song.stream_url = arrOfSongStreams[i].stream_url
@@ -80,6 +94,6 @@ function shuffle (arr, size) {
     arr[randomIndex] = holder
   }
   if (size) arr.length = size
-  arr.length = 9
+  else arr.length = 9
   return arr
 }

@@ -1,7 +1,9 @@
 import SC from 'soundcloud'
 import axios from 'axios'
+import io from 'socket.io-client'
 import { actions as notifActions } from 'redux-notifications'
 const { notifSend } = notifActions
+let socket = io('http://localhost:3000')
 
 import * as actionTypes from '../constants/actionTypes'
 import { openHeader } from '../actions'
@@ -131,10 +133,9 @@ function addSavantTracks (id) {
       kind: 'info',
       dismissAfter: 20000
     }))
+    
     axios.post(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
-    .then(response => response.data)
-    .then(songs => dispatch(trackSetSavant(songs)))
-    .then(() => dispatch(notifSend({message: 'Got em! :)', kind: 'success', dismissAfter: 3000})))
+    .then(response => socket.on('doneCreateSavantTracks', () => dispatch(getSavantTracks(id))))
     .catch(err => dispatch(notifSend({message: err, kind: 'danger', dismissAfter: 3000})))
   }
 }

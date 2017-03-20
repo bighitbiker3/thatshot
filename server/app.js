@@ -1,9 +1,12 @@
 'use strict'
 const express = require('express')
 const app = express()
+var http = require('http');
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const router = require('./routes')
+const router = require('./routes')(io)
 const db = require('./db')
 const path = require('path')
 const morgan = require('morgan') // comment out for prod?
@@ -30,7 +33,7 @@ app.get('/*', function (req, res) {
   res.render('index.html')
 })
 
-db.sync({})
+db.sync()
 // Savant()
 
-app.listen(process.env.PORT || 3000)
+server.listen(process.env.PORT || 3000)

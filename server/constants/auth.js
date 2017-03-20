@@ -1,4 +1,7 @@
 module.exports = {
   // CLIENT_ID: '2fd5b79e3498c867ce3b817dce252dd2'
-  CLIENT_ID: '622c5a5338becb1365fb57b6bdc97f09'
+  CLIENT_ID: '622c5a5338becb1365fb57b6bdc97f09',
+  CLIENT_ID_DUP1: '32df91eafee983706b850abf230584e9',
+  CLIENT_ID_DUP2: '5f33db471dcac15a4a2d641be30c7042',
+  CLIENT_ID_DUP3: '0addcc52d782e38a7a5a00f6acf5754a'
 }
