@@ -36,14 +36,16 @@ const getTracksSendEmail = (user) => {
 }
 
 const makeEmail = (address, tracks) => {
-  tracks = tracks.map(track => {
-    track.artwork_url = track.artwork_url.replace('large', 't300x300')
-    return track
+  tracks = tracks.filter(track => {
+    if (track.artwork_url) {
+      track.artwork_url = track.artwork_url.replace('large', 't300x300')
+      return track
+    }
   })
   return {
     from: 'That\'s Hot <elliott@thatshot.audio>',
     to: address,
-    subject: `That's Hot - New tunes from ${tracks[0].artist}, ${tracks[3].artist}, and ${tracks[6].artist}!`,
+    subject: `That's Hot - New tunes from ${tracks[0].artist}, ${tracks[1].artist}, and ${tracks[2].artist}!`,
     text: 'Testing some Mailgun awesomness!',
     html: `
 <body bgcolor="#f6f6f6" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; margin: 0; padding: 0;">
@@ -66,12 +68,12 @@ const makeEmail = (address, tracks) => {
 </div>
 <div style='text-align: center;'>
 <a href="https://thatshot.audio">
-<img src='${tracks[3].artwork_url}' />&#13;
+<img src='${tracks[1].artwork_url}' />&#13;
 </a>
 </div>
 <div style='text-align: center;'>
 <a href="https://thatshot.audio">
-<img src='${tracks[6].artwork_url}' />&#13;
+<img src='${tracks[2].artwork_url}' />&#13;
 </a>
 </div>
 <table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;"><td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 10px 0;">&#13;
