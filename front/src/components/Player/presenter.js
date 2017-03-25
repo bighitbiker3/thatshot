@@ -7,6 +7,7 @@ import FontAwesome from 'react-fontawesome'
 import { CLIENT_ID } from '../../constants/auth'
 import Interval from 'react-interval'
 import Slider from 'react-slider'
+import keyBindings from '../../lib/keyBindings'
 
 class Player extends React.Component {
 
@@ -20,6 +21,9 @@ class Player extends React.Component {
     this.durationInterval = null
   }
 
+  componentDidMount() {
+    keyBindings('space', this.props.toggleTrack)
+  }
   componentDidUpdate () {
     const audioElement = ReactDOM.findDOMNode(this.refs.player)
 

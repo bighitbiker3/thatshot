@@ -15,7 +15,8 @@ class Overlay extends React.Component {
       songs: false,
       soundcloudData: false,
       needEmail: false,
-      email: null
+      email: null,
+      error: null
     }
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.handleEmailSubmit = this.handleEmailSubmit.bind(this)
@@ -41,17 +42,17 @@ class Overlay extends React.Component {
 
   getAllTheThings (soundcloud_id, id) { // eslint-disable-line camelcase
     axios.post(`${API_LOCATION}/users/${soundcloud_id}/savants`) // eslint-disable-line camelcase
-    .then(res => {
-      if (res.status === 201) {
-        this.setState({savants: false, songs: true})
-        return axios.post(`${API_LOCATION}/songs/${id}/savantTracks`)
-      }
+    
+    socket.on('doneGettingSavants', () => {
+      console.log('dont getting savants')
+      this.setState({savants: false, songs: true})
+      return axios.post(`${API_LOCATION}/songs/${id}/savantTracks`)
     })
+
     socket.on('doneCreateSavantTracks', () => {
       axios.get(`${API_LOCATION}/songs/${id}/savantTracks`)
       .then(res => res.data)
       .then(songs => {
-        console.log(songs)
         this.setState({songs: false, soundcloudData: true})
         this.props.trackSetSavant(songs)
         return this.props.initSoundCloud()
@@ -59,6 +60,9 @@ class Overlay extends React.Component {
       .then(() => {
         this.props.closeHeader()
       })
+    })
+    socket.on('error', (err) => {
+      this.setState({ error: err })
     })
   }
 
@@ -73,8 +77,15 @@ class Overlay extends React.Component {
 
   getUI () {
     const { user } = this.props.auth
-    const { savants, songs, soundcloudData, needEmail } = this.state
-    console.log(user.created, needEmail);
+    const { savants, songs, soundcloudData, needEmail, error } = this.state
+    if (error) {
+      return (
+        <div>
+          <h2>An unexpected error occurred. Please try again</h2>
+          <h4>{error}</h4>
+        </div>
+      )
+    }
     if (!user.created) {
       return (
         <div>

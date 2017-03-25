@@ -569,24 +569,17 @@ profile-page .posted-title {
       width: 90%;
       height: 100%;
       margin: 0 auto; } }
-  .album-art-div .upvote-box {
-    background-color: black;
-    height: 25px;
-    width: 125px;
+  .album-art-div .album-art-play {
     position: absolute;
-    text-align: center;
-    bottom: -25px;
-    right: 0; }
+    transition: opacity 0.3s ease;
+    bottom: 5px;
+    left: 65px;
+    color: red;
+    opacity: 0; }
     @media (min-width: 300px) and (max-width: 420px) {
-      .album-art-div .upvote-box {
+      .album-art-div .album-art-play {
         width: 90%; } }
-    .album-art-div .upvote-box p {
-      color: white;
-      font-size: 15px;
-      margin-top: 3px;
-      display: block; }
   .album-art-div .album-art {
-    transition: bottom 0.3s ease;
     position: absolute;
     bottom: -25px;
     right: 0;
@@ -596,13 +589,6 @@ profile-page .posted-title {
       .album-art-div .album-art {
         width: 90%;
         height: auto; } }
-  .album-art-div .album-art:hover {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 125px;
-    height: 125px; }
-    @media (min-width: 300px) and (max-width: 420px) {
-      .album-art-div .album-art:hover {
-        width: 90%;
-        height: auto; } }
+
+.album-art-div:hover .album-art-play {
+  opacity: 1; }

@@ -24,10 +24,14 @@ module.exports = (id, req, io) => {
     }
     return Song.findOrCreate({where: songToAdd, include: [User]})
   }))) // returns [[songObj, bool],[songObj, bool],[songObj, bool]]
-  .then(foundOrCreated => foundOrCreated.reduce((a, b) => a.concat(b)).filter(thing => {
-    // console.log(thing, 'THIIIIIIIIIIIIINNNNNNNNNGGGGGGGGGG')
-    if (typeof thing === 'object') return thing
-  }))
+  .then(foundOrCreated => {
+    if (!foundOrCreated.length) {
+      throw new Error('No Tracks')
+    }
+    return foundOrCreated.reduce((a, b) => a.concat(b)).filter(thing => {
+      if (typeof thing === 'object') return thing
+    })
+  })
   .then(songsAdded => {
     return [Promise.all(songsAdded.map(song => req.user.addUserSavantTracks(song))), songsAdded]
   })
@@ -35,5 +39,8 @@ module.exports = (id, req, io) => {
     return [req.user.update({last_updated: Date.now()}), songsAdded]
   })
   .spread((updated, songsAdded) => io.emit('doneCreateSavantTracks'))
-  .catch(err => console.log(err, 'ERRR'))
+  .catch(err => {
+    console.log(err)
+    io.emit('error', 'Error getting tracks')
+  })
 }

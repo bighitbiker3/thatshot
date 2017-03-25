@@ -145,26 +145,18 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
     height: 100%;
     margin: 0 auto;
   }
-  .upvote-box{
-    background-color: black;
-    height: 25px;
-    width: 125px;
+  .album-art-play{
     position: absolute;
-    text-align: center;
-    bottom: -25px;
-    right: 0;
+    transition: opacity 0.3s ease;
+    bottom: 5px;
+    left: 65px;
+    color: red;
+    opacity: 0;
     @media #{$phone}{
       width: 90%;
-    }
-    p{
-      color: white;
-      font-size: 15px;
-      margin-top: 3px;
-      display: block;
     }
   }
   .album-art{
-    transition: bottom 0.3s ease;
     position: absolute;
     bottom: -25px;
     right: 0;
@@ -175,15 +167,9 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
       height: auto;
     }
   }
-  .album-art:hover{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 125px;
-    height:125px;
-    @media #{$phone}{
-      width: 90%;
-      height: auto;
+}
+.album-art-div:hover{
+  .album-art-play{
+      opacity: 1;
     }
-  }
 }

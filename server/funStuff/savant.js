@@ -25,7 +25,7 @@ module.exports = {
     .then(newFire => newFire.filter(obj => obj))
     .then(fireTracks => getStreamUrl(fireTracks))
     .then(itsFire15 => itsFire15.filter(obj => obj))
-    .catch(err => console.log(err))
+    .catch(err => err)
   }
 }
 

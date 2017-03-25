@@ -9,8 +9,6 @@ const createSavantTracks = require('../../funStuff/createSavantTracks')
 const getTodaysTracks = require('../../funStuff/getTodaysTracks')
 const ensureAuthenticated = require('../middleware').ensureAuthenticated
 
-console.log(typeof moment().startOf('day').toDate())
-
 module.exports = (io) => {
   // GET SONGS
   router.get('/', function (req, res, next) {

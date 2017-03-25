@@ -1,7 +1,6 @@
 const moment = require('moment')
 const db = require('../db')
 const Song = db.model('song')
-const User = db.model('user')
 const UserSavantTracks = db.model('userSavantTracks')
 
 module.exports = (userId) => {

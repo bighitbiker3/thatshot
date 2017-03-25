@@ -9,7 +9,7 @@ const subscribersRouter = require('./routers/subscribers')
 module.exports = (io) => {
   router.use('/songs', songsRouter(io))
   router.use('/artists', artistsRouter)
-  router.use('/users', usersRouter)
+  router.use('/users', usersRouter(io))
   router.use('/subscribers', subscribersRouter)
   return router
 }
