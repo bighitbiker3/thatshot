@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const db = require('../../db')
 const User = db.model('user')
+const Song = db.model('song')
+const UserSavantTracks = db.model('userSavantTracks')
 const Promise = require('bluebird')
 const setSavants = require('../../funStuff/setSavants')
 
@@ -53,11 +55,18 @@ module.exports = (io) => {
     } else {
       findBy = User.findOne({where: {username: req.params.userId}})
     }
-    findBy.then(thing => console.log(thing))
 
     findBy
-    .then(user => Promise.all([user.getSongs({include: {model: User}}), user.getUpVotedSongs({include: [User]})]))
-    .then(songs => songs.reduce((a, b) => a.concat(b), []))
+    .then(user => {
+      return UserSavantTracks.findAll({
+        where: {
+          userId: user.id,
+          posted: true
+        },
+        include: [{model: Song}]
+      })
+    })
+    .then(songs => songs.map(song => song.song))
     .then(songs => res.send(songs))
     .catch(next)
   })

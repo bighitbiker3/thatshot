@@ -1,10 +1,7 @@
 import * as actionTypes from '../constants/actionTypes'
 
 const initialState = {
-  profileTracks: {
-    upvoted: [],
-    posted: []
-  },
+  profileTracks: [],
   showSettings: false
 }
 
@@ -19,10 +16,11 @@ export default function (state = initialState, action) {
 }
 
 function setProfilePageTracks (state, action) {
-  let profileTracks = {}
-  profileTracks.upvoted = action.upVotedTracks || []
-  profileTracks.posted = action.postedTracks || []
-  return {...state, profileTracks}
+  console.log(action.payload, 'payyy');
+  return {
+    ...state,
+    profileTracks: action.payload
+  }
 }
 
 function removeProfileTracks (state, action) {

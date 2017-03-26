@@ -363,58 +363,6 @@ a:link {
   position: absolute;
   right: 0; }
 
-.upvoted-tracks {
-  float: left;
-  width: 45%; }
-  .upvoted-tracks .track-group {
-    width: 100%; }
-  @media (min-width: 300px) and (max-width: 420px) {
-    .upvoted-tracks {
-      width: 100%;
-      float: none; }
-      .upvoted-tracks .track-group {
-        width: 90%; } }
-
-.posted-tracks {
-  float: right;
-  margin-right: 30px;
-  width: 45%; }
-  .posted-tracks .track-group {
-    width: 100%; }
-  @media (min-width: 300px) and (max-width: 420px) {
-    .posted-tracks {
-      float: none;
-      width: 100%; }
-      .posted-tracks .track-group {
-        width: 90%; } }
-
-profile-page .username {
-  font-family: 'Times New Roman';
-  font-style: italic;
-  font-weight: 300;
-  text-align: center;
-  margin-top: 0px; }
-
-profile-page .upvotes-title {
-  float: left;
-  top: 0;
-  font-weight: 300;
-  width: 45%;
-  text-align: center; }
-  @media (min-width: 300px) and (max-width: 420px) {
-    profile-page .upvotes-title {
-      display: none; } }
-
-profile-page .posted-title {
-  float: right;
-  top: 0;
-  font-weight: 300;
-  width: 45%;
-  text-align: center; }
-  @media (min-width: 300px) and (max-width: 420px) {
-    profile-page .posted-title {
-      display: none; } }
-
 .settings-cog {
   position: absolute;
   right: 62px; }
@@ -447,6 +395,13 @@ profile-page .posted-title {
 
 .track-types a:last-child {
   margin-left: 20px; }
+
+.stream-title {
+  font-family: 'Times New Roman';
+  font-style: italic;
+  font-weight: 300;
+  text-align: center;
+  margin-top: 0px; }
 
 .track-group {
   display: flex;

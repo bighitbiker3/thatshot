@@ -1,12 +1,14 @@
 import * as actionTypes from '../constants/actionTypes'
 import * as server from '../constants/server'
+import axios from 'axios'
 
 export function setProfilePageTracks (id) {
   return function (dispatch) {
     dispatch({type: actionTypes.START_LOADING})
-    return fetch(server.API_LOCATION + `/users/${id}/tracks`)
-    .then(res => res.json())
+    return axios.get(server.API_LOCATION + `/users/${id}/tracks`)
+    .then(res => res.data)
     .then(userStuff => {
+      console.log(userStuff);
       dispatch(setTracks(userStuff, id))
       dispatch({type: actionTypes.STOP_LOADING})
     })
@@ -28,15 +30,9 @@ export function toggleSettings () {
 
 
 function setTracks (tracks, id) {
-  tracks = tracks.map(track => {
-    track.reqUserId = id
-    return track
-  })
-  // let upVotedTracks = tracks.filter(track => track.reqUserId !== track.userId && track.reqUserId !== track.user.username)
-  // let postedTracks = tracks.filter(track => track.reqUserId === track.userId || track.reqUserId === track.user.username)
+  console.log(tracks);
   return {
     type: actionTypes.SET_PROFILE_TRACKS,
-    upVotedTracks: tracks,
-    postedTracks: []
+    payload: tracks
   }
 }

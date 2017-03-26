@@ -22,7 +22,6 @@ export function openHeader () {
 }
 
 export function closeHeader () {
-  console.log('firedddd')
   return {
     type: actionTypes.CLOSE_HEADER,
     payload: {active: false, show: 'none'}

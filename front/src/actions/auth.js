@@ -41,7 +41,7 @@ function logoutMe () {
 }
 
 export function getSession () {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     axios.get(server.SERVER_LOCATION + '/session')
     .then(res => res.data)
     .then(data => {
@@ -57,7 +57,8 @@ export function getSession () {
       return data
     })
     .catch(err => {
-      if (err) dispatch(openHeader())
+      const pathName = getState().routing.locationBeforeTransitions.pathname
+      if (err && pathName === '/') dispatch(openHeader())
     })
   }
 }

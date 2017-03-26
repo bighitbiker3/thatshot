@@ -1,23 +1,17 @@
 import React from 'react'
-import UserPage from '../UserPage/presenter'
+import Stream from '../Stream/presenter'
 
 export default class ArtistPage extends React.Component {
-  constructor (props) {
-    super(props)
-    this.getArtistTracks = this.props.getArtistTracks.bind(this)
-  }
-
   componentDidMount () {
-    this.getArtistTracks(this.props.routeParams.artistName)
+    this.props.getArtistTracks(this.props.routeParams.artistName)
   }
 
   render () {
     return (
-      <UserPage name={this.props.routeParams.artistName}
-                oneColumn={true}
-                postedTracks={this.props.artist.artistTracks}
-                upvotedTracks={[]}>
-      </UserPage>
+        <Stream
+          tracks={this.props.artist.artistTracks}
+          title={this.props.routeParams.artistName}
+        />
     )
   }
 }

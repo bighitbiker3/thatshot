@@ -11,6 +11,10 @@ class Header extends React.Component {
     this.props.getSession()
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.route.pathname === '/' && !nextProps.header.active && !nextProps.auth.user.id) this.props.getSession()
+  }
+
   render () {
     // Header Input show
     if (this.props.header.show === 'login') input = <Login />
