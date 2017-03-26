@@ -10,6 +10,7 @@ import Stream from './components/Stream'
 import ProfilePage from './components/ProfilePage'
 import ProfileSettings from './components/ProfilePage/Settings'
 import ArtistPage from './components/ArtistPage'
+import Unsubscribe from './components/Unsubscribe'
 
 const store = configureStore()
 
@@ -24,11 +25,12 @@ ReactDOM.render(
     <Router history={history}>
       <Route path='/' component={App}>
         <IndexRoute component={Stream} />
-        <Route path='/:user' component={ProfilePage} />
+        <Route path='/user/:user' component={ProfilePage} />
         <Route path='/artist/:artistName' component={ArtistPage} />
         <Route path='/me' component={ProfilePage}>
           <Route path='/me/settings' component={ProfileSettings} />
         </Route>
+        <Route path='/unsubscribe' component={Unsubscribe} />
       </Route>
     </Router>
   </Provider>,

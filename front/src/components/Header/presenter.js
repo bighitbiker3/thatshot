@@ -28,7 +28,6 @@ class Header extends React.Component {
           { this.props.auth.user.id
             ? <div>
                 <Link to={`/me`}><p>Hi {this.props.auth.user.username}</p></Link>
-                <p>Score: {this.props.auth.user.score} </p>
                 <p onClick={() => this.props.logout()}>Logout</p>
               </div>
             : null

@@ -7,7 +7,7 @@ const domain = 'mail.thatshot.audio'
 const mailgun = require('mailgun-js')({ apiKey, domain })
 
 
-db.sync()
+module.exports = db.sync()
 .then(() => sendEmails())
 
 
@@ -28,14 +28,14 @@ const getTracksSendEmail = (user) => {
   getTodaysTracks(user.id)
   .then(tracks => tracks.map(t => t.song))
   .then(tracks => {
-    mailgun.messages().send(makeEmail(user.email, tracks), (error, body) => {
+    mailgun.messages().send(makeEmail(user.email, user.id, tracks), (error, body) => {
       console.log(body, 'body')
       console.log(error, 'err')
     })
   })
 }
 
-const makeEmail = (address, tracks) => {
+const makeEmail = (address, id, tracks) => {
   tracks = tracks.filter(track => {
     if (track.artwork_url) {
       track.artwork_url = track.artwork_url.replace('large', 't300x300')
@@ -89,7 +89,7 @@ const makeEmail = (address, tracks) => {
 &#13;
 <div style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; max-width: 600px; display: block; margin: 0 auto; padding: 0;">&#13;
 <table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;"><td align="center" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">&#13;
-<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.6; color: #666; font-weight: normal; margin: 0 0 10px; padding: 0;">Don't like these annoying emails? <a href="#d41d8cd98f00b204e9800998ecf8427e" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; color: #999; margin: 0; padding: 0;"><unsubscribe style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Unsubscribe</unsubscribe></a>.&#13;
+<p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.6; color: #666; font-weight: normal; margin: 0 0 10px; padding: 0;">Don't like these annoying emails? <a href='https://localhost:3000/api/users/${id}/unsubscribe' style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; color: #999; margin: 0; padding: 0;"><unsubscribe style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Unsubscribe</unsubscribe></a>.&#13;
 </p>&#13;
 </td>&#13;
 </tr></table></div>&#13;

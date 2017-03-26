@@ -31,13 +31,13 @@ module.exports = {
 
 function getSavants (reqUserId) {
   return User.findById(reqUserId)
-  .then(user => user.getSavants())
+  .then(user => user.getUserSavants())
   .then(savants => savants.map(savant => savant.soundcloud_id))
   .catch(err => console.log(err))
 }
 
 function getUserLikes (arr) {
-  console.log('lolllllllllllllllllll');
+  console.log('lolllllllllllllllllll')
   return Promise.all(arr.map(userId => axios.get(`https://api-v2.soundcloud.com/users/${userId}/track_likes?&limit=200&client_id=${CLIENT_ID_DUP1}`)
     .catch(err => console.log(err, 'THIS WAS AN ERROR get user likes BUT KEEP GOING LMAOOO'))))
   .then(arrOfResp => arrOfResp.map(resp => resp.data))

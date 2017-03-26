@@ -53,7 +53,7 @@ module.exports = function (app, db) {
     // logged in already.
   app.get('/session', function (req, res) {
     if (req.user) {
-      req.user.getSavants()
+      req.user.getUserSavants()
       .then(savants => {
         //return setSavants(req.user.soundcloud_id, req)
         if (!savants.length) res.send({user: req.user.sanitize(), created: true})

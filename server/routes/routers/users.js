@@ -37,6 +37,13 @@ module.exports = (io) => {
     .catch(next)
   })
 
+  router.get('/:userId/unsubscribe', (req, res, next) => {
+    User.findById(req.params.userId)
+    .then(user => user.update({allow_marketing: false}))
+    .then(() => res.redirect('/unsubscribe'))
+    .catch(next)
+  })
+
   // GET SPECIFIC USERS TRACKS
   router.get('/:userId/tracks', function (req, res, next) {
     // Allow for passing of ID's or usernames

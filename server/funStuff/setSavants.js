@@ -13,14 +13,22 @@ function makeOGScUri (scUserId, endpoint = '') {
   return `https://api.soundcloud.com/users/${scUserId}/${endpoint}?client_id=622c5a5338becb1365fb57b6bdc97f09`
 }
 
+function filterNonActive (arr) {
+  console.log('filtering non active', arr.length)
+  return arr.filter(a => a).filter(potentialSavant => {
+    if (potentialSavant.likes_count > 100) return potentialSavant
+  })
+}
+
 function getListOfFollowingsSavants (scUserId) {
+  console.log('running this')
   return axios.get(makeScUri(scUserId, 'followings'))
   .then(res => res.data) // res.data ={collection: [obj, obj, obj], next_href: '', query_urn: ''}
   .then(data => data.collection) // data.collection = [obj, obj, obj]
-  .then(followings => followings.filter(potentialSavant => {
-    if (potentialSavant.likes_count > 50) return potentialSavant
-  }))
+  .then(followings => followings)
+  .catch(err => console.log(err))
 }
+
 
 function getListOfLikeArtistsSavants (scUserId) {
   if (!scUserId) throw new Error('Not Enough Info')
@@ -56,14 +64,24 @@ function getSavantsRecurse (scUserId, savantsArr, likesUserId = []) {
 
 function getSavants (scUserId) {
   return getListOfFollowingsSavants(scUserId)
-  .then(savants => {
-    if (savants.length > 90) return savants
-    else return getSavantsRecurse(scUserId, savants)
+  .then(followings => Promise.all([followings, Promise.all(followings.map(user => getListOfFollowingsSavants(user.id)))]))
+  .then(separation => {
+    const firstDegree = filterNonActive(separation[0]) // [user, user, user]
+    const secondDegree = separation[1].length && filterNonActive(separation[1].reduce((a, b) => a.concat(b))) // [[user, user], [user, user]]
+    return [firstDegree, secondDegree]
   })
+  .then(savants => {
+    if ((savants[0].length + savants[1].length) > 100) return savants
+    else {
+      const recurseSavants = savants.length ? savants.filter(a => a).reduce((a, b) => a.concat(b)) : []
+      return getSavantsRecurse(scUserId, recurseSavants)
+    }
+  })
+  .catch(err => console.log(err))
 }
 
 function backupPlan (req, io) {
-  db.query('SELECT "savantId" FROM "userSavants" GROUP BY "savantId" ORDER BY COUNT(*) DESC LIMIT 200;', { type: db.QueryTypes.SELECT })
+  db.query('SELECT "savantId" FROM "userSavants" GROUP BY "savantId" ORDER BY COUNT(*) DESC LIMIT 400;', { type: db.QueryTypes.SELECT })
   .then(savantIds => req.user.addSavants(savantIds.map(obj => obj.savantId)))
   .catch(err => {
     console.log(err)
@@ -71,9 +89,17 @@ function backupPlan (req, io) {
   })
 }
 
-function setSavants (scUserId, req, io) {
-  return getSavants(scUserId)
-  .then(savants => Promise.all(savants.map(savant => {
+function getUnique (first, second) {
+  const keysOfIds = first.reduce((obj, user) => {
+    obj[user.id] = true
+    return obj
+  }, {})
+  const filteredSecond = second.filter(user => !keysOfIds[user.id]) // only return if doesn't exist in first already
+  return [first, filteredSecond]
+}
+
+function findOrCreate (arr) {
+  return Promise.all(arr.map(savant => {
     return Savant.findOrCreate({
       where: {
         soundcloud_id: savant.id,
@@ -84,16 +110,48 @@ function setSavants (scUserId, req, io) {
         city: savant.city
       }
     })
-  })))
-  .then(foundOrCreated => foundOrCreated
-    .reduce((a, b) => a.concat(b))
+  }))
+}
+
+function flatten (arr) {
+  return arr.reduce((a, b) => a.concat(b))
     .filter(thing => {
       if (typeof thing === 'object') return thing
     })
-  )
-  .then(savants => req.user.addSavants(_.uniqBy(savants, 'id')))
+}
+
+function setSavants (scUserId, req, io) {
+  return getSavants(scUserId)
+  .then(savants => {
+    if (savants.length > 2) {
+      return findOrCreate(savants)
+        .then(created => {
+          const flat = flatten(created)
+          return req.user.addUserSavants(_.uniqBy(flat, 'id'), { degree: 1 })
+        })
+    } else {
+      const unique = getUnique(savants[0], savants[1])
+      const firstDegree = findOrCreate(unique[0])
+      const secondDegree = findOrCreate(unique[1])
+      return Promise.all([firstDegree, secondDegree])
+        .then(foundOrCreated => {
+          const firstDegree = flatten(foundOrCreated[0])
+          const secondDegree = flatten(foundOrCreated[1])
+          return [firstDegree, secondDegree]
+        })
+        .then(savants => {
+          const firstDegree = savants[0]
+          const secondDegree = savants[1]
+          return Promise.all([
+            req.user.addUserSavants(_.uniqBy(firstDegree, 'id'), { degree: 1 }),
+            req.user.addUserSavants(_.uniqBy(secondDegree, 'id'), { degree: 2 })
+          ])
+        })
+    }
+  })
   .then(added => io.emit('doneGettingSavants'))
   .catch(err => {
+    console.log(err)
     if (err.message === 'Not Enough Info') return backupPlan(req, io)
     else io.emit('error', 'Error finding artists')
   })
