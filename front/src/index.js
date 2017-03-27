@@ -11,7 +11,6 @@ import ProfilePage from './components/ProfilePage'
 import ProfileSettings from './components/ProfilePage/Settings'
 import ArtistPage from './components/ArtistPage'
 import Unsubscribe from './components/Unsubscribe'
-import SingleTrack from './components/ArtistPage/SingleTrack'
 
 const store = configureStore()
 
