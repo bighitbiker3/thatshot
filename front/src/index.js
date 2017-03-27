@@ -27,9 +27,8 @@ ReactDOM.render(
       <Route path='/' component={App}>
         <IndexRoute component={Stream} />
         <Route path='/user/:user' component={ProfilePage} />
-        <Route path='/artist/:artistName' component={ArtistPage}>
-          <Route path='/artist/:artistName/:songName' component={SingleTrack} />
-        </Route>
+        <Route path='/artist/:artistName/:songName' component={ArtistPage} />
+        <Route path='/artist/:artistName' component={ArtistPage} />
         <Route path='/me' component={ProfilePage}>
           <Route path='/me/settings' component={ProfileSettings} />
         </Route>

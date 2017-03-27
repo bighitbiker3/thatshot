@@ -19,19 +19,4 @@ router.get('/:artistName/songs', function (req, res, next) {
   .catch(next)
 })
 
-router.get('/:artistName/:songName', (req, res, next) => {
-  Song.findOne({
-    where: {
-      artist: {
-        $iLike: req.params.artistName
-      },
-      title: {
-        $iLike: req.params.songName
-      }
-    }
-  })
-  .then(song => song)
-  .catch(next)
-})
-
 module.exports = router
