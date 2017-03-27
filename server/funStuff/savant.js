@@ -18,6 +18,10 @@ module.exports = {
     .then(likesArr => likesArr.map(data => data.collection).reduce((a, b) => a.concat(b)))
     .then(objWithTrackArr => shuffle(objWithTrackArr, objWithTrackArr.length).map(obj => obj.track))
     .then(flatArr => flatArr.filter(songObj => (songObj.favoritings_count / songObj.playback_count > 0.39 && songObj.playback_count < 10000) || (songObj.playback_count > 10000 && songObj.comment_count > 9)))
+    .then(filtered => filtered.filter(song => {
+      const title = song.title.toLowercase()
+      if (!title.includes('preview') || !title.includes('sample pack')) return song
+    }))
     .then(filteredArr => getUserFollowers(filteredArr))
     // .then(shit => console.log(shit, 'shitttt'))
     .then(songObjArr => shuffle(songObjArr, songObjArr.length).filter(songObj => (songObj.userInfo && songObj.userInfo.followers_count < 15000)))
