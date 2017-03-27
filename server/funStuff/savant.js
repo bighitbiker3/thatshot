@@ -19,11 +19,8 @@ module.exports = {
     .then(objWithTrackArr => shuffle(objWithTrackArr, objWithTrackArr.length).map(obj => obj.track))
     .then(flatArr => flatArr.filter(songObj => (songObj.favoritings_count / songObj.playback_count > 0.39 && songObj.playback_count < 10000) || (songObj.playback_count > 10000 && songObj.comment_count > 9)))
     .then(hotSongs => {
-      console.log(hotSongs, 'herrrrrrrrrrrrrrrrrrrrrrrr');
       return hotSongs.filter(song => {
-        console.log(song.title, song);
         const title = song.title.toLowerCase()
-        console.log(title, 'here')
         if (!title.includes('preview') && !title.includes('sample pack') && !title.includes('teaser')) return song
       })
     })
