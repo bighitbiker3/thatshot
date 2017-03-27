@@ -20,7 +20,7 @@ module.exports = {
     .then(flatArr => flatArr.filter(songObj => (songObj.favoritings_count / songObj.playback_count > 0.39 && songObj.playback_count < 10000) || (songObj.playback_count > 10000 && songObj.comment_count > 9)))
     .then(filtered => filtered.filter(song => {
       const title = song.title.toLowercase()
-      if (!title.includes('preview') || !title.includes('sample pack')) return song
+      if (!title.includes('preview') && !title.includes('sample pack') && !title.includes('teaser')) return song
     }))
     .then(filteredArr => getUserFollowers(filteredArr))
     // .then(shit => console.log(shit, 'shitttt'))
