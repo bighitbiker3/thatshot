@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "14952f60dc26764363e8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0dcfe05e87d0e4c07032"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -3175,7 +3175,7 @@
 /* 432 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(3);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Track = __webpack_require__(433);\n\nvar _Track2 = _interopRequireDefault(_Track);\n\nvar _presenter = __webpack_require__(428);\n\nvar _presenter2 = _interopRequireDefault(_presenter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Stream = function Stream(props) {\n  var stream = props.tracks && props.tracks.map(function (track, key) {\n    return track && _react2.default.createElement(_Track2.default, { className: 'track', key: key, track: track });\n  });\n  return _react2.default.createElement(\n    'div',\n    null,\n    props.title && _react2.default.createElement(\n      'h1',\n      { className: 'stream-title' },\n      props.title\n    ),\n    _react2.default.createElement('br', null),\n    _react2.default.createElement(\n      'div',\n      null,\n      stream\n    )\n  );\n};\n\nexports.default = Stream;\n\n//////////////////\n// WEBPACK FOOTER\n// ./front/src/components/Stream/presenter.js\n// module id = 432\n// module chunks = 0\n//# sourceURL=webpack:///./front/src/components/Stream/presenter.js?");
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(3);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Track = __webpack_require__(433);\n\nvar _Track2 = _interopRequireDefault(_Track);\n\nvar _presenter = __webpack_require__(428);\n\nvar _presenter2 = _interopRequireDefault(_presenter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Stream = function Stream(props) {\n  var stream = props.tracks && props.tracks.map(function (track, key) {\n    return track && _react2.default.createElement(_Track2.default, { className: 'track', key: key, track: track });\n  });\n  return _react2.default.createElement(\n    'div',\n    null,\n    props.title && _react2.default.createElement(\n      'h1',\n      { className: 'stream-title' },\n      props.title\n    ),\n    _react2.default.createElement(\n      'div',\n      null,\n      stream\n    )\n  );\n};\n\nexports.default = Stream;\n\n//////////////////\n// WEBPACK FOOTER\n// ./front/src/components/Stream/presenter.js\n// module id = 432\n// module chunks = 0\n//# sourceURL=webpack:///./front/src/components/Stream/presenter.js?");
 
 /***/ },
 /* 433 */

@@ -29,6 +29,7 @@ $iPhone5: "(min-width: 300px) and (max-width: 320px)";
   font-size: 12px;
   width: 50%;
   margin-top: 120px;
+  margin-bottom: 30px;
   @media #{$phone}{
     width: 90%;
   }

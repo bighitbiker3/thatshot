@@ -153,7 +153,8 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
     color: red;
     opacity: 0;
     @media #{$phone}{
-      width: 90%;
+      bottom: -25px;
+      left: 155px;
     }
   }
   .album-art{
@@ -161,7 +162,7 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
     bottom: -25px;
     right: 0;
     width: 125px;
-    height:125px;
+    height: 125px;
     @media #{$phone}{
       width: 90%;
       height: auto;

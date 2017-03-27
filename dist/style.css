@@ -19,7 +19,8 @@
 .header-message {
   font-size: 12px;
   width: 50%;
-  margin-top: 120px; }
+  margin-top: 120px;
+  margin-bottom: 30px; }
   .header-message h2 {
     font-weight: 400; }
   @media (min-width: 300px) and (max-width: 420px) {
@@ -533,7 +534,8 @@ a:link {
     opacity: 0; }
     @media (min-width: 300px) and (max-width: 420px) {
       .album-art-div .album-art-play {
-        width: 90%; } }
+        bottom: -25px;
+        left: 155px; } }
   .album-art-div .album-art {
     position: absolute;
     bottom: -25px;

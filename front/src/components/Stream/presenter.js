@@ -7,7 +7,6 @@ const Stream = (props) => {
   return (
     <div>
       {props.title && <h1 className='stream-title'>{props.title}</h1>}
-      <br />
       <div>
         {stream}
       </div>
