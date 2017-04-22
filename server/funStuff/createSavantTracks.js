@@ -4,6 +4,7 @@ const Song = db.model('song')
 const User = db.model('user')
 
 module.exports = (id, req, io) => {
+  console.log('THIS IS ID', id);
   return getSavantTracks.runSavant(id)
   .then(data => Promise.all(data.map(song => {
     const songToAdd = {

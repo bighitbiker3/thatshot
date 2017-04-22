@@ -63,7 +63,7 @@ module.exports = (user) => {
   }
   mailgun.messages().send(makeEmail(user.email, user.id), (error, body) => {
     console.log(body, 'body')
-    console.log(error, 'err')
+    console.log(error, 'err in welcome email')
   })
 
 }
