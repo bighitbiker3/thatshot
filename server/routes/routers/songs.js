@@ -28,7 +28,7 @@ module.exports = (io) => {
   router.get('/:userId/savantTracks', function (req, res, next) {
     console.log(req.user.last_updated)
     const { userId } = req.params
-    getTodaysTracks(userId, Song)
+    getTodaysTracks(req.user.id, Song)
     .then(tracks => {
       if (tracks.length === 9) return Promise.all(tracks.map(track => track.update({posted: true, posted_date: moment().startOf('day').toDate()})))
       else res.send(204)
@@ -41,7 +41,7 @@ module.exports = (io) => {
 
   // ADD USER'S SAVANT TUNES
   router.post('/:userId/savantTracks', function (req, res, next) {
-    createSavantTracks(req.params.userId, req, io)
+    createSavantTracks(req.user.id, req, io)
     // .then(tracks => res.send(201))
     .catch(next)
     res.send(201)
