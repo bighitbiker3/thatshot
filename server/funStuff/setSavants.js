@@ -162,7 +162,7 @@ function setSavants (scUserId, req, io) {
   .then(() => welcomeEmail(req.user))
   .catch(err => {
     console.log(err, 'this is err')
-    if (err.message === 'Not Enough Info') return backupPlan(req, io)
+    if (err.message === 'Not enough info') return backupPlan(req, io)
     else io.emit('error', `Error finding artists ${scUserId}`)
   })
 }
