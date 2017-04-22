@@ -13,7 +13,7 @@ module.exports = db.define('song', {
     allowNull: false
   },
   genre: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: true
   },
   trackId: {

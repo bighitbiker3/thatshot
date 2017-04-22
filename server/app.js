@@ -33,7 +33,7 @@ app.get('/*', function (req, res) {
   res.render('index.html')
 })
 
-db.sync(process.env === 'production' ? {/* nothing goes in here*/} : {force: true})
+db.sync(process.env === 'production' ? {/* nothing goes in here*/} : {})
 // Savant()
 
 server.listen(process.env.PORT || 3000)
