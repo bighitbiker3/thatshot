@@ -50,7 +50,7 @@ module.exports = (user) => {
   &#13;
   <div style="max-width: 600px; display: block; margin: 0 auto; padding: 0;">&#13;
   <table style="width: 100%; margin: 0; padding: 0;"><tr style="margin: 0; padding: 0;"><td align="center" style="margin: 0; padding: 0;">&#13;
-  <p style="font-size: 12px; line-height: 1.6; color: #666; font-weight: normal; margin: 0 0 10px; padding: 0;">Don't like these annoying emails? <a href='https://localhost:3000/api/users/${id}/unsubscribe' style="color: #999; margin: 0; padding: 0;"><unsubscribe style="margin: 0; padding: 0;">Unsubscribe</unsubscribe></a>.&#13;
+  <p style="font-size: 12px; line-height: 1.6; color: #666; font-weight: normal; margin: 0 0 10px; padding: 0;">Don't like these annoying emails? <a href='https://thatshot.audio/api/users/${id}/unsubscribe' style="color: #999; margin: 0; padding: 0;"><unsubscribe style="margin: 0; padding: 0;">Unsubscribe</unsubscribe></a>.&#13;
   </p>&#13;
   </td>&#13;
   </tr></table></div>&#13;
