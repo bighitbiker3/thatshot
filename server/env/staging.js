@@ -32,5 +32,5 @@ module.exports = {
   'MAILGUN': {
     'apiKey': process.env.MAILGUN_APIKEY
   },
-  'LOGGING': true
+  'LOGGING': false
 }
