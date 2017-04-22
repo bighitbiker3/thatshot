@@ -61,7 +61,7 @@ function getSavantsRecurse (scUserId, savantsArr, likesUserId = []) {
     if (uniqueCombined.length > 90) return uniqueCombined
     else {
       console.log(savantIds, scUserId, 'in recurse');
-      if (!savantIds.length) console.log('get fucked bitch')
+      if (!savantIds.length) return 'Not enough info'
       return getSavantsRecurse(savantIds.shift(), uniqueCombined, savantIds)
     }
   })
@@ -86,8 +86,9 @@ function getSavants (scUserId) {
 }
 
 function backupPlan (req, io) {
+  console.log('Backup plan engaged');
   db.query('SELECT "savantId" FROM "userSavants" GROUP BY "savantId" ORDER BY COUNT(*) DESC LIMIT 400;', { type: db.QueryTypes.SELECT })
-  .then(savantIds => req.user.addSavants(savantIds.map(obj => obj.savantId)))
+  .then(savantIds => req.user.addUserSavants(savantIds.map(obj => obj.savantId)))
   .catch(err => {
     console.log(err)
     io.emit('error', 'Error in BUP')
@@ -130,6 +131,7 @@ function flatten (arr) {
 function setSavants (scUserId, req, io) {
   return getSavants(scUserId)
   .then(savants => {
+    if (savants === 'Not enough info') return backupPlan(req, io);
     if (savants.length > 2) {
       return findOrCreate(savants)
         .then(created => {
@@ -159,7 +161,7 @@ function setSavants (scUserId, req, io) {
   .then(added => io.emit('doneGettingSavants'))
   .then(() => welcomeEmail(req.user))
   .catch(err => {
-    console.log(err)
+    console.log(err, 'this is err')
     if (err.message === 'Not Enough Info') return backupPlan(req, io)
     else io.emit('error', `Error finding artists ${scUserId}`)
   })
