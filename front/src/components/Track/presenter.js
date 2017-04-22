@@ -16,7 +16,16 @@ function Track ({ track = {}, toggleTrack, auth, likeOnSoundCloud, copyNotificat
           copyNotification()
         }}><span>{track.title}</span></p>
         <p className='artist-name'><Link to={`/artist/${track.artist}`}><span>{track.artist}</span></Link></p>
-        <FontAwesome onClick={() => likeOnSoundCloud(track.trackId)} className="soundcloud-like" name={auth.soundcloud.favorites.includes(track.trackId) ? 'heart' : 'heart-o'} size='lg' />
+        <div className='soundcloud-like-wrapper'>
+          <FontAwesome
+          onClick={() => likeOnSoundCloud(track.trackId)}
+          className="soundcloud-like"
+          name={auth.soundcloud.favorites.includes(track.trackId) ? 'heart' : 'heart-o'}
+          size='lg' />
+          <div className='soundcloud-like-text'>
+            {auth.soundcloud.favorites.includes(track.trackId) ? 'Already liked :)' : 'Like on SoundCloud'}
+          </div>
+        </div>
       </div>
       <div className='link-item-right'>
 

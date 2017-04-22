@@ -21,6 +21,8 @@ module.exports = {
     'clientSecret': 'f4aca71f0560950db4ed8c3ae5d1ae19',
     'callbackUrl': 'http://localhost:3000/callback'
   },
-
+  'MAILGUN': {
+    'apiKey': 'key-aaa3f71c340b05266e25a7f2da185eea'
+  },
   'LOGGING': false
 }

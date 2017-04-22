@@ -16,7 +16,6 @@ export default function (state = initialState, action) {
 }
 
 function setProfilePageTracks (state, action) {
-  console.log(action.payload, 'payyy');
   return {
     ...state,
     profileTracks: action.payload

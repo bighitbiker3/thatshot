@@ -29,5 +29,8 @@ module.exports = {
     'clientSecret': process.env.SOUNDCLOUD_CLIENT_SECRET,
     'callbackUrl': process.env.SOUNDCLOUD_CALLBACK_URL
   },
+  'MAILGUN': {
+    'apiKey': process.env.MAILGUN_APIKEY
+  },
   'LOGGING': true
 }

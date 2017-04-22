@@ -4,7 +4,6 @@ const db = require('../../db')
 const User = db.model('user')
 const Song = db.model('song')
 const UserSavantTracks = db.model('userSavantTracks')
-const Promise = require('bluebird')
 const setSavants = require('../../funStuff/setSavants')
 
 module.exports = (io) => {

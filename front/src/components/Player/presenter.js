@@ -46,7 +46,7 @@ class Player extends React.Component {
   getProgressFill () {
     let returnVal = this.state.currentTime ? (this.state.currentTime / this.state.duration * 100) : null
     let stringifiedReturnVal = returnVal ? returnVal += '%' : '0%'
-    //TODO: Can change this to use bars like in dscout app
+    // TODO: Can change this to use bars like in dscout app
     $('.progress-slider').css('background', `linear-gradient(to right, #ffffff ${stringifiedReturnVal},#1e1e1e ${stringifiedReturnVal},#a9a9a9 ${stringifiedReturnVal},#ffffff ${stringifiedReturnVal},#1e1e1e ${stringifiedReturnVal})`)
     $('.progress-slider-handle').css('left', stringifiedReturnVal)
     return returnVal

@@ -9,7 +9,6 @@ import * as actionTypes from '../constants/actionTypes'
 import { openHeader } from '../actions'
 import { trackSetSavant } from '../actions/track'
 import * as server from '../constants/server'
-import { closeHeader } from './header'
 import { CLIENT_ID, REDIRECT_URI } from '../constants/auth'
 
 const stopLoadingHelper = () => {
@@ -68,7 +67,8 @@ export function logout () {
     axios.get(server.SERVER_LOCATION + '/logout')
     .then(() => {
       dispatch(logoutMe())
-      dispatch(closeHeader())
+      dispatch(openHeader())
+      dispatch(trackSetSavant([]))
     })
     .catch(err => console.warn(err))
   }

@@ -447,7 +447,7 @@ a:link {
   padding-left: 40px;
   display: inline-block;
   width: 70%;
-  margin-top: 71px; }
+  margin-top: 50px; }
   .song-title-div p:first-child {
     margin-bottom: 15px; }
     @media (min-width: 300px) and (max-width: 420px) {
@@ -455,12 +455,23 @@ a:link {
         margin-bottom: 5px; } }
   .song-title-div p {
     margin: 0; }
-  .song-title-div .soundcloud-like {
-    position: relative;
-    margin-top: 15px;
-    padding-left: 0px;
-    cursor: pointer;
-    color: #ff7700; }
+  .song-title-div .soundcloud-like-wrapper {
+    display: inline-block; }
+    .song-title-div .soundcloud-like-wrapper .soundcloud-like {
+      position: relative;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      padding-left: 0px;
+      cursor: pointer;
+      color: #ff7700; }
+    .song-title-div .soundcloud-like-wrapper .soundcloud-like-text {
+      color: #ff7700;
+      font-size: 12px;
+      transition: .3s linear opacity;
+      opacity: 0; }
+    .song-title-div .soundcloud-like-wrapper:hover .soundcloud-like-text {
+      opacity: 1;
+      transition: .3s linear opacity; }
   @media (min-width: 300px) and (max-width: 420px) {
     .song-title-div {
       width: 100%;

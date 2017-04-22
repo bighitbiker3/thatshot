@@ -45,7 +45,7 @@ class Header extends React.Component {
         </div>
 
         <div className='header-message'>
-          <h2>The top 15 songs from Soundcloud users with fewer than 15K followers, every day</h2>
+          <h2>Nine 🔥 tunes just for you - from Soundcloud artists with fewer than 15K followers, every day</h2>
         </div>
       </header>
     )

@@ -56,17 +56,31 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
   p{
     margin: 0;
   }
-  .soundcloud-like{
-    position: relative;
-    margin-top: 15px;
-    padding-left: 0px;
-    cursor: pointer;
-    color: #ff7700;
+  .soundcloud-like-wrapper {
+    display: inline-block;
+    .soundcloud-like{
+      position: relative;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      padding-left: 0px;
+      cursor: pointer;
+      color: #ff7700;
+    }
+    .soundcloud-like-text {
+      color: #ff7700;
+      font-size: 12px;
+      transition: .3s linear opacity;
+      opacity: 0;
+    }
+    &:hover .soundcloud-like-text{
+      opacity: 1;
+      transition: .3s linear opacity;
+    }
   }
   padding-left: 40px;
   display: inline-block;
   width: 70%;
-  margin-top: 71px;
+  margin-top: 50px;
   @media #{$phone}{
     width: 100%;
     margin-top: 30px;

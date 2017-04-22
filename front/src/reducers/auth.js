@@ -28,9 +28,7 @@ function setMeSoundCloud (state, action) {
 }
 
 function logout (state, action) {
-  const user = null
-  const soundcloud = null
-  return Object.assign({}, state, {soundcloud, user})
+  return Object.assign({}, state, initialState)
 }
 
 function likeOnSoundcloud (state, action) {

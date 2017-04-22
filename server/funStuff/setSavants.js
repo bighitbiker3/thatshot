@@ -3,6 +3,7 @@ const db = require('../db')
 const Savant = db.model('savant')
 const Promise = require('bluebird')
 const _ = require('lodash')
+const welcomeEmail = require('../lib/welcomeEmail')
 
 function makeScUri (scUserId, endpoint) {
   if (!endpoint) throw new Error('NEED ENDPOINT IN makeScUri FUNC El')
@@ -156,6 +157,7 @@ function setSavants (scUserId, req, io) {
     }
   })
   .then(added => io.emit('doneGettingSavants'))
+  .then(() => welcomeEmail(req.user))
   .catch(err => {
     console.log(err)
     if (err.message === 'Not Enough Info') return backupPlan(req, io)
