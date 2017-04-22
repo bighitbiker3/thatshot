@@ -106,7 +106,9 @@ function findOrCreate (arr) {
   return Promise.all(arr.map(savant => {
     return Savant.findOrCreate({
       where: {
-        soundcloud_id: savant.id,
+        soundcloud_id: savant.id
+      },
+      defaults: {
         permalink: savant.permalink,
         avatar_url: savant.avatar_url,
         username: savant.username,
