@@ -1,4 +1,5 @@
-const apiKey = 'key-aaa3f71c340b05266e25a7f2da185eea'
+const env = require('../env')
+const apiKey = env.MAILGUN.clientID
 const domain = 'mail.thatshot.audio'
 const mailgun = require('mailgun-js')({ apiKey, domain })
 
