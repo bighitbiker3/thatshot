@@ -29,6 +29,7 @@ class Overlay extends React.Component {
 
   handleEmailSubmit (e) {
     e.preventDefault()
+    console.log(this.props.auth.user);
     const { id, soundcloud_id } = this.props.auth.user // eslint-disable-line camelcase
     const { email } = this.state
 
