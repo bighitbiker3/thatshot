@@ -67,7 +67,7 @@ function getSavantsRecurse (scUserId, savantsArr, likesUserId = []) {
 }
 
 function getSavants (scUserId) {
-  return getListOfFollowingsSavants(14694320)
+  return getListOfFollowingsSavants(scUserId)
   // .then(followings => Promise.all([followings, Promise.all(followings.map(user => getListOfFollowingsSavants(user.id)))]))
   // .then(separation => {
   //   const firstDegree = filterNonActive(separation[0]) // [user, user, user]
@@ -78,7 +78,7 @@ function getSavants (scUserId) {
     if ((savants.length) > 90) return savants
     else {
       const recurseSavants = savants.length ? savants.filter(a => a) : []
-      return getSavantsRecurse(14694320, recurseSavants)
+      return getSavantsRecurse(scUserId, recurseSavants)
     }
   })
   .catch(err => console.log(err))
