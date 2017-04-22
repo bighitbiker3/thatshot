@@ -19,6 +19,7 @@ function mapDispatchToProps (dispatch) {
   return {
     toggleTrack: bindActionCreators(actions.toggleTrack, dispatch),
     likeOnSoundCloud: bindActionCreators(actions.likeOnSoundCloud, dispatch),
+    unlikeOnSoundCloud: bindActionCreators(actions.unlikeOnSoundCloud, dispatch),
     copyNotification: () => dispatch(notifSend({message: 'Copied Link :)', kind: 'success', dismissAfter: 3000}))
   }
 }

@@ -10,7 +10,7 @@ module.exports = (id, req, io) => {
     const songToAdd = {
       artwork_url: song.artwork_url,
       duration: song.duration,
-      genre: song.genre,
+      genre: `${song.genre} ${song.tag_list}`,
       trackId: song.id,
       permalink_url: song.permalink_url,
       reposts_count: song.reposts_count,

@@ -13,6 +13,7 @@ export default function (state = initialState, action) {
     case actionTypes.ME_SET_SOUNDCLOUD: return setMeSoundCloud(state, action)
     case actionTypes.LOGOUT: return logout(state, action)
     case actionTypes.LIKE_ON_SOUNDCLOUD: return likeOnSoundcloud(state, action)
+    case actionTypes.REMOVE_LIKE_ON_SOUNDCLOUD: return unlikeOnSoundcloud(state, action)
   }
   return state
 }
@@ -34,4 +35,11 @@ function logout (state, action) {
 function likeOnSoundcloud (state, action) {
   state.soundcloud.favorites.push(action.trackId)
   return Object.assign({}, state)
+}
+
+function unlikeOnSoundcloud (state, action) {
+  const { favorites } = state.soundcloud
+  const index = favorites.indexOf(action.trackId)
+  favorites.splice(index, 1)
+  return {...state}
 }

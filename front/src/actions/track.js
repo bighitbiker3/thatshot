@@ -77,10 +77,25 @@ export function addToLikesOnState (trackId) {
   }
 }
 
+export function removeLikesOnState (trackId) {
+  return {
+    type: actionTypes.REMOVE_LIKE_ON_SOUNDCLOUD,
+    trackId
+  }
+}
+
 export function likeOnSoundCloud (trackId) {
   return function (dispatch, getState) {
     dispatch(addToLikesOnState(trackId))
     SC.put(`/me/favorites/${trackId}`)
+    .catch(err => console.warn(err))
+  }
+}
+
+export const unlikeOnSoundCloud = (trackId) => {
+  return (dispatch, getState) => {
+    dispatch(removeLikesOnState(trackId))
+    SC.delete(`/me/favorites/${trackId}`)
     .catch(err => console.warn(err))
   }
 }

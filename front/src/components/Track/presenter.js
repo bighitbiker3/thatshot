@@ -6,7 +6,8 @@ import copy from 'copy-to-clipboard'
 import urlEncoder from 'postman-url-encoder'
 import { SERVER_LOCATION } from '../../constants/server'
 
-function Track ({ track = {}, toggleTrack, auth, likeOnSoundCloud, copyNotification }) {
+function Track ({ track = {}, toggleTrack, auth, likeOnSoundCloud, copyNotification, unlikeOnSoundCloud }) {
+  const alreadLiked = auth.soundcloud.favorites.includes(track.trackId)
   return (
     <div className='track-group'>
       <UpVote track={track} />
@@ -18,12 +19,12 @@ function Track ({ track = {}, toggleTrack, auth, likeOnSoundCloud, copyNotificat
         <p className='artist-name'><Link to={`/artist/${track.artist}`}><span>{track.artist}</span></Link></p>
         <div className='soundcloud-like-wrapper'>
           <FontAwesome
-          onClick={() => likeOnSoundCloud(track.trackId)}
+          onClick={() => alreadLiked ? unlikeOnSoundCloud(track.trackId) : likeOnSoundCloud(track.trackId)}
           className="soundcloud-like"
-          name={auth.soundcloud.favorites.includes(track.trackId) ? 'heart' : 'heart-o'}
+          name={alreadLiked ? 'heart' : 'heart-o'}
           size='lg' />
           <div className='soundcloud-like-text'>
-            {auth.soundcloud.favorites.includes(track.trackId) ? 'Already liked :)' : 'Like on SoundCloud'}
+            {alreadLiked ? 'Already liked :)' : 'Like on SoundCloud'}
           </div>
         </div>
       </div>
