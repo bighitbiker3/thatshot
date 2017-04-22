@@ -49,21 +49,25 @@ function getListOfLikeArtistsSavants (scUserId) {
 }
 
 function getSavantsRecurse (scUserId, savantsArr, likesUserId = []) {
+  // console.log(scUserId, savantsArr, likesUserId, 'id in recruse');
   return getListOfLikeArtistsSavants(scUserId)
   .then(data => {
     const userIds = data[0]
     const arrOfSavants = data[1]
+    const savantIds = [...likesUserId, ...userIds]
     const combinedSavants = [...savantsArr, ...arrOfSavants]
-    if (combinedSavants.length > 90) return combinedSavants
+    const uniqueCombined = _.uniqBy(combinedSavants, 'id')
+    if (uniqueCombined.length > 90) return uniqueCombined
     else {
-      const nextUser = likesUserId.length ? likesUserId.shift() : userIds.shift()
-      return getSavantsRecurse(nextUser, combinedSavants, likesUserId)
+      console.log(savantIds, scUserId, 'in recurse');
+      if (!savantIds.length) console.log('get fucked bitch')
+      return getSavantsRecurse(savantIds.shift(), uniqueCombined, savantIds)
     }
   })
 }
 
 function getSavants (scUserId) {
-  return getListOfFollowingsSavants(scUserId)
+  return getListOfFollowingsSavants(14694320)
   // .then(followings => Promise.all([followings, Promise.all(followings.map(user => getListOfFollowingsSavants(user.id)))]))
   // .then(separation => {
   //   const firstDegree = filterNonActive(separation[0]) // [user, user, user]
@@ -73,8 +77,8 @@ function getSavants (scUserId) {
   .then(savants => {
     if ((savants.length) > 90) return savants
     else {
-      const recurseSavants = savants.length ? savants.filter(a => a).reduce((a, b) => a.concat(b)) : []
-      return getSavantsRecurse(scUserId, recurseSavants)
+      const recurseSavants = savants.length ? savants.filter(a => a) : []
+      return getSavantsRecurse(14694320, recurseSavants)
     }
   })
   .catch(err => console.log(err))
