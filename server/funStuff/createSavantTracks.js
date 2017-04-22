@@ -41,6 +41,6 @@ module.exports = (id, req, io) => {
   .spread((updated, songsAdded) => io.emit('doneCreateSavantTracks'))
   .catch(err => {
     console.log(err)
-    io.emit('error', 'Error getting tracks')
+    io.emit('error', `Error getting tracks ${id}`)
   })
 }
