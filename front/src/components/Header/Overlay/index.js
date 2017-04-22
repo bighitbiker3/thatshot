@@ -45,7 +45,7 @@ class Overlay extends React.Component {
     axios.post(`${API_LOCATION}/users/${soundcloud_id}/savants`) // eslint-disable-line camelcase
     
     socket.on('doneGettingSavants', () => {
-      console.log('dont getting savants')
+      console.log('done getting savants', id, soundcloud_id)
       this.setState({savants: false, songs: true})
       return axios.post(`${API_LOCATION}/songs/${id}/savantTracks`)
     })

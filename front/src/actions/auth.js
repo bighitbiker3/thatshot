@@ -128,13 +128,13 @@ function getSavantTracks (id) {
 }
 
 function addSavantTracks (id) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(notifSend({
       message: 'We\'re getting your new tracks for the day. This might take a minute. Please don\'t refresh',
       kind: 'info',
       dismissAfter: 20000
     }))
-    
+    console.log(id, getState());
     axios.post(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
     .then(response => socket.on('doneCreateSavantTracks', () => dispatch(getSavantTracks(id))))
     .catch(err => dispatch(notifSend({message: err, kind: 'danger', dismissAfter: 3000})))
