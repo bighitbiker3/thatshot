@@ -19,7 +19,7 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
   display: inline-block;
   color: white;
   padding: 10px;
-
+  margin-left: 20px;
 }
 
 .progressContainer{
@@ -41,13 +41,14 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
 
 .progress-slider{
   position: relative;
+  display: inline-block;
   background: linear-gradient(to right, #ffffff 0%,#1e1e1e 0%,#1e1e1e 0%,#ffffff 0%,#1e1e1e 0%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   cursor: pointer;
   height: 15px;
   width: 60%;
   margin-left: 20%;
   display: flex;
-  margin-top: -35px;
+  margin-top: -32px;
   .progress-slider-handle{
     display: none;
     background-color: white;

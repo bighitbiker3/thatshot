@@ -265,7 +265,8 @@ a:link {
 .play-pause-button {
   display: inline-block;
   color: white;
-  padding: 10px; }
+  padding: 10px;
+  margin-left: 20px; }
 
 .progressContainer {
   display: none;
@@ -283,6 +284,7 @@ a:link {
 
 .progress-slider {
   position: relative;
+  display: inline-block;
   background: linear-gradient(to right, #ffffff 0%, #1e1e1e 0%, #1e1e1e 0%, #ffffff 0%, #1e1e1e 0%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   cursor: pointer;
@@ -290,7 +292,7 @@ a:link {
   width: 60%;
   margin-left: 20%;
   display: flex;
-  margin-top: -35px; }
+  margin-top: -32px; }
   .progress-slider .progress-slider-handle {
     display: none;
     background-color: white;
@@ -447,7 +449,7 @@ a:link {
   padding-left: 40px;
   display: inline-block;
   width: 70%;
-  margin-top: 50px; }
+  margin-top: 60px; }
   .song-title-div p:first-child {
     margin-bottom: 15px; }
     @media (min-width: 300px) and (max-width: 420px) {

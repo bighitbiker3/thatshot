@@ -161,7 +161,7 @@ function setSavants (scUserId, req, io) {
   .catch(err => {
     console.log(err)
     if (err.message === 'Not Enough Info') return backupPlan(req, io)
-    else io.emit('error', 'Error finding artists')
+    else io.emit('error', `Error finding artists ${scUserId}`)
   })
 }
 
