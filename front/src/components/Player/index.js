@@ -6,8 +6,10 @@ import Player from './presenter'
 
 function mapStateToProps (state, props) {
   const player = state.player
+  const tracks = state.track.savantTracks
   return {
-    player
+    player,
+    tracks
   }
 }
 

@@ -1,6 +1,3 @@
-//I am keeping the state for player seeking and positioning in the presenter.
-//Using redux seemed like overkill for this and could slow things down firing so many actions
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import FontAwesome from 'react-fontawesome'
@@ -19,17 +16,29 @@ class Player extends React.Component {
       seekPosition: 0
     }
     this.durationInterval = null
+    this.getNextTrack = this.getNextTrack.bind(this)
+    this.onSliderClick = this.onSliderClick.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     keyBindings('space', this.props.toggleTrack)
+    this.refs.player.onended = () => this.getNextTrack()
   }
+
+  getNextTrack () {
+    const { tracks } = this.props
+    const { activeTrack } = this.props.player
+    let nextTrack = tracks.indexOf(activeTrack) + 1
+    if (nextTrack >= tracks.length) nextTrack = 0
+    this.props.toggleTrack(tracks[nextTrack])
+  }
+
   componentDidUpdate () {
     const audioElement = ReactDOM.findDOMNode(this.refs.player)
 
     if (!audioElement) return
 
-    const { nowPlaying, activeTrack } = this.props.player
+    const { nowPlaying } = this.props.player
 
     nowPlaying ? audioElement.play() : audioElement.pause()
   }
@@ -37,21 +46,21 @@ class Player extends React.Component {
   getProgressFill () {
     let returnVal = this.state.currentTime ? (this.state.currentTime / this.state.duration * 100) : null
     let stringifiedReturnVal = returnVal ? returnVal += '%' : '0%'
-    //ugh
+    //TODO: Can change this to use bars like in dscout app
     $('.progress-slider').css('background', `linear-gradient(to right, #ffffff ${stringifiedReturnVal},#1e1e1e ${stringifiedReturnVal},#a9a9a9 ${stringifiedReturnVal},#ffffff ${stringifiedReturnVal},#1e1e1e ${stringifiedReturnVal})`)
     $('.progress-slider-handle').css('left', stringifiedReturnVal)
     return returnVal
   }
 
-  onSliderClick = (seekPosition) => {
+  onSliderClick (seekPosition) {
     const audioElement = ReactDOM.findDOMNode(this.refs.player)
     audioElement.currentTime = this.state.duration * (seekPosition * 0.01)
     this.setState({currentTime: audioElement.currentTime})
   }
 
   getTimeFormat (time) {
-    let minutes = Math.floor(time/60)
-    let seconds = Math.floor(time%60)
+    let minutes = Math.floor(time / 60)
+    let seconds = Math.floor(time % 60)
     seconds = '' + seconds
     seconds = seconds.length < 2 ? '0' + seconds : seconds
     return `${minutes}:${seconds}`
@@ -79,41 +88,10 @@ class Player extends React.Component {
             this.getProgressFill()
           }
         }}/>
-        {activeTrack ? <audio id='audio' ref='player' src={`${activeTrack.stream_url}?client_id=${CLIENT_ID}`} /> : null}
+        <audio id='audio' style={{display: activeTrack ? '' : 'none'}} ref='player' src={`${activeTrack && activeTrack.stream_url}?client_id=${CLIENT_ID}`} />
       </player>
     )
   }
 }
 
 export default Player
-
-//  IFRAME OPTION BELOW (NO API LIMIT W/ THIS ONE)
-
-// import React from 'react'
-// // import ReactDOM from 'react-dom'
-// // import FontAwesome from 'react-fontawesome'
-// // import { CLIENT_ID } from '../../constants/auth'
-// let frameSrc
-//
-// class Player extends React.Component {
-//   constructor (props) {
-//     super(props)
-//   }
-//   componentWillMount () {
-//     console.log(this.props)
-//   }
-//   render () {
-//     const { activeTrack } = this.props.player
-//     console.log(activeTrack, 'ACTIVE TRACKKKKKKK');
-//     frameSrc = activeTrack ? `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${activeTrack.trackId}&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=true&amp;visual=true` : `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=true&amp;visual=true`
-//     return (
-//       <player className='playerDiv'>
-//         <div className='player'>
-//           <iframe width="100%" height="50" scrolling="no" src={frameSrc}></iframe>
-//         </div>
-//     </player>
-//     )
-//   }
-// }
-
-// export default Player
