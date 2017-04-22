@@ -25,7 +25,7 @@ module.exports = (io) => {
   })
 
   // GET USER'S SAVANT TUNES
-  router.get('/:userId/savantTracks', function (req, res, next) {
+  router.get('/:userId/savantTracks', ensureAuthenticated, function (req, res, next) {
     console.log(req.user.last_updated)
     const { userId } = req.params
     getTodaysTracks(req.user.id, Song)
@@ -40,7 +40,7 @@ module.exports = (io) => {
   })
 
   // ADD USER'S SAVANT TUNES
-  router.post('/:userId/savantTracks', function (req, res, next) {
+  router.post('/:userId/savantTracks', ensureAuthenticated, function (req, res, next) {
     createSavantTracks(req.user.id, req, io)
     // .then(tracks => res.send(201))
     .catch(next)
