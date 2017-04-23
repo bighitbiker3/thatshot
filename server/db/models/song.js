@@ -13,6 +13,10 @@ module.exports = db.define('song', {
     allowNull: false
   },
   genre: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  tag_list: {
     type: Sequelize.TEXT,
     allowNull: true
   },
