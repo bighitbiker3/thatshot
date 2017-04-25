@@ -27,6 +27,11 @@ console.log('listening on port 3000')
 
 require('./auth')(app, db)
 
+app.use('/images/:image', (req, res) => {
+  console.log(req.params.image, 'hereeeeeeee');
+  res.sendFile(path.join(__dirname, '..', `dist/images/${req.params.image}`))
+})
+
 app.use('/api', router)
 
 app.get('/*', function (req, res) {
