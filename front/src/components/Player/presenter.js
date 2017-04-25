@@ -12,7 +12,7 @@ class Player extends React.Component {
     super(props)
     this.state = {
       currentTime: 0,
-      duration: 1,
+      duration: 0,
       seekPosition: 0
     }
     this.durationInterval = null
@@ -61,6 +61,7 @@ class Player extends React.Component {
   getTimeFormat (time) {
     let minutes = Math.floor(time / 60)
     let seconds = Math.floor(time % 60)
+    if (isNaN(minutes) || isNaN(seconds)) return '....'
     seconds = '' + seconds
     seconds = seconds.length < 2 ? '0' + seconds : seconds
     return `${minutes}:${seconds}`

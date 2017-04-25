@@ -113,7 +113,7 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
   text-align: right;
   width: 130px;
   font-size: 12px;
-  margin-top: 53px;
+  margin-top: 88px;
   @media #{$phone}{
     display: block;
     float: none;
@@ -131,13 +131,6 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
     margin-right: 5px;
   }
 
-}
-
-.up-votes{
-  @media #{$phone}{
-    display: inline-block;
-    margin-right: 5px;
-  }
 }
 
 .genre{

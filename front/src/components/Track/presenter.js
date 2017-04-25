@@ -19,7 +19,7 @@ function Track ({ track = {}, toggleTrack, auth, likeOnSoundCloud, copyNotificat
         <p className='artist-name'><Link to={`/artist/${track.artist}`}><span>{track.artist}</span></Link></p>
         <div className='soundcloud-like-wrapper'>
           <FontAwesome
-          onClick={() => alreadLiked ? unlikeOnSoundCloud(track.trackId) : likeOnSoundCloud(track.trackId)}
+          onClick={() => alreadLiked ? unlikeOnSoundCloud(track.trackId) : likeOnSoundCloud(track.trackId, track.id, auth.user)}
           className="soundcloud-like"
           name={alreadLiked ? 'heart' : 'heart-o'}
           size='lg' />
@@ -29,10 +29,6 @@ function Track ({ track = {}, toggleTrack, auth, likeOnSoundCloud, copyNotificat
         </div>
       </div>
       <div className='link-item-right'>
-
-        <div className='up-votes'>
-          <p><span>{track.upvotes} upvotes</span></p>
-        </div>
         <div className='genre'>
           <p><span>genre: {track.genre || 'idk'}</span></p>
         </div>
