@@ -29,7 +29,7 @@ require('./auth')(app, db)
 
 app.use('/images/:image', (req, res) => {
   console.log(req.params.image, 'hereeeeeeee');
-  res.sendFile(path.join(__dirname, '..', `images/${req.params.image}`))
+  res.sendFile(path.join(__dirname, `images/${req.params.image}`))
 })
 
 app.use('/api', router)
