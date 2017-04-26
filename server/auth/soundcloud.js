@@ -51,7 +51,7 @@ module.exports = function (app, db) {
   })
 
   app.get('/login/soundcloud', function (req, res, next) {
-    console.log(callbackURL,'a;sldfjas;lfdjas;lfasf');
+    console.log(callbackURL, 'a;sldfjas;lfdjas;lfasf');
     passport.authenticate('soundcloud')(req, res, next)
   })
 

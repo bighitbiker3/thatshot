@@ -1,6 +1,6 @@
 import * as actionTypes from '../constants/actionTypes'
 import * as server from '../constants/server'
-import axios from 'axios';
+import axios from 'axios'
 import { reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications'
 const { notifSend } = notifActions
 
