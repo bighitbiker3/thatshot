@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server/app",
     "start-watch": "gulp & webpack --progress --colors --watch & nodemon server/app --watch server",
+    "build": "gulp & webpack --progress --colors",
     "test": "mocha --compilers js:babel-core/register --require ./front/test/setup.js 'front/src/**/*spec.js'",
     "test:watch": "npm run test -- --watch"
   },
