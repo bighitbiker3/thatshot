@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/app",
     "start-watch": "gulp & webpack --progress --colors --watch & nodemon server/app --watch server",
-    "build": "gulp & webpack --progress --colors",
+    "build": "NODE_ENV=production gulp & webpack -p --progress --config ./webpack.config.prod.js",
     "test": "mocha --compilers js:babel-core/register --require ./front/test/setup.js 'front/src/**/*spec.js'",
     "test:watch": "npm run test -- --watch"
   },
@@ -28,6 +28,7 @@
     "babel-preset-stage-2": "^6.13.0",
     "chai": "^3.5.0",
     "chance": "^1.0.4",
+    "compression-webpack-plugin": "^0.4.0",
     "enzyme": "^2.4.1",
     "eslint": "^3.7.1",
     "eslint-config-standard": "^6.2.0",

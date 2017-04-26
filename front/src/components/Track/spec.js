@@ -20,4 +20,4 @@ describe('play button', () => {
     const expectedAction = {type: actionTypes.TOGGLE_TRACK, track}
     expect(actions.toggleTrack(track)).to.deep.equal(expectedAction)
   })
-})
+});

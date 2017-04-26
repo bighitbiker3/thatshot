@@ -12,7 +12,7 @@ const path = require('path')
 const morgan = require('morgan') // comment out for prod?
 
 app.use(morgan('dev'))
-app.use(express.static('dist'))
+app.use(express.static(path.join(__dirname, '..', '/dist')))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -26,6 +26,16 @@ console.log('listening on port 3000')
 // require('./jobs/getSavantTracks')
 
 require('./auth')(app, db)
+
+app.get('/*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.removeHeader('Content-Encoding')
+  res.set({
+    'Content-Encoding': 'gzip',
+    'Content-Type': 'application/javascript'
+  })
+  res.sendFile(path.join(__dirname, '../', 'dist', req.url))
+});
 
 app.use('/images/:image', (req, res) => {
   console.log(req.params.image, 'hereeeeeeee');
