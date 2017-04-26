@@ -15,9 +15,9 @@ export default function (state = initialState, action) {
 }
 
 function loginEmailFormChange (state, action) {
-  return Object.assign({}, state, {email: action.email})
+  return {...state, email: action.email}
 }
 
 function loginPasswordFormChange (state, action) {
-  return Object.assign({}, state, {password: action.password})
+  return {...state, password: action.password}
 }

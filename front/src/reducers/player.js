@@ -13,6 +13,6 @@ export default function (state = initialState, action) {
 }
 
 function toggleTrack (state, action) {
-  const activeTrack = action.track
-  return state.activeTrack === action.track || !action.track ? Object.assign({}, state, {nowPlaying: !state.nowPlaying}) : {nowPlaying: true, activeTrack: activeTrack}
+  // TODO: Don't rename action.track?
+  return state.activeTrack === action.track || !action.track ? Object.assign({}, state, {nowPlaying: !state.nowPlaying}) : {nowPlaying: true, activeTrack: action.track}
 }

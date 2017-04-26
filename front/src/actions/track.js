@@ -1,9 +1,10 @@
 import * as actionTypes from '../constants/actionTypes'
 import * as server from '../constants/server'
+import axios from 'axios'
 import { reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications'
 const { notifSend } = notifActions
 
-function trackSetSavant (tracks) {
+export function trackSetSavant (tracks) {
   return {
     type: actionTypes.TRACKS_SET_SAVANT,
     tracks
@@ -36,40 +37,22 @@ export function setUserTracks (song, user) {
     if (song) {
       song.user = user
       return dispatch(trackSetUser(song))
-    }
-    else {
-      dispatch({type: actionTypes.START_LOADING})
+    } else {
       return fetch(server.API_LOCATION + '/songs?is_savant=false')
       .then(data => data.json())
       .then(dataJSON => {
         dispatch(trackSetUser(dataJSON))
-        dispatch({type: actionTypes.STOP_LOADING})
       })
       .catch(err => console.warn(err))
     }
   }
-}
-
-function alreadyUpvoted () {
-  return {type: actionTypes.ALREADY_UPVOTED}
 }
 
 export function upVoteTrack (trackId, user) {
   return function (dispatch, getState) {
     if (!user) return dispatch(notifSend({message: 'You must be logged in to upvote tunes', kind: 'danger', dismissAfter: 1000}))
-    return $.ajax(server.API_LOCATION + `/songs/${trackId}/${user.id}/upvote`, {method: 'POST'})
-      .then(track => {
-        if (track) dispatch(sendUpvoteAction(track))
-        else dispatch(notifSend({message: 'You already upvoted that', kind: 'danger', dismissAfter: 1000}))
-      })
+    return axios.post(server.API_LOCATION + `/songs/${trackId}/${user.id}/upvote`, {})
       .catch(err => console.warn(err))
-  }
-}
-
-export function sendUpvoteAction (track) {
-  return {
-    type: actionTypes.UPVOTE_TRACK,
-    track
   }
 }
 
@@ -80,10 +63,26 @@ export function addToLikesOnState (trackId) {
   }
 }
 
-export function likeOnSoundCloud (trackId) {
+export function removeLikesOnState (trackId) {
+  return {
+    type: actionTypes.REMOVE_LIKE_ON_SOUNDCLOUD,
+    trackId
+  }
+}
+
+export function likeOnSoundCloud (scTrackId, trackId, user) {
   return function (dispatch, getState) {
-    dispatch(addToLikesOnState(trackId))
-    SC.put(`/me/favorites/${trackId}`)
+    dispatch(addToLikesOnState(scTrackId))
+    dispatch(upVoteTrack(trackId, user))
+    SC.put(`/me/favorites/${scTrackId}`)
+    .catch(err => console.warn(err))
+  }
+}
+
+export const unlikeOnSoundCloud = (scTrackId) => {
+  return (dispatch, getState) => {
+    dispatch(removeLikesOnState(scTrackId))
+    SC.delete(`/me/favorites/${scTrackId}`)
     .catch(err => console.warn(err))
   }
 }

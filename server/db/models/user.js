@@ -1,6 +1,5 @@
 'use strict'
 var crypto = require('crypto')
-var _ = require('lodash')
 var Sequelize = require('sequelize')
 
 var db = require('../_db')
@@ -9,26 +8,15 @@ var Song = require('./song')
 module.exports = db.define('user', {
   email: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     unique: true,
     validate: {
       isEmail: true
     }
   },
-  password: {
-    type: Sequelize.STRING
-  },
-  salt: {
-    type: Sequelize.STRING
-  },
-  twitter_id: {
-    type: Sequelize.STRING
-  },
-  facebook_id: {
-    type: Sequelize.STRING
-  },
-  google_id: {
-    type: Sequelize.STRING
+  allow_marketing: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
   },
   first_name: {
     type: Sequelize.STRING,
@@ -51,18 +39,28 @@ module.exports = db.define('user', {
     type: Sequelize.VIRTUAL,
     allowNull: false,
     defaultValue: 0
+  },
+  soundcloud_id: {
+    type: Sequelize.INTEGER
+  },
+  soundcloud_accessToken: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  soundcloud_refreshToken: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  last_updated: {
+    type: Sequelize.DATE,
+    defaultValue: null
   }
 
 }, {
   instanceMethods: {
     sanitize: function () {
-      return _.omit(this.toJSON(), ['password', 'salt'])
-    },
-    correctPassword: function (candidatePassword) {
-      return this.Model.encryptPassword(candidatePassword, this.salt) === this.password
-    },
-    changePassword: function (password) {
-      return this.setDataValue('password', this.Model.encryptPassword(password, this.salt))
+      return this.toJSON()
+      // return _.omit(this.toJSON(), ['password', 'salt'])
     }
   },
   classMethods: {
@@ -78,16 +76,6 @@ module.exports = db.define('user', {
     }
   },
   hooks: {
-    beforeCreate: function (user) {
-      user.salt = user.Model.generateSalt()
-      user.password = user.Model.encryptPassword(user.password, user.salt)
-    },
-    beforeUpdate: function (user) {
-      if (user.changed('password')) {
-        user.salt = user.Model.generateSalt()
-        user.password = user.Model.encryptPassword(user.password, user.salt)
-      }
-    },
     afterFind: function (user) {
       if (user && !Array.isArray(user)) {
         return Song.findAll({where: {userId: user.id}})

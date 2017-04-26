@@ -3,10 +3,11 @@ var path = require('path')
 var session = require('express-session')
 var passport = require('passport')
 var SequelizeStore = require('connect-session-sequelize')(session.Store)
-// var SC = require('soundcloud')
+const setSavants = require('../funStuff/setSavants')
 
 var ENABLED_AUTH_STRATEGIES = [
-  'local'
+  'local',
+  'soundcloud'
     // 'twitter',
     // 'facebook',
     // 'google'
@@ -32,21 +33,19 @@ module.exports = function (app, db) {
     // the request session information.
   app.use(passport.initialize())
   app.use(passport.session())
-
     // When we give a cookie to the browser, it is just the userId (encrypted with our secret).
   passport.serializeUser(function (user, done) {
-    done(null, user.id)
+    return done(null, user.id)
   })
 
     // When we receive a cookie from the browser, we use that id to set our req.user
     // to a user found in the database.
   passport.deserializeUser(function (id, done) {
     User.findById(id)
-            .then(function (user) {
-              console.log('found user in deserializeUser')
-              done(null, user)
-            })
-            .catch(done)
+    .then(function (user) {
+      return done(null, user)
+    })
+    .catch(done)
   })
 
     // We provide a simple GET /session in order to get session information directly.
@@ -54,15 +53,12 @@ module.exports = function (app, db) {
     // logged in already.
   app.get('/session', function (req, res) {
     if (req.user) {
-      req.user.getScAuthToken()
-      .then(token => {
-        if (token) {
-          res.send({ user: req.user.sanitize(), token: token.access_token })
-        } else {
-          res.send({ user: req.user.sanitize() })
-        }
+      req.user.getUserSavants()
+      .then(savants => {
+        //return setSavants(req.user.soundcloud_id, req)
+        if (!savants.length) res.send({user: req.user.sanitize(), created: true})
+        else res.send({user: req.user.sanitize(), created: false})
       })
-      .catch(err => console.log(err))
     } else {
       res.status(401).send('No authenticated user.')
     }

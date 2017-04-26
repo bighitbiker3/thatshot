@@ -2,32 +2,16 @@ import React from 'react'
 import Track from '../Track'
 import Loader from '../Loader/presenter'
 
-class Stream extends React.Component {
-  constructor (props) {
-    super(props)
-    this.setUserTracks = this.props.setUserTracks.bind(this)
-    this.setSavantTracks = this.props.setSavantTracks.bind(this)
-  }
-
-  componentDidMount () {
-    this.setSavantTracks()
-    this.setUserTracks()
-  }
-
-  render () {
-    var stream
-    if (this.props.stream === 'savantTracks') stream = this.props.tracks.savantTracks.map((track, key) => { return track ? <Track className='track' key={key} track={track} /> : null })
-    else stream = this.props.tracks.userTracks.map((track, key) => { return track ? <Track className='track' key={key} track={track} /> : null })
-    return (
+const Stream = (props) => {
+  const stream = props.tracks && props.tracks.map((track, key) => { return track && <Track className='track' key={key} track={track} /> })
+  return (
+    <div>
+      {props.title && <h1 className='stream-title'>{props.title}</h1>}
       <div>
-        <br />
-        <p className="track-types">Track Types: <a style={this.props.stream === 'savantTracks' ? null : {textDecoration: 'underline'}} onClick={() => this.props.showUserTracks()}>User Posted</a> <a style={this.props.stream === 'savantTracks' ? {textDecoration: 'underline'} : null} onClick={() => this.props.showSavantTracks()}>Savant</a></p>
-        <div>
-          {stream}
-        </div>
+        {stream}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Stream

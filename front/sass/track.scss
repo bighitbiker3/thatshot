@@ -56,17 +56,31 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
   p{
     margin: 0;
   }
-  .soundcloud-like{
-    position: relative;
-    margin-top: 15px;
-    padding-left: 0px;
-    cursor: pointer;
-    color: #ff7700;
+  .soundcloud-like-wrapper {
+    display: inline-block;
+    .soundcloud-like{
+      position: relative;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      padding-left: 0px;
+      cursor: pointer;
+      color: #ff7700;
+    }
+    .soundcloud-like-text {
+      color: #ff7700;
+      font-size: 12px;
+      transition: .3s linear opacity;
+      opacity: 0;
+    }
+    &:hover .soundcloud-like-text{
+      opacity: 1;
+      transition: .3s linear opacity;
+    }
   }
   padding-left: 40px;
   display: inline-block;
   width: 70%;
-  margin-top: 71px;
+  margin-top: 60px;
   @media #{$phone}{
     width: 100%;
     margin-top: 30px;
@@ -99,7 +113,7 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
   text-align: right;
   width: 130px;
   font-size: 12px;
-  margin-top: 53px;
+  margin-top: 88px;
   @media #{$phone}{
     display: block;
     float: none;
@@ -117,13 +131,6 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
     margin-right: 5px;
   }
 
-}
-
-.up-votes{
-  @media #{$phone}{
-    display: inline-block;
-    margin-right: 5px;
-  }
 }
 
 .genre{
@@ -145,45 +152,32 @@ $phone: "(min-width: 300px) and (max-width: 420px)";
     height: 100%;
     margin: 0 auto;
   }
-  .upvote-box{
-    background-color: black;
-    height: 25px;
-    width: 125px;
+  .album-art-play{
     position: absolute;
-    text-align: center;
-    bottom: -25px;
-    right: 0;
+    transition: opacity 0.3s ease;
+    bottom: 5px;
+    left: 65px;
+    color: red;
+    opacity: 0;
     @media #{$phone}{
-      width: 90%;
-    }
-    p{
-      color: white;
-      font-size: 15px;
-      margin-top: 3px;
-      display: block;
+      bottom: -25px;
+      left: 155px;
     }
   }
   .album-art{
-    transition: bottom 0.3s ease;
     position: absolute;
     bottom: -25px;
     right: 0;
     width: 125px;
-    height:125px;
+    height: 125px;
     @media #{$phone}{
       width: 90%;
       height: auto;
     }
   }
-  .album-art:hover{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 125px;
-    height:125px;
-    @media #{$phone}{
-      width: 90%;
-      height: auto;
+}
+.album-art-div:hover{
+  .album-art-play{
+      opacity: 1;
     }
-  }
 }

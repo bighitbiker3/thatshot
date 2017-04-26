@@ -16,6 +16,10 @@ module.exports = db.define('song', {
     type: Sequelize.STRING,
     allowNull: true
   },
+  tag_list: {
+    type: Sequelize.TEXT,
+    allowNull: true
+  },
   trackId: {
     type: Sequelize.INTEGER,
     allowNull: false,

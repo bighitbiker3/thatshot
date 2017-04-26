@@ -11,9 +11,9 @@ router.get('/:artistName/songs', function (req, res, next) {
       artist: {
         $iLike: req.params.artistName
       }
-    },
-    include: [{model: User, where: req.query}]
+    }
   })
+  // .then(songs => console.log(songs))
   .then(songs => res.json(songs))
   .catch(next)
 })

@@ -19,7 +19,8 @@
 .header-message {
   font-size: 12px;
   width: 50%;
-  margin-top: 120px; }
+  margin-top: 120px;
+  margin-bottom: 30px; }
   .header-message h2 {
     font-weight: 400; }
   @media (min-width: 300px) and (max-width: 420px) {
@@ -56,57 +57,59 @@
 
 .header-overlay-off {
   transition: top 0.5s ease;
-  height: 270px;
+  height: 100vh;
   width: 100%;
   background-color: black;
   z-index: 1;
   position: absolute;
   left: 0;
-  top: -272px; }
+  top: -100vh; }
 
 .header-overlay-on {
   transition: top 0.5s ease;
-  height: 272px;
+  height: 100vh;
   width: 100%;
   background-color: black;
   z-index: 1;
   position: absolute;
   left: 0;
   top: 0; }
+  .header-overlay-on .header-intro-message {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100%; }
 
 .header-input {
-  position: absolute;
-  right: 5%;
-  top: 130px;
-  z-index: 1;
-  width: 250px; }
+  z-index: 1; }
   .header-input .submission input {
     margin-top: 50px; }
   .header-input p {
     margin: 0;
     cursor: pointer; }
   .header-input input {
-    width: 250px;
-    font-size: 12px;
+    font-size: 25px;
     border-bottom: solid 5px white;
     border-top: none;
     border-left: none;
     border-right: none;
-    margin-bottom: 10px;
-    text-align: left;
+    margin-top: 52px;
+    text-align: center;
     background-color: transparent;
-    color: white;
-    display: block; }
+    display: block;
+    width: 100%; }
   .header-input input[placeholder] {
     color: white; }
   .header-input button {
     position: relative;
     z-index: 0;
-    border: 1px solid white;
+    border: 5px solid white;
     background-color: black;
     color: white;
     cursor: pointer;
-    padding: 5px 5px 5px 5px; }
+    padding: 5px 20px 5px 20px;
+    margin-top: 60px; }
 
 .header-close {
   position: absolute;
@@ -262,7 +265,8 @@ a:link {
 .play-pause-button {
   display: inline-block;
   color: white;
-  padding: 10px; }
+  padding: 10px;
+  margin-left: 20px; }
 
 .progressContainer {
   display: none;
@@ -280,6 +284,7 @@ a:link {
 
 .progress-slider {
   position: relative;
+  display: inline-block;
   background: linear-gradient(to right, #ffffff 0%, #1e1e1e 0%, #1e1e1e 0%, #ffffff 0%, #1e1e1e 0%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   cursor: pointer;
@@ -287,7 +292,7 @@ a:link {
   width: 60%;
   margin-left: 20%;
   display: flex;
-  margin-top: -35px; }
+  margin-top: -32px; }
   .progress-slider .progress-slider-handle {
     display: none;
     background-color: white;
@@ -307,14 +312,10 @@ a:link {
     margin: 0;
     display: inline-block; }
   .current-time-div p:first-child {
-    transition: opacity 0.5s ease;
-    opacity: 0;
     position: absolute;
     left: 0;
     font-size: 14px; }
   .current-time-div p:last-child {
-    transition: opacity 0.5s ease;
-    opacity: 0;
     position: absolute;
     right: 0;
     font-size: 14px; }
@@ -351,68 +352,6 @@ a:link {
       .current-song-div p:last-child {
         font-size: 10px; } }
 
-.player:hover .current-time-div p:first-child {
-  opacity: 1;
-  position: absolute;
-  left: 0; }
-
-.player:hover .current-time-div p:last-child {
-  opacity: 1;
-  position: absolute;
-  right: 0; }
-
-.upvoted-tracks {
-  float: left;
-  width: 45%; }
-  .upvoted-tracks .track-group {
-    width: 100%; }
-  @media (min-width: 300px) and (max-width: 420px) {
-    .upvoted-tracks {
-      width: 100%;
-      float: none; }
-      .upvoted-tracks .track-group {
-        width: 90%; } }
-
-.posted-tracks {
-  float: right;
-  margin-right: 30px;
-  width: 45%; }
-  .posted-tracks .track-group {
-    width: 100%; }
-  @media (min-width: 300px) and (max-width: 420px) {
-    .posted-tracks {
-      float: none;
-      width: 100%; }
-      .posted-tracks .track-group {
-        width: 90%; } }
-
-profile-page .username {
-  font-family: 'Times New Roman';
-  font-style: italic;
-  font-weight: 300;
-  text-align: center;
-  margin-top: 0px; }
-
-profile-page .upvotes-title {
-  float: left;
-  top: 0;
-  font-weight: 300;
-  width: 45%;
-  text-align: center; }
-  @media (min-width: 300px) and (max-width: 420px) {
-    profile-page .upvotes-title {
-      display: none; } }
-
-profile-page .posted-title {
-  float: right;
-  top: 0;
-  font-weight: 300;
-  width: 45%;
-  text-align: center; }
-  @media (min-width: 300px) and (max-width: 420px) {
-    profile-page .posted-title {
-      display: none; } }
-
 .settings-cog {
   position: absolute;
   right: 62px; }
@@ -445,6 +384,13 @@ profile-page .posted-title {
 
 .track-types a:last-child {
   margin-left: 20px; }
+
+.stream-title {
+  font-family: 'Times New Roman';
+  font-style: italic;
+  font-weight: 300;
+  text-align: center;
+  margin-top: 0px; }
 
 .track-group {
   display: flex;
@@ -489,7 +435,7 @@ profile-page .posted-title {
   padding-left: 40px;
   display: inline-block;
   width: 70%;
-  margin-top: 71px; }
+  margin-top: 60px; }
   .song-title-div p:first-child {
     margin-bottom: 15px; }
     @media (min-width: 300px) and (max-width: 420px) {
@@ -497,12 +443,23 @@ profile-page .posted-title {
         margin-bottom: 5px; } }
   .song-title-div p {
     margin: 0; }
-  .song-title-div .soundcloud-like {
-    position: relative;
-    margin-top: 15px;
-    padding-left: 0px;
-    cursor: pointer;
-    color: #ff7700; }
+  .song-title-div .soundcloud-like-wrapper {
+    display: inline-block; }
+    .song-title-div .soundcloud-like-wrapper .soundcloud-like {
+      position: relative;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      padding-left: 0px;
+      cursor: pointer;
+      color: #ff7700; }
+    .song-title-div .soundcloud-like-wrapper .soundcloud-like-text {
+      color: #ff7700;
+      font-size: 12px;
+      transition: .3s linear opacity;
+      opacity: 0; }
+    .song-title-div .soundcloud-like-wrapper:hover .soundcloud-like-text {
+      opacity: 1;
+      transition: .3s linear opacity; }
   @media (min-width: 300px) and (max-width: 420px) {
     .song-title-div {
       width: 100%;
@@ -519,7 +476,7 @@ profile-page .posted-title {
   text-align: right;
   width: 130px;
   font-size: 12px;
-  margin-top: 53px; }
+  margin-top: 88px; }
   .link-item-right span {
     color: white;
     background-color: black; }
@@ -546,11 +503,6 @@ profile-page .posted-title {
     margin-right: 5px; } }
 
 @media (min-width: 300px) and (max-width: 420px) {
-  .up-votes {
-    display: inline-block;
-    margin-right: 5px; } }
-
-@media (min-width: 300px) and (max-width: 420px) {
   .genre {
     display: inline-block;
     margin-right: 5px; } }
@@ -567,24 +519,18 @@ profile-page .posted-title {
       width: 90%;
       height: 100%;
       margin: 0 auto; } }
-  .album-art-div .upvote-box {
-    background-color: black;
-    height: 25px;
-    width: 125px;
+  .album-art-div .album-art-play {
     position: absolute;
-    text-align: center;
-    bottom: -25px;
-    right: 0; }
+    transition: opacity 0.3s ease;
+    bottom: 5px;
+    left: 65px;
+    color: red;
+    opacity: 0; }
     @media (min-width: 300px) and (max-width: 420px) {
-      .album-art-div .upvote-box {
-        width: 90%; } }
-    .album-art-div .upvote-box p {
-      color: white;
-      font-size: 15px;
-      margin-top: 3px;
-      display: block; }
+      .album-art-div .album-art-play {
+        bottom: -25px;
+        left: 155px; } }
   .album-art-div .album-art {
-    transition: bottom 0.3s ease;
     position: absolute;
     bottom: -25px;
     right: 0;
@@ -594,13 +540,12 @@ profile-page .posted-title {
       .album-art-div .album-art {
         width: 90%;
         height: auto; } }
-  .album-art-div .album-art:hover {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 125px;
-    height: 125px; }
-    @media (min-width: 300px) and (max-width: 420px) {
-      .album-art-div .album-art:hover {
-        width: 90%;
-        height: auto; } }
+
+.album-art-div:hover .album-art-play {
+  opacity: 1; }
+
+.unsubscribeWrapper {
+  text-align: center;
+  margin-top: 100px; }
+  .unsubscribeWrapper p {
+    font-size: 24px; }

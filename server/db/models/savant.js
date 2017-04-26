@@ -4,10 +4,9 @@ var Sequelize = require('sequelize')
 var db = require('../_db')
 
 module.exports = db.define('savant', {
-  userId: {
+  soundcloud_id: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    unique: true
+    allowNull: false
   },
   permalink: {
     type: Sequelize.STRING,
@@ -23,7 +22,7 @@ module.exports = db.define('savant', {
     allowNull: false
   },
   description: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   city: {
     type: Sequelize.STRING

@@ -17,13 +17,13 @@ export default function (state = initialState, action) {
 }
 
 function signUpEmailFormChange (state, action) {
-  return Object.assign({}, state, {email: action.email})
+  return {...state, email: action.email}
 }
 
 function signUpPasswordFormChange (state, action) {
-  return Object.assign({}, state, {password: action.password})
+  return {...state, password: action.password}
 }
 
 function signUpUsernameChange (state, action) {
-  return Object.assign({}, state, {username: action.username})
+  return {...state, username: action.username}
 }

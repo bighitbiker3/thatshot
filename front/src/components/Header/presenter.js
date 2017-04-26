@@ -1,26 +1,24 @@
 import React from 'react'
 import SignUp from './SignUp'
 import Login from './Login'
-import Submission from './Submission'
 import Overlay from './Overlay'
 import Subscribe from './Subscribe'
 import { Link } from 'react-router'
 var input
 
 class Header extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
   componentWillMount () {
     this.props.getSession()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.route.pathname === '/' && !nextProps.header.active && !nextProps.auth.user.id) this.props.getSession()
   }
 
   render () {
     // Header Input show
     if (this.props.header.show === 'login') input = <Login />
     else if (this.props.header.show === 'signup') input = <SignUp />
-    else if (this.props.header.show === 'submission') input = <Submission />
     else input = null
 
     return (
@@ -31,19 +29,24 @@ class Header extends React.Component {
         </div>
 
         <div className='header-right'>
-          { this.props.auth.user ? <div><Link to={`/me`}><p>Hi {this.props.auth.user.username}</p></Link> <p>Score: {this.props.auth.user.score} </p> <p onClick={() => this.props.showSubmission()}>Submit Tune</p><p onClick={() => this.props.logout()}>Logout</p></div> : <div> <p onClick={() => this.props.showSignUp()}>Sign Up</p> <p onClick={() => this.props.showLogin()}>Login</p></div> }
+          { this.props.auth.user.id
+            ? <div>
+                <Link to={`/me`}><p>Hi {this.props.auth.user.username}</p></Link>
+                <p onClick={() => this.props.logout()}>Logout</p>
+              </div>
+            : null
+          }
         </div>
         <div className='header-input'>
         {input}
         </div>
         <div className='header-close'>
-            {this.props.header.active ? <p onClick={() => this.props.closeHeader()}>X</p> : null}
+            {/*this.props.header.active ? <p onClick={() => this.props.closeHeader()}>X</p> : null */}
         </div>
 
         <div className='header-message'>
-          <h2>The top 15 songs from Soundcloud users with fewer than 15K followers, every day</h2>
+          <h2>Nine 🔥 tunes just for you - from Soundcloud artists with fewer than 15K followers, every day</h2>
         </div>
-        {this.props.route.pathname === '/' ? <Subscribe /> : null}
       </header>
     )
   }

@@ -29,6 +29,7 @@ $iPhone5: "(min-width: 300px) and (max-width: 320px)";
   font-size: 12px;
   width: 50%;
   margin-top: 120px;
+  margin-bottom: 30px;
   @media #{$phone}{
     width: 90%;
   }
@@ -67,31 +68,34 @@ $iPhone5: "(min-width: 300px) and (max-width: 320px)";
 
 .header-overlay-off{
   transition: top 0.5s ease;
-  height: 270px;
+  height: 100vh;
   width: 100%;
   background-color: black;
   z-index: 1;
   position: absolute;
   left: 0;
-  top: -272px;
+  top: -100vh;
 }
 .header-overlay-on{
   transition: top 0.5s ease;
-  height: 272px;
+  height: 100vh;
   width: 100%;
   background-color: black;
   z-index: 1;
   position: absolute;
   left: 0;
   top: 0;
+  .header-intro-message{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
+  }
 }
 
 .header-input{
-  position: absolute;
-  right: 5%;
-  top: 130px;
   z-index: 1;
-  width: 250px;
   .submission{
     input{
       margin-top: 50px;
@@ -102,17 +106,16 @@ $iPhone5: "(min-width: 300px) and (max-width: 320px)";
     cursor: pointer;
   }
   input{
-    width: 250px;
-    font-size: 12px;
+    font-size: 25px;
     border-bottom: solid 5px white;
     border-top: none;
     border-left: none;
     border-right: none;
-    margin-bottom: 10px;
-    text-align: left;
+    margin-top: 52px;
+    text-align: center;
     background-color: transparent;
-    color: white;
     display: block;
+    width: 100%;
   }
   input[placeholder]{
     color: white;
@@ -120,11 +123,12 @@ $iPhone5: "(min-width: 300px) and (max-width: 320px)";
   button{
     position: relative;
     z-index: 0;
-    border: 1px solid white ;
+    border: 5px solid white;
     background-color: black;
     color: white;
     cursor: pointer;
-    padding: 5px 5px 5px 5px;
+    padding: 5px 20px 5px 20px;
+    margin-top: 60px;
   }
 }
 .header-close{

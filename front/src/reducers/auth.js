@@ -1,6 +1,11 @@
 import * as actionTypes from '../constants/actionTypes'
 
-const initialState = {}
+const initialState = {
+  user: {},
+  soundcloud: {
+    favorites: []
+  }
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -8,13 +13,13 @@ export default function (state = initialState, action) {
     case actionTypes.ME_SET_SOUNDCLOUD: return setMeSoundCloud(state, action)
     case actionTypes.LOGOUT: return logout(state, action)
     case actionTypes.LIKE_ON_SOUNDCLOUD: return likeOnSoundcloud(state, action)
+    case actionTypes.REMOVE_LIKE_ON_SOUNDCLOUD: return unlikeOnSoundcloud(state, action)
   }
   return state
 }
 
 function setMe (state, action) {
   const { user } = action
-  const { soundcloud } = action
   return {...state, user}
 }
 
@@ -24,12 +29,17 @@ function setMeSoundCloud (state, action) {
 }
 
 function logout (state, action) {
-  const user = null
-  const soundcloud = null
-  return Object.assign({}, state, {soundcloud, user})
+  return Object.assign({}, state, initialState)
 }
 
 function likeOnSoundcloud (state, action) {
   state.soundcloud.favorites.push(action.trackId)
   return Object.assign({}, state)
+}
+
+function unlikeOnSoundcloud (state, action) {
+  const { favorites } = state.soundcloud
+  const index = favorites.indexOf(action.trackId)
+  favorites.splice(index, 1)
+  return {...state}
 }

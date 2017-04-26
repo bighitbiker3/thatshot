@@ -43,6 +43,12 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss!sass?sourceMap'),
         include: /(browser)|(node_modules)/
       }
+      // TODO - FOR CSS MODULES - READ ABOUT
+        // {
+        // test: /\.modules.s?css$/,
+        // loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer&modules!postcss!sass?sourceMap'),
+        // include: /(browser)|(node_modules)/
+        // }
     ]
   },
   postcss: function () {

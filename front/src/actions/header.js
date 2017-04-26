@@ -14,17 +14,17 @@ export function showLogin () {
   }
 }
 
+export function openHeader () {
+  return {
+    type: actionTypes.OPEN_HEADER,
+    payload: {active: true, show: 'none'}
+  }
+}
+
 export function closeHeader () {
   return {
     type: actionTypes.CLOSE_HEADER,
     payload: {active: false, show: 'none'}
-  }
-}
-
-export function showSubmission () {
-  return {
-    type: actionTypes.SHOW_SUBMISSION,
-    payload: {active: true, show: 'submission'}
   }
 }
 

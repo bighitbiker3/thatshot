@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from '../../actions'
 import Track from './presenter'
+import { reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications'
+const { notifSend } = notifActions
 
 function mapStateToProps (state, props) {
   const track = props.track
@@ -16,7 +18,9 @@ function mapStateToProps (state, props) {
 function mapDispatchToProps (dispatch) {
   return {
     toggleTrack: bindActionCreators(actions.toggleTrack, dispatch),
-    likeOnSoundCloud: bindActionCreators(actions.likeOnSoundCloud, dispatch)
+    likeOnSoundCloud: bindActionCreators(actions.likeOnSoundCloud, dispatch),
+    unlikeOnSoundCloud: bindActionCreators(actions.unlikeOnSoundCloud, dispatch),
+    copyNotification: () => dispatch(notifSend({message: 'Copied Link :)', kind: 'success', dismissAfter: 3000}))
   }
 }
 
