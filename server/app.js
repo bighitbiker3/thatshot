@@ -35,7 +35,7 @@ app.use('/images/:image', (req, res) => {
 app.use('/api', router)
 
 app.get('/*', function (req, res) {
-  res.render('index.html')
+  res.sendFile(path.join(__dirname, '../', 'dist', 'index.html'))
 })
 
 db.sync(process.env === 'production' ? {/* nothing goes in here*/} : {})
