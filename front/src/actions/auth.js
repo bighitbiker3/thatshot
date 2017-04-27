@@ -49,7 +49,6 @@ export function getSession () {
         data.user.created = data.created
         dispatch(setMe(data.user))
         if (!data.created) {
-          console.log(data, 'dataaaaa');
           dispatch(getSavantTracks(data.user.id))
           dispatch(initSoundCloud())
         }
@@ -121,7 +120,6 @@ function getSavantTracks (id) {
   return function (dispatch) {
     axios.get(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
     .then(response => {
-      console.log(id, 'id in get savant tracks');
       if (response.status === 204) dispatch(addSavantTracks(id))
       else dispatch(trackSetSavant(response.data))
     })

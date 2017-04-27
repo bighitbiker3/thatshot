@@ -3,7 +3,6 @@ import UpVote from './UpVote'
 import { Link } from 'react-router'
 import FontAwesome from 'react-fontawesome'
 import copy from 'copy-to-clipboard'
-import DocumentMeta from 'react-document-meta'
 import urlEncoder from 'postman-url-encoder'
 import { SERVER_LOCATION } from '../../constants/server'
 
