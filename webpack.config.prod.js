@@ -4,13 +4,11 @@ const path = require('path')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const precss = require('precss')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const indexPath = path.join(__dirname, './server', 'app', 'views', 'index.html')
-var CompressionPlugin = require('compression-webpack-plugin');
+var CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = {
-  devtool: "source-map",
+  devtool: 'source-map',
   entry: [
     // 'babel-polyfill',
     // 'webpack-hot-middleware/client',
@@ -55,14 +53,14 @@ module.exports = {
   postcss: function () {
     return [autoprefixer, precss]
   },
- plugins: [
+  plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         // This has effect on the react lib size
-        'NODE_ENV': JSON.stringify('production'),
+        'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new ExtractTextPlugin("bundle.css", {allChunks: false}),
+    new ExtractTextPlugin('bundle.css', {allChunks: false}),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
@@ -76,17 +74,17 @@ module.exports = {
         screw_ie8: true
       },
       output: {
-        comments: false,
+        comments: false
       },
       exclude: [/\.min\.js$/gi] // skip pre-minified libs
     }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]), 
+    new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
     new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0
     })
-  ],
+  ]
 }

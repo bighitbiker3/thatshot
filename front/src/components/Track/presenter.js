@@ -9,25 +9,8 @@ import { SERVER_LOCATION } from '../../constants/server'
 
 function Track ({ track = {}, toggleTrack, auth, likeOnSoundCloud, copyNotification, unlikeOnSoundCloud }) {
   const alreadLiked = auth.soundcloud.favorites.includes(track.trackId)
-  const meta = {
-    title: `${track.title} - ${track.artist}`,
-    description: 'That\'s Hot',
-    meta: {
-      charset: 'utf-8',
-      name: {
-        keywords: 'react,meta,document,html,tags'
-      },
-      property: {
-        'og:title': `${track.title} - ${track.artist}`,
-        'og:type': 'article',
-        'og:image': track.artwork_url.replace('large', 't300x300'),
-        'og:site_name': 'That\'s Hot'
-      }
-    }
-  }
   return (
     <div className='track-group'>
-      <DocumentMeta {...meta} />
       <UpVote track={track} />
       <div className='song-title-div'>
         <p className='song-title' onClick={() => {

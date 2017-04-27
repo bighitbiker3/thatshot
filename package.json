@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/app",
-    "start-watch": "gulp & webpack --progress --colors --watch & nodemon server/app --watch server",
+    "start-watch": "gulp & webpack --progress --colors --watch --config ./webpack.config.js & nodemon server/app --watch server",
     "build": "NODE_ENV=production gulp & webpack -p --progress --config ./webpack.config.prod.js",
     "test": "mocha --compilers js:babel-core/register --require ./front/test/setup.js 'front/src/**/*spec.js'",
     "test:watch": "npm run test -- --watch"

@@ -55,7 +55,7 @@ module.exports = function (app, db) {
     passport.authenticate('soundcloud')(req, res, next)
   })
 
-  app.get('/callback', passport.authenticate('soundcloud', { failureRedirect: '/wrong' }), (req, res) => {
+  app.get(env === 'production' ? '/auth/callback' : '/callback', passport.authenticate('soundcloud', { failureRedirect: '/wrong' }), (req, res) => {
     res.redirect('/')
   })
 }

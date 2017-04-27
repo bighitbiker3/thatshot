@@ -13,7 +13,8 @@ class Player extends React.Component {
     this.state = {
       currentTime: 0,
       duration: 0,
-      seekPosition: 0
+      seekPosition: 0,
+      inFocus: true
     }
     this.durationInterval = null
     this.getNextTrack = this.getNextTrack.bind(this)
@@ -23,6 +24,9 @@ class Player extends React.Component {
   componentDidMount () {
     keyBindings('space', this.props.toggleTrack)
     this.refs.player.onended = () => this.getNextTrack()
+    window.onblur = () => {
+      this.setState({ inFocus: false })
+    }
   }
 
   getNextTrack () {
@@ -31,16 +35,6 @@ class Player extends React.Component {
     let nextTrack = tracks.indexOf(activeTrack) + 1
     if (nextTrack >= tracks.length) nextTrack = 0
     this.props.toggleTrack(tracks[nextTrack])
-  }
-
-  componentDidUpdate () {
-    const audioElement = ReactDOM.findDOMNode(this.refs.player)
-
-    if (!audioElement) return
-
-    const { nowPlaying } = this.props.player
-
-    nowPlaying ? audioElement.play() : audioElement.pause()
   }
 
   getProgressFill () {
@@ -89,7 +83,7 @@ class Player extends React.Component {
             this.getProgressFill()
           }
         }}/>
-        <audio id='audio' style={{display: activeTrack ? '' : 'none'}} ref='player' src={`${activeTrack && activeTrack.stream_url}?client_id=${CLIENT_ID}`} />
+        <audio id='audio' autoPlay style={{display: activeTrack ? '' : 'none'}} ref='player' src={`${activeTrack && activeTrack.stream_url}?client_id=${CLIENT_ID}`} />
       </player>
     )
   }
