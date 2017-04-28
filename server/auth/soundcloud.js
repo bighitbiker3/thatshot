@@ -5,6 +5,7 @@ const env = require('../env')
 const clientID = env.SOUNDCLOUD.clientID
 const clientSecret = env.SOUNDCLOUD.clientSecret
 const callbackURL = env.SOUNDCLOUD.callbackUrl
+const callbackRoute = env.SOUNDCLOUD.callbackRoute
 
 
 
@@ -55,7 +56,7 @@ module.exports = function (app, db) {
     passport.authenticate('soundcloud')(req, res, next)
   })
 
-  app.get(env === 'production' ? '/auth/callback' : '/callback', passport.authenticate('soundcloud', { failureRedirect: '/wrong' }), (req, res) => {
+  app.get(callbackRoute, passport.authenticate('soundcloud', { failureRedirect: '/wrong' }), (req, res) => {
     res.redirect('/')
   })
 }

@@ -28,17 +28,16 @@ console.log('listening on port 3000')
 require('./auth')(app, db)
 
 app.get('/*.js', function (req, res, next) {
-  req.url = req.url + '.gz';
+  req.url = req.url + '.gz'
   res.removeHeader('Content-Encoding')
   res.set({
     'Content-Encoding': 'gzip',
     'Content-Type': 'application/javascript'
   })
   res.sendFile(path.join(__dirname, '../', 'dist', req.url))
-});
+})
 
 app.use('/images/:image', (req, res) => {
-  console.log(req.params.image, 'hereeeeeeee');
   res.sendFile(path.join(__dirname, `images/${req.params.image}`))
 })
 

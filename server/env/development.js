@@ -19,7 +19,8 @@ module.exports = {
   'SOUNDCLOUD': {
     'clientID': '2fd5b79e3498c867ce3b817dce252dd2',
     'clientSecret': 'f4aca71f0560950db4ed8c3ae5d1ae19',
-    'callbackUrl': 'http://localhost:3000/callback'
+    'callbackUrl': 'http://localhost:3000/callback',
+    'callbackRoute': '/callback'
   },
   'MAILGUN': {
     'apiKey': 'key-aaa3f71c340b05266e25a7f2da185eea'
