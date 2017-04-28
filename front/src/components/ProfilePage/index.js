@@ -1,29 +1,51 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../../actions'
-import ProfilePage from './presenter'
+import { clearTracks, getProfileTracks } from '../../actions/track'
+import { getUser, getProfilePage, getTracks } from '../../selectors'
+
+import Stream from '../Stream'
+
+class ProfilePage extends React.Component {
+  componentDidMount () {
+    const { user } = this.props
+    if (user && user.id) {
+      this.props.getProfileTracks(user.id)
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { user } = this.props
+    console.log(nextProps.user.id);
+    if (user.id !== nextProps.user.id) this.props.getProfileTracks(nextProps.user.id)
+  }
+  
+
+  componentWillUnmount () {
+    this.props.clearTracks()
+  }
+
+  render () {
+    return (
+      <Stream
+        tracks={this.props.tracks}
+        title='Your Tracks'
+      />
+    )
+  }
+}
 
 function mapStateToProps (state, props) {
-  const route = state.routing.locationBeforeTransitions
-  const routeParams = props.routeParams
-  const { profilePage } = state
-  const tracks = state.profilePage.profileTracks
-  const { user } = state.auth
   return {
-    profilePage,
-    user,
-    route,
-    routeParams,
-    tracks
+    profilePage: getProfilePage(state),
+    user: getUser(state),
+    tracks: getTracks(state)
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    setProfilePageTracks: bindActionCreators(actions.setProfilePageTracks, dispatch),
-    removeProfileTracks: bindActionCreators(actions.removeProfileTracks, dispatch),
-    toggleSettings: bindActionCreators(actions.toggleSettings, dispatch)
+    getProfileTracks: (id) => dispatch(getProfileTracks(id)),
+    clearTracks: () => dispatch(clearTracks())
   }
 }
 

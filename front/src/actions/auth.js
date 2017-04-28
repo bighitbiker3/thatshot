@@ -11,14 +11,6 @@ import { trackSetSavant } from '../actions/track'
 import * as server from '../constants/server'
 import { CLIENT_ID, REDIRECT_URI } from '../constants/auth'
 
-const stopLoadingHelper = () => {
-  return (dispatch, getState) => {
-    const { soundcloud } = getState().auth
-    const { savantTracks } = getState().track
-    if (soundcloud.favorites.length && savantTracks.length) dispatch({type: actionTypes.STOP_LOADING})
-  }
-}
-
 function setMe (user) {
   return {
     type: actionTypes.ME_SET,
@@ -116,14 +108,16 @@ export const getSoundCloudRefreshToken = () => {
   }
 }
 
-function getSavantTracks (id) {
-  return function (dispatch) {
-    axios.get(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
-    .then(response => {
-      if (response.status === 204) dispatch(addSavantTracks(id))
-      else dispatch(trackSetSavant(response.data))
-    })
-    .catch(err => console.log(err, 'errrrrr'))
+export function getSavantTracks (id) {
+  return function (dispatch, getState) {
+    if (getState().routing.locationBeforeTransitions.pathname === '/') {
+      axios.get(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
+      .then(response => {
+        if (response.status === 204) dispatch(addSavantTracks(id))
+        else dispatch(trackSetSavant(response.data))
+      })
+      .catch(err => console.log(err, 'errrrrr'))
+    }
   }
 }
 

@@ -7,8 +7,6 @@ const clientSecret = env.SOUNDCLOUD.clientSecret
 const callbackURL = env.SOUNDCLOUD.callbackUrl
 const callbackRoute = env.SOUNDCLOUD.callbackRoute
 
-
-
 module.exports = function (app, db) {
   const User = db.model('user')
   const strategy = new SoundCloudStrategy({

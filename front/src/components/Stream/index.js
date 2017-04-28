@@ -1,29 +1,16 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as actions from '../../actions'
-import Stream from './presenter'
+import Track from '../Track'
 
-function mapStateToProps (state) {
-  const { user } = state.auth
-  const { profilePage } = state.header
-  const tracks = state.track.savantTracks
-  const stream = state.stream.show
-  return {
-    user,
-    profilePage,
-    tracks,
-    stream
-  }
+const Stream = (props) => {
+  const stream = props.tracks && props.tracks.map((track, key) => { return track && <Track className='track' key={key} track={track} /> })
+  return (
+    <div>
+      {props.title && <h1 className='stream-title'>{props.title}</h1>}
+      <div>
+        {stream}
+      </div>
+    </div>
+  )
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    setSavantTracks: bindActionCreators(actions.setSavantTracks, dispatch),
-    setUserTracks: bindActionCreators(actions.setUserTracks, dispatch),
-    showUserTracks: bindActionCreators(actions.showUserTracks, dispatch),
-    showSavantTracks: bindActionCreators(actions.showSavantTracks, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Stream)
+export default Stream

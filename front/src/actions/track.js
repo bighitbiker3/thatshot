@@ -11,42 +11,20 @@ export function trackSetSavant (tracks) {
   }
 }
 
-export function setSavantTracks () {
-  return function (dispatch, getState) {
+
+export function getProfileTracks (id) {
+  return function (dispatch) {
     dispatch({type: actionTypes.START_LOADING})
-    return fetch(server.API_LOCATION + '/songs?is_savant=true')
-      .then(data => data.json())
-      .then(dataJSON => dataJSON.sort((a, b) => b.upvotes - a.upvotes))
-      .then(dataSorted => {
-        dispatch(trackSetSavant(dataSorted))
-        dispatch({type: actionTypes.STOP_LOADING})
-      })
-      .catch(err => console.warn(err))
+    return axios.get(server.API_LOCATION + `/users/${id}/tracks`)
+    .then(res => res.data)
+    .then(userStuff => {
+      dispatch(trackSetSavant(userStuff))
+      dispatch({type: actionTypes.STOP_LOADING})
+    })
+    .catch(err => console.warn(err))
   }
 }
 
-function trackSetUser (tracks) {
-  return {
-    type: actionTypes.TRACKS_SET_USER,
-    tracks
-  }
-}
-
-export function setUserTracks (song, user) {
-  return function (dispatch, getState) {
-    if (song) {
-      song.user = user
-      return dispatch(trackSetUser(song))
-    } else {
-      return fetch(server.API_LOCATION + '/songs?is_savant=false')
-      .then(data => data.json())
-      .then(dataJSON => {
-        dispatch(trackSetUser(dataJSON))
-      })
-      .catch(err => console.warn(err))
-    }
-  }
-}
 
 export function upVoteTrack (trackId, user) {
   return function (dispatch, getState) {
@@ -86,3 +64,7 @@ export const unlikeOnSoundCloud = (scTrackId) => {
     .catch(err => console.warn(err))
   }
 }
+
+export const clearTracks = () => ({
+  type: actionTypes.CLEAR_TRACKS
+})

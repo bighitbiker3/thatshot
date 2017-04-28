@@ -406,20 +406,6 @@ a:link {
       margin-bottom: 200px;
       margin-top: 100px; } }
 
-.track-group:last-child {
-  display: flex;
-  align-items: flex-end;
-  height: 150px;
-  margin-bottom: 60px; }
-  @media (min-width: 300px) and (max-width: 420px) {
-    .track-group:last-child {
-      display: block;
-      width: 90%;
-      height: auto;
-      height: 200px;
-      margin-bottom: 200px;
-      margin-top: 100px; } }
-
 .artist-name {
   cursor: pointer; }
   .artist-name a {
@@ -435,7 +421,7 @@ a:link {
   padding-left: 40px;
   display: inline-block;
   width: 70%;
-  margin-top: 60px; }
+  margin-top: 26px; }
   .song-title-div p:first-child {
     margin-bottom: 15px; }
     @media (min-width: 300px) and (max-width: 420px) {
@@ -476,7 +462,7 @@ a:link {
   text-align: right;
   width: 130px;
   font-size: 12px;
-  margin-top: 88px; }
+  margin-top: 26px; }
   .link-item-right span {
     color: white;
     background-color: black; }
