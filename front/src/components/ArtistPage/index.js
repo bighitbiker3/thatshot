@@ -4,6 +4,7 @@ import * as actions from '../../actions'
 import Stream from '../Stream'
 
 import { clearTracks } from '../../actions/track'
+import { getTracks } from '../../selectors'
 
 class ArtistPage extends React.Component {
   componentDidMount () {
@@ -17,9 +18,9 @@ class ArtistPage extends React.Component {
 
   render () {
     const { songName } = this.props.routeParams
-    let tracks = this.props.artist.artistTracks
+    let { tracks } = this.props
     if (songName) {
-      tracks = this.props.artist.artistTracks.filter(track => track.title === songName)
+      tracks = tracks.filter(track => track.title === songName)
     }
     return (
         <Stream
@@ -31,11 +32,11 @@ class ArtistPage extends React.Component {
 }
 
 
-const mapStateToProps = ({artist}, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   const routeParams = ownProps.routeParams
   return {
     routeParams,
-    artist
+    tracks: getTracks(state)
   }
 }
 
