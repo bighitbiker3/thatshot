@@ -53,7 +53,7 @@ export function likeOnSoundCloud (scTrackId, trackId, user) {
     dispatch(addToLikesOnState(scTrackId))
     dispatch(upVoteTrack(trackId, user))
     SC.put(`/me/favorites/${scTrackId}`)
-    .catch(err => console.warn(err))
+    .catch(() => dispatch(notifSend({message: 'Ugh, something went wrong with our connection to SoundCloud. Please try again', kind: 'danger', dismissAfter: 1000})))
   }
 }
 
@@ -61,7 +61,7 @@ export const unlikeOnSoundCloud = (scTrackId) => {
   return (dispatch, getState) => {
     dispatch(removeLikesOnState(scTrackId))
     SC.delete(`/me/favorites/${scTrackId}`)
-    .catch(err => console.warn(err))
+    .catch(() => dispatch(notifSend({message: 'Ugh, something went wrong with our connection to SoundCloud. Please try again', kind: 'danger', dismissAfter: 1000})))
   }
 }
 
