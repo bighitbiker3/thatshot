@@ -89,9 +89,9 @@ class Overlay extends React.Component {
     }
     if (!user.created) {
       return (
-        <div>
-          <h2>We're here to help you find the best tunes from smaller artists.</h2>
-          <h2>We'll need to take a look at your SoundCloud to see what kind of music you like.</h2>
+        <div className='header-overlay-text'>
+          <h2>🔥 tunes from Soundcloud artists with fewer than 15K followers - every damn day</h2>
+          <h2>We'll need to take a look at your SoundCloud to see what kind of hot music you like</h2>
           <p><a href={`${SERVER_LOCATION}/login/soundcloud`}><span>Sign Up/Login</span></a></p>
         </div>
       )
@@ -110,7 +110,7 @@ class Overlay extends React.Component {
       }
       if (savants) {
         return (
-          <div>
+          <div className='header-overlay-text'>
             <h1>We're checking which artists you like</h1>
             <Loader style={{position: 'relative', marginTop: '10px', border: '.5em solid #FFF'}} />
           </div>
@@ -118,7 +118,7 @@ class Overlay extends React.Component {
       }
       if (songs) {
         return (
-          <div>
+          <div className='header-overlay-text'>
             <h1>Finding songs you might like</h1>
             <h1>This could take a couple minutes</h1>
             <h1>Please don't refresh the page</h1>
@@ -128,7 +128,7 @@ class Overlay extends React.Component {
       }
       if (soundcloudData) {
         return (
-          <div>
+          <div className='header-overlay-text'>
             <h1>Grabbing some SoundCloud data to fine-tune the selection</h1>
             <Loader style={{position: 'relative', marginTop: '10px', border: '.5em solid #FFF'}} />
           </div>

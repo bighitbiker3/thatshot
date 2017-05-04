@@ -16,36 +16,42 @@ class Header extends React.Component {
   }
 
   render () {
+    const { header, auth } = this.props
     // Header Input show
-    if (this.props.header.show === 'login') input = <Login />
-    else if (this.props.header.show === 'signup') input = <SignUp />
+    if (header.show === 'login') input = <Login />
+    else if (header.show === 'signup') input = <SignUp />
     else input = null
 
+
+    const renderHeader = () => {
+      if (auth.user.id) {
+        return (
+          <div>
+            <Link to={`/me`}><p>Hi {auth.user.username}</p></Link>
+            <p onClick={() => this.props.logout()}>Logout</p>
+          </div>
+        )
+      } else if (!auth.user.id && !header.active) {
+        return <p onClick={() => this.props.logout()}>Login</p>
+      }
+      return null
+    }
+
     return (
-      <header style={this.props.header.active ? {color: 'white'} : {color: 'black'}} className='header'>
+      <header style={header.active ? {color: 'white'} : {color: 'black'}} className='header'>
       <Overlay />
         <div className='brand-div'>
           <Link to={`/`}><h1 className='brand'>That's Hot</h1></Link>
         </div>
 
         <div className='header-right'>
-          { this.props.auth.user.id
-            ? <div>
-                <Link to={`/me`}><p>Hi {this.props.auth.user.username}</p></Link>
-                <p onClick={() => this.props.logout()}>Logout</p>
-              </div>
-            : null
-          }
+          {renderHeader()}
         </div>
         <div className='header-input'>
         {input}
         </div>
-        <div className='header-close'>
-            {/*this.props.header.active ? <p onClick={() => this.props.closeHeader()}>X</p> : null */}
-        </div>
-
-        <div className='header-message'>
-          <h2>Nine 🔥 tunes just for you - from Soundcloud artists with fewer than 15K followers, every day</h2>
+        <div style={header.active ? {color: 'white'} : {color: 'black'}} className='header-message'>
+          <h2>🔥 tunes from Soundcloud artists with fewer than 15K followers - every damn day</h2>
         </div>
       </header>
     )

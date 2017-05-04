@@ -1,6 +1,14 @@
 .header {
   transition: color 0.5s ease; }
 
+.header-overlay-text h2 {
+  font-weight: 400; }
+
+@media (min-width: 300px) and (max-width: 420px) {
+  .header-overlay-text {
+    padding-left: 5%;
+    padding-right: 5%; } }
+
 .brand {
   position: absolute;
   top: 50px;
@@ -17,6 +25,7 @@
       display: block; } }
 
 .header-message {
+  transition: color 0.5s ease;
   font-size: 12px;
   width: 50%;
   margin-top: 120px;
