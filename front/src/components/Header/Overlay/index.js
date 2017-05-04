@@ -92,7 +92,7 @@ class Overlay extends React.Component {
         <div className='header-overlay-text'>
           <h2>🔥 tunes from Soundcloud artists with fewer than 15K followers - every damn day</h2>
           <h2>We'll need to take a look at your SoundCloud to see what kind of hot music you like</h2>
-          <h2 style={{fontStyle: 'italic'}}>licks finger, places on ass, makes sizzle noise</h2>
+          <p style={{fontStyle: 'italic'}}>licks finger, places on ass, makes sizzle noise</p>
           <h3><a href={`${SERVER_LOCATION}/login/soundcloud`}><span>Sign Up/Login</span></a></h3>
         </div>
       )
