@@ -3,6 +3,7 @@ var path = require('path')
 var session = require('express-session')
 var passport = require('passport')
 var SequelizeStore = require('connect-session-sequelize')(session.Store)
+const JWT = require('jsonwebtoken');
 const setSavants = require('../funStuff/setSavants')
 
 var ENABLED_AUTH_STRATEGIES = [
@@ -26,7 +27,8 @@ module.exports = function (app, db) {
     secret: 'lol',
     store: dbStore,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { maxAge: 3600000000000 }
   }))
 
     // Initialize passport and also allow it to read
@@ -48,9 +50,6 @@ module.exports = function (app, db) {
     .catch(done)
   })
 
-    // We provide a simple GET /session in order to get session information directly.
-    // This is used by the browser application (React/Redux) to determine if a user is
-    // logged in already.
   app.get('/session', function (req, res) {
     if (req.user) {
       req.user.getUserSavants()

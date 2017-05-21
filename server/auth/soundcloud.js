@@ -1,6 +1,7 @@
 const passport = require('passport')
 const SoundCloudStrategy = require('passport-soundcloud').Strategy
 const refresh = require('passport-oauth2-refresh')
+const iswebview = require('is-webview')
 const env = require('../env')
 const clientID = env.SOUNDCLOUD.clientID
 const clientSecret = env.SOUNDCLOUD.clientSecret
@@ -50,12 +51,17 @@ module.exports = function (app, db) {
   })
 
   app.get('/login/soundcloud', function (req, res, next) {
-    console.log(callbackURL, 'a;sldfjas;lfdjas;lfasf');
+    console.log(callbackURL, 'Callback URL')
     passport.authenticate('soundcloud')(req, res, next)
   })
 
   app.get(callbackRoute, passport.authenticate('soundcloud', { failureRedirect: '/wrong' }), (req, res) => {
-    res.redirect('/')
+    if (iswebview(req.headers['user-agent']) || iswebview(req.headers['User-Agent'])) {
+      console.log('in herrrrrrrrrrrrr');
+      res.redirect(`thatshot://success`)
+    } else {
+      res.redirect('/')
+    }
   })
 }
 
