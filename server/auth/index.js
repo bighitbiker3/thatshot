@@ -3,7 +3,6 @@ var path = require('path')
 var session = require('express-session')
 var passport = require('passport')
 var SequelizeStore = require('connect-session-sequelize')(session.Store)
-const JWT = require('jsonwebtoken');
 const setSavants = require('../funStuff/setSavants')
 
 var ENABLED_AUTH_STRATEGIES = [
