@@ -2,17 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { isEqual } from 'lodash'
 import { clearTracks, getProfileTracks } from '../../actions/track'
-import { getUser, getProfilePage, getTracks } from '../../selectors'
+import { getUser, getProfilePage, getTracks, getNextHref } from '../../selectors'
 
 import Stream from '../Stream'
 
 class ProfilePage extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      offset: 0,
-      limit: 20
-    }
     this.getMoreTracks = this.getMoreTracks.bind(this)
     this.handleScroll = this.handleScroll.bind(this)
   }
@@ -21,6 +17,7 @@ class ProfilePage extends React.Component {
     if (user && user.id) {
       this.props.getProfileTracks(user.id)
     }
+    document.addEventListener('scroll', this.handleScroll)
   }
 
   handleScroll () {
@@ -33,17 +30,15 @@ class ProfilePage extends React.Component {
   }
 
   getMoreTracks () {
-    const { user } = this.props
-    const offset = this.state.offset + this.state.limit
+    const { user, nextHref } = this.props
     document.removeEventListener('scroll', this.handleScroll)
-    this.props.getProfileTracks(user.id, this.state.limit, offset)
-    this.setState({ offset })
+    if (nextHref) this.props.getProfileTracks(user.id, nextHref)
   }
 
   componentWillReceiveProps (nextProps) {
     const { user } = this.props
     if (user.id !== nextProps.user.id) this.props.getProfileTracks(nextProps.user.id)
-    if (!isEqual(nextProps.tracks, this.props.tracks)) document.addEventListener('scroll', this.handleScroll)
+    if (!isEqual(nextProps.tracks, this.props.tracks) && this.props.nextHref) document.addEventListener('scroll', this.handleScroll)
   }
 
   componentWillUnmount () {
@@ -64,7 +59,8 @@ function mapStateToProps (state, props) {
   return {
     profilePage: getProfilePage(state),
     user: getUser(state),
-    tracks: getTracks(state)
+    tracks: getTracks(state),
+    nextHref: getNextHref(state)
   }
 }
 

@@ -2,6 +2,7 @@ import * as actionTypes from '../constants/actionTypes'
 
 const initialState = {
   savantTracks: [],
+  next_href: null,
   userTracks: []
 }
 
@@ -17,16 +18,21 @@ export default function (state = initialState, action) {
 }
 
 function setSavantTracks (state, action) {
-  const savantTracks = action.tracks
-  return { ...state, savantTracks }
+  const { songs, next_href } = action.payload
+  return {
+    ...state,
+    savantTracks: songs,
+    next_href
+  }
 }
 
 const moreSavantTracks = (state, action) => {
-  const currentTracks = state.savantTracks
-  const newTracks = [...currentTracks, ...action.tracks]
+  const { songs, next_href } = action.payload
+  const newTracks = [...state.savantTracks, ...songs]
   return {
     ...state,
-    savantTracks: newTracks
+    savantTracks: newTracks,
+    next_href
 
   }
 }

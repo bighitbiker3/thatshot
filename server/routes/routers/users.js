@@ -48,8 +48,8 @@ module.exports = (io) => {
   // GET SPECIFIC USERS TRACKS
   router.get('/:userId/tracks', function (req, res, next) {
     // Allow for passing of ID's or usernames
-    const { limit = 100, offset = 0 } = req.query
-    let findBy
+    const { limit = 5, offset = 0 } = req.query
+    let findBy, count
     if (Number(req.params.userId)) {
       findBy = User.findById(req.params.userId)
     } else {
@@ -58,7 +58,7 @@ module.exports = (io) => {
 
     findBy
     .then(user => {
-      return UserSavantTracks.findAll({
+      return UserSavantTracks.findAndCountAll({
         where: {
           userId: user.id,
           posted: true
@@ -68,8 +68,15 @@ module.exports = (io) => {
         limit
       })
     })
+    .then(res => {
+      count = res.count
+      return res.rows
+    })
     .then(songs => songs.map(song => song.song))
-    .then(songs => res.send(songs))
+    .then(songs => {
+      const newOffset = +offset + +limit
+      res.send({songs, next_href: newOffset > count ? null : `/users/${req.params.userId}/tracks?limit=${limit}&offset=${newOffset}`})
+    })
     .catch(next)
   })
 

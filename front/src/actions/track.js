@@ -4,29 +4,29 @@ import axios from 'axios'
 import { reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications'
 const { notifSend } = notifActions
 
-export function trackSetSavant (tracks) {
+export function trackSetSavant (tracksAndLink) {
   return {
     type: actionTypes.TRACKS_SET_SAVANT,
-    tracks
+    payload: tracksAndLink
   }
 }
 
-export function moreSavantTracks (tracks) {
+export function moreSavantTracks (tracksAndLink) {
   return {
     type: actionTypes.MORE_SAVANT_TRACKS,
-    tracks
+    payload: tracksAndLink
   }
 }
 
 
 
-export function getProfileTracks (id, limit = 20, offset = 0) {
+export function getProfileTracks (id, nextHref) {
   return function (dispatch) {
     dispatch({type: actionTypes.START_LOADING})
-    return axios.get(server.API_LOCATION + `/users/${id}/tracks?limit=${limit}&offset=${offset}`)
+    return axios.get(nextHref ? server.API_LOCATION + nextHref : server.API_LOCATION + `/users/${id}/tracks`)
     .then(res => res.data)
-    .then(tracks => {
-      offset > 0 ? dispatch(moreSavantTracks(tracks)) : dispatch(trackSetSavant(tracks))
+    .then(tracksAndLink => {
+      nextHref ? dispatch(moreSavantTracks(tracksAndLink)) : dispatch(trackSetSavant(tracksAndLink))
       dispatch({type: actionTypes.STOP_LOADING})
     })
     .catch(err => console.warn(err))
