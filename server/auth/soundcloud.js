@@ -57,7 +57,6 @@ module.exports = function (app, db) {
 
   app.get(callbackRoute, passport.authenticate('soundcloud', { failureRedirect: '/wrong' }), (req, res) => {
     if (iswebview(req.headers['user-agent']) || iswebview(req.headers['User-Agent'])) {
-      console.log('in herrrrrrrrrrrrr');
       res.redirect(`thatshot://success`)
     } else {
       res.redirect('/')

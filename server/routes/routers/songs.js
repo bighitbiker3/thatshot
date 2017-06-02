@@ -64,5 +64,6 @@ module.exports = (io) => {
     })
     .catch(next)
   })
+
   return router
 }

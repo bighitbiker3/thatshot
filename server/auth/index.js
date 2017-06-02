@@ -50,6 +50,7 @@ module.exports = function (app, db) {
   })
 
   app.get('/session', function (req, res) {
+    console.log('session aca');
     if (req.user) {
       req.user.getUserSavants()
       .then(savants => {

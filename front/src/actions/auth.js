@@ -128,7 +128,6 @@ function addSavantTracks (id) {
       kind: 'info',
       dismissAfter: 20000
     }))
-    console.log(id, getState());
     axios.post(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
     .then(response => socket.on('doneCreateSavantTracks', () => dispatch(getSavantTracks(id))))
     .catch(err => dispatch(notifSend({message: err, kind: 'danger', dismissAfter: 3000})))

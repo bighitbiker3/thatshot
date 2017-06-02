@@ -48,6 +48,7 @@ module.exports = (io) => {
   // GET SPECIFIC USERS TRACKS
   router.get('/:userId/tracks', function (req, res, next) {
     // Allow for passing of ID's or usernames
+    const { limit = 100, offset = 0 } = req.query
     let findBy
     if (Number(req.params.userId)) {
       findBy = User.findById(req.params.userId)
@@ -62,7 +63,9 @@ module.exports = (io) => {
           userId: user.id,
           posted: true
         },
-        include: [{model: Song}]
+        include: [{model: Song}],
+        offset,
+        limit
       })
     })
     .then(songs => songs.map(song => song.song))

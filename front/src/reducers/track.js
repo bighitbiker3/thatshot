@@ -8,6 +8,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.TRACKS_SET_SAVANT: return setSavantTracks(state, action)
+    case actionTypes.MORE_SAVANT_TRACKS: return moreSavantTracks(state, action)
     case actionTypes.TRACKS_SET_USER: return setUserTracks(state, action)
     case actionTypes.UPVOTE_TRACK: return upVoteTrack(state, action)
     case actionTypes.ALREADY_UPVOTED: return alreadyUpvoted(state, action)
@@ -18,6 +19,16 @@ export default function (state = initialState, action) {
 function setSavantTracks (state, action) {
   const savantTracks = action.tracks
   return { ...state, savantTracks }
+}
+
+const moreSavantTracks = (state, action) => {
+  const currentTracks = state.savantTracks
+  const newTracks = [...currentTracks, ...action.tracks]
+  return {
+    ...state,
+    savantTracks: newTracks
+
+  }
 }
 
 function setUserTracks (state, action) {

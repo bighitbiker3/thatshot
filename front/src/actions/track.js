@@ -11,14 +11,22 @@ export function trackSetSavant (tracks) {
   }
 }
 
+export function moreSavantTracks (tracks) {
+  return {
+    type: actionTypes.MORE_SAVANT_TRACKS,
+    tracks
+  }
+}
 
-export function getProfileTracks (id) {
+
+
+export function getProfileTracks (id, limit = 20, offset = 0) {
   return function (dispatch) {
     dispatch({type: actionTypes.START_LOADING})
-    return axios.get(server.API_LOCATION + `/users/${id}/tracks`)
+    return axios.get(server.API_LOCATION + `/users/${id}/tracks?limit=${limit}&offset=${offset}`)
     .then(res => res.data)
-    .then(userStuff => {
-      dispatch(trackSetSavant(userStuff))
+    .then(tracks => {
+      offset > 0 ? dispatch(moreSavantTracks(tracks)) : dispatch(trackSetSavant(tracks))
       dispatch({type: actionTypes.STOP_LOADING})
     })
     .catch(err => console.warn(err))
