@@ -48,7 +48,7 @@ module.exports = (io) => {
   // GET SPECIFIC USERS TRACKS
   router.get('/:userId/tracks', function (req, res, next) {
     // Allow for passing of ID's or usernames
-    const { limit = 5, offset = 0 } = req.query
+    const { limit = 20, offset = 0 } = req.query
     let findBy, count
     if (Number(req.params.userId)) {
       findBy = User.findById(req.params.userId)
