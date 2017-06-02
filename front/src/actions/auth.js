@@ -114,7 +114,7 @@ export function getSavantTracks (id) {
       axios.get(`${server.SERVER_LOCATION}/api/songs/${id}/savantTracks`)
       .then(response => {
         if (response.status === 204) dispatch(addSavantTracks(id))
-        else dispatch(trackSetSavant(response.data))
+        else dispatch(trackSetSavant({songs: response.data}))
       })
       .catch(err => console.log(err, 'errrrrr'))
     }
