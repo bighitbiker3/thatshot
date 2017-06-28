@@ -12,7 +12,7 @@ export function setArtistPageTracks (artistName, trackName) {
     axios.get(url)
     .then(res => res.data)
     .then(songs => {
-      dispatch(trackSetSavant(songs))
+      dispatch(trackSetSavant({ songs }))
       dispatch({type: actionTypes.STOP_LOADING})
     })
     .catch(err => {
@@ -20,4 +20,4 @@ export function setArtistPageTracks (artistName, trackName) {
       dispatch(notifSend({message: 'Sorry, there was an error. Please try again' + err, kind: 'danger', dismissAfter: 1000}))
     })
   }
-}
+};

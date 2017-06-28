@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../../db')
-const User = db.model('user')
 const Song = db.model('song')
 
 // FIND SONGS BY ARTIST
